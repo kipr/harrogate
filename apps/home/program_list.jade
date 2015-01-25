@@ -1,7 +1,10 @@
-mixin app(name, icon, descr)
+mixin app(name, icon, fonticon, descr)
   div(class='media')
     div(class='media-left')
       a(href='#')
+      - if(icon === undefined)
+        i(class='fa', class='#{fonticon}', class='fa-4x')
+      - else
         img(class='media-object', src='#{icon}', width=64, height=64)
     div(class='media-body')
       h4(class='media-heading') #{name}
@@ -21,7 +24,7 @@ mixin app_group(name)
 div(class='row')
   - for(a in Object.keys(lists[l])) {
   div(class='col-sm-4')
-    +app(lists[l][a]['name'], lists[l][a]['icon'], lists[l][a]['description'])
+    +app(lists[l][a]['name'], lists[l][a]['icon'], lists[l][a]['fonticon'], lists[l][a]['description'])
   - }
 - }
 - }

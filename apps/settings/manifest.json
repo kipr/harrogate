@@ -1,7 +1,7 @@
 {
   "name": "Settings",
-  "resources": ["icon.png:binary"],
-  "icon": "icon.png",
+  "resources": [],
+  "fonticon": "fa-cogs",
   "exec": "exec.coffee",
   "description": "Modify the system's settings, such as network, time, and more.",
   "category": "System"

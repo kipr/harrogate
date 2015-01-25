@@ -1,7 +1,7 @@
 {
   "name": "Motors",
   "resources": ["icon.png:binary"],
-  "icon": "icon.png",
+  "fonticon": "fa-car",
   "exec": "exec.coffee",
   "description": "Manually manipulate motors plugged into the system",
   "category": "Sensors"

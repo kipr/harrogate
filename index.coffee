@@ -50,7 +50,8 @@ load_app = (path) ->
     if !manifest['hidden']
       app_catalog[manifest['name']] =
         name: manifest['name']
-        icon: "/#{path}/#{manifest['icon']}"
+        icon: "/#{path}/#{manifest['icon']}" if manifest['icon']?
+        fonticon: manifest['fonticon'] if manifest['fonticon']?
         description: manifest['description']
         category: manifest['category']
     
@@ -85,6 +86,7 @@ load_app = (path) ->
             response.writeHead 200, {'Content-Type': "#{mime.lookup(name)}"}
             response.end data, encoding
           )
+        console.log routes
       lam resource
   )
 
@@ -99,8 +101,8 @@ fs.readdir('apps', (err, apps) ->
 
 
 http.createServer((request, response) ->
-  path = url.parse(request.url).pathname
-  
+  path = url.parse(request.url).pathname.split('?')[0]
+  console.log path
   route = routes[path]
   return route request, response if route?
   
@@ -113,3 +115,4 @@ http.createServer((request, response) ->
 
 ).listen(8888)
 
+console.log routes
