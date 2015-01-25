@@ -1,0 +1,8 @@
+{
+  "name": "Motors",
+  "resources": ["icon.png:binary"],
+  "icon": "icon.png",
+  "exec": "exec.coffee",
+  "description": "Manually manipulate motors plugged into the system",
+  "category": "Sensors"
+}

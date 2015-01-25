@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    script(src='/extern/require.js')
+    script(src='/apps/home/index.coffee')
+    link(href='/apps/home/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/apps/home/css/bootstrap-theme.min.css', rel='stylesheet')
+  body
+    include topbar.jade
+    div(class='container')
+      div(class='jumbotron')
+        h1 Hello, World!
+        p.
+          Welcome to your new Link 2. Watch our brief overview to get started!
+        p
+          a(class=['btn', 'btn-primary', 'btn-lg'], href='#', role='button') Learn More!
+      include program_list.jade
+    script(src='/apps/home/js/jquery-2.1.3.min.js')
+    script(src='/apps/home/js/bootstrap.min.js')

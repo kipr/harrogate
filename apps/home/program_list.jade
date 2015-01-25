@@ -1,0 +1,27 @@
+mixin app(name, icon, descr)
+  div(class='media')
+    div(class='media-left')
+      a(href='#')
+        img(class='media-object', src='#{icon}', width=64, height=64)
+    div(class='media-body')
+      h4(class='media-heading') #{name}
+      p #{descr}
+mixin app_group(name)
+  h2 #{name}
+
+
+- for(c in apps) {
+- console.log(c);
++app_group(c)
+- var lists = {};
+- for(var j = 0; j < Math.ceil(apps[c].length / 2); ++j) lists[j] = {};
+- for(var j = 0; j < apps[c].length; ++j) lists[Math.floor(j / 2)][Math.floor(j % 2)] = apps[c][j];
+- console.log(lists);
+- for(l in Object.keys(lists)) {
+div(class='row')
+  - for(a in Object.keys(lists[l])) {
+  div(class='col-sm-4')
+    +app(lists[l][a]['name'], lists[l][a]['icon'], lists[l][a]['description'])
+  - }
+- }
+- }

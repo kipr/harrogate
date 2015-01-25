@@ -1,0 +1,8 @@
+{
+  "name": "test",
+  "resources": ["icon.png:binary"],
+  "icon": "icon.png",
+  "exec": "exec.coffee",
+  "description": "Just a test app",
+  "category": "Test"
+}

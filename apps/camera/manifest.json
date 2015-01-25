@@ -1,0 +1,8 @@
+{
+  "name": "Camera",
+  "resources": ["icon.png:binary"],
+  "icon": "icon.png",
+  "exec": "exec.coffee",
+  "description": "View live feeds from USB cameras plugged into the system.",
+  "category": "Sensors"
+}
