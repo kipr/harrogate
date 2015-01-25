@@ -12,7 +12,6 @@
     "jade": ">=1.9.1",
     "json": "^9.0.3",
     "mime": "^1.2.11",
-    "node-dir": "^0.1.6",
     "ws": "^0.7.0"
   },
   "author": "Braden McDorman",

@@ -6,7 +6,6 @@ coffee = require 'coffee-script'
 fs = require 'fs'
 path_tools = require 'path'
 mime = require 'mime'
-dir = require 'node-dir'
 
 requirejs = null
 fs.readFile('client/extern/require.js', 'utf8', (err, data) ->
@@ -97,9 +96,6 @@ fs.readdir('apps', (err, apps) ->
     continue if !fs.statSync("apps/#{app}").isDirectory()
     load_app "apps/#{app}"
 )
-
-
-
 
 
 http.createServer((request, response) ->
