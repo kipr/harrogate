@@ -11,7 +11,6 @@ module.exports =
   handle: (request, response) ->
     path = url.parse(request.url).pathname
     name = path_tools.basename(path)
-    console.log name
     if name is 'home'
       response.writeHead 200, { 'Content-Type': 'text/html' }
       return response.end index(apps: app_categories), 'utf8'

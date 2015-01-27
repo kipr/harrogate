@@ -5,6 +5,7 @@ html(lang="en")
     script(src='/extern/require.js')
     script(src='/apps/home/index.coffee')
     link(href='/apps/home/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/apps/home/css/style.css', rel='stylesheet')
     link(href='/apps/home/css/bootstrap-theme.min.css', rel='stylesheet')
     link(href='/apps/home/css/font-awesome.min.css', rel='stylesheet')
   body
@@ -16,6 +17,8 @@ html(lang="en")
           Welcome to your new Link 2. Watch our brief overview to get started!
         p
           a(class=['btn', 'btn-primary', 'btn-lg'], href='#', role='button') Learn More!
+          a(class=['btn', 'btn-lg'], href='#', role='button') Dismiss
       include program_list.jade
+      include footer.jade
     script(src='/apps/home/js/jquery-2.1.3.min.js')
     script(src='/apps/home/js/bootstrap.min.js')

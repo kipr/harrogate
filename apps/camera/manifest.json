@@ -1,6 +1,6 @@
 {
   "name": "Camera",
-  "resources": [],
+  "resources": ["client.coffee:utf8"],
   "fonticon": "fa-camera",
   "exec": "exec.coffee",
   "description": "View live feeds from USB cameras plugged into the system.",

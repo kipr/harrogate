@@ -7,6 +7,7 @@
     "js/bootstrap.min.js:utf8",
     "js/jquery-2.1.3.min.js:utf8",
     "css/font-awesome.min.css:utf8",
+    "css/style.css:utf8",
     "fonts/fontawesome-webfont.ttf:binary",
     "fonts/fontawesome-webfont.woff:binary",
     "fonts/fontawesome-webfont.woff2:binary",

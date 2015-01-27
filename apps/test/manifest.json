@@ -1,8 +1,0 @@
-{
-  "name": "test",
-  "resources": ["icon.png:binary"],
-  "fonticon": "fa-camera",
-  "exec": "exec.coffee",
-  "description": "Just a test app",
-  "category": "Test"
-}

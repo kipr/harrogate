@@ -1,13 +1,14 @@
-mixin app(name, icon, fonticon, descr)
+mixin app(name, icon, fonticon, descr, url)
   div(class='media')
-    div(class='media-left')
-      a(href='#')
-      - if(icon === undefined)
-        i(class='fa', class='#{fonticon}', class='fa-4x')
-      - else
-        img(class='media-object', src='#{icon}', width=64, height=64)
+    div(class=['media-left', 'media-middle'])
+      a(href='#{url}')
+        - if(icon === undefined)
+          i(class=['fa', '#{fonticon}', 'fa-4x', 'fa-fw'])
+        - else
+          img(class='media-object', src='#{icon}', width=64, height=64)
     div(class='media-body')
-      h4(class='media-heading') #{name}
+      a(href='#{url}')
+        h4(class='media-heading') #{name}
       p #{descr}
 mixin app_group(name)
   h2 #{name}
@@ -23,8 +24,8 @@ mixin app_group(name)
 - for(l in Object.keys(lists)) {
 div(class='row')
   - for(a in Object.keys(lists[l])) {
-  div(class='col-sm-4')
-    +app(lists[l][a]['name'], lists[l][a]['icon'], lists[l][a]['fonticon'], lists[l][a]['description'])
+  div(class='col-sm-6')
+    +app(lists[l][a]['name'], lists[l][a]['icon'], lists[l][a]['fonticon'], lists[l][a]['description'], lists[l][a]['url'])
   - }
 - }
 - }
