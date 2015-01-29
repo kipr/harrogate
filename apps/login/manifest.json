@@ -1,0 +1,10 @@
+{
+  "name": "Login",
+  "hidden": true,
+  "essential": true,
+  "resources": [],
+  "fonticon": "fa-user",
+  "exec": "exec.coffee",
+  "description": "Manage active user session",
+  "category": "System"
+}

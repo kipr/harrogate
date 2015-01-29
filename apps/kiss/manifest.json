@@ -1,0 +1,8 @@
+{
+  "name": "KISS IDE",
+  "priority": 1,
+  "exec": "kiss.coffee",
+  "fonticon": "fa-file-code-o",
+  "description": "Edit and compile programs for the device",
+  "category": "General"
+}

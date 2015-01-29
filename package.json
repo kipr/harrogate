@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "coffee-script": "^1.8.0",
+    "cookies": "^0.5.0",
     "jade": ">=1.9.1",
     "json": "^9.0.3",
     "mime": "^1.2.11",

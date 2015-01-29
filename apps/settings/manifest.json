@@ -1,5 +1,6 @@
 {
   "name": "Settings",
+  "priority": -1,
   "resources": [],
   "fonticon": "fa-cogs",
   "exec": "exec.coffee",

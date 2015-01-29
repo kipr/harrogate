@@ -6,6 +6,7 @@ coffee = require 'coffee-script'
 fs = require 'fs'
 path_tools = require 'path'
 mime = require 'mime'
+Cookies = require 'cookies'
 
 requirejs = null
 fs.readFile('client/extern/require.js', 'utf8', (err, data) ->
@@ -47,9 +48,12 @@ load_app = (path) ->
     
     return console.log "#{path} manifest is malformed" if manifest is undefined
     
+    manifest['priority'] = 0 if manifest['priority'] is undefined
+    
     if !manifest['hidden']
       app_catalog[manifest['name']] =
         name: manifest['name']
+        priority: manifest['priority']
         url: "/#{path}"
         icon: "/#{path}/#{manifest['icon']}" if manifest['icon']?
         fonticon: manifest['fonticon'] if manifest['fonticon']?
@@ -61,9 +65,13 @@ load_app = (path) ->
     if !manifest['hidden']
       update_app_lists()
     
-    app_routes["#{path_tools.basename(path)}"] = (request, response) ->
-      app_instances[manifest['name']].handle request, response
+    if app_instances[manifest['name']]['handle']?
+      app_routes["#{path_tools.basename(path)}"] = (request, response, cookies) ->
+        app_instances[manifest['name']].handle request, response, cookies
+    else
+      console.log "Warning: #{manifest['name']} has no handle method"
     
+    return if manifest['resources'] is undefined
     for resource in manifest['resources']
       lam = (r) ->
         parts = r.split ':'
@@ -90,8 +98,6 @@ load_app = (path) ->
       lam resource
   )
 
-
-
 fs.readdir('apps', (err, apps) ->
   return console.log err if err
   for app in apps
@@ -99,18 +105,26 @@ fs.readdir('apps', (err, apps) ->
     load_app "apps/#{app}"
 )
 
-
 http.createServer((request, response) ->
-  path = url.parse(request.url).pathname.split('?')[0]
-  route = routes[path]
-  return route request, response if route?
+  cookies = new Cookies(request, response)
+  path = url.parse(request.url, true).pathname
   
+  route = routes[path]
+  return route(request, response, cookies) if route?
+
   parts = path.split '/'
+  authed = app_instances['Login'].is_authed(cookies)
+  console.log authed
+  if !authed and !(parts[1] is 'apps' and parts[2] is 'login')
+    response.statusCode = 302
+    response.setHeader("Location", "/apps/login")
+    return response.end()
+  
   if parts[1] is 'apps'
     app_route = app_routes[parts[2]]
-    return app_route request, response if app_route?
+    return app_route(request, response, cookies) if app_route?
   
-  err_route request, response
+  err_route request, response, cookies
 
 ).listen(8888)
 

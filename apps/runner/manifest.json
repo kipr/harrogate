@@ -1,0 +1,7 @@
+{
+  "name": "runner",
+  "hidden": true,
+  "exec": "runner.coffee",
+  "description": "Runs a user program",
+  "category": "System"
+}

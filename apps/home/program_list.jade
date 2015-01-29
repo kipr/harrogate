@@ -14,18 +14,16 @@ mixin app_group(name)
   h2 #{name}
 
 
-- for(c in apps) {
-- console.log(c);
-+app_group(c)
-- var lists = {};
-- for(var j = 0; j < Math.ceil(apps[c].length / 2); ++j) lists[j] = {};
-- for(var j = 0; j < apps[c].length; ++j) lists[Math.floor(j / 2)][Math.floor(j % 2)] = apps[c][j];
-- console.log(lists);
-- for(l in Object.keys(lists)) {
+- for(var i = 0; i < apps.length; ++i) {
++app_group(apps[i]['name'])
+- var lists = [];
+- for(var j = 0; j < Math.ceil(apps[i]['list'].length / 2); ++j) lists.push([]);
+- for(var j = 0; j < apps[i]['list'].length; ++j) lists[Math.floor(j / 2)].push(apps[i]['list'][j]);
+- for(var j = 0; j < lists.length; ++j) {
 div(class='row')
-  - for(a in Object.keys(lists[l])) {
+  - for(var k = 0; k < lists[j].length; ++k) {
   div(class='col-sm-6')
-    +app(lists[l][a]['name'], lists[l][a]['icon'], lists[l][a]['fonticon'], lists[l][a]['description'], lists[l][a]['url'])
+    +app(lists[j][k]['name'], lists[j][k]['icon'], lists[j][k]['fonticon'], lists[j][k]['description'], lists[j][k]['url'])
   - }
 - }
 - }
