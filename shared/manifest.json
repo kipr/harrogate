@@ -1,6 +1,6 @@
 {
   "resources": [
-    "public/js/harrogate.coffee:utf8",
+    "public/js/index.coffee:utf8",
     "public/css/bootstrap.min.css:utf8",
     "public/css/bootstrap-theme.min.css:utf8",
     "public/js/lib/bootstrap.min.js:utf8",

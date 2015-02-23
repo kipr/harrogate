@@ -71,7 +71,7 @@
     <Content Include="apps\user\exec.coffee" />
     <Content Include="shared\public\fonts\fontawesome-webfont.svg" />
     <Compile Include="shared\public\js\lib\require.js" />
-    <Content Include="shared\public\js\harrogate.coffee" />
+    <Content Include="shared\public\js\index.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps" />
