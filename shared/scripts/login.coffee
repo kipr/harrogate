@@ -4,7 +4,7 @@ url = require 'url'
 path_tools = require 'path'
 qs = require 'querystring'
 
-index = jade.compile(fs.readFileSync('shared/public/login.jade', 'utf8'), filename: "./shared/public/login.jade")
+index = jade.compile(fs.readFileSync('shared/client/login.jade', 'utf8'), filename: "./shared/client/login.jade")
 
 the_password = 'test'
 

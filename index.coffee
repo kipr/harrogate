@@ -22,7 +22,7 @@ err_route = (request, response) ->
 
 # Set the route to the index and the login page
 
-index = jade.compile(fs.readFileSync('shared/public/index.jade', 'utf8'), filename: "./shared/public/index.jade")
+index = jade.compile(fs.readFileSync('shared/client/index.jade', 'utf8'), filename: "./shared/client/index.jade")
 auth_required_routes['/'] = (request, response) ->
   response.writeHead 200, { 'Content-Type': 'text/html' }
   return response.end index(app_catalog_str: JSON.stringify(app_catalog)), 'utf8'
