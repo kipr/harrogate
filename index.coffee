@@ -8,7 +8,9 @@ path_tools = require 'path'
 mime = require 'mime'
 Cookies = require 'cookies'
 
-app_routes = {}
+public_routes = {}
+auth_required_routes = {}
+
 app_catalog = {}
 app_instances = {}
 
@@ -18,13 +20,17 @@ err_route = (request, response) ->
   response.write 'Page not found'
   response.end()
 
-# Set the route to the harrogate app
+# Set the route to the index and the login page
+
 index = jade.compile(fs.readFileSync('shared/public/index.jade', 'utf8'), filename: "./shared/public/index.jade")
-routes = {
-  '/': (request, response) ->
-    response.writeHead 200, { 'Content-Type': 'text/html' }
-    return response.end index(app_catalog_str: JSON.stringify(app_catalog)), 'utf8'
-}
+auth_required_routes['/'] = (request, response) ->
+  response.writeHead 200, { 'Content-Type': 'text/html' }
+  return response.end index(app_catalog_str: JSON.stringify(app_catalog)), 'utf8'
+
+login_instance = require "./shared/scripts/login.coffee"
+
+public_routes['/login'] = (request, response, cookies) ->
+  login_instance.handle request, response, cookies
 
 # Parse shared/manifest.json to add routes to shared resources
 fs.readFile("shared/manifest.json", 'utf8', (err, data) ->
@@ -41,7 +47,7 @@ fs.readFile("shared/manifest.json", 'utf8', (err, data) ->
       name = parts[0]
       encoding = parts[1]
       
-      routes["/shared/#{name}"] = (request, response) ->
+      public_routes["/shared/#{name}"] = (request, response) ->
         fs.readFile("shared/#{name}", encoding, (err, data) ->
           
           return err_route request, response if err
@@ -93,7 +99,7 @@ load_app = (path) ->
       update_app_lists()
     
     if app_instances[manifest['name']]['handle']?
-      app_routes["#{path_tools.basename(path)}"] = (request, response, cookies) ->
+      auth_required_routes["/#{path}"] = (request, response, cookies) ->
         app_instances[manifest['name']].handle request, response, cookies
     else
       console.log "Warning: #{manifest['name']} has no handle method"
@@ -107,7 +113,7 @@ load_app = (path) ->
         name = parts[0]
         encoding = parts[1]
         
-        routes["/#{path}/#{name}"] = (request, response) ->
+        public_routes["/#{path}/#{name}"] = (request, response) ->
           fs.readFile("#{path}/#{name}", encoding, (err, data) ->
             
             return err_route request, response if err
@@ -136,17 +142,22 @@ fs.readdir('apps', (err, apps) ->
 http.createServer((request, response) ->
   cookies = new Cookies(request, response)
   path = url.parse(request.url, true).pathname
-  
-  route = routes[path]
+
+  # check if it is a public route
+  route = public_routes[path]
   return route(request, response, cookies) if route?
 
-  parts = path.split '/'
-  authed = app_instances['Login'].is_authed(cookies)
-  console.log authed
-  if parts[1] is 'apps'
-    app_route = app_routes[parts[2]]
-    return app_route(request, response, cookies) if app_route?
-  
+  # check if it is a route who requires authentication
+  if auth_required_routes[path]?
+    
+    # is the user logged in?
+    if not login_instance.is_authed(cookies)
+      response.statusCode = 302
+      response.setHeader("Location", "/login")
+      return response.end()
+
+    return auth_required_routes[path](request, response, cookies)
+
   err_route request, response, cookies
 
 ).listen(8888)

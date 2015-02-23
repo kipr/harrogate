@@ -27,6 +27,7 @@
     <Content Include="shared\public\css\bootstrap.min.css" />
     <Content Include="shared\public\css\font-awesome.min.css" />
     <Content Include="shared\public\css\style.css" />
+    <Content Include="shared\public\footer.jade" />
     <Content Include="shared\public\index.jade" />
     <Content Include="shared\manifest.json" />
     <Content Include="package.json" />
@@ -49,11 +50,10 @@
     <Content Include="apps\home\server.coffee" />
     <Content Include="apps\kiss\manifest.json" />
     <Content Include="apps\kiss\exec.coffee" />
-    <Content Include="apps\login\icon.png" />
-    <Content Include="apps\login\manifest.json" />
-    <Content Include="apps\login\index.jade" />
-    <Content Include="apps\login\client.coffee" />
-    <Content Include="apps\login\exec.coffee" />
+    <Content Include="shared\public\login.jade" />
+    <Content Include="shared\public\scripts.jade" />
+    <Content Include="shared\public\styles.jade" />
+    <Content Include="shared\scripts\login.coffee" />
     <Content Include="apps\motors\index.html" />
     <Content Include="apps\motors\icon.png" />
     <Content Include="apps\motors\manifest.json" />
@@ -78,9 +78,9 @@
     <Folder Include="apps\camera" />
     <Folder Include="apps\cloud" />
     <Folder Include="apps\home" />
+    <Folder Include="shared\scripts\" />
     <Folder Include="shared\public\fonts\" />
     <Folder Include="apps\kiss" />
-    <Folder Include="apps\login" />
     <Folder Include="apps\motors" />
     <Folder Include="shared\" />
     <Folder Include="apps\programs" />

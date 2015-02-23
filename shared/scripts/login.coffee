@@ -4,7 +4,7 @@ url = require 'url'
 path_tools = require 'path'
 qs = require 'querystring'
 
-index = jade.compile(fs.readFileSync('apps/login/index.jade', 'utf8'), filename: "./apps/login/index.jade")
+index = jade.compile(fs.readFileSync('shared/public/login.jade', 'utf8'), filename: "./shared/public/login.jade")
 
 the_password = 'test'
 
@@ -19,11 +19,11 @@ handle_auth = (request, response, cookies) ->
     response.statusCode = 302
     console.log post['password']
     if post['password'] isnt the_password
-      response.setHeader("Location", "/apps/login?retry=true")
+      response.setHeader("Location", "/login?retry=true")
     else
       console.log "success"
       cookies.set 'session', 'signed_in'
-      response.setHeader("Location", "/apps/home")
+      response.setHeader("Location", "/")
     response.end()
     
 authed = (cookies) ->
@@ -35,10 +35,10 @@ module.exports =
   handle: (request, response, cookies) ->
     if authed(cookies)
       response.statusCode = 302
-      response.setHeader("Location", "/apps/home")
+      response.setHeader("Location", "/")
       return response.end()
     u = url.parse(request.url, true)
-    if u.pathname isnt '/apps/login'
+    if u.pathname isnt '/login'
       response.writeHead 404, { 'Content-Type': 'text/plain' }
       return response.end 'Page not found\n'
     return handle_auth(request, response, cookies) if request.method is 'POST'

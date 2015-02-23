@@ -2,20 +2,12 @@
 html(lang="en" data-ng-app='harrogate')
   head
     title= pageTitle
-    link(href='/shared/public/css/bootstrap.min.css', rel='stylesheet')
-    link(href='/shared/public/css/bootstrap-theme.min.css', rel='stylesheet')
-    link(href='/shared/public/css/font-awesome.min.css', rel='stylesheet')
-    
+    include styles.jade
+
     // Quick and dirty way to get the app catalog to the client
     script(type='text/javascript').
       var app_catalog = !{app_catalog_str}
-    
-    script(src='/shared/public/js/lib/jquery-2.1.3.min.js')
-    script(src='/shared/public/js/lib/bootstrap.min.js')
-    script(src='/shared/public/js/lib/angular/angular.min.js')
-    script(src='/shared/public/js/lib/angular/angular-route.min.js')
-    script(src='/shared/public/js/index.coffee')
-    meta(name='viewport', content=['width=device-width', 'initial-scale=1', 'maximum-scale=1', 'user-scalable=no'])
+
   body
     nav(class=['navbar', 'navbar-default'], style='margin-bottom: 0px')
       div(class='container-fluid')
@@ -40,10 +32,8 @@ html(lang="en" data-ng-app='harrogate')
       // App view container
       div(data-ng-view='')
 
-      // Footer
-      div(class='container-fluid')
-        hr(class='featurette-divider')
-        footer
-          p(class='pull-right')
-            a(href='#') Back to top
-          p Copyright &copy; 2015 KISS Insitute for Practical Robotics
+    include footer.jade
+    include scripts.jade
+    script(src='/shared/public/js/lib/angular/angular.min.js')
+    script(src='/shared/public/js/lib/angular/angular-route.min.js')
+    script(src='/shared/public/js/index.coffee')
