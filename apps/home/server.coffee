@@ -30,14 +30,16 @@ module.exports =
         name: c
         list: []
     for app in Object.keys apps
-      c = apps[app]['category']
-      i = category_index c
-      if i < 0
-        console.log "Warning: Please add #{c} to categories.json"
-        app_categories.push
-          name: c
-          list: []
-      app_categories[i]['list'].push apps[app]
+      # Skip hidden apps
+      if not apps[app]['hidden']
+        c = apps[app]['category']
+        i = category_index c
+        if i < 0
+          console.log "Warning: Please add #{c} to categories.json"
+          app_categories.push
+            name: c
+            list: []
+        app_categories[i]['list'].push apps[app]
       
     # Sort the apps by priority
     for i in [0 .. app_categories.length - 1]

@@ -3,12 +3,8 @@ html(lang="en")
   head
     title= pageTitle
     script(src='/extern/require.js')
-    include ../home/styles.jade
   body
-    include ../home/topbar.jade
     div(class='container')
       div(class=['embed-responsive', 'embed-responsive-16by9'])
         img#camera(class='embed-responsive-item')
-      include ../home/footer.jade
-    include ../home/scripts.jade
     script(src='/apps/camera/client.coffee')

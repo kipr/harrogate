@@ -8,23 +8,9 @@ path_tools = require 'path'
 mime = require 'mime'
 Cookies = require 'cookies'
 
-requirejs = null
-fs.readFile('client/extern/require.js', 'utf8', (err, data) ->
-  return console.log err if err
-  requirejs = data
-)
-
-routes =
-  '/': (request, response) ->
-    response.statusCode = 302
-    response.setHeader("Location", "/apps/home")
-    response.end()
-  '/extern/require.js': (request, response) ->
-    response.writeHead(200, {'Content-Type': 'text/javascript'})
-    response.write(requirejs)
-    response.end()
-
 app_routes = {}
+app_catalog = {}
+app_instances = {}
 
 err_route = (request, response) ->
   console.log "Failed to serve route #{request.url}"
@@ -32,8 +18,47 @@ err_route = (request, response) ->
   response.write 'Page not found'
   response.end()
 
-app_catalog = {}
-app_instances = {}
+# Set the route to the harrogate app
+index = jade.compile(fs.readFileSync('shared/public/index.jade', 'utf8'), filename: "./shared/public/index.jade")
+routes = {
+  '/': (request, response) ->
+    response.writeHead 200, { 'Content-Type': 'text/html' }
+    return response.end index(app_catalog_str: JSON.stringify(app_catalog)), 'utf8'
+}
+
+# Parse shared/manifest.json to add routes to shared resources
+fs.readFile("shared/manifest.json", 'utf8', (err, data) ->
+  return console.log err if err
+  
+  manifest = JSON.parse data
+  return console.log "shared manifest is malformed" if manifest is undefined
+  
+  return if manifest['resources'] is undefined
+  for resource in manifest['resources']
+    lam = (r) ->
+      parts = r.split ':'
+      
+      name = parts[0]
+      encoding = parts[1]
+      
+      routes["/shared/#{name}"] = (request, response) ->
+        fs.readFile("shared/#{name}", encoding, (err, data) ->
+          
+          return err_route request, response if err
+          ext = path_tools.extname name
+          if ext is '.coffee'
+            response.writeHead 200, {'Content-Type': "text/javascript"}
+            return response.end coffee.compile(data), encoding
+          
+          if ext is '.jade'
+            response.writeHead 200, {'Content-Type': "text/html"}
+            return response.end jade.compile(data, filename: "#shared#{name}")(), encoding
+          
+          response.writeHead 200, {'Content-Type': "#{mime.lookup(name)}"}
+          response.end data, encoding
+        )
+    lam resource
+)
 
 # Tell all of the apps about each other
 update_app_lists = ->
@@ -50,15 +75,17 @@ load_app = (path) ->
     
     manifest['priority'] = 0 if manifest['priority'] is undefined
     
-    if !manifest['hidden']
-      app_catalog[manifest['name']] =
-        name: manifest['name']
-        priority: manifest['priority']
-        url: "/#{path}"
-        icon: "/#{path}/#{manifest['icon']}" if manifest['icon']?
-        fonticon: manifest['fonticon'] if manifest['fonticon']?
-        description: manifest['description']
-        category: manifest['category']
+    app_catalog[manifest['name']] =
+      name: manifest['name']
+      priority: manifest['priority']
+      url: "/\#/#{path}"
+      angular_route: "/#{path}"
+      angular_template_path: "/#{path}"
+      icon: "/#{path}/#{manifest['icon']}" if manifest['icon']?
+      fonticon: manifest['fonticon'] if manifest['fonticon']?
+      description: manifest['description']
+      category: manifest['category']
+      hidden: manifest['hidden']
     
     app_instances[manifest['name']] = require "./#{path}/#{manifest['exec']}"
     
@@ -71,6 +98,7 @@ load_app = (path) ->
     else
       console.log "Warning: #{manifest['name']} has no handle method"
     
+    # Parse {app}/manifest.json to add routes to app resources
     return if manifest['resources'] is undefined
     for resource in manifest['resources']
       lam = (r) ->
@@ -115,11 +143,6 @@ http.createServer((request, response) ->
   parts = path.split '/'
   authed = app_instances['Login'].is_authed(cookies)
   console.log authed
-  if !authed and !(parts[1] is 'apps' and parts[2] is 'login')
-    response.statusCode = 302
-    response.setHeader("Location", "/apps/login")
-    return response.end()
-  
   if parts[1] is 'apps'
     app_route = app_routes[parts[2]]
     return app_route(request, response, cookies) if app_route?
@@ -127,5 +150,3 @@ http.createServer((request, response) ->
   err_route request, response, cookies
 
 ).listen(8888)
-
-console.log routes

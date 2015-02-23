@@ -3,9 +3,7 @@ html(lang="en")
   head
     title= pageTitle
     script(src='/apps/home/index.coffee')
-    include styles.jade
   body
-    include topbar.jade
     div(class='container')
       div(class='jumbotron')
         h1 Hello, World!
@@ -15,5 +13,3 @@ html(lang="en")
           a(class=['btn', 'btn-primary', 'btn-lg'], href='#', role='button') Learn More!
           a(class=['btn', 'btn-lg'], href='#', role='button') Dismiss
       include program_list.jade
-    include footer.jade
-    include scripts.jade

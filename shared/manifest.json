@@ -1,0 +1,19 @@
+{
+  "resources": [
+    "public/js/harrogate.coffee:utf8",
+    "public/css/bootstrap.min.css:utf8",
+    "public/css/bootstrap-theme.min.css:utf8",
+    "public/js/lib/bootstrap.min.js:utf8",
+    "public/js/lib/jquery-2.1.3.min.js:utf8",
+    "public/js/lib/angular/angular.min.js:utf8",
+    "public/js/lib/angular/angular.min.js.map:utf8",
+    "public/js/lib/angular/angular-route.min.js:utf8",
+    "public/js/lib/angular/angular-route.min.js.map:utf8",
+    "public/css/font-awesome.min.css:utf8",
+    "public/css/style.css:utf8",
+    "public/fonts/fontawesome-webfont.ttf:binary",
+    "public/fonts/fontawesome-webfont.woff:binary",
+    "public/fonts/fontawesome-webfont.woff2:binary",
+    "public/fonts/fontawesome-webfont.svg:binary",
+    "public/fonts/fontawesome-webfont.eot:binary" ]
+}
