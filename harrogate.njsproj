@@ -27,8 +27,12 @@
     <Content Include="shared\client\css\bootstrap.min.css" />
     <Content Include="shared\client\css\font-awesome.min.css" />
     <Content Include="shared\client\css\style.css" />
+    <Content Include="shared\client\images\botguy-logo.png" />
+    <Content Include="shared\client\navbar.jade" />
     <Content Include="shared\client\footer.jade" />
     <Content Include="shared\client\index.jade" />
+    <Content Include="shared\client\scripts\harrogate-apps-module.coffee" />
+    <Content Include="shared\client\scripts\harrogate-navbar-module.coffee" />
     <Content Include="shared\manifest.json" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
@@ -71,13 +75,14 @@
     <Content Include="apps\user\exec.coffee" />
     <Content Include="shared\client\fonts\fontawesome-webfont.svg" />
     <Compile Include="shared\client\scripts\lib\require.js" />
-    <Content Include="shared\client\scripts\index.coffee" />
+    <Content Include="shared\client\scripts\harrogate-index-app.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps" />
     <Folder Include="apps\camera" />
     <Folder Include="apps\cloud" />
     <Folder Include="apps\home" />
+    <Folder Include="shared\client\images\" />
     <Folder Include="shared\scripts\" />
     <Folder Include="shared\client\fonts\" />
     <Folder Include="apps\kiss" />

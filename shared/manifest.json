@@ -1,6 +1,8 @@
 {
   "resources": [
-    "client/scripts/index.coffee:utf8",
+    "client/scripts/harrogate-index-app.coffee:utf8",
+    "client/scripts/harrogate-navbar-module.coffee:utf8",
+    "client/images/botguy-logo.png:binary",
     "client/css/bootstrap.min.css:utf8",
     "client/css/bootstrap-theme.min.css:utf8",
     "client/scripts/lib/bootstrap.min.js:utf8",

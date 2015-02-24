@@ -1,39 +1,22 @@
 ﻿doctype html
-html(lang="en" data-ng-app='harrogate')
+html(lang="en" data-ng-app='harrogateIndexApp')
   head
     title= pageTitle
     include styles.jade
+
+    include scripts.jade
+    script(src='/shared/client/scripts/lib/angular/angular.min.js')
+    script(src='/shared/client/scripts/lib/angular/angular-route.min.js')
+    script(src='/shared/client/scripts/harrogate-index-app.coffee')
 
     // Quick and dirty way to get the app catalog to the client
     script(type='text/javascript').
       var app_catalog = !{app_catalog_str}
 
   body
-    nav(class=['navbar', 'navbar-default'], style='margin-bottom: 0px')
-      div(class='container-fluid')
-        div(class='navbar-header')
-          button(type='button', class=['navbar-toggle', 'collapsed'], data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span(class='sr-only') Toggle navigation
-            span(class='icon-bar')
-            span(class='icon-bar')
-            span(class='icon-bar')
-          a(class='navbar-brand', href='#')
-            i(class=['fa', 'fa-rocket'])
-        
-        div#bs-example-navbar-collapse-1(class=['collapse', 'navbar-collapse'])
-          p(class=['navbar-text', 'navbar-right']) Battery: 83%
-    ol(class='breadcrumb')
-      li
-        a(href='#') Home
-      li
-        a(href='#') Library
-      li(href='#', class='active') Data
+    include navbar.jade
 
-      // App view container
-      div(data-ng-view='')
+    // App view container
+    div(data-ng-view='')
 
     include footer.jade
-    include scripts.jade
-    script(src='/shared/client/scripts/lib/angular/angular.min.js')
-    script(src='/shared/client/scripts/lib/angular/angular-route.min.js')
-    script(src='/shared/client/scripts/index.coffee')
