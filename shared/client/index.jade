@@ -9,10 +9,10 @@ html(lang="en" data-ng-app='harrogateIndexApp')
     script(src='/shared/client/scripts/lib/angular/angular-route.min.js')
     script(src='/shared/client/scripts/harrogate-index-app.coffee')
 
-    // Quick and dirty way to get the app catalog to the client
+    // Load the app catalog
     script(type='text/javascript').
-      var app_catalog = !{app_catalog_str}
-
+      var app_catalog = undefined; function app_catalog_jsonp_callback(data){app_catalog = data; console.log(app_catalog);}
+    script(src='/json/app-catalog.js?callback=app_catalog_jsonp_callback')
   body
     include navbar.jade
 

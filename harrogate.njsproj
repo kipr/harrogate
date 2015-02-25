@@ -57,6 +57,7 @@
     <Content Include="shared\client\login.jade" />
     <Content Include="shared\client\scripts.jade" />
     <Content Include="shared\client\styles.jade" />
+    <Content Include="shared\scripts\app-catalog.coffee" />
     <Content Include="shared\scripts\login.coffee" />
     <Content Include="apps\motors\index.html" />
     <Content Include="apps\motors\icon.png" />

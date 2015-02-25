@@ -12,8 +12,8 @@
     
     # add the routes for the apps
     for app_name, app_obj of app_catalog
-      $routeProvider.when(app_obj.angular_route,
-        templateUrl: app_obj.angular_template_path)
+      $routeProvider.when(app_obj.angularjs_route,
+        templateUrl: app_obj.nodejs_route)
     
     return
 ])
