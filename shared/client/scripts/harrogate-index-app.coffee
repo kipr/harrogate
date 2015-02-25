@@ -1,6 +1,7 @@
 ﻿angular.module 'harrogateIndexApp', [
-  'ngRoute',
-  'harrogateNavbar']
+  'ngRoute'
+  'harrogateNavbar'
+  'harrogateApps']
 .config([
   '$routeProvider'
   ($routeProvider) ->

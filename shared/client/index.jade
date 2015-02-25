@@ -8,11 +8,12 @@ html(lang="en" data-ng-app='harrogateIndexApp')
     script(src='/shared/client/scripts/lib/angular/angular.min.js')
     script(src='/shared/client/scripts/lib/angular/angular-route.min.js')
     script(src='/shared/client/scripts/harrogate-index-app.coffee')
+    script(src='/shared/client/scripts/harrogate-apps-module.coffee')
 
     // Load the app catalog
     script(type='text/javascript').
-      var app_catalog = undefined; function app_catalog_jsonp_callback(data){app_catalog = data; console.log(app_catalog);}
-    script(src='/json/app-catalog.js?callback=app_catalog_jsonp_callback')
+      var app_catalog = undefined; function app_catalog_jsonp_callback(data){app_catalog = data;}
+    script(src='/json/app-catalog?callback=app_catalog_jsonp_callback')
   body
     include navbar.jade
 

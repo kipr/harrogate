@@ -12,8 +12,13 @@ public_routes = {}
 auth_required_routes = {}
 
 app_catalog = require './shared/scripts/app-catalog.coffee'
-public_routes['/json/app-catalog.js'] = (request, response, cookies) ->
+public_routes['/json/app-catalog'] = (request, response, cookies) ->
   app_catalog.handle request, response, cookies
+
+app_categories = fs.readFileSync('apps/categories.json', 'utf8')
+public_routes['/json/app-categories'] = (request, response) ->
+  response.writeHead 200, { 'Content-Type': 'application/json' }
+  return response.end app_categories, 'utf8'
 
 err_route = (request, response) ->
   console.log "Failed to serve route #{request.url}"
