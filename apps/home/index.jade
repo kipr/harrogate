@@ -1,15 +1,10 @@
-doctype html
-html(lang="en")
-  head
-    title= pageTitle
-    script(src='/apps/home/index.coffee')
-  body
-    div(class='container')
-      div(class='jumbotron')
-        h1 Hello, World!
-        p.
-          Welcome to your new Link 2. Watch our brief overview to get started!
-        p
-          a(class=['btn', 'btn-primary', 'btn-lg'], href='#', role='button') Learn More!
-          a(class=['btn', 'btn-lg'], href='#', role='button') Dismiss
-      include program_list.jade
+script(src='/apps/home/index.coffee')
+div(class='container')
+  div(class='jumbotron')
+    h1 Hello, World!
+    p.
+      Welcome to your new Link 2. Watch our brief overview to get started!
+    p
+      a(class=['btn', 'btn-primary', 'btn-lg'], href='#', role='button') Learn More!
+      a(class=['btn', 'btn-lg'], href='#', role='button') Dismiss
+  include program_list.jade
