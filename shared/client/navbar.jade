@@ -9,7 +9,6 @@ nav.navbar.navbar-default(role='navigation', data-ng-controller='HarrogateNavbar
         img(src='/shared/client/images/botguy-logo.png')
     #harrogate-navbar-collapse.collapse.navbar-collapse
       ul.nav.navbar-nav
-          // Home
-          li(data-ng-class="{active: $location.path() == '/apps/home'}")
-            a(href='#/apps/home')
-              i.fa.fa-home.fa-fw.fa-2x
+          li(data-ng-repeat="(app_name, app_obj) in app_catalog" data-ng-class="{active: $location.path() == app_obj['angularjs_route']}")
+            a(data-ng-href="{{app_obj['url']}}")
+              i.fa.fa-fw.fa-2x(data-ng-class="app_obj['fonticon']")

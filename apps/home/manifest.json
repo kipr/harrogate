@@ -14,6 +14,7 @@
     "fonts/fontawesome-webfont.svg:binary",
     "fonts/fontawesome-webfont.eot:binary" ],
   "exec": "server.coffee",
+  "fonticon": "fa-home",
   "description": "The launchpad",
   "category": "System",
   "hidden": true
