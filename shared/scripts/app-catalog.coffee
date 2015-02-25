@@ -60,7 +60,6 @@ class AppCatalog
       response.writeHead 200, { 'Content-Type': 'application/javascript' }
       return response.end "#{callback}(#{JSON.stringify(@catalog_4_client)})", 'utf8'
     else
-      console.log callback
       response.writeHead 200, { 'Content-Type': 'application/json' }
       return response.end "#{JSON.stringify(@catalog_4_client)}", 'utf8'
 
