@@ -36,6 +36,7 @@ class AppCatalog
         description: manifest['description']
         category: manifest['category']
         hidden: manifest['hidden']
+        navbar: manifest['navbar']
         exec_path: "#{path}/#{manifest['exec']}"
         resources: manifest['resources']
 
@@ -52,6 +53,7 @@ class AppCatalog
         description: manifest['description']
         category: manifest['category']
         hidden: manifest['hidden']
+        navbar: manifest['navbar']
 
   handle: (request, response, cookies) ->
     callback = url.parse(request.url, true).query['callback']

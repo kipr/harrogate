@@ -3,6 +3,7 @@
   "resources": [],
   "fonticon": "fa-user",
   "exec": "exec.coffee",
+  "navbar": true,
   "description": "Set owner information, enable accessibility tools, and more.",
   "category": "System"
 }

@@ -11,7 +11,7 @@
 
       # then the other by category
       for cat, app_list of apps_by_category
-        list = app_list.filter (app) -> not app.hidden
+        list = app_list.filter (app) -> not app.hidden and app.navbar
         list.sort (a, b) -> a.priority - b.priority
         apps.push list
 

@@ -2,6 +2,7 @@
   "name": "KISS IDE",
   "resources": ["client.coffee:utf8"],
   "priority": 1,
+  "navbar": true,
   "exec": "exec.coffee",
   "fonticon": "fa-file-code-o",
   "description": "Edit and compile programs for the device",
