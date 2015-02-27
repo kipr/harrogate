@@ -40,7 +40,6 @@
     <Content Include="shared\client\css\bootstrap.min.css" />
     <Content Include="shared\client\css\font-awesome.min.css" />
     <Content Include="shared\client\css\style.css" />
-    <Content Include="shared\client\images\botguy-logo.png" />
     <Content Include="shared\client\views\includes\navbar.jade" />
     <Content Include="shared\client\views\includes\footer.jade" />
     <Content Include="shared\client\views\index.jade" />
