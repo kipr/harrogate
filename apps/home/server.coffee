@@ -1,6 +1,5 @@
 url = require 'url'
 path_tools = require 'path'
-jade = require 'jade'
 fs = require 'fs'
 app_catalog = require '../../shared/scripts/app-catalog.coffee'
 

@@ -48,7 +48,6 @@
     <Content Include="shared\client\scripts\harrogate-navbar-module.coffee" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
-    <Content Include="index.coffee" />
     <Content Include="apps\categories.json" />
     <Content Include="apps\camera\manifest.json" />
     <Content Include="apps\camera\resources\index.jade" />

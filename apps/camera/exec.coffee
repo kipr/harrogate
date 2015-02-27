@@ -1,6 +1,5 @@
 Worker = require('webworker-threads').Worker
 boyd = require 'node-boyd'
-jade = require 'jade'
 fs = require 'fs'
 url = require 'url'
 path_tools = require 'path'
@@ -11,7 +10,6 @@ wss = undefined
 
 module.exports =
   exec: ->
-    console.log 'called...'
     wss = new WebSocketServer(port: 8374)
 
     wss.broadcast = (data) ->
