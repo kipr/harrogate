@@ -66,7 +66,6 @@
     <Content Include="shared\client\views\includes\scripts.jade" />
     <Content Include="shared\client\views\includes\styles.jade" />
     <Content Include="shared\scripts\app-catalog.coffee" />
-    <Content Include="shared\scripts\login.coffee" />
     <Content Include="apps\motors\manifest.json" />
     <Content Include="apps\motors\exec.coffee" />
     <Content Include="apps\programs\manifest.json" />
