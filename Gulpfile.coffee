@@ -12,10 +12,12 @@ path_tools = require 'path'
 gulp.task 'dev', [
   'shared'
   'apps'
+  'watch'
 ], ->
   nodemon(
     script: 'server.js'
-    ext: 'html js'
+    watch: 'public'
+    ext: 'html js json css'
   ).on 'restart', ->
     console.log 'restarted!'
     return
@@ -114,3 +116,15 @@ gulp.task 'app_scripts', ->
   )
   .pipe gulp.dest('public/apps/')
   return
+
+# Watch task
+gulp.task 'watch', ->
+  gulp.watch 'shared/client/views/*.jade', ['views']
+  gulp.watch 'shared/client/css/*.css', ['styles']
+  gulp.watch 'shared/client/fonts/*', ['resources']
+  gulp.watch 'shared/client/images/*', ['resources']
+  gulp.watch 'apps/categories.json', ['resources']
+  gulp.watch 'shared/client/scripts/*.coffee', ['scripts']
+
+  gulp.watch 'apps/**/resources/*.jade', ['app_views']
+  gulp.watch 'apps/**/resources/*.coffee', ['app_scripts']
