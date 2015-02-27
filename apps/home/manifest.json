@@ -4,5 +4,6 @@
   "fonticon": "fa-home",
   "description": "The launchpad",
   "category": "System",
+  "navbar": true,
   "hidden": true
 }

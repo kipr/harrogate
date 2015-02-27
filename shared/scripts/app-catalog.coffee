@@ -36,6 +36,7 @@ class AppCatalog
         description: manifest['description']
         category: manifest['category']
         hidden: manifest['hidden']
+        navbar: manifest['navbar']
         exec_path: "#{path}/#{manifest['exec']}"
 
       # There might be a better strategy than to create two catalogs.
@@ -51,6 +52,7 @@ class AppCatalog
         description: manifest['description']
         category: manifest['category']
         hidden: manifest['hidden']
+        navbar: manifest['navbar']
 
   handle: (request, response) ->
     callback = url.parse(request.url, true).query['callback']
