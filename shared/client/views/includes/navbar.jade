@@ -1,4 +1,4 @@
-﻿script(src='/shared/client/scripts/harrogate-navbar-module.coffee')
+﻿script(src='/scripts/harrogate-navbar-module.js')
 
 nav.navbar.navbar-default(role='navigation', data-ng-controller='HarrogateNavbarCtrl')
   .container-fluid
@@ -6,7 +6,7 @@ nav.navbar.navbar-default(role='navigation', data-ng-controller='HarrogateNavbar
       button.navbar-toggle.collapsed(data-toggle='collapse', data-target='#harrogate-navbar-collapse')
         i.fa.fa-bars
       .navbar-brand
-        img(src='/shared/client/images/botguy-logo.png')
+        img(src='/images/botguy-logo.png')
     #harrogate-navbar-collapse.collapse.navbar-collapse
       ul.nav.navbar-nav
           li(data-ng-repeat="(app_name, app_obj) in app_catalog" data-ng-class="{active: $location.path() == app_obj['angularjs_route']}")

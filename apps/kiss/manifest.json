@@ -1,6 +1,5 @@
 {
   "name": "KISS IDE",
-  "resources": ["client.coffee:utf8"],
   "priority": 1,
   "exec": "exec.coffee",
   "fonticon": "fa-file-code-o",

@@ -1,6 +1,5 @@
 {
   "name": "Cloud Management",
-  "resources": [],
   "fonticon": "fa-cloud",
   "exec": "exec.coffee",
   "description": "Manage integration with KIPR's cloud services, such as automatic program backup.",

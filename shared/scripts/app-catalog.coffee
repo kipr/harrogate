@@ -37,7 +37,6 @@ class AppCatalog
         category: manifest['category']
         hidden: manifest['hidden']
         exec_path: "#{path}/#{manifest['exec']}"
-        resources: manifest['resources']
 
       # There might be a better strategy than to create two catalogs.
       # However they are supposed to be read-only, so this is the more performant way
@@ -53,7 +52,7 @@ class AppCatalog
         category: manifest['category']
         hidden: manifest['hidden']
 
-  handle: (request, response, cookies) ->
+  handle: (request, response) ->
     callback = url.parse(request.url, true).query['callback']
     # should we return JSON or JSONP (callback defined)?
     if callback?

@@ -1,7 +1,6 @@
 {
   "name": "Settings",
   "priority": -1,
-  "resources": [],
   "fonticon": "fa-cogs",
   "exec": "exec.coffee",
   "description": "Modify the system's settings, such as network, time, and more.",

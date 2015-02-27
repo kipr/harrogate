@@ -1,13 +1,8 @@
 ﻿harrogateAppsModule = angular.module 'harrogateApps', []
 
 harrogateAppsCatalogProvider = ->
-  app_catalog_url = '/json/app-catalog'
-  app_categories_url = '/json/app-categories'
-  useTinfoilShielding = false
-
-  @useTinfoilShielding = (value) ->
-    useTinfoilShielding = ! !value
-    return
+  app_catalog_url = '/apps/catalog.json'
+  app_categories_url = '/apps/categories.json'
 
   @$get = ['$http', '$q', ($http, $q) ->
     service =

@@ -1,18 +1,5 @@
 {
   "name": "Home",
-  "resources": [
-    "index.coffee:utf8",
-    "css/bootstrap.min.css:utf8",
-    "css/bootstrap-theme.min.css:utf8",
-    "scripts/bootstrap.min.js:utf8",
-    "scripts/jquery-2.1.3.min.js:utf8",
-    "css/font-awesome.min.css:utf8",
-    "css/style.css:utf8",
-    "fonts/fontawesome-webfont.ttf:binary",
-    "fonts/fontawesome-webfont.woff:binary",
-    "fonts/fontawesome-webfont.woff2:binary",
-    "fonts/fontawesome-webfont.svg:binary",
-    "fonts/fontawesome-webfont.eot:binary" ],
   "exec": "server.coffee",
   "fonticon": "fa-home",
   "description": "The launchpad",

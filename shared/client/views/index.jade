@@ -1,0 +1,23 @@
+﻿doctype html
+html(lang="en" data-ng-app='harrogateIndexApp')
+  head
+    title= pageTitle
+    include includes/styles.jade
+
+    include includes/scripts.jade
+    script(src='/scripts/lib/angular/angular.min.js')
+    script(src='/scripts/lib/angular/angular-route.min.js')
+    script(src='/scripts/harrogate-index-app.js')
+    script(src='/scripts/harrogate-apps-module.js')
+
+    // Load the app catalog
+    script(type='text/javascript').
+      var app_catalog = undefined; function app_catalog_jsonp_callback(data){app_catalog = data;}
+    script(src='/apps/catalog.json?callback=app_catalog_jsonp_callback')
+  body
+    include includes/navbar.jade
+
+    // App view container
+    div(data-ng-view='')
+
+    include includes/footer.jade

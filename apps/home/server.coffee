@@ -6,8 +6,6 @@ app_catalog = require '../../shared/scripts/app-catalog.coffee'
 
 app_categories = []
 
-index = jade.compile(fs.readFileSync('apps/home/index.jade', 'utf8'), filename: "./apps/home/index.jade")
-
 category_index = (name) ->
   for i in [0 .. app_categories.length - 1]
     return i if app_categories[i]['name'] is name
@@ -35,13 +33,5 @@ for i in [0 .. app_categories.length - 1]
   app_categories[i]['list'].sort (a, b) -> a.priority - b.priority
 
 module.exports =
-  handle: (request, response) ->
-    path = url.parse(request.url).pathname
-    name = path_tools.basename(path)
-    if name is 'home'
-      response.writeHead 200, { 'Content-Type': 'text/html' }
-      return response.end index(apps: app_categories), 'utf8'
-      
-    response.writeHead 404, { 'Content-Type': 'text/plain' }
-    response.end 'Pade not found\n'
-    return
+  exec: ->
+  jade_locals: {apps: app_categories}
