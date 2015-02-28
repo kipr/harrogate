@@ -4,7 +4,7 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 session = require 'express-session'
 passport = require 'passport'
-BasicStrategy =  require 'passport-http'.BasicStrategy
+BasicStrategy =  require('passport-http').BasicStrategy
 
 app_catalog = require './shared/scripts/app-catalog.coffee'
 
