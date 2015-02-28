@@ -4,9 +4,7 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 session = require 'express-session'
 passport = require 'passport'
-BasicStrategy = 
-  require 'passport-http'
-  .BasicStrategy
+BasicStrategy =  require 'passport-http'.BasicStrategy
 
 app_catalog = require './shared/scripts/app-catalog.coffee'
 
@@ -22,12 +20,12 @@ harrogate_app.use session(secret: 'B on harrogate')
 harrogate_app.use passport.initialize()
 
 # setup passport
-passport.use new BasicStrategy((username, password, done) ->
+passport.use new BasicStrategy (username, password, done) ->
   if password is 'test'
     done null, username
   else
     done null, false
-)
+
 
 # All the /app stuff requires auth
 harrogate_app.use '/apps', passport.authenticate('basic', {session: false}), (request, response, next) ->
