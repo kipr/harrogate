@@ -1,4 +1,3 @@
-Worker = require('webworker-threads').Worker
 boyd = require 'node-boyd'
 fs = require 'fs'
 url = require 'url'
