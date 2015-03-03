@@ -1,9 +1,9 @@
 div(class='container')
-  div(class='jumbotron')
+  div.jumbotron(data-ng-show='show_welcome')
     h1 Hello, World!
     p.
       Welcome to your new Link 2. Watch our brief overview to get started!
     p
-      a(class=['btn', 'btn-primary', 'btn-lg'], href='#', role='button') Learn More!
-      a(class=['btn', 'btn-lg'], href='#', role='button') Dismiss
+      a.btn.btn-primary.btn-lg(role='button' data-ng-click='click_learn_more()') Learn More!
+      a.btn.btn-lg(data-ng-click='show_welcome = false') Dismiss
   include includes/program_list.jade
