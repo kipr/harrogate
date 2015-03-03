@@ -38,8 +38,8 @@
     <Content Include="shared\client\views\includes\navbar.jade" />
     <Content Include="shared\client\views\includes\footer.jade" />
     <Content Include="shared\client\views\index.jade" />
-    <Content Include="shared\client\scripts\harrogate-apps-module.coffee" />
-    <Content Include="shared\client\scripts\harrogate-navbar-module.coffee" />
+    <Content Include="shared\client\scripts\app-catalog-provider.coffee" />
+    <Content Include="shared\client\scripts\navbar-controller.coffee" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
     <Content Include="apps\categories.json" />

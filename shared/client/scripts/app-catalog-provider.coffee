@@ -1,5 +1,5 @@
 ﻿exports.inject = (app) ->
-  app.provider 'harrogateAppsCatalog', exports.provider
+  app.provider 'app_catalog_provider', exports.provider
   exports.provider
 
 exports.provider = ->

@@ -6,7 +6,7 @@ gulp = require 'gulp'
 gulp_filter = require 'gulp-filter'
 gutil = require 'gulp-util'
 jade = require 'gulp-jade'
-minifyCSS = require 'gulp-minify-css'
+minify_css = require 'gulp-minify-css'
 nodemon = require 'gulp-nodemon'
 path_tools = require 'path'
 rename = require 'gulp-rename'
@@ -49,7 +49,7 @@ gulp.task 'shared_views', ->
 # Shared styles task
 gulp.task 'shared_styles', ->
   gulp.src('shared/client/css/*.css')
-  .pipe minifyCSS(keepBreaks: true)
+  .pipe minify_css(keepBreaks: true)
   .pipe gulp.dest('public/css/')
 
 # Shared resources task

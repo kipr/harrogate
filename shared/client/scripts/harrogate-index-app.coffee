@@ -3,8 +3,8 @@ require 'angular-route'
 
 app = angular.module 'harrogateIndexApp', ['ngRoute']
 
-require('./harrogate-apps-module.coffee').inject app
-require('./harrogate-navbar-module.coffee').inject app
+require('./app-catalog-provider.coffee').inject app
+require('./navbar-controller.coffee').inject app
 
 app.config([
   '$routeProvider'

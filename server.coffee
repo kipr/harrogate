@@ -1,6 +1,6 @@
 fs = require 'fs'
 express = require 'express'
-cookieParser = require 'cookie-parser'
+cookie_parser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 session = require 'express-session'
 passport = require 'passport'
@@ -14,7 +14,7 @@ config = require('./config/server/config.js')
 
 # create the app
 harrogate_app = express()
-harrogate_app.use cookieParser()
+harrogate_app.use cookie_parser()
 harrogate_app.use bodyParser()
 harrogate_app.use session(secret: 'B on harrogate')
 harrogate_app.use passport.initialize()
