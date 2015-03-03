@@ -3,6 +3,7 @@ coffee_script = require 'coffee-script'
 coffee = require 'gulp-coffee'
 data = require 'gulp-data'
 gulp = require 'gulp'
+gulp_filter = require 'gulp-filter'
 gutil = require 'gulp-util'
 jade = require 'gulp-jade'
 minifyCSS = require 'gulp-minify-css'
@@ -11,6 +12,9 @@ path_tools = require 'path'
 rename = require 'gulp-rename'
 transform = require 'vinyl-transform'
 through = require 'through'
+
+# Default task
+gulp.task 'default', ['dev'] 
 
 # Start the development server
 gulp.task 'dev', [
@@ -29,53 +33,59 @@ gulp.task 'dev', [
 
 # Create the shared static content
 gulp.task 'shared', [
-  'views'
-  'styles'
-  'resources'
-  'scripts'
+  'shared_views'
+  'shared_styles'
+  'shared_resources'
+  'shared_scripts'
+  'shared_3rd_party_libs'
 ], ->
 
-# Views task
-gulp.task 'views', ->
+# Shared views task
+gulp.task 'shared_views', ->
   gulp.src('shared/client/views/*.jade')
   .pipe jade()
   .pipe gulp.dest('public/')
-  return
 
-# Styles task
-gulp.task 'styles', ->
+# Shared styles task
+gulp.task 'shared_styles', ->
   gulp.src('shared/client/css/*.css')
   .pipe minifyCSS(keepBreaks: true)
   .pipe gulp.dest('public/css/')
-  return
 
-# Resources task
-gulp.task 'resources', ->
-  # bootstrap
-  gulp.src('node_modules/bootstrap/dist/css/*')
-  .pipe gulp.dest('public/css/')
-  gulp.src('node_modules/bootstrap/dist/fonts/*')
-  .pipe gulp.dest('public/fonts/')
-  gulp.src('node_modules/bootstrap/dist/js/*')
-  .pipe gulp.dest('public/scripts/')
+# Shared resources task
+gulp.task 'shared_resources', ->
+  gulp.src('apps/categories.json')
+  .pipe gulp.dest('public/apps/')
 
-  # jQuery
+# Shared resources task
+gulp.task 'shared_3rd_party_libs', [
+  'bootstrap'
+  'jquery'
+  'font-awesome'
+], ->
+
+# bootstrap
+gulp.task 'bootstrap', ->
+  gulp.src('node_modules/bootstrap/dist/**/*')
+  .pipe rename((path) ->
+    path.dirname = 'scripts' if path.dirname is 'js'
+    return
+  )
+  .pipe gulp.dest('public/')
+
+# jquery
+gulp.task 'jquery', ->
   gulp.src('node_modules/jquery/dist/jquery.*')
   .pipe gulp.dest('public/scripts/')
 
-  # Font Awesome
-  gulp.src('node_modules/font-awesome/css/*')
+# Font Awesome
+gulp.task 'font-awesome', ->
+  gulp.src('node_modules/font-awesome/**/*')
+  .pipe gulp_filter ['css/*', 'fonts/*']
   .pipe gulp.dest('public/')
-  gulp.src('node_modules/font-awesome/fonts/*')
-  .pipe gulp.dest('public/fonts/')
-
-  # json data
-  gulp.src('apps/categories.json')
-  .pipe gulp.dest('public/apps/')
-  return
 
 # Scripts task
-gulp.task 'scripts', ->
+gulp.task 'shared_scripts', ->
 # Browserify task
   b = browserify
     debug: true
@@ -105,11 +115,6 @@ gulp.task 'scripts', ->
     return
   )
   .pipe gulp.dest 'public/scripts/'
-
-  # Let's not browserify jquery and bootstrap for now
-  gulp.src(['shared/client/scripts/lib/**/*'])
-  .pipe gulp.dest('public/scripts/lib/')
-  return
 
 # Create the apps static content
 gulp.task 'apps', [
@@ -143,7 +148,6 @@ gulp.task 'app_views', ->
     return
   )
   .pipe gulp.dest('public/apps/')
-  return
 
 # App scripts task
 gulp.task 'app_scripts', ->
@@ -155,7 +159,6 @@ gulp.task 'app_scripts', ->
     return
   )
   .pipe gulp.dest('public/apps/')
-  return
 
 # Watch task
 gulp.task 'watch', ->
