@@ -162,12 +162,9 @@ gulp.task 'app_scripts', ->
 
 # Watch task
 gulp.task 'watch', ->
-  gulp.watch 'shared/client/views/**/*.jade', ['views']
-  gulp.watch 'shared/client/css/*.css', ['styles']
-  gulp.watch 'shared/client/fonts/*', ['resources']
-  gulp.watch 'shared/client/images/*', ['resources']
-  gulp.watch 'apps/categories.json', ['resources']
-  gulp.watch 'shared/client/scripts/*.coffee', ['scripts']
+  gulp.watch 'shared/client/views/**/*.jade', ['shared_views']
+  gulp.watch 'shared/client/css/*.css', ['shared_styles']
+  gulp.watch 'shared/client/scripts/*.coffee', ['shared_scripts']
 
   gulp.watch 'apps/**/resources/**/*.jade', ['app_views']
   gulp.watch 'apps/**/resources/*.coffee', ['app_scripts']
