@@ -1,6 +1,5 @@
 browserify = require 'browserify'
-coffee_script = require 'coffee-script'
-coffee = require 'gulp-coffee'
+coffee = require 'coffee-script'
 data = require 'gulp-data'
 gulp = require 'gulp'
 gulp_filter = require 'gulp-filter'
@@ -104,7 +103,7 @@ gulp.task 'scripts', ->
       return
 
     end = ->
-      @queue coffee_script.compile(data[file])
+      @queue coffee.compile(data[file])
       @queue null
       return
 
