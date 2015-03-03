@@ -24,8 +24,6 @@
     <Compile Include="Gulpfile.coffee" />
     <Compile Include="Gulpfile.js" />
     <Compile Include="server.coffee" />
-    <Compile Include="shared\client\scripts\lib\bootstrap.min.js" />
-    <Compile Include="shared\client\scripts\lib\jquery-2.1.3.min.js" />
     <Content Include=".gitignore" />
     <Content Include=".jshintrc" />
     <Content Include="apps\cloud\resources\index.jade" />
@@ -36,9 +34,6 @@
     <Content Include="config\server\env\development.json" />
     <Content Include="config\server\env\production.json" />
     <Content Include="config\server\env\test.json" />
-    <Content Include="shared\client\css\bootstrap-theme.min.css" />
-    <Content Include="shared\client\css\bootstrap.min.css" />
-    <Content Include="shared\client\css\font-awesome.min.css" />
     <Content Include="shared\client\css\style.css" />
     <Content Include="shared\client\views\includes\navbar.jade" />
     <Content Include="shared\client\views\includes\footer.jade" />
@@ -76,8 +71,6 @@
     <Content Include="apps\settings\exec.coffee" />
     <Content Include="apps\user\manifest.json" />
     <Content Include="apps\user\exec.coffee" />
-    <Content Include="shared\client\fonts\fontawesome-webfont.svg" />
-    <Compile Include="shared\client\scripts\lib\require.js" />
     <Content Include="shared\client\scripts\harrogate-index-app.coffee" />
   </ItemGroup>
   <ItemGroup>
@@ -96,11 +89,9 @@
     <Folder Include="config\" />
     <Folder Include="config\server\" />
     <Folder Include="config\server\env\" />
-    <Folder Include="shared\client\images\" />
     <Folder Include="shared\client\views\" />
     <Folder Include="shared\client\views\includes\" />
     <Folder Include="shared\scripts\" />
-    <Folder Include="shared\client\fonts\" />
     <Folder Include="apps\kiss" />
     <Folder Include="apps\motors" />
     <Folder Include="shared\" />
@@ -109,7 +100,6 @@
     <Folder Include="apps\settings" />
     <Folder Include="apps\user" />
     <Folder Include="shared\client\css\" />
-    <Folder Include="shared\client\scripts\lib\" />
     <Folder Include="shared\client\" />
     <Folder Include="shared\client\scripts\" />
   </ItemGroup>

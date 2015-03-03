@@ -51,13 +51,23 @@ gulp.task 'styles', ->
 
 # Resources task
 gulp.task 'resources', ->
-  # Fonts
-  gulp.src('shared/client/fonts/*')
+  # bootstrap
+  gulp.src('node_modules/bootstrap/dist/css/*')
+  .pipe gulp.dest('public/css/')
+  gulp.src('node_modules/bootstrap/dist/fonts/*')
   .pipe gulp.dest('public/fonts/')
+  gulp.src('node_modules/bootstrap/dist/js/*')
+  .pipe gulp.dest('public/scripts/')
 
-  # images
-  gulp.src('shared/client/images/*')
-  .pipe gulp.dest('public/images/')
+  # jQuery
+  gulp.src('node_modules/jquery/dist/jquery.*')
+  .pipe gulp.dest('public/scripts/')
+
+  # Font Awesome
+  gulp.src('node_modules/font-awesome/css/*')
+  .pipe gulp.dest('public/')
+  gulp.src('node_modules/font-awesome/fonts/*')
+  .pipe gulp.dest('public/fonts/')
 
   # json data
   gulp.src('apps/categories.json')
