@@ -1,12 +1,16 @@
-gulp = require 'gulp'
-jade = require 'gulp-jade'
+browserify = require 'browserify'
+coffee_script = require 'coffee-script'
 coffee = require 'gulp-coffee'
-minifyCSS = require 'gulp-minify-css'
-gutil = require 'gulp-util'
-nodemon = require 'gulp-nodemon'
-rename = require 'gulp-rename'
 data = require 'gulp-data'
+gulp = require 'gulp'
+gutil = require 'gulp-util'
+jade = require 'gulp-jade'
+minifyCSS = require 'gulp-minify-css'
+nodemon = require 'gulp-nodemon'
 path_tools = require 'path'
+rename = require 'gulp-rename'
+transform = require 'vinyl-transform'
+through = require 'through'
 
 # Start the development server
 gulp.task 'dev', [
@@ -62,11 +66,37 @@ gulp.task 'resources', ->
 
 # Scripts task
 gulp.task 'scripts', ->
-  gulp.src('shared/client/scripts/*.coffee')
-  .pipe coffee(bare: true).on('error', gutil.log)
-  .pipe gulp.dest('public/scripts/')
+# Browserify task
+  b = browserify
+    debug: true
+    bare: true
+  .transform (file) ->
+    data[file] = ''
 
-  # We will use browserify or something similar later for bootstrap, jQuery and angular
+    write = (buf) ->
+      data[file] += buf
+      return
+
+    end = ->
+      @queue coffee_script.compile(data[file])
+      @queue null
+      return
+
+    through write, end
+
+  # bundle the main app for index.jade
+  gulp.src 'shared/client/scripts/harrogate-index-app.coffee'
+  .pipe transform((filename) ->
+    b.add filename
+    b.bundle()
+  )
+  .pipe rename((path) ->
+    path.extname  = '.js'
+    return
+  )
+  .pipe gulp.dest 'public/scripts/'
+
+  # Let's not browserify jquery and bootstrap for now
   gulp.src(['shared/client/scripts/lib/**/*'])
   .pipe gulp.dest('public/scripts/lib/')
   return

@@ -1,6 +1,8 @@
-﻿harrogateAppsModule = angular.module 'harrogateApps', []
+﻿exports.inject = (app) ->
+  app.provider 'harrogateAppsCatalog', exports.provider
+  exports.provider
 
-harrogateAppsCatalogProvider = ->
+exports.provider = ->
   app_catalog_url = '/apps/catalog.json'
   app_categories_url = '/apps/categories.json'
 
@@ -58,6 +60,3 @@ harrogateAppsCatalogProvider = ->
     service
   ]
   return
-
-harrogateAppsModule
-.provider 'harrogateAppsCatalog', harrogateAppsCatalogProvider

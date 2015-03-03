@@ -1,8 +1,12 @@
-﻿angular.module 'harrogateIndexApp', [
-  'ngRoute'
-  'harrogateNavbar'
-  'harrogateApps']
-.config([
+﻿angular = require 'angular'
+require 'angular-route'
+
+app = angular.module 'harrogateIndexApp', ['ngRoute']
+
+require('./harrogate-apps-module.coffee').inject app
+require('./harrogate-navbar-module.coffee').inject app
+
+app.config([
   '$routeProvider'
   ($routeProvider) ->
     
@@ -16,3 +20,5 @@
     
     return
 ])
+
+app.run()
