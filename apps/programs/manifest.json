@@ -4,5 +4,6 @@
   "navbar": true,
   "fonticon": "fa-th",
   "description": "Run, modify, and manage programs on the device.",
-  "category": "General"
+  "category": "General",
+  "angular_ctrl": "resources/programs-view-controller.coffee"
 }

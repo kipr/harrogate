@@ -15,8 +15,17 @@ app.config([
 
     # add the routes for the apps
     for app_name, app_obj of app_catalog
-      $routeProvider.when(app_obj.angularjs_route,
-        templateUrl: app_obj.nodejs_route)
+      if app_obj.angular_ctrl?
+        require(app_name).inject app
+    
+        $routeProvider.when(app_obj.angularjs_route,
+          templateUrl: app_obj.nodejs_route
+          controller: require(app_name).controller
+        )
+      else
+        $routeProvider.when(app_obj.angularjs_route,
+          templateUrl: app_obj.nodejs_route
+        )
     
     return
 ])

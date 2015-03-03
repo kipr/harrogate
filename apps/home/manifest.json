@@ -5,5 +5,6 @@
   "description": "The launchpad",
   "category": "System",
   "navbar": true,
-  "hidden": true
+  "hidden": true,
+  "angular_ctrl": "resources/home-view-controller.coffee"
 }

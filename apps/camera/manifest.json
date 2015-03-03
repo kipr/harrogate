@@ -3,5 +3,6 @@
   "fonticon": "fa-camera",
   "exec": "exec.coffee",
   "description": "View live feeds from USB cameras plugged into the system.",
-  "category": "Sensors"
+  "category": "Sensors",
+  "angular_ctrl": "resources/camera-view-controller.coffee"
 }

@@ -3,5 +3,6 @@
   "fonticon": "fa-cloud",
   "exec": "exec.coffee",
   "description": "Manage integration with KIPR's cloud services, such as automatic program backup.",
-  "category": "System"
+  "category": "System",
+  "angular_ctrl": "resources/cloud-view-controller.coffee"
 }

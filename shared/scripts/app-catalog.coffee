@@ -53,6 +53,7 @@ class AppCatalog
         category: manifest['category']
         hidden: manifest['hidden']
         navbar: manifest['navbar']
+        angular_ctrl: "#{path}/#{manifest['angular_ctrl']}" if manifest['angular_ctrl']
 
   handle: (request, response) ->
     callback = url.parse(request.url, true).query['callback']

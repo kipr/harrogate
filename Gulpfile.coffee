@@ -13,6 +13,12 @@ rename = require 'gulp-rename'
 transform = require 'vinyl-transform'
 through = require 'through'
 
+# Create the app instances
+app_instances = {}
+app_catalog = require './shared/scripts/app-catalog.coffee'
+for app_name, app of app_catalog.catalog
+  app_instances[path_tools.basename(app['path'])] = require app['exec_path']
+
 # Default task
 gulp.task 'default', ['dev'] 
 
@@ -36,7 +42,7 @@ gulp.task 'shared', [
   'shared_views'
   'shared_styles'
   'shared_resources'
-  'shared_scripts'
+  'scripts'
   'shared_3rd_party_libs'
 ], ->
 
@@ -85,7 +91,7 @@ gulp.task 'font-awesome', ->
   .pipe gulp.dest('public/')
 
 # Scripts task
-gulp.task 'shared_scripts', ->
+gulp.task 'scripts', ->
 # Browserify task
   b = browserify
     debug: true
@@ -104,6 +110,11 @@ gulp.task 'shared_scripts', ->
 
     through write, end
 
+  # Add app scripts
+  for app_name, app of app_catalog.catalog_4_client
+    if app.angular_ctrl?
+      b.require app.angular_ctrl, expose: app.name
+  
   # bundle the main app for index.jade
   gulp.src 'shared/client/scripts/harrogate-index-app.coffee'
   .pipe transform((filename) ->
@@ -119,15 +130,9 @@ gulp.task 'shared_scripts', ->
 # Create the apps static content
 gulp.task 'apps', [
   'app_views'
-  'app_scripts'
 ], ->
 
 # App views task
-app_instances = {}
-app_catalog = require './shared/scripts/app-catalog.coffee'
-for app_name, app of app_catalog.catalog
-  app_instances[path_tools.basename(app['path'])] = require app['exec_path']
-
 gulp.task 'app_views', ->
   gulp.src('apps/**/resources/*.jade')
   .pipe data((file) ->
@@ -149,22 +154,11 @@ gulp.task 'app_views', ->
   )
   .pipe gulp.dest('public/apps/')
 
-# App scripts task
-gulp.task 'app_scripts', ->
-  gulp.src('apps/**/resources/*.coffee')
-  .pipe coffee(bare: true).on('error', gutil.log)
-  .pipe rename((path) ->
-    path.dirname = path.dirname.replace '/resources', '/scripts'
-    path.dirname = path.dirname.replace '\\resources', '\\scripts'
-    return
-  )
-  .pipe gulp.dest('public/apps/')
-
 # Watch task
 gulp.task 'watch', ->
   gulp.watch 'shared/client/views/**/*.jade', ['shared_views']
   gulp.watch 'shared/client/css/*.css', ['shared_styles']
-  gulp.watch 'shared/client/scripts/*.coffee', ['shared_scripts']
+  gulp.watch 'shared/client/scripts/*.coffee', ['scripts']
 
   gulp.watch 'apps/**/resources/**/*.jade', ['app_views']
-  gulp.watch 'apps/**/resources/*.coffee', ['app_scripts']
+  gulp.watch 'apps/**/resources/*.coffee', ['scripts']
