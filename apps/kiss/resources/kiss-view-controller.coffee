@@ -20,7 +20,6 @@ exports.controller = ($scope, $location, $http) ->
     file_uri = $location.search().path
     $http.get(file_uri)
     .success (data, status, headers, config) ->
-      console.log data
       editor.setValue(new Buffer(data.content, 'base64').toString('ascii'));
       return
     .error (data, status, headers, config) ->
