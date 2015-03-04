@@ -29,3 +29,5 @@
             td
               button.btn.btn-default(data-ng-if="child.type == 'Directory'", type='button', data-toggle='tooltip', data-placement='top', title='Open Directory', data-ng-click="open_child_directory(child)")
                 i.fa.fa-folder-open-o
+              a.btn.btn-default(data-ng-if="child.type == 'File'", type='button', data-toggle='tooltip', data-placement='top', title='Open File', data-ng-href="/#/apps/kiss?path={{child.href | escape}}")
+                i.fa.fa-folder-open-o
