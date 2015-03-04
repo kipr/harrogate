@@ -67,6 +67,8 @@ gulp.task 'shared_3rd_party_libs', [
   'bootstrap'
   'jquery'
   'font-awesome'
+  'code-mirror'
+  'code-mirror-themes'
 ], ->
 
 # bootstrap
@@ -88,6 +90,16 @@ gulp.task 'font-awesome', ->
   gulp.src('node_modules/font-awesome/**/*')
   .pipe gulp_filter ['css/*', 'fonts/*']
   .pipe gulp.dest('public/')
+
+# Code Mirror
+gulp.task 'code-mirror', ->
+  gulp.src('node_modules/codemirror/lib/codemirror.css')
+  .pipe gulp.dest('public/css/')
+
+# Code Mirror Themes
+gulp.task 'code-mirror-themes', ->
+  gulp.src('node_modules/codemirror/theme/*.css')
+  .pipe gulp.dest('public/css/codemirror-theme/')
 
 # Scripts task
 gulp.task 'scripts', ->

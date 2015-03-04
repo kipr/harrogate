@@ -1,2 +1,46 @@
-p Hello from kiss/index.jade
-p Hello from {{test}}
+.container
+  .row
+    span.btn-group
+      button.btn(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-disabled='!documentChanged', ;='', data-toggle='tooltip', data-placement='top', title='Save File', data-ng-click='save()')
+        i.fa.fa-floppy-o
+      button.btn.btn-default.disabled(type='button', data-toggle='tooltip', data-placement='top', title='Reload', data-ng-click='refresh()')
+        i.fa.fa-refresh
+      button.btn(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-disabled='!documentChanged', ;='', data-toggle='tooltip', data-placement='top', title='Upload to Cloud', data-ng-click='uploadToCloud()')
+        i.fa.fa-cloud
+      button.btn(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-disabled='!documentChanged', ;='', data-toggle='tooltip', data-placement='top', title='Download File', data-ng-click='downloadFile()')
+        i.fa.fa-download
+    |  
+    span.btn-group
+      button.btn.btn-default.disabled(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Cut', data-ng-click='cut()')
+        i.fa.fa-scissors
+      button.btn.btn-default.disabled(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Copy', data-ng-click='copy()')
+        i.fa.fa-copy
+      button.btn.btn-default.disabled(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Paste', data-ng-click='paste()')
+        i.fa.fa-clipboard
+    |  
+    span.btn-group
+      button.btn.btn-default(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Undo', data-ng-click='undo()')
+        i.fa.fa-undo
+      button.btn.btn-default(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Redo', data-ng-click='redo()')
+        i.fa.fa-repeat
+    |  
+    span.btn-group
+      button.btn.btn-default(type='button', data-toggle='tooltip', data-placement='top', title='Compile Project', data-ng-click='compile()')
+        i.fa.fa-th
+    |  
+    span.btn-group
+      button.btn.btn-default(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Find', data-ng-click='find()')
+        i.fa.fa-binoculars
+    |  
+    span.btn-group
+      button.btn.btn-default(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Zoom In', data-ng-click='zoomIn()')
+        i.fa.fa-search-plus
+      button.btn.btn-default(type='button', ;='', data-toggle='tooltip', data-placement='top', title='Zoom Out', data-ng-click='zoomOut()')
+        i.fa.fa-search-minus
+    |  
+    span.btn-group
+      button.btn.btn-default.disabled(type='button', data-toggle='tooltip', data-placement='top', title='Help', data-ng-click='help()')
+        i.fa.fa-question-circle
+  .row
+    .panel.panel-default
+      textarea#editor.panel-body

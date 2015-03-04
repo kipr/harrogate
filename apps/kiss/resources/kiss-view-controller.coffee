@@ -1,3 +1,6 @@
+require 'codemirror/mode/clike/clike'
+code_mirror = require 'codemirror/lib/codemirror'
+
 exports.name = 'kiss_view_controller'
 
 exports.inject = (app) ->
@@ -9,5 +12,10 @@ exports.inject = (app) ->
   exports.controller
 
 exports.controller = ($scope) ->
-  $scope.test = 'Hello from kiss-view-controller.coffee'
+  document.getElementById('editor')
+  editor = code_mirror.fromTextArea(document.getElementById('editor'),
+    mode: 'text/x-csrc'
+    lineNumbers: true
+    theme : 'eclipse'
+  )
   return
