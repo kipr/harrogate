@@ -30,6 +30,10 @@
     <Content Include="apps\cloud\resources\cloud-view-controller.coffee" />
     <Content Include="apps\kiss\resources\kiss-view-controller.coffee" />
     <Content Include="apps\kiss\resources\index.jade" />
+    <Content Include="apps\fs\exec.coffee" />
+    <Content Include="apps\fs\manifest.json" />
+    <Content Include="apps\fs\resources\index.jade" />
+    <Content Include="apps\fs\resources\fs-view-controller.coffee" />
     <Content Include="apps\motors\resources\index.jade" />
     <Content Include="apps\motors\resources\motors-view-controller.coffee" />
     <Content Include="apps\programs\resources\programs-view-controller.coffee" />
@@ -89,6 +93,8 @@
     <Folder Include="apps\home\resources\" />
     <Folder Include="apps\home\resources\includes\" />
     <Folder Include="apps\kiss\resources\" />
+    <Folder Include="apps\fs\" />
+    <Folder Include="apps\fs\resources\" />
     <Folder Include="apps\motors\resources\" />
     <Folder Include="apps\programs\resources\" />
     <Folder Include="apps\settings\resources\" />

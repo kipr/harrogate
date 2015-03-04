@@ -38,6 +38,7 @@ class AppCatalog
         hidden: manifest['hidden']
         navbar: manifest['navbar']
         exec_path: "#{path}/#{manifest['exec']}"
+        web_api: manifest['web_api'] if manifest['web_api']?
 
       # There might be a better strategy than to create two catalogs.
       # However they are supposed to be read-only, so this is the more performant way
@@ -54,6 +55,7 @@ class AppCatalog
         hidden: manifest['hidden']
         navbar: manifest['navbar']
         angular_ctrl: "#{path}/#{manifest['angular_ctrl']}" if manifest['angular_ctrl']
+        web_api: manifest['web_api'] if manifest['web_api']?
 
   handle: (request, response) ->
     callback = url.parse(request.url, true).query['callback']

@@ -26,7 +26,6 @@ passport.use new BasicStrategy (username, password, done) ->
   else
     done null, false
 
-
 # All the /app stuff requires auth
 harrogate_app.use '/apps', passport.authenticate('basic', {session: false}), (request, response, next) ->
   next()
@@ -34,6 +33,13 @@ harrogate_app.use '/apps', passport.authenticate('basic', {session: false}), (re
 # Serve /apps/catalog.json
 harrogate_app.use '/apps/catalog.json', (request, response, next) ->
   app_catalog.handle request, response
+
+# Register app web-api routes
+for app_name, app of app_catalog.catalog
+  if app.web_api?
+    for web_api in app.web_api
+      console.log "Register API: #{web_api.uri} --> '#{app_name}'.#{web_api.handle}"
+      harrogate_app.use web_api.uri, require(app.exec_path)[web_api.handle]
 
 # Start the apps
 for app_name, app of app_catalog.catalog

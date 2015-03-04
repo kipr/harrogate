@@ -1,0 +1,31 @@
+.container
+  .row
+    .panel.panel-default
+      .panel-heading Current Directory:
+        strong {{current.name}}
+        span.btn-group.navbar-right
+          button.btn.btn-default(type='button', data-toggle='tooltip', data-placement='top', title='Root', data-ng-click='root()')
+            i.fa.fa-hdd-o
+          button.btn.btn-default(type='button', data-toggle='tooltip', data-placement='top', title='Up', data-ng-click='up()')
+            i.fa.fa-arrow-up
+          button.btn.btn-default(type='button', data-toggle='tooltip', data-placement='top', title='Reload', data-ng-click='reload()')
+            i.fa.fa-refresh
+      table.panel-body.table
+        thead
+          tr
+            th Name
+            th Path
+            th MIME type
+            th 
+        tbody
+          tr(data-ng-repeat = "child in current.links.childs")
+            th(scope="row")
+              i.fa.fa-folder-o(data-ng-if="child.type == 'Directory'")
+              i.fa.fa-file-o(data-ng-if="child.type == 'File'")
+              |  
+              {{child.name}}
+            td {{child.path}}
+            td {{child.mime}}
+            td
+              button.btn.btn-default(data-ng-if="child.type == 'Directory'", type='button', data-toggle='tooltip', data-placement='top', title='Open Directory', data-ng-click="open_child_directory(child)")
+                i.fa.fa-folder-open-o
