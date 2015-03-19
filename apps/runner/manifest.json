@@ -1,7 +1,8 @@
 {
   "name": "runner",
-  "hidden": true,
+  "hidden": false,
   "exec": "runner.coffee",
   "description": "Runs a user program",
-  "category": "System"
+  "category": "System",
+  "angular_ctrl": "resources/graphics-view-controller.coffee"
 }
