@@ -2,8 +2,6 @@ net = require 'net'
 assert = require 'assert'
 zlib = require 'zlib'
 WebSocketServer = require('ws').Server
-Jpeg = require('jpeg').Jpeg;
-base64 = require 'base64'
 
 displays = {}
 
@@ -18,8 +16,7 @@ handle_display_packet = (packet) ->
   raw = packet.slice total - size
   
   zlib.inflate raw, (e, b) ->
-    jpeg = new Jpeg b, width, height, 'rgb'
-    img = base64.encode jpeg.encodeSync().toString 'binary'
+    img = new Buffer(original_data, 'binary').toString('base64')
   
     displays[pid] =
       'width': width
