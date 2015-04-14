@@ -5,6 +5,7 @@ bodyParser = require 'body-parser'
 session = require 'express-session'
 passport = require 'passport'
 BasicStrategy =  require('passport-http').BasicStrategy
+ON_DEATH = require 'death'
 
 app_catalog = require './shared/scripts/app-catalog.coffee'
 
@@ -53,3 +54,14 @@ harrogate_app.use express.static(__dirname + '/public')
 # Start the server
 server = harrogate_app.listen config.port, ->
   console.log "Starting express.js server (#{server.address().address}:#{server.address().port})"
+
+ON_DEATH (signal, err) ->
+  console.log "Stopping express.js server"
+  server.close()
+
+  # Stop apps
+  for app_name, app of app_catalog.catalog
+    console.log "Stopping #{app_name}"
+    app_instance = require app['exec_path']
+    app_instance.closing() if app_instance['closing']
+  return

@@ -6,6 +6,7 @@ WebSocketServer = require('ws').Server
 
 cam = undefined
 wss = undefined
+closing = false # signal that the app is closing
 
 module.exports =
   exec: ->
@@ -20,8 +21,25 @@ module.exports =
     console.log cam
 
     broadcastImage = ->
-      wss.broadcast(boyd.getImage(cam.handle))
-      setTimeout(broadcastImage, 25)
+      if !closing
+        wss.broadcast(boyd.getImage(cam.handle))
+        setTimeout(broadcastImage, 25)
 
     if cam.success
       broadcastImage()
+
+  closing: ->
+    closing = true
+
+    # wait to avoid race conditions with broadcastImage
+    setTimeout (->
+      wss.close() if wss?
+      wss = undefined
+
+      boyd.close(cam.handle) if cam?
+      cam = undefined
+
+      return
+    ), 30
+
+    return
