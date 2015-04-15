@@ -37,7 +37,6 @@ module.exports =
     # is the raw file or the JSON object requested?
     response_mode = url.parse(request.url, true).query['mode']
     if response_mode? and response_mode is 'raw'
-      console.log fs_path
       response.download fs_path
 
     else
