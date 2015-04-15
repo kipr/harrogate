@@ -13,18 +13,18 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
       $scope.current = data
       return
     .error (data, status, headers, config) ->
-      console.log "Could not get #{web_api.rel_uri}"
+      console.log "Could not get #{uri}"
       return
     return
   
   root_dir_uri = undefined
   
   app_catalog_provider.catalog.then (app_catalog) ->
-    for web_api in app_catalog['Host Filesystem']['web_api']
-      if web_api.id is 'fs'
-        open_dir(web_api.uri)
-        root_dir_uri = web_api.uri
-        return
+    fs_api = app_catalog['Host Filesystem']?.web_api?.fs
+    if fs_api?
+      open_dir(fs_api.uri)
+      root_dir_uri = fs_api.uri
+      $scope.home_uri = fs_api.home_uri
     return
 
   $scope.open_directory = (directory) ->
@@ -39,6 +39,10 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
       $scope.open_directory child
     else
       $scope.selected = child
+    return
+
+  $scope.home = () ->
+    open_dir($scope.home_uri) if $scope.home_uri?
     return
 
   $scope.root = () ->

@@ -1,6 +1,10 @@
 .container
   .row.toolbar
     span.btn-group
+      button.btn.btn-default.btn-toolbar(type='button', data-ng-class='{disabled: !home_uri}', data-ng-click='home()')
+        i.fa.fa-home
+        br
+        small.small Home
       button.btn.btn-default.btn-toolbar(type='button', data-ng-click='root()')
         i.fa.fa-hdd-o
         br

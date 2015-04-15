@@ -23,6 +23,6 @@ exports.controller = ($scope, $location, $http) ->
       editor.setValue(new Buffer(data.content, 'base64').toString('ascii'));
       return
     .error (data, status, headers, config) ->
-      console.log "Could not get #{web_api.rel_uri}"
+      console.log "Could not get #{file_uri}"
       return
   return

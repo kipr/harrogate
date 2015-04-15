@@ -38,13 +38,14 @@ harrogate_app.use '/apps/catalog.json', (request, response, next) ->
 # Register app web-api routes
 for app_name, app of app_catalog.catalog
   if app.web_api?
-    for web_api in app.web_api
-      console.log "Register API: #{web_api.uri} --> '#{app_name}'.#{web_api.handle}"
-      harrogate_app.use web_api.uri, app.get_instance()[web_api.handle]
+    for api of app.web_api
+      console.log "Register API: #{app.web_api[api].uri} --> '#{app_name}'.#{app.web_api[api].handle}"
+      harrogate_app.use app.web_api[api].uri, app.get_instance()[app.web_api[api].handle]
 
 # Start the apps
 for app_name, app of app_catalog.catalog
   console.log "Starting #{app_name}"
+  app.get_instance().init(app) if app.get_instance()['init']?
   app.get_instance().exec() if app.get_instance()['exec']?
 
 # Route to static content

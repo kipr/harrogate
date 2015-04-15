@@ -23,6 +23,12 @@ if os.platform() is 'win32'
   list.stdin.end()
 
 module.exports =
+  init: (app) ->
+    # add the home folder
+    home_path = process.env[ if os.platform() is 'win32' then 'USERPROFILE' else 'HOME']
+    app.web_api.fs['home_uri'] = "#{app.web_api.fs.uri}#{home_path.replace /(path.sep)/g, '/'}"
+    console.log app.web_api.fs['home_uri']
+
   exec: ->
 
   handle_fs: (request, response, next) ->
