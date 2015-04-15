@@ -1,1 +1,12 @@
 ﻿@charset "UTF-8";
+
+.toolbar
+{
+    padding-bottom: 5px;
+}
+
+.btn-toolbar
+{
+    min-width: 60px;
+    height: 50px;
+}

@@ -7,6 +7,7 @@ exports.inject = (app) ->
 exports.controller = ($scope, $http, app_catalog_provider) ->
   open_dir = (uri) ->
     $scope.current = undefined
+    $scope.selected = undefined
     $http.get(uri)
     .success (data, status, headers, config) ->
       $scope.current = data
@@ -26,8 +27,18 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
         return
     return
 
-  $scope.open_child_directory = (child) ->
-    open_dir(child.href)
+  $scope.open_directory = (directory) ->
+    open_dir(directory.href)
+    return
+
+  $scope.can_up = () ->
+    return $scope.current and $scope.current.links.self.href isnt root_dir_uri
+
+  $scope.select_child = (child) ->
+    if $scope.selected is child and child.type is 'Directory'
+      $scope.open_directory child
+    else
+      $scope.selected = child
     return
 
   $scope.root = () ->

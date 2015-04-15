@@ -47,7 +47,7 @@ display_server = net.createServer (sock) ->
     for pid in pids
       delete displays[pid]
 
-display_server.listen 60000
+# display_server.listen 60000
 
 module.exports =
   exec: ->
