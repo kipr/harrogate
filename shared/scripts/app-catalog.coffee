@@ -37,8 +37,9 @@ class AppCatalog
         category: manifest['category']
         hidden: manifest['hidden']
         navbar: manifest['navbar']
-        exec_path: "#{path}/#{manifest['exec']}"
         web_api: manifest['web_api'] if manifest['web_api']?
+        exec_path: "#{path}/#{manifest['exec']}"
+        get_instance: -> require "../../#{@exec_path}"
 
       # There might be a better strategy than to create two catalogs.
       # However they are supposed to be read-only, so this is the more performant way

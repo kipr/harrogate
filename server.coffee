@@ -40,13 +40,12 @@ for app_name, app of app_catalog.catalog
   if app.web_api?
     for web_api in app.web_api
       console.log "Register API: #{web_api.uri} --> '#{app_name}'.#{web_api.handle}"
-      harrogate_app.use web_api.uri, require(app.exec_path)[web_api.handle]
+      harrogate_app.use web_api.uri, app.get_instance()[web_api.handle]
 
 # Start the apps
 for app_name, app of app_catalog.catalog
   console.log "Starting #{app_name}"
-  app_instance = require app['exec_path']
-  app_instance.exec() if app_instance['exec']?
+  app.get_instance().exec() if app.get_instance()['exec']?
 
 # Route to static content
 harrogate_app.use express.static(__dirname + '/public')
@@ -62,6 +61,5 @@ ON_DEATH (signal, err) ->
   # Stop apps
   for app_name, app of app_catalog.catalog
     console.log "Stopping #{app_name}"
-    app_instance = require app['exec_path']
-    app_instance.closing() if app_instance['closing']
+    app.get_instance().closing() if app.get_instance()['closing']
   return

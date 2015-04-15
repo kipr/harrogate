@@ -16,7 +16,7 @@ through = require 'through'
 app_instances = {}
 app_catalog = require './shared/scripts/app-catalog.coffee'
 for app_name, app of app_catalog.catalog
-  app_instances[path_tools.basename(app['path'])] = require app['exec_path']
+  app_instances[path_tools.basename(app['path'])] = app.get_instance()
 
 # Default task
 gulp.task 'default', ['dev'] 
