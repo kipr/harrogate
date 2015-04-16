@@ -38,8 +38,12 @@
     <Content Include="apps\motors\resources\motors-view-controller.coffee" />
     <Content Include="apps\programs\resources\programs-view-controller.coffee" />
     <Content Include="apps\programs\resources\index.jade" />
+    <Content Include="apps\runner\resources\graphics-view-controller.coffee" />
+    <Content Include="apps\runner\resources\index.jade" />
     <Content Include="apps\settings\resources\index.jade" />
     <Content Include="apps\settings\resources\settings-view-controller.coffee" />
+    <Content Include="apps\target\exec.coffee" />
+    <Content Include="apps\target\manifest.json" />
     <Content Include="apps\user\resources\index.jade" />
     <Content Include="apps\user\resources\users-view-controller.coffee" />
     <Content Include="config\server\env\development.json" />
@@ -82,6 +86,7 @@
     <Content Include="apps\user\manifest.json" />
     <Content Include="apps\user\exec.coffee" />
     <Content Include="shared\client\scripts\harrogate-index-app.coffee" />
+    <Content Include="shared\scripts\program.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps" />
@@ -97,7 +102,9 @@
     <Folder Include="apps\fs\resources\" />
     <Folder Include="apps\motors\resources\" />
     <Folder Include="apps\programs\resources\" />
+    <Folder Include="apps\runner\resources\" />
     <Folder Include="apps\settings\resources\" />
+    <Folder Include="apps\target\" />
     <Folder Include="apps\user\resources\" />
     <Folder Include="config\" />
     <Folder Include="config\server\" />

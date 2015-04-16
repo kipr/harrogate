@@ -1,0 +1,7 @@
+{
+  "name": "Target information",
+  "hidden": true,
+  "exec": "exec.coffee",
+  "description": "Contains information about the target",
+  "category": "System"
+}

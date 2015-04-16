@@ -1,12 +1,14 @@
 url = require 'url'
 fs = require 'fs'
-os = require 'os'
 path = require 'path'
 mime = require 'mime'
+app_manifest = require './manifest.json'
+app_catalog = require '../../shared/scripts/app-catalog.coffee'
+target_app = app_catalog.catalog['Target information'].get_instance()
 
 # get the drive letters
 win_drive_letters = []
-if os.platform() is 'win32'
+if target_app.platform is target_app.supported_platforms.WINDOWS_PC
   spawn = require('child_process').spawn
   list = spawn('cmd')
   list.stdout.on 'data', (data) ->
@@ -25,17 +27,19 @@ if os.platform() is 'win32'
 module.exports =
   init: (app) ->
     # add the home folder
-    home_path = process.env[ if os.platform() is 'win32' then 'USERPROFILE' else 'HOME']
-    app.web_api.fs['home_uri'] = "#{app.web_api.fs.uri}#{home_path.replace /(path.sep)/g, '/'}"
-    console.log app.web_api.fs['home_uri']
+    app.web_api.fs['home_uri'] = @get_home_uri()
 
   exec: ->
+
+  get_home_uri: () ->
+    home_path = process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME']
+    return "#{app_manifest.web_api.fs.uri}#{home_path.replace(new RegExp('\\' + path.sep, 'g'), '/')}"
 
   handle_fs: (request, response, next) ->
     # the the FS path
     fs_path = url.parse(request.url, true).pathname
     fs_path = fs_path.replace /(\/)/g, path.sep
-    if os.platform() is 'win32'
+    if target_app.platform is target_app.supported_platforms.WINDOWS_PC
       fs_path = fs_path.substr 1
       if fs_path.slice(-1) is ':'
         fs_path = fs_path + path.sep
@@ -47,7 +51,7 @@ module.exports =
 
     else
       # Handle 'This PC'
-      if os.platform() is 'win32' and fs_path is ''
+      if target_app.platform is target_app.supported_platforms.WINDOWS_PC and fs_path is ''
         resp_obj =
           name: "This PC"
           type: 'Directory'
@@ -91,7 +95,7 @@ module.exports =
               mime: mime.lookup parent_fs_path
               path: parent_fs_path
               href: path.dirname request.originalUrl
-        if os.platform() is 'win32' and fs_path.slice(-2) is (':' + path.sep)
+        if target_app.platform is target_app.supported_platforms.WINDOWS_PC and fs_path.slice(-2) is (':' + path.sep)
           resp_obj.links.parent =
               name: "This PC"
               type: 'Directory'
