@@ -122,7 +122,7 @@ gulp.task 'scripts', ->
     through write, end
 
   # Add app scripts
-  for app_name, app of app_catalog.catalog_4_client
+  for app_name, app of app_catalog.catalog
     if app.angular_ctrl?
       b.require app.angular_ctrl, expose: app.name
   

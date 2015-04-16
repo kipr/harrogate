@@ -44,6 +44,7 @@ class AppCatalog
 
       # Client side data ('angular_ctrl' is set)
       if manifest['angular_ctrl']?
+        manifest['angular_ctrl'] = "#{path}/#{manifest['angular_ctrl']}"
         manifest['url'] = "/##{@apps_angularjs_route_base}/#{app}"
         manifest['angularjs_route'] = "#{@apps_angularjs_route_base}/#{app}"
         manifest['nodejs_route'] = "#{@apps_nodejs_route_base}/#{app}"
