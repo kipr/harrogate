@@ -9,7 +9,7 @@
   "angular_ctrl": "resources/fs-view-controller.coffee",
   "web_api": {
     "fs": {
-      "uri": "/api/fs/",
+      "uri": "/api/fs",
       "description": "Provides host filesystem access",
       "handle": "handle_fs"
     }

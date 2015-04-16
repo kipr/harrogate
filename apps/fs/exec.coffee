@@ -24,25 +24,55 @@ if target_app.platform is target_app.supported_platforms.WINDOWS_PC
   list.stdin.write 'wmic logicaldisk get name\n'
   list.stdin.end()
 
-module.exports =
+class FsApp
   init: (app) ->
     # add the home folder
     app.web_api.fs['home_uri'] = @get_home_uri()
 
   exec: ->
 
-  get_home_uri: () ->
-    home_path = process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME']
-    return "#{app_manifest.web_api.fs.uri}#{home_path.replace(new RegExp('\\' + path.sep, 'g'), '/')}"
+  uri_2_path: (uri, has_api_prefix = true) ->
+    if has_api_prefix # uri = <app_manifest.web_api.fs.uri>/<fs_path>
+      fs_path = uri.substr app_manifest.web_api.fs.uri.length
+    else # uri = <fs_path>
+      fs_path = uri
 
-  handle_fs: (request, response, next) ->
-    # the the FS path
-    fs_path = url.parse(request.url, true).pathname
+    # '/' --> os dependent path separator
     fs_path = fs_path.replace /(\/)/g, path.sep
+
+    # For Windows '\C:' --> C:\
     if target_app.platform is target_app.supported_platforms.WINDOWS_PC
       fs_path = fs_path.substr 1
       if fs_path.slice(-1) is ':'
         fs_path = fs_path + path.sep
+
+    return fs_path
+
+  path_2_uri: (fs_path, add_api_prefix = true) ->
+    # os dependent path separator --> '/'
+    uri = fs_path.replace new RegExp('\\' + path.sep, 'g'), '/'
+
+    # <fs_path>/ --> <fs_path>
+    if uri.slice(-1) is '/'
+      uri = uri.slice(0, -1)
+
+    # For Windows 'C:' --> \C:
+    if target_app.platform is target_app.supported_platforms.WINDOWS_PC
+      uri = '/' + fs_path
+
+    # <fs_path> --> <app_manifest.web_api.fs.uri>/<fs_path>
+    if add_api_prefix
+      uri = "#{app_manifest.web_api.fs.uri}" + uri
+
+    return uri
+
+  get_home_uri: () =>
+    home_path = process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME']
+    return @path_2_uri home_path
+
+  handle_fs: (request, response, next) =>
+    # the the FS path
+    fs_path = @uri_2_path url.parse(request.url, true).pathname, false
 
     # is the raw file or the JSON object requested?
     response_mode = url.parse(request.url, true).query['mode']
@@ -141,3 +171,5 @@ module.exports =
       else
         response.writeHead 200, { 'Content-Type': 'application/json' }
         return response.end "#{JSON.stringify(resp_obj)}", 'utf8'
+
+module.exports = new FsApp
