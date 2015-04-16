@@ -4,7 +4,6 @@ fs = require 'fs'
 class AppCatalog
   constructor: ->
     @catalog = {}
-    @catalog_4_client = {}
     @apps_base_path = './apps'
     @apps_nodejs_route_base = '/apps'
     @apps_angularjs_route_base = '/apps'
@@ -24,48 +23,44 @@ class AppCatalog
         console.log "#{path}/manifest.json is malformed"
         continue
 
-      @catalog[manifest['name']] =
-        name: manifest['name']
-        path: "#{path}"
-        priority: manifest['priority'] ? 0
-        url: "/##{@apps_angularjs_route_base}/#{app}"
-        angularjs_route: "#{@apps_angularjs_route_base}/#{app}"
-        nodejs_route: "#{@apps_nodejs_route_base}/#{app}"
-        icon: "/#{path}/#{manifest['icon']}" if manifest['icon']?
-        fonticon: manifest['fonticon'] if manifest['fonticon']?
-        description: manifest['description']
-        category: manifest['category']
-        hidden: manifest['hidden']
-        navbar: manifest['navbar']
-        web_api: manifest['web_api'] if manifest['web_api']?
-        exec_path: "#{path}/#{manifest['exec']}"
-        get_instance: -> require "../../#{@exec_path}"
+      # General app data
+      manifest['name'] ?= "#{app}"
+      manifest['path'] = "#{path}"
+      manifest['description'] ?= ''
 
-      # There might be a better strategy than to create two catalogs.
-      # However they are supposed to be read-only, so this is the more performant way
-      @catalog_4_client[manifest['name']] =
-        name: manifest['name']
-        priority: manifest['priority'] ? 0
-        url: "/##{@apps_angularjs_route_base}/#{app}"
-        angularjs_route: "#{@apps_angularjs_route_base}/#{app}"
-        nodejs_route: "#{@apps_nodejs_route_base}/#{app}"
-        icon: "/#{path}/#{manifest['icon']}" if manifest['icon']?
-        fonticon: manifest['fonticon'] if manifest['fonticon']?
-        description: manifest['description']
-        category: manifest['category']
-        hidden: manifest['hidden']
-        navbar: manifest['navbar']
-        angular_ctrl: "#{path}/#{manifest['angular_ctrl']}" if manifest['angular_ctrl']
-        web_api: manifest['web_api'] if manifest['web_api']?
+      # Bot UI data
+      manifest['priority'] ?= 0
+      manifest['navbar'] ?= false
+      manifest['hidden'] ?= false
+      manifest['fonticon'] ?= 'fa-exclamation-triangle'
+      manifest['category'] ?= 'General'
+
+      # Server side data ('exec' is set)
+      # manifest['init'] nothing to do
+      if manifest['exec']?
+        manifest['exec_path'] = "#{path}/#{manifest['exec']}"
+        manifest['get_instance'] = -> require "../../#{@exec_path}"
+      # manifest['closing'] nothing to do
+
+      # Client side data ('angular_ctrl' is set)
+      if manifest['angular_ctrl']?
+        manifest['url'] = "/##{@apps_angularjs_route_base}/#{app}"
+        manifest['angularjs_route'] = "#{@apps_angularjs_route_base}/#{app}"
+        manifest['nodejs_route'] = "#{@apps_nodejs_route_base}/#{app}"
+
+      # Web API data
+      # manifest['web_api'] nothing to do
+
+      @catalog[manifest['name']] = manifest
 
   handle: (request, response) ->
     callback = url.parse(request.url, true).query['callback']
     # should we return JSON or JSONP (callback defined)?
     if callback?
       response.writeHead 200, { 'Content-Type': 'application/javascript' }
-      return response.end "#{callback}(#{JSON.stringify(@catalog_4_client)})", 'utf8'
+      return response.end "#{callback}(#{JSON.stringify(@catalog)})", 'utf8'
     else
       response.writeHead 200, { 'Content-Type': 'application/json' }
-      return response.end "#{JSON.stringify(@catalog_4_client)}", 'utf8'
+      return response.end "#{JSON.stringify(@catalog)}", 'utf8'
 
 module.exports = new AppCatalog
