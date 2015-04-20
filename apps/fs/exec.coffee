@@ -66,9 +66,11 @@ class FsApp
 
     return uri
 
+  get_home_path: () ->
+    return process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME']
+
   get_home_uri: () =>
-    home_path = process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME']
-    return @path_2_uri home_path
+    return @path_2_uri @get_home_path()
 
   handle_fs: (request, response, next) =>
     # the the FS path
