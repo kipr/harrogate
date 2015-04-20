@@ -51,6 +51,22 @@ for app_name, app of app_catalog.catalog
 # Route to static content
 harrogate_app.use express.static(__dirname + '/public')
 
+# Error handling
+harrogate_app.use (error, request, response, next) ->
+  # Body Parser error
+  if error instanceof SyntaxError
+    response.writeHead 400, { 'Content-Type': 'application/json' }
+    return response.end "#{JSON.stringify(error: 'Malformed syntax, could not parse request')}", 'utf8'
+
+  # Server error?!
+  console.error '!!!!INTERNAL SERVER ERROR!!!!'
+  console.error error
+  console.error 'Stack Trace:'
+  console.error error.stack
+
+  response.writeHead 500
+  return response.end()
+
 # Start the server
 server = harrogate_app.listen config.port, ->
   console.log "Starting express.js server (#{server.address().address}:#{server.address().port})"
