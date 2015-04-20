@@ -2,7 +2,7 @@
   "name": "Host Filesystem",
   "priority": 10,
   "navbar": false,
-  "exec": "exec.coffee",
+  "exec": "fs_exec.coffee",
   "fonticon": "fa-hdd-o",
   "description": "Host filesystem manager",
   "category": "System",
