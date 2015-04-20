@@ -58,7 +58,7 @@ class FsApp
 
     # For Windows 'C:' --> \C:
     if target_app.platform is target_app.supported_platforms.WINDOWS_PC
-      uri = '/' + fs_path
+      uri = '/' + uri
 
     # <fs_path> --> <app_manifest.web_api.fs.uri>/<fs_path>
     if add_api_prefix
