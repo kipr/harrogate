@@ -10,8 +10,7 @@
   "web_api": {
     "fs": {
       "uri": "/api/fs",
-      "description": "Provides host filesystem access",
-      "handle": "handle_fs"
+      "description": "Provides host filesystem access"
     }
   }
 }
