@@ -16,7 +16,7 @@ config = require('./config/server/config.js')
 # create the app
 harrogate_app = express()
 harrogate_app.use cookie_parser()
-harrogate_app.use bodyParser()
+harrogate_app.use bodyParser.json({limit: '5mb'})
 harrogate_app.use session(secret: 'B on harrogate')
 harrogate_app.use passport.initialize()
 
@@ -35,17 +35,25 @@ harrogate_app.use '/apps', passport.authenticate('basic', {session: false}), (re
 harrogate_app.use '/apps/catalog.json', (request, response, next) ->
   app_catalog.handle request, response
 
+# Init the apps
+for app_name, app of app_catalog.catalog
+  if app.get_instance()['init']?
+    console.log "Init #{app_name}"
+    app.get_instance().init(app)
+
 # Register app web-api routes
 for app_name, app of app_catalog.catalog
   if app.web_api?
     for api of app.web_api
-      console.log "Register API: #{app.web_api[api].uri} --> '#{app_name}'.#{app.web_api[api].handle}"
-      harrogate_app.use app.web_api[api].uri, app.get_instance()[app.web_api[api].handle]
+      if app.web_api[api].router?
+        console.log "Add Route: #{app.web_api[api].uri} --> #{app_name}"
+        harrogate_app.use app.web_api[api].uri, app.web_api[api].router
+      else
+        console.warn "Warning: App #{app_name} defines web api '#{api}' but no router"
 
 # Start the apps
 for app_name, app of app_catalog.catalog
   console.log "Starting #{app_name}"
-  app.get_instance().init(app) if app.get_instance()['init']?
   app.get_instance().exec() if app.get_instance()['exec']?
 
 # Route to static content
