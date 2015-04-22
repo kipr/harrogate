@@ -28,6 +28,7 @@
     <Content Include=".jshintrc" />
     <Content Include="apps\cloud\resources\index.jade" />
     <Content Include="apps\cloud\resources\cloud-view-controller.coffee" />
+    <Content Include="apps\fs\fs-resource-factory.coffee" />
     <Content Include="apps\kiss\resources\kiss-view-controller.coffee" />
     <Content Include="apps\kiss\resources\index.jade" />
     <Content Include="apps\fs\fs_exec.coffee" />
@@ -87,6 +88,7 @@
     <Content Include="apps\user\exec.coffee" />
     <Content Include="shared\client\scripts\harrogate-index-app.coffee" />
     <Content Include="shared\scripts\program.coffee" />
+    <Content Include="shared\scripts\server-error.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps" />
