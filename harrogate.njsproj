@@ -31,7 +31,7 @@
     <Content Include="apps\fs\fs-resource-factory.coffee" />
     <Content Include="apps\kiss\resources\kiss-view-controller.coffee" />
     <Content Include="apps\kiss\resources\index.jade" />
-    <Content Include="apps\fs\fs_exec.coffee" />
+    <Content Include="apps\fs\fs-exec.coffee" />
     <Content Include="apps\fs\manifest.json" />
     <Content Include="apps\fs\resources\index.jade" />
     <Content Include="apps\fs\resources\fs-view-controller.coffee" />
