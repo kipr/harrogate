@@ -118,7 +118,9 @@ class FsDirectoryResource
     representation =
       name: @name
       type: 'Directory'
-      links: [(rel: 'self', href: @uri)]
+      links:
+        self:
+          href: @uri
 
     # add path (not for 'This PC')
     if not (TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC and @path is '')
@@ -292,7 +294,9 @@ class FsFileResource
       name: @name
       path: @path
       type: Mime.lookup @path
-      links: [(rel: 'self', href: @uri)]
+      links:
+        self:
+          href: @uri
 
     # >>> Async part. Return a promise and continue
     # check if the resource is valid

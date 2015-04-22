@@ -28,7 +28,7 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
     return
 
   $scope.open_directory = (directory) ->
-    open_dir(directory.href)
+    open_dir(directory.links.self.href)
     return
 
   $scope.can_up = () ->
@@ -50,8 +50,8 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
     return
 
   $scope.up = () ->
-    if $scope.current.links.parent?
-      open_dir($scope.current.links.parent.href)
+    if $scope.current.parent?
+      open_dir($scope.current.parent.links.self.href)
     return
 
   $scope.reload = () ->

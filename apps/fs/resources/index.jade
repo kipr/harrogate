@@ -38,24 +38,24 @@
             th MIME type
             th 
         tbody
-          tr(data-ng-repeat = "child in current.links.childs" data-ng-class='{active: selected === child}' data-ng-click='select_child(child)')
+          tr(data-ng-repeat = "child in current.children" data-ng-class='{active: selected === child}' data-ng-click='select_child(child)')
             th(scope="row")
               i.fa.fa-folder-o(data-ng-if="child.type == 'Directory'")
-              i.fa.fa-file-o(data-ng-if="child.type == 'File'")
+              i.fa.fa-file-o(data-ng-if="child.type != 'Directory'")
               |  
               {{child.name}}
-            td {{child.mime}}
+            td {{child.type}}
             td 
               span.btn-group-xs.pull-right
                 button.btn.btn-default(type='button' data-ng-show="selected === child && selected.type == 'Directory'" data-ng-click="open_directory(selected)")
                   i.fa.fa-folder-open-o
                   |  
                   small.small Open
-                a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type == 'File'" data-ng-href="/#/apps/kiss?path={{selected.href | escape}}")
+                a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type != 'Directory'" data-ng-href="/#/apps/kiss?path={{selected.links.self.href | escape}}")
                   i.fa.fa-file-text-o
                   |  
                   small.small Edith
-                a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type == 'File'" data-ng-href="{{selected.href}}?mode=raw")
+                a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type != 'Directory'" data-ng-href="{{selected.links.self.href}}?mode=raw" download)
                   i.fa.fa-download
                   |  
                   small.small Download
