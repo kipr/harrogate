@@ -159,7 +159,7 @@ class FsDirectoryResource
         .then (children) =>
           # get a list of all children; allSettled bc not all children (e.g. Floppy) might be accessible
           return Q.allSettled children.map( (child_name) =>
-            if @path.slice(-1) is Path.sep # fix for windows drive letters
+            if @path.slice(-1) is Path.sep or @path is '' # fix for windows drive letters and 'this PC'
               path = @path
             else
               path = @path + Path.sep
