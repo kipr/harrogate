@@ -12,53 +12,15 @@ ServerError = require '../../shared/scripts/server-error.coffee'
 router = express.Router()
 
 class FsApp
-  init: (app) ->
+  constructor: ->
+    @home_folder = FsResourceFactory.FsDirectoryResource.create_from_path process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME' ]
+
+  init: (app) =>
     # add the home folder and the router
-    app.web_api.fs['home_uri'] = @get_home_uri()
+    app.web_api.fs['home_uri'] = @home_folder.uri
     app.web_api.fs['router'] = router
 
   exec: ->
-
-  uri_2_path: (uri, has_api_prefix = true) ->
-    if has_api_prefix # uri = <app_manifest.web_api.fs.uri>/<fs_path>
-      fs_path = uri.substr app_manifest.web_api.fs.uri.length
-    else # uri = <fs_path>
-      fs_path = uri
-
-    # '/' --> os dependent path separator
-    fs_path = fs_path.replace /(\/)/g, path.sep
-
-    # For Windows '\C:' --> C:\
-    if target_app.platform is target_app.supported_platforms.WINDOWS_PC
-      fs_path = fs_path.substr 1
-      if fs_path.slice(-1) is ':'
-        fs_path = fs_path + path.sep
-
-    return fs_path
-
-  path_2_uri: (fs_path, add_api_prefix = true) ->
-    # os dependent path separator --> '/'
-    uri = fs_path.replace new RegExp('\\' + path.sep, 'g'), '/'
-
-    # <fs_path>/ --> <fs_path>
-    if uri.slice(-1) is '/'
-      uri = uri.slice(0, -1)
-
-    # For Windows 'C:' --> \C:
-    if target_app.platform is target_app.supported_platforms.WINDOWS_PC
-      uri = '/' + uri
-
-    # <fs_path> --> <app_manifest.web_api.fs.uri>/<fs_path>
-    if add_api_prefix
-      uri = "#{app_manifest.web_api.fs.uri}" + uri
-
-    return uri
-
-  get_home_path: () ->
-    return process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME']
-
-  get_home_uri: () =>
-    return @path_2_uri @get_home_path()
 
 # create the app object
 fs_app = new FsApp
