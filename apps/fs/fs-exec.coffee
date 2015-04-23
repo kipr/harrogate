@@ -130,7 +130,10 @@ router.put '/*', (request, response) ->
     response.writeHead 400, { 'Content-Type': 'application/json' }
     return response.end "#{JSON.stringify(error: request.fs_resource.path + ' is not a file')}", 'utf8'
 
-  request.fs_resource.write request.body.content, request.body.encoding
+  encoding = if request.body.encoding? then request.body.encoding else 'ascii'
+  content = if request.body.content? then new Buffer(request.body.content, 'base64').toString(encoding) else ''
+
+  request.fs_resource.write content, encoding
   .then () ->
     response.writeHead 204
     return response.end()
