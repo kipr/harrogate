@@ -12,6 +12,9 @@ AppManifest = require './manifest.json'
 # Helper functions
 ####################################################################################################
 uri_2_path = (uri) ->
+  # decode uri
+  uri = decodeURI uri
+
   # uri = <AppManifest.web_api.fs.uri>/<path>
   path = uri.substr AppManifest.web_api.fs.uri.length
 
@@ -41,7 +44,7 @@ path_2_uri = (path) ->
   # <path> --> <AppManifest.web_api.fs.uri>/<path>
   uri = "#{AppManifest.web_api.fs.uri}" + uri
 
-  return uri
+  return encodeURI uri
 
 # get the drive letters
 win_drive_letters = []
