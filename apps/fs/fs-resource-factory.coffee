@@ -1,6 +1,7 @@
 ﻿FS = require 'fs'
 Mime = require 'mime'
 Path = require 'path'
+Rmdir = require 'rimraf'
 Q = require 'q'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
@@ -249,7 +250,14 @@ class FsDirectoryResource
         return fs_resource_factory.create_from_path child_path
 
   remove: () =>
-    return Q.nfcall FS.rmdir, @path
+    deferred = Q.defer()
+    Rmdir @path, (error) =>
+      if error
+        deferred.reject new ServerError(403, 'Unable to delete ' + @path)
+      else
+        deferred.resolve()
+
+    return deferred.promise
 
 # class FsFileResource
 ####################################################################################################

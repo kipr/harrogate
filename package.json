@@ -22,6 +22,7 @@
     "passport": "^0.2.1",
     "passport-http": "^0.2.2",
     "q": "^1.2.0",
+    "rimraf": "^2.3.2",
     "webworker-threads": "^0.5.3",
     "ws": "^0.7.0"
   },
