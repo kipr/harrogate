@@ -9,6 +9,8 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $location, $http, app_catalog_provider) ->
   open_file = (file_uri) ->
+    $scope.displayed_file = undefined
+
     $http.get(file_uri)
     .success (data, status, headers, config) ->
       $scope.displayed_file = data
@@ -73,5 +75,18 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
       .error (data, status, headers, config) ->
         console.log "Could not get #{file_uri}"
         return
+
+  $scope.refresh = ->
+    if $scope.displayed_file?
+      open_file $scope.displayed_file.links.self.href
+    return
+
+  $scope.undo = ->
+    editor.undo()
+    return
+
+  $scope.redo = ->
+    editor.redo()
+    return
 
   return
