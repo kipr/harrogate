@@ -97,10 +97,23 @@ class FsDirectoryResource
   get_children: () =>
     if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC and @path is ''
       # Children = windows drive letters
-      return Q(drive_letter + Path.sep for drive_letter in win_drive_letters)
+      promise = Q(drive_letter + Path.sep for drive_letter in win_drive_letters)
     else
       # Children = @path/*
-      return Q.nfcall FS.readdir, @path
+      promise = Q.nfcall FS.readdir, @path
+
+    promise.then (children) =>
+      # get a list of all children; allSettled bc not all children (e.g. Floppy) might be accessible
+      return Q.allSettled children.map( (child_name) =>
+        if @path.slice(-1) is Path.sep or @path is '' # fix for windows drive letters and 'this PC'
+          path = @path
+        else
+          path = @path + Path.sep
+        return fs_resource_factory.create_from_path(path + child_name))
+
+    .then (child_resource_promises) =>
+      # ignore rejected promises; return fulfilled as array
+      return (promise.value for promise in child_resource_promises when promise.state is 'fulfilled')
 
   is_valid: () =>
     # 'this PC' is always valid
@@ -160,18 +173,9 @@ class FsDirectoryResource
           # get the children
           return @get_children()
 
-        .then (children) =>
-          # get a list of all children; allSettled bc not all children (e.g. Floppy) might be accessible
-          return Q.allSettled children.map( (child_name) =>
-            if @path.slice(-1) is Path.sep or @path is '' # fix for windows drive letters and 'this PC'
-              path = @path
-            else
-              path = @path + Path.sep
-            return fs_resource_factory.create_from_path(path + child_name))
-
-        .then (child_resource_promises) =>
-          # ignore rejected promises; get the compact representation of all resources
-          return Q.allSettled (promise.value for promise in child_resource_promises when promise.state is 'fulfilled').map((child_resource) =>
+        .then (child_resources) =>
+          # get the compact representation of all resources
+          return Q.allSettled child_resources.map((child_resource) =>
             return child_resource.get_representation false )
 
         .then (child_representation_promises) =>
@@ -349,7 +353,7 @@ class FsFileResource
     encoding ?= 'ascii'
     content ?= ''
 
-    return Q.nfcall FS.writeFile, @path, new Buffer(content, 'base64').toString(encoding), encoding=encoding
+    return Q.nfcall FS.writeFile, @path, content, encoding=encoding
 
   remove: () =>
     return Q.nfcall FS.unlink, @path

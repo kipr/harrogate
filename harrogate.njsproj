@@ -39,6 +39,7 @@
     <Content Include="apps\motors\resources\motors-view-controller.coffee" />
     <Content Include="apps\programs\resources\programs-view-controller.coffee" />
     <Content Include="apps\programs\resources\index.jade" />
+    <Content Include="apps\programs\workspace-resource-factory.coffee" />
     <Content Include="apps\runner\resources\graphics-view-controller.coffee" />
     <Content Include="apps\runner\resources\index.jade" />
     <Content Include="apps\settings\resources\index.jade" />
@@ -117,7 +118,7 @@
     <Folder Include="apps\kiss" />
     <Folder Include="apps\motors" />
     <Folder Include="shared\" />
-    <Folder Include="apps\programs" />
+    <Folder Include="apps\programs\" />
     <Folder Include="apps\runner" />
     <Folder Include="apps\settings" />
     <Folder Include="apps\user" />

@@ -15,6 +15,9 @@ class FsApp
   constructor: ->
     @home_folder = FsResourceFactory.FsDirectoryResource.create_from_path process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME' ]
 
+  # expose the fs resources
+  FsResourceFactory: FsResourceFactory
+
   init: (app) =>
     # add the home folder and the router
     app.web_api.fs['home_uri'] = @home_folder.uri
@@ -70,7 +73,7 @@ router.get '/*', (request, response, next) ->
       else
         next e
     .done()
-
+  return
 
 router.post '/*', (request, response, next) ->
   # We only support application/json
@@ -99,7 +102,9 @@ router.post '/*', (request, response, next) ->
   if request.body.type is 'directory'
     resource_promise = request.fs_resource.create_subdirectory request.body.name
   else # request.body.type is 'file'
-    resource_promise = request.fs_resource.create_file request.body.name, request.body.content, request.body.encoding
+    encoding = if request.body.encoding? then request.body.encoding else 'ascii'
+    content = if request.body.content? then new Buffer(request.body.content, 'base64').toString(encoding) else ''
+    resource_promise = request.fs_resource.create_file request.body.name, content, encoding
 
   resource_promise
   .then (resource) ->
@@ -112,6 +117,7 @@ router.post '/*', (request, response, next) ->
     else
       next e
   .done()
+  return
 
 router.put '/*', (request, response) ->
   # We only support application/json
@@ -135,6 +141,7 @@ router.put '/*', (request, response) ->
     else
       next e
   .done()
+  return
 
 router.delete '/*', (request, response) ->
   request.fs_resource.remove()
@@ -152,6 +159,7 @@ router.delete '/*', (request, response) ->
       response.writeHead 403, { 'Content-Type': 'application/json' }
       return response.end "#{JSON.stringify(error: 'Unable to delete ' + request.fs_resource.name)}", 'utf8'
   .done()
+  return
 
 # return unsupported method for anything not handlet yet
 router.use '/', (request, response, next) ->

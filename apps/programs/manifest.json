@@ -5,5 +5,11 @@
   "fonticon": "fa-th",
   "description": "Run, modify, and manage programs on the device.",
   "category": "General",
-  "angular_ctrl": "resources/programs-view-controller.coffee"
+  "angular_ctrl": "resources/programs-view-controller.coffee",
+  "web_api": {
+    "projects": {
+      "uri": "/api/projects",
+      "description": "Provides projects access"
+    }
+  }
 }
