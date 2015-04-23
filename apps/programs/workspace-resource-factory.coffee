@@ -91,7 +91,6 @@ class WsResource
 
     .then (project_representation_promises) =>
       # add the projects (just the valid ones)
-      console.log project_representation_promises
       representation.projects = (promise.value for promise in project_representation_promises when promise.state is 'fulfilled')
 
       return representation
