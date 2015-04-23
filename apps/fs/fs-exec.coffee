@@ -1,19 +1,19 @@
-url = require 'url'
-fs = require 'fs'
-path = require 'path'
-express = require 'express'
-app_manifest = require './manifest.json'
-app_catalog = require '../../shared/scripts/app-catalog.coffee'
-target_app = app_catalog.catalog['Target information'].get_instance()
-FsResourceFactory = require './fs-resource-factory.coffee'
+Express = require 'express'
+Url = require 'url'
+
 ServerError = require '../../shared/scripts/server-error.coffee'
 
+AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+TargetApp = AppCatalog.catalog['Target information'].get_instance()
+
+FsResourceFactory = require './fs-resource-factory.coffee'
+
 # the fs router
-router = express.Router()
+router = Express.Router()
 
 class FsApp
   constructor: ->
-    @home_folder = FsResourceFactory.FsDirectoryResource.create_from_path process.env[ if target_app.platform is target_app.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME' ]
+    @home_folder = FsResourceFactory.FsDirectoryResource.create_from_path process.env[ if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME' ]
 
   # expose the fs resources
   FsResourceFactory: FsResourceFactory
@@ -28,10 +28,10 @@ class FsApp
 # create the app object
 fs_app = new FsApp
 
-# '/' is relative to <app_manifest>.web_api.fs.uri
+# '/' is relative to <manifest>.web_api.fs.uri
 router.use '/', (request, response, next) ->
   # Create the fs resource
-  FsResourceFactory.create_from_uri url.parse(request.originalUrl, true).pathname
+  FsResourceFactory.create_from_uri Url.parse(request.originalUrl, true).pathname
    # store it and continue
   .then (value) ->
     request.fs_resource = value
@@ -51,14 +51,14 @@ router.get '/*', (request, response, next) ->
   fs_path = request.fs_resource.path
 
   # is the raw file or the JSON object requested?
-  response_mode = url.parse(request.url, true).query['mode']
+  response_mode = Url.parse(request.url, true).query['mode']
   if response_mode? and response_mode is 'raw'
     response.download fs_path
 
   else
     request.fs_resource.get_representation()
     .then (representation) ->
-      callback = url.parse(request.url, true).query['callback']
+      callback = Url.parse(request.url, true).query['callback']
       # should we return JSON or JSONP (callback defined)?
       if callback?
         response.writeHead 200, { 'Content-Type': 'application/javascript' }

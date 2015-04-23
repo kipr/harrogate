@@ -1,19 +1,21 @@
-Url = require 'url'
+Express = require 'Express'
 FS = require 'fs'
 Path = require 'path'
 Q = require 'q'
-Express = require 'Express'
+Url = require 'url'
+
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+ServerError = require '../../shared/scripts/server-error.coffee'
+
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
+
 FsResourceFactory = FsApp.FsResourceFactory
 FsFileResource = FsResourceFactory.FsFileResource
 FsDirectoryResource = FsResourceFactory.FsDirectoryResource
+
 WorkspaceResourceFactory = require './workspace-resource-factory.coffee'
-ServerError = require '../../shared/scripts/server-error.coffee'
-
 AppManifest = require './manifest.json'
-
 
 # the fs router
 router = Express.Router()

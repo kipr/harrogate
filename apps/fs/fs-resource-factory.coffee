@@ -1,11 +1,12 @@
 ﻿FS = require 'fs'
 Mime = require 'mime'
 Path = require 'path'
-Rmdir = require 'rimraf'
 Q = require 'q'
+Rmdir = require 'rimraf'
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 ServerError = require '../../shared/scripts/server-error.coffee'
+AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 
 AppManifest = require './manifest.json'

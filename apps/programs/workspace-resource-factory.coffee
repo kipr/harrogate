@@ -1,9 +1,12 @@
 ﻿FS = require 'fs'
 Path = require 'path'
 Q = require 'q'
+
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
+
 FsResourceFactory = FsApp.FsResourceFactory
 FsFileResource = FsResourceFactory.FsFileResource
 FsDirectoryResource = FsResourceFactory.FsDirectoryResource
