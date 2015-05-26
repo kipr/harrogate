@@ -4,42 +4,38 @@ url = require 'url'
 path_tools = require 'path'
 WebSocketServer = require('ws').Server
 
+AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+
 cam = undefined
 wss = undefined
-closing = false # signal that the app is closing
 
 module.exports =
   exec: ->
-    wss = new WebSocketServer(port: 8374)
+    wss_port = AppCatalog.catalog['Camera'].config.camera_wss_port
+    console.log "Starting camera web socket server at port #{wss_port}"
+    wss = new WebSocketServer(port: wss_port)
 
-    wss.broadcast = (data) ->
-      wss.clients.forEach (client) ->
-        client.send(data);
+    wss.on 'connection', (ws) ->
+      cam = boyd.open() if not cam
 
-    cam = boyd.open()
+      sendImage = ->
+        try
+          ws.send(boyd.getImage(cam.handle))
+          setTimeout(sendImage, 25)
+        catch
+          # the socket was closed
+          # close the cam if there are no more clients
+          if wss.clients.length is 0
+            boyd.close(cam.handle) if cam?
+            cam = undefined
+        return
 
-    console.log cam
-
-    broadcastImage = ->
-      if !closing
-        wss.broadcast(boyd.getImage(cam.handle))
-        setTimeout(broadcastImage, 25)
-
-    if cam.success
-      broadcastImage()
-
-  closing: ->
-    closing = true
-
-    # wait to avoid race conditions with broadcastImage
-    setTimeout (->
-      wss.close() if wss?
-      wss = undefined
-
-      boyd.close(cam.handle) if cam?
-      cam = undefined
+      if cam.success
+        sendImage()
 
       return
-    ), 30
 
+  closing: ->
+    wss.close() if wss?
+    wss = undefined
     return

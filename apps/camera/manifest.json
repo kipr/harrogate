@@ -4,5 +4,8 @@
   "exec": "exec.coffee",
   "description": "View live feeds from USB cameras plugged into the system.",
   "category": "Sensors",
-  "angular_ctrl": "resources/camera-view-controller.coffee"
+  "angular_ctrl": "resources/camera-view-controller.coffee",
+  "config": { 
+    "camera_wss_port": 8374
+  }
 }
