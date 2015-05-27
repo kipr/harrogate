@@ -5,10 +5,9 @@ path_tools = require 'path'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 
-camera_event_group = AppCatalog.catalog['Camera'].event_groups.camera_events
+events = AppCatalog.catalog['Camera'].event_groups.camera_events.events
 
 cam = undefined
-wss = undefined
 clients = 0
 
 module.exports =
@@ -18,7 +17,7 @@ module.exports =
 
     sendImage = ->
       try
-        socket.emit camera_event_group.events.frame_arrived.id, boyd.getImage(cam.handle)
+        socket.emit events.frame_arrived.id, boyd.getImage(cam.handle)
         setTimeout(sendImage, 25)
       return
 
@@ -37,9 +36,4 @@ module.exports =
     return
 
   exec: ->
-    return
-
-  closing: ->
-    wss.close() if wss?
-    wss = undefined
     return
