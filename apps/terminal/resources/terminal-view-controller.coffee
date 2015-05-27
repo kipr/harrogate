@@ -1,4 +1,5 @@
 code_mirror = require 'codemirror/lib/codemirror'
+io = require 'socket.io-client'
 
 exports.name = 'terminal_view_controller'
 
@@ -8,11 +9,12 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $location, $http, app_catalog_provider) ->
   socket = undefined
+  terminal_event_group = undefined
   read_only_ch = -1
 
   on_enter = (e) ->
-    if socket? and socket.readyState is WebSocket.OPEN
-      socket.send e.getLine(e.lastLine()).substring(read_only_ch + 1)
+    if socket? and terminal_event_group?
+      socket.emit terminal_event_group.events.stdin.id, e.getLine(e.lastLine()).substring(read_only_ch + 1)
 
     read_only_ch = -1
 
@@ -37,21 +39,22 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     return
 
   app_catalog_provider.catalog.then (app_catalog) ->
-    wss_port = app_catalog['Terminal']?.config?.terminal_wss_port
-    if wss_port?
-      socket = new WebSocket("ws://#{location.hostname}:#{wss_port}")
+    terminal_event_group =  app_catalog['Terminal']?.event_groups?.terminal_events
+    if terminal_event_group?
+      socket = io ':8888' + terminal_event_group.namespace
 
-      socket.onmessage = (msg) ->
-        editor.replaceRange msg.data, code_mirror.Pos(editor.lastLine())
+      socket.on terminal_event_group.events.stdout.id, (msg) ->
+        editor.replaceRange msg, code_mirror.Pos(editor.lastLine())
         editor.setCursor editor.lineCount(), 0
         read_only_ch = editor.getCursor().ch - 1
         return
 
-      # close socket if we leave the view
-      $scope.$on '$locationChangeStart', (e) ->
-        socket.close()
-        socket = undefined
+      socket.on terminal_event_group.events.stderr.id, (msg) ->
+        editor.replaceRange msg, code_mirror.Pos(editor.lastLine())
+        editor.setCursor editor.lineCount(), 0
+        read_only_ch = editor.getCursor().ch - 1
         return
+
     return
 
   return

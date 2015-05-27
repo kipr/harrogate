@@ -7,7 +7,27 @@
   "description": "Opens a terminal to the target",
   "category": "System",
   "angular_ctrl": "resources/terminal-view-controller.coffee",
-  "config": { 
-    "terminal_wss_port": 8377
+  "event_groups": {
+    "terminal_events": {
+      "namespace": "/terminal",
+      "on_connection": "terminal_on_connection",
+      "events": {
+        "stdin": {
+          "id": "stdin",
+          "publisher": "CLIENT",
+          "description": "stdin sent to the terminal."
+        },
+        "stdout": {
+          "id": "stdout",
+          "publisher": "SERVER",
+          "description": "stdout sent from the terminal."
+        },
+        "stderr": {
+          "id": "stderr",
+          "publisher": "SERVER",
+          "description": "stderr sent from the terminal."
+        }
+      }
+    }
   }
 }
