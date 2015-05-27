@@ -5,7 +5,17 @@
   "description": "View live feeds from USB cameras plugged into the system.",
   "category": "Sensors",
   "angular_ctrl": "resources/camera-view-controller.coffee",
-  "config": { 
-    "camera_wss_port": 8374
+  "event_groups": {
+    "camera_events": {
+      "namespace": "/camera",
+      "on_connection": "camera_on_connection",
+      "events": {
+        "frame_arrived": {
+          "id": "frame arrived",
+          "publisher": "SERVER",
+          "description": "Raised when a new camera frame is arrived."
+        }
+      }
+    }
   }
 }

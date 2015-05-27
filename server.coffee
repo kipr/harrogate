@@ -1,4 +1,5 @@
 fs = require 'fs'
+http = require 'http'
 express = require 'express'
 cookie_parser = require 'cookie-parser'
 bodyParser = require 'body-parser'
@@ -20,6 +21,12 @@ harrogate_app.use bodyParser.json({limit: '5mb'})
 harrogate_app.use session(secret: 'B on harrogate')
 harrogate_app.use passport.initialize()
 
+# create the server
+server = http.createServer harrogate_app
+
+# create the socket.io object
+io = require('socket.io')(server)
+
 # setup passport
 passport.use new BasicStrategy (username, password, done) ->
   if password is 'test'
@@ -40,6 +47,18 @@ for app_name, app of app_catalog.catalog
   if app.get_instance()['init']?
     console.log "Init #{app_name}"
     app.get_instance().init(app)
+
+# Register the events
+for app_name, app of app_catalog.catalog
+  if app.event_groups?
+    for event_group_name of app.event_groups
+      event_group = app.event_groups[event_group_name]
+      if event_group.namespace? and app.get_instance()[event_group.on_connection]?
+        console.log "Add Event Namespace: #{event_group.namespace} --> #{app_name}"
+        ns = io.of event_group.namespace
+        ns.on 'connection', app.get_instance()[event_group.on_connection]
+      else
+        console.warn "Warning: App #{app_name} has malformed event definitions"
 
 # Register app web-api routes
 for app_name, app of app_catalog.catalog
@@ -76,7 +95,7 @@ harrogate_app.use (error, request, response, next) ->
   return response.end()
 
 # Start the server
-server = harrogate_app.listen config.port, ->
+server.listen config.port, ->
   console.log "Starting express.js server (#{server.address().address}:#{server.address().port})"
 
 ON_DEATH (signal, err) ->

@@ -1,3 +1,5 @@
+io = require 'socket.io-client'
+
 exports.name = 'camera_view_controller'
 
 exports.inject = (app) ->
@@ -11,17 +13,12 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, app_catalog_provider) ->
   app_catalog_provider.catalog.then (app_catalog) ->
-    camera_wss_port = app_catalog['Camera']?.config?.camera_wss_port
-    if camera_wss_port?
-      socket = new WebSocket("ws://#{location.hostname}:#{camera_wss_port}")
+    camera_event_group =  app_catalog['Camera']?.event_groups?.camera_events
+    if camera_event_group?
+      socket = io ':8888' + camera_event_group.namespace
 
-      socket.onmessage = (m) ->
-        $('#camera').attr 'src', "data:image/jpeg;base64,#{m.data}"
-        return
-
-      # close socket if we leave the view
-      $scope.$on '$locationChangeStart', (e) ->
-        socket.close()
+      socket.on camera_event_group.events.frame_arrived.id, (msg) ->
+        $('#camera').attr 'src', "data:image/jpeg;base64,#{msg}"
         return
     return
   return 
