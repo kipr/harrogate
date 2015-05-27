@@ -1,0 +1,13 @@
+{
+  "name": "Terminal",
+  "priority": -1,
+  "fonticon": "fa-terminal",
+  "exec": "exec.coffee",
+  "navbar": false,
+  "description": "Opens a terminal to the target",
+  "category": "System",
+  "angular_ctrl": "resources/terminal-view-controller.coffee",
+  "config": { 
+    "terminal_wss_port": 8377
+  }
+}

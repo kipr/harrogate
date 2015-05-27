@@ -46,6 +46,10 @@
     <Content Include="apps\settings\resources\settings-view-controller.coffee" />
     <Content Include="apps\target\exec.coffee" />
     <Content Include="apps\target\manifest.json" />
+    <Content Include="apps\terminal\exec.coffee" />
+    <Content Include="apps\terminal\manifest.json" />
+    <Content Include="apps\terminal\resources\index.jade" />
+    <Content Include="apps\terminal\resources\terminal-view-controller.coffee" />
     <Content Include="apps\user\resources\index.jade" />
     <Content Include="apps\user\resources\users-view-controller.coffee" />
     <Content Include="config\server\env\development.json" />
@@ -108,6 +112,8 @@
     <Folder Include="apps\runner\resources\" />
     <Folder Include="apps\settings\resources\" />
     <Folder Include="apps\target\" />
+    <Folder Include="apps\terminal\" />
+    <Folder Include="apps\terminal\resources\" />
     <Folder Include="apps\user\resources\" />
     <Folder Include="config\" />
     <Folder Include="config\server\" />
