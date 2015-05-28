@@ -1,10 +1,11 @@
 url = require 'url'
 fs = require 'fs'
+path = require 'path'
 
 class AppCatalog
   constructor: ->
     @catalog = {}
-    @apps_base_path = './apps'
+    @apps_base_path = path.join process.cwd(), 'apps'
     @apps_nodejs_route_base = '/apps'
     @apps_angularjs_route_base = '/apps'
 
@@ -39,7 +40,7 @@ class AppCatalog
       # manifest['init'] nothing to do
       if manifest['exec']?
         manifest['exec_path'] = "#{path}/#{manifest['exec']}"
-        manifest['get_instance'] = -> require "../../#{@exec_path}"
+        manifest['get_instance'] = -> require "#{@exec_path}"
       # manifest['closing'] nothing to do
 
       # Client side data ('angular_ctrl' is set)
