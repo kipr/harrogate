@@ -19,7 +19,6 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Compile Include="config\server\config.js" />
     <Compile Include="server.js" />
     <Compile Include="Gulpfile.coffee" />
     <Compile Include="Gulpfile.js" />
@@ -52,9 +51,7 @@
     <Content Include="apps\terminal\resources\terminal-view-controller.coffee" />
     <Content Include="apps\user\resources\index.jade" />
     <Content Include="apps\user\resources\users-view-controller.coffee" />
-    <Content Include="config\server\env\development.json" />
-    <Content Include="config\server\env\production.json" />
-    <Content Include="config\server\env\test.json" />
+    <Content Include="settings.json" />
     <Content Include="shared\client\css\style.css" />
     <Content Include="shared\client\views\includes\navbar.jade" />
     <Content Include="shared\client\views\includes\footer.jade" />
@@ -94,6 +91,7 @@
     <Content Include="shared\client\scripts\harrogate-index-app.coffee" />
     <Content Include="shared\scripts\program.coffee" />
     <Content Include="shared\scripts\server-error.coffee" />
+    <Content Include="shared\scripts\settings-manager.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps" />
@@ -115,9 +113,6 @@
     <Folder Include="apps\terminal\" />
     <Folder Include="apps\terminal\resources\" />
     <Folder Include="apps\user\resources\" />
-    <Folder Include="config\" />
-    <Folder Include="config\server\" />
-    <Folder Include="config\server\env\" />
     <Folder Include="shared\client\views\" />
     <Folder Include="shared\client\views\includes\" />
     <Folder Include="shared\scripts\" />

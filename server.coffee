@@ -9,10 +9,7 @@ BasicStrategy =  require('passport-http').BasicStrategy
 ON_DEATH = require 'death'
 
 app_catalog = require './shared/scripts/app-catalog.coffee'
-
-# set env, get config
-env = process.env.NODE_ENV = process.env.NODE_ENV or 'development'
-config = require('./config/server/config.js')
+SettingsManager = require './shared/scripts/settings-manager'
 
 # create the app
 harrogate_app = express()
@@ -95,7 +92,7 @@ harrogate_app.use (error, request, response, next) ->
   return response.end()
 
 # Start the server
-server.listen config.port, ->
+server.listen SettingsManager.settings.server.port, ->
   console.log "Starting express.js server (#{server.address().address}:#{server.address().port})"
 
 ON_DEATH (signal, err) ->
