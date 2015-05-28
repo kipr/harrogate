@@ -26,6 +26,11 @@
           "id": "stderr",
           "publisher": "SERVER",
           "description": "stderr sent from the terminal."
+        },
+        "restart": {
+          "id": "restart",
+          "publisher": "CLIENT",
+          "description": "Restart the terminal session."
         }
       }
     }

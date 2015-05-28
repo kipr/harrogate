@@ -2,6 +2,11 @@
   .row
     .panel.panel-default
       .panel-heading
-        .panel-title Terminal
+        .panel-title
+          | Terminal
+          |  
+          span.btn-group
+            button.btn.btn-default(type='button', data-ng-click='refresh()')
+              i.fa.fa-refresh
 
       textarea#terminal.panel-body
