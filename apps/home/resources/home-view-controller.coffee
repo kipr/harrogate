@@ -9,7 +9,4 @@ exports.inject = (app) ->
   exports.controller
 
 exports.controller = ($scope) ->
-  $scope.show_welcome = true
-  $scope.click_learn_more = ->
-    alert 'Implement me!!!'
   return 
