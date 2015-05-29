@@ -39,7 +39,7 @@
     <Content Include="apps\programs\resources\programs-view-controller.coffee" />
     <Content Include="apps\programs\resources\index.jade" />
     <Content Include="apps\programs\workspace-resource-factory.coffee" />
-    <Content Include="apps\runner\resources\graphics-view-controller.coffee" />
+    <Content Include="apps\runner\resources\runner-view-controller.coffee" />
     <Content Include="apps\runner\resources\index.jade" />
     <Content Include="apps\settings\resources\index.jade" />
     <Content Include="apps\settings\resources\settings-view-controller.coffee" />

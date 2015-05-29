@@ -1,3 +1,36 @@
+Express = require 'express'
+
+ServerError = require '../../shared/scripts/server-error.coffee'
+
+AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+TargetApp = AppCatalog.catalog['Target information'].get_instance()
+
+# information about the program which is currently runned
+class RunningProgram
+  constructor: (@name) ->
+
+# the currently runned program
+running = null
+
+# the runner router
+router = Express.Router()
+
+# get information about the currently running program
+router.get '/', (request, response, next) ->
+  response.writeHead 200, { 'Content-Type': 'application/json' }
+  return response.end "#{JSON.stringify(running: running)}", 'utf8'
+
+# get information about the currently running program
+router.post '/', (request, response, next) ->
+  response.writeHead 200, { 'Content-Type': 'application/json' }
+  return response.end "#{JSON.stringify(running: running)}", 'utf8'
+
+# get information about the currently running program
+router.delete '/', (request, response, next) ->
+  response.writeHead 200, { 'Content-Type': 'application/json' }
+  return response.end "#{JSON.stringify(running: running)}", 'utf8'
+
+
 net = require 'net'
 assert = require 'assert'
 zlib = require 'zlib'
@@ -50,6 +83,11 @@ display_server = net.createServer (sock) ->
 # display_server.listen 60000
 
 module.exports =
+  init: (app) =>
+    # add the router
+    app.web_api.run['router'] = router
+    return
+
   exec: ->
     wss = new WebSocketServer(port: 8375)
 

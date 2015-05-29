@@ -1,4 +1,4 @@
-exports.name = 'camera_view_controller'
+exports.name = 'runner_view_controller'
 
 exports.inject = (app) ->
   app.controller exports.name,

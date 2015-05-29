@@ -4,5 +4,11 @@
   "exec": "runner.coffee",
   "description": "Runs a user program",
   "category": "System",
-  "angular_ctrl": "resources/graphics-view-controller.coffee"
+  "angular_ctrl": "resources/runner-view-controller.coffee",
+  "web_api": {
+    "run": {
+      "uri": "/api/run",
+      "description": "Start, stop and get information about running robot programs"
+    }
+  }
 }
