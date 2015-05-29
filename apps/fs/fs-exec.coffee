@@ -5,6 +5,7 @@ ServerError = require '../../shared/scripts/server-error.coffee'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
+SettingsManager = require '../../shared/scripts/settings-manager'
 
 FsResourceFactory = require './fs-resource-factory.coffee'
 
@@ -13,7 +14,7 @@ router = Express.Router()
 
 class FsApp
   constructor: ->
-    @home_folder = FsResourceFactory.FsDirectoryResource.create_from_path process.env[ if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC then 'USERPROFILE' else 'HOME' ]
+    @home_folder = FsResourceFactory.FsDirectoryResource.create_from_path SettingsManager.settings.workspace.path
 
   # expose the fs resources
   FsResourceFactory: FsResourceFactory
