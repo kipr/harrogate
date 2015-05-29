@@ -6,5 +6,11 @@
   "navbar": true,
   "description": "Modify the system's settings, such as network, time, and more.",
   "category": "System",
-  "angular_ctrl": "resources/settings-view-controller.coffee"
+  "angular_ctrl": "resources/settings-view-controller.coffee",
+  "web_api": {
+    "settings": {
+      "uri": "/api/settings",
+      "description": "Provides access to the settings"
+    }
+  }
 }

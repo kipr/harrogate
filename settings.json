@@ -1,5 +1,8 @@
-﻿{
+{
   "server": {
     "port": 8888
+  },
+  "workspace": {
+    "path": "C:\\Users\\stefa_000\\Documents\\KISS"
   }
 }

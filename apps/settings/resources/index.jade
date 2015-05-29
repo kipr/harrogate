@@ -1,2 +1,11 @@
-p Hello from settings/index.jade
-p Hello from {{test}}
+.container
+  .row
+    .panel-group
+      .panel.panel-default(data-ng-repeat="(group, setting) in settings")
+        .panel-heading
+          .h3.panel-title {{group | capitalize}}
+
+        .panel-body
+          .form-group(data-ng-repeat="(name, value) in setting")
+            label(data-ng-attr-for="{{name}}") {{name | capitalize}}
+            input.form-control(type='text' readonly data-ng-attr-id="{{name}}" data-ng-attr-value="{{value}}")

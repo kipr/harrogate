@@ -10,6 +10,10 @@ require('./navbar-controller.coffee').inject app
 app.filter 'escape', ->
   window.encodeURIComponent
 
+app.filter 'capitalize', ->
+  return (input) ->
+    return if input? then input.charAt(0).toUpperCase() + input.substr(1) else ''
+
 app.config([
   '$routeProvider'
   ($routeProvider) ->
