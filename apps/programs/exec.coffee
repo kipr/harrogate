@@ -38,7 +38,7 @@ class ProgramsApp
       path = SettingsManager.settings.workspace.path
 
   init: (app) ->
-    # add the home folder and the router
+    # add the router
     app.web_api.projects['router'] = router
 
   exec: ->

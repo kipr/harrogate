@@ -80,7 +80,7 @@ class HostFileSystem
     Directory = require './directory.coffee'
     File = require './file.coffee'
 
-    # empty path is OK for windows; and it's a folder
+    # empty path is OK for windows; and it's a directory
     if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC and path is ''
       return Q(Directory.create_from_path(path))
 

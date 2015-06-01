@@ -18,7 +18,7 @@ class FsApp
     @home_directory = Directory.create_from_path SettingsManager.settings.workspace.path
 
   init: (app) =>
-    # add the home folder and the router
+    # add the home directory and the router
     app.web_api.fs['home_uri'] = @home_directory.uri
     app.web_api.fs['router'] = router
 
