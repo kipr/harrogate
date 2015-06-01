@@ -27,10 +27,12 @@
     <Content Include=".jshintrc" />
     <Content Include="apps\cloud\resources\index.jade" />
     <Content Include="apps\cloud\resources\cloud-view-controller.coffee" />
-    <Content Include="apps\fs\fs-resource-factory.coffee" />
+    <Content Include="apps\fs\file.coffee" />
+    <Content Include="apps\fs\directory.coffee" />
+    <Content Include="apps\fs\host-fs.coffee" />
     <Content Include="apps\kiss\resources\kiss-view-controller.coffee" />
     <Content Include="apps\kiss\resources\index.jade" />
-    <Content Include="apps\fs\fs-exec.coffee" />
+    <Content Include="apps\fs\exec.coffee" />
     <Content Include="apps\fs\manifest.json" />
     <Content Include="apps\fs\resources\index.jade" />
     <Content Include="apps\fs\resources\fs-view-controller.coffee" />
@@ -81,7 +83,7 @@
     <Content Include="apps\motors\manifest.json" />
     <Content Include="apps\motors\exec.coffee" />
     <Content Include="apps\programs\manifest.json" />
-    <Content Include="apps\programs\programs.coffee" />
+    <Content Include="apps\programs\exec.coffee" />
     <Content Include="apps\runner\manifest.json" />
     <Content Include="apps\runner\runner.coffee" />
     <Content Include="apps\settings\manifest.json" />

@@ -1,27 +1,25 @@
 Express = require 'express'
 Url = require 'url'
 
-ServerError = require '../../shared/scripts/server-error.coffee'
-
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
-TargetApp = AppCatalog.catalog['Target information'].get_instance()
+Directory = require './directory.coffee'
+File = require './file.coffee'
+HostFileSystem = require './host-fs.coffee'
+ServerError = require '../../shared/scripts/server-error.coffee'
 SettingsManager = require '../../shared/scripts/settings-manager'
 
-FsResourceFactory = require './fs-resource-factory.coffee'
+TargetApp = AppCatalog.catalog['Target information'].get_instance()
 
 # the fs router
 router = Express.Router()
 
 class FsApp
   constructor: ->
-    @home_folder = FsResourceFactory.FsDirectoryResource.create_from_path SettingsManager.settings.workspace.path
-
-  # expose the fs resources
-  FsResourceFactory: FsResourceFactory
+    @home_directory = Directory.create_from_path SettingsManager.settings.workspace.path
 
   init: (app) =>
     # add the home folder and the router
-    app.web_api.fs['home_uri'] = @home_folder.uri
+    app.web_api.fs['home_uri'] = @home_directory.uri
     app.web_api.fs['router'] = router
 
   exec: ->
@@ -32,7 +30,7 @@ fs_app = new FsApp
 # '/' is relative to <manifest>.web_api.fs.uri
 router.use '/', (request, response, next) ->
   # Create the fs resource
-  FsResourceFactory.create_from_uri Url.parse(request.originalUrl, true).pathname
+  HostFileSystem.open uri: Url.parse(request.originalUrl, true).pathname
    # store it and continue
   .then (value) ->
     request.fs_resource = value
@@ -83,7 +81,7 @@ router.post '/*', (request, response, next) ->
     return response.end "#{JSON.stringify(error: 'Only content-type application/json supported')}", 'utf8'
 
   # Check if the uri points to a directory
-  if request.fs_resource not instanceof FsResourceFactory.FsDirectoryResource
+  if request.fs_resource not instanceof Directory
     response.writeHead 400, { 'Content-Type': 'application/json' }
     return response.end "#{JSON.stringify(error: request.fs_resource.path + ' is not a directory')}", 'utf8'
 
@@ -127,7 +125,7 @@ router.put '/*', (request, response) ->
     return response.end "#{JSON.stringify(error: 'Only content-type application/json supported')}", 'utf8'
 
   # Check if the uri points to a directory
-  if request.fs_resource not instanceof FsResourceFactory.FsFileResource
+  if request.fs_resource not instanceof File
     response.writeHead 400, { 'Content-Type': 'application/json' }
     return response.end "#{JSON.stringify(error: request.fs_resource.path + ' is not a file')}", 'utf8'
 

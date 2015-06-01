@@ -1,6 +1,6 @@
 {
   "name": "Programs",
-  "exec": "programs.coffee",
+  "exec": "exec.coffee",
   "navbar": true,
   "fonticon": "fa-th",
   "description": "Run, modify, and manage programs on the device.",

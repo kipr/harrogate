@@ -6,16 +6,16 @@ Url = require 'url'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 ServerError = require '../../shared/scripts/server-error.coffee'
+SettingsManager = require '../../shared/scripts/settings-manager'
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
-
-FsResourceFactory = FsApp.FsResourceFactory
-FsFileResource = FsResourceFactory.FsFileResource
-FsDirectoryResource = FsResourceFactory.FsDirectoryResource
+Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
 
 WorkspaceResourceFactory = require './workspace-resource-factory.coffee'
 AppManifest = require './manifest.json'
+
+Workspace = require './workspace.coffee'
 
 # the fs router
 router = Express.Router()
@@ -24,11 +24,19 @@ router = Express.Router()
 default_base_fs_resource = undefined
 switch TargetApp.platform
   when TargetApp.supported_platforms.WINDOWS_PC
-    path = Path.join FsApp.home_folder.path, 'Documents', 'KISS_Projects'
-    default_base_fs_resource = WorkspaceResourceFactory.create AppManifest.web_api.projects.uri, FsDirectoryResource.create_from_path(path)
+    path = Path.join FsApp.home_directory.path, 'Documents', 'KISS_Projects'
+    default_base_fs_resource = WorkspaceResourceFactory.create AppManifest.web_api.projects.uri, Directory.create_from_path(path)
   # TODO: Add it for other platforms
 
 class ProgramsApp
+
+  create_workspace: (path) ->
+    if path?
+      # update workspace path
+      SettingsManager.update { workspace: path: path }
+    else
+      path = SettingsManager.settings.workspace.path
+
   init: (app) ->
     # add the home folder and the router
     app.web_api.projects['router'] = router
@@ -43,7 +51,7 @@ router.use '/', (request, response, next) ->
   # Was a workspace fs uri provided?
   ws_uri = Url.parse(request.url, true).query['ws_uri']
   if ws_uri?
-    ws_resource = WorkspaceResourceFactory.create request.baseUrl, new FsDirectoryResource(ws_uri)
+    ws_resource = WorkspaceResourceFactory.create request.baseUrl, new Directory(ws_uri)
   else # use default resource
     ws_resource = default_base_fs_resource
 
@@ -70,7 +78,7 @@ router.use '/', (request, response, next) ->
       return response.end "#{JSON.stringify(err_resp)}", 'utf8'
 
   # return an error if it is not a directory
-  if ws_resource.base_fs_resource not instanceof FsResourceFactory.FsDirectoryResource
+  if ws_resource.base_fs_resource not instanceof Directory
     err_resp =
       error: 'Unable to open workspace'
       workspace_uri: ws_resource.base_fs_resource.uri

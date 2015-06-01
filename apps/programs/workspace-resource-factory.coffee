@@ -6,10 +6,7 @@ AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
-
-FsResourceFactory = FsApp.FsResourceFactory
-FsFileResource = FsResourceFactory.FsFileResource
-FsDirectoryResource = FsResourceFactory.FsDirectoryResource
+HostFileSystem = FsApp.HostFileSystem
 
 # class ProjectResource
 ####################################################################################################
@@ -73,7 +70,7 @@ class WsResource
     .then (child_resources) =>
 
       #create the project resources (exclude non-folders)
-      project_resources = (child_resource for child_resource in child_resources when child_resource instanceof FsDirectoryResource ).map (child_resource) =>
+      project_resources = (child_resource for child_resource in child_resources when child_resource instanceof HostFileSystem.Directory ).map (child_resource) =>
         return new ProjectResource @uri + '/' + encodeURIComponent(child_resource.name), child_resource
 
   get_representation: =>
