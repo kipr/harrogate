@@ -19,6 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="apps\programs\workspace.coffee" />
     <Compile Include="server.js" />
     <Compile Include="Gulpfile.coffee" />
     <Compile Include="Gulpfile.js" />
@@ -38,9 +39,9 @@
     <Content Include="apps\fs\resources\fs-view-controller.coffee" />
     <Content Include="apps\motors\resources\index.jade" />
     <Content Include="apps\motors\resources\motors-view-controller.coffee" />
+    <Content Include="apps\programs\project.coffee" />
     <Content Include="apps\programs\resources\programs-view-controller.coffee" />
     <Content Include="apps\programs\resources\index.jade" />
-    <Content Include="apps\programs\workspace-resource-factory.coffee" />
     <Content Include="apps\runner\resources\runner-view-controller.coffee" />
     <Content Include="apps\runner\resources\index.jade" />
     <Content Include="apps\settings\resources\index.jade" />

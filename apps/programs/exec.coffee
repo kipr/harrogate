@@ -5,28 +5,19 @@ Q = require 'q'
 Url = require 'url'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+Project = require './project.coffee'
 ServerError = require '../../shared/scripts/server-error.coffee'
 SettingsManager = require '../../shared/scripts/settings-manager'
+Workspace = require './workspace.coffee'
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
 
-WorkspaceResourceFactory = require './workspace-resource-factory.coffee'
 AppManifest = require './manifest.json'
-
-Workspace = require './workspace.coffee'
 
 # the fs router
 router = Express.Router()
-
-# default workspace path
-default_base_fs_resource = undefined
-switch TargetApp.platform
-  when TargetApp.supported_platforms.WINDOWS_PC
-    path = Path.join FsApp.home_directory.path, 'Documents', 'KISS_Projects'
-    default_base_fs_resource = WorkspaceResourceFactory.create AppManifest.web_api.projects.uri, Directory.create_from_path(path)
-  # TODO: Add it for other platforms
 
 class ProgramsApp
 
@@ -46,50 +37,29 @@ class ProgramsApp
 # create the app object
 programs_app = new ProgramsApp
 
-# '/' is relative to <app_manifest>.web_api.projects.uri
+# '/' is relative to <manifest>.web_api.projects.uri
 router.use '/', (request, response, next) ->
-  # Was a workspace fs uri provided?
-  ws_uri = Url.parse(request.url, true).query['ws_uri']
-  if ws_uri?
-    ws_resource = WorkspaceResourceFactory.create request.baseUrl, new Directory(ws_uri)
-  else # use default resource
-    ws_resource = default_base_fs_resource
+  # Create the ws resource
+  ws_directory = Directory.create_from_path SettingsManager.settings.workspace.path
+  ws_resource = new Workspace ws_directory
 
-  # validate workspace path (TODO: Change me!!)
-  try
-    stats = FS.statSync ws_resource.base_fs_resource.path
-  catch err
-    if err.code is 'ENOENT'
-      err_resp =
-        error: 'Unable to open workspace'
-        workspace_uri: ws_resource.base_fs_resource.uri
-        reason: 'No such file or directory'
+  # and validate it
+  ws_resource.is_valid()
+  .then (valid) ->
+    if not valid
+      throw new ServerError 400, ws_directory.path + ' is not a valid workspace'
 
-      response.writeHead 404, { 'Content-Type': 'application/json' }
-      return response.end "#{JSON.stringify(err_resp)}", 'utf8'
-
-    else # something unexpected happened
-      err_resp =
-        error: 'Unable to open workspace'
-        workspace_uri: ws_resource.base_fs_resource.uri
-        reason: 'Unable to open ' + ws_resource.base_fs_resource.name
-
-      response.writeHead 500, { 'Content-Type': 'application/json' }
-      return response.end "#{JSON.stringify(err_resp)}", 'utf8'
-
-  # return an error if it is not a directory
-  if ws_resource.base_fs_resource not instanceof Directory
-    err_resp =
-      error: 'Unable to open workspace'
-      workspace_uri: ws_resource.base_fs_resource.uri
-      reason: ws_resource.base_fs_resource.name + ' is not a directory'
-
-    response.writeHead 400, { 'Content-Type': 'application/json' }
-    return response.end "#{JSON.stringify(err_resp)}", 'utf8'
-
-  # store resource and continue
-  request.ws_resource = ws_resource
-  next()
+    # and attach it to the request object
+    request.ws_resource = ws_resource
+    next()
+  # could not create the ws resource (wrong path)
+  .catch (e) ->
+    if e instanceof ServerError
+      response.writeHead e.code, { 'Content-Type': 'application/javascript' }
+      return response.end "#{JSON.stringify(error: e.message)}", 'utf8'
+    else
+      next e
+  .done()
   return
 
 router.get '/', (request, response, next) ->
