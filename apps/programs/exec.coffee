@@ -11,8 +11,8 @@ SettingsManager = require '../../shared/scripts/settings-manager'
 Workspace = require './workspace.coffee'
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
-FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
+HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.coffee'
 
 AppManifest = require './manifest.json'
 
@@ -39,15 +39,22 @@ programs_app = new ProgramsApp
 
 # '/' is relative to <manifest>.web_api.projects.uri
 router.use '/', (request, response, next) ->
-  # Create the ws resource
-  ws_directory = Directory.create_from_path SettingsManager.settings.workspace.path
-  ws_resource = new Workspace ws_directory
+  ws_resource = null
 
-  # and validate it
-  ws_resource.is_valid()
+  # Create the ws resource
+  HostFileSystem.open SettingsManager.settings.workspace.path
+  .then (ws_directory) ->
+    # return 400 if it is a file
+    if ws_directory not instanceof Directory
+      throw new ServerError 400, ws_directory.path + ' is a file'
+
+    ws_resource = new Workspace ws_directory
+
+    # validate it
+    return ws_resource.is_valid()
   .then (valid) ->
     if not valid
-      throw new ServerError 400, ws_directory.path + ' is not a valid workspace'
+      throw new ServerError 400, ws_resource.ws_directory.path + ' is not a valid workspace'
 
     # and attach it to the request object
     request.ws_resource = ws_resource

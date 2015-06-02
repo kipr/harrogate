@@ -10,3 +10,14 @@
     min-width: 60px;
     height: 50px;
 }
+
+.tree-table th:not(:last-child), .tree-table td:not(:last-child)
+{
+    white-space: nowrap;
+}
+
+.tree-table th:last-child, .tree-table td:last-child
+{
+    width: 99%;
+    padding-left: 0px;
+}

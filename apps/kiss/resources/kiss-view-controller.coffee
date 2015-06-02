@@ -9,16 +9,24 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $location, $http, app_catalog_provider) ->
   open_file = (file_uri) ->
-    $scope.displayed_file = undefined
+    close_file()
 
     $http.get(file_uri)
     .success (data, status, headers, config) ->
       $scope.displayed_file = data
       editor.setValue(new Buffer($scope.displayed_file.content, 'base64').toString('ascii'));
+
+      setTimeout -> 
+        editor.refresh()
       return
     .error (data, status, headers, config) ->
       console.log "Could not get #{file_uri}"
       return
+
+  close_file = ->
+    $scope.displayed_file = null
+    editor.setValue ''
+    return
 
   document.getElementById('editor')
   editor = code_mirror.fromTextArea(document.getElementById('editor'),
@@ -33,9 +41,9 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     open_file file_uri
 
   app_catalog_provider.catalog.then (app_catalog) ->
-    fs_api = app_catalog['Programs']?.web_api?.projects
-    if fs_api?
-      $http.get(fs_api.uri)
+    projects_resource = app_catalog['Programs']?.web_api?.projects
+    if projects_resource?
+      $http.get(projects_resource.uri)
       .success (data, status, headers, config) ->
         $scope.ws = data
         return
@@ -45,22 +53,37 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     return
 
   $scope.select_project = (project) ->
-    $scope.selected_project = project
-    $scope.selected_file = undefined
+    # toggle selection
+    if $scope.selected_project is project
+      close_file()
+      $scope.selected_project = null
+      $scope.selected_file = null
 
-    # load project files
-    $http.get(project.links.self.href)
-    .success (data, status, headers, config) ->
-      $scope.project_files = data.files
-      return
-    .error (data, status, headers, config) ->
-      console.log "Could not get #{project.links.self.href}"
-      return
+    else
+      $scope.selected_project = project
+      $scope.selected_file = null
+
+      # load project files
+      $http.get(project.links.self.href)
+      .success (data, status, headers, config) ->
+        console.log data
+        $scope.project_resource = data
+        return
+      .error (data, status, headers, config) ->
+        console.log "Could not get #{project.links.self.href}"
+        return
     return
 
   $scope.select_file = (file) ->
-    $scope.selected_file = file
-    open_file $scope.selected_file.links.self.href
+    # toggle selection
+    if $scope.selected_file is file
+      $scope.selected_file = null
+      close_file()
+
+    else
+      $scope.selected_file = file
+      open_file $scope.selected_file.links.self.href
+
     return
 
   $scope.save = ->

@@ -4,20 +4,51 @@
       .panel.panel-default
         .panel-heading
           .panel-title Projects:
-        table.panel-body.table
+        table.panel-body.table.tree-table
           tbody
-            tr(data-ng-repeat-start = "project in ws.projects" data-ng-class='{active: selected_project === project}' data-ng-click='select_project(project)')
-              th(scope="row")
+            tr(data-ng-repeat-start = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="selected_project === project")
+                i.fa.fa-chevron-circle-right(data-ng-if="selected_project !== project")
+              th(colspan="2")
                 | {{project.name}}
                 |  
                 small [{{project.parameters.language}}]
-            tr(data-ng-if="selected_project === project" data-ng-repeat-end = "" data-ng-repeat = "file in project_files" data-ng-class='{active: selected_file === file}' data-ng-click='select_file(file)')
-              th(scope="row") 
+            tr(data-ng-if="selected_project === project && project_resource.include_files")
+              th
+              th(colspan="2")
+                | Include Files
+            tr(data-ng-if="selected_project === project && project_resource.include_files" data-ng-repeat = "file in project_resource.include_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file)')
+              td
+              td
+              td
+                i.fa.fa-file-o
+                |  
+                | {{file.name}}
+            tr(data-ng-if="selected_project === project && project_resource.source_files")
+              th
+              th(colspan="2")
+                | Source Files
+            tr(data-ng-if="selected_project === project && project_resource.source_files" data-ng-repeat = "file in project_resource.source_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file)')
+              td
+              td
+              td
+                i.fa.fa-file-o
+                |  
+                | {{file.name}}
+            tr(data-ng-if="selected_project === project && project_resource.data_files")
+              th
+              th(colspan="2")
+                | User Data Files
+            tr(data-ng-if="selected_project === project && project_resource.data_files" data-ng-repeat-end data-ng-repeat = "file in project_resource.data_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file)')
+              td
+              td
+              td
                 i.fa.fa-file-o
                 |  
                 | {{file.name}}
     .col-md-9
-      .panel.panel-default
+      .panel.panel-default(data-ng-show="displayed_file")
         .panel-heading
           .panel-title
             | {{displayed_file ? displayed_file.name : 'Unnamed File'}}
