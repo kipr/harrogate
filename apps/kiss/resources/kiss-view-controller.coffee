@@ -52,6 +52,30 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
         return
     return
 
+  $scope.toggle_include_files_expanded = ->
+    $scope.include_files_expanded = not $scope.include_files_expanded
+    if not $scope.include_files_expanded and $scope.selected_file_categorie is 'include'
+      $scope.selected_file = null
+      $scope.selected_file_categorie = null
+      close_file()
+    return
+
+  $scope.toggle_src_files_expanded = ->
+    $scope.src_files_expanded = not $scope.src_files_expanded
+    if not $scope.src_files_expanded and $scope.selected_file_categorie is 'src'
+      $scope.selected_file = null
+      $scope.selected_file_categorie = null
+      close_file()
+    return
+
+  $scope.toggle_data_files_expanded = ->
+    $scope.data_files_expanded = not $scope.data_files_expanded
+    if not $scope.data_files_expanded and $scope.selected_file_categorie is 'data'
+      $scope.selected_file = null
+      $scope.selected_file_categorie = null
+      close_file()
+    return
+
   $scope.select_project = (project) ->
     # toggle selection
     if $scope.selected_project is project
@@ -59,9 +83,18 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
       $scope.selected_project = null
       $scope.selected_file = null
 
+      $scope.include_files_expanded = true
+      $scope.src_files_expanded = true
+      $scope.data_files_expanded = true
+
     else
+      close_file()
       $scope.selected_project = project
       $scope.selected_file = null
+
+      $scope.include_files_expanded = true
+      $scope.src_files_expanded = true
+      $scope.data_files_expanded = true
 
       # load project files
       $http.get(project.links.self.href)
@@ -74,14 +107,17 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
         return
     return
 
-  $scope.select_file = (file) ->
+  $scope.selected_file_categorie = null
+  $scope.select_file = (file, categorie) ->
     # toggle selection
     if $scope.selected_file is file
       $scope.selected_file = null
+      $scope.selected_file_categorie = null
       close_file()
 
     else
       $scope.selected_file = file
+      $scope.selected_file_categorie = categorie
       open_file $scope.selected_file.links.self.href
 
     return

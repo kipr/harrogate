@@ -14,33 +14,43 @@
                 | {{project.name}}
                 |  
                 small [{{project.parameters.language}}]
-            tr(data-ng-if="selected_project === project && project_resource.include_files")
+            tr(data-ng-if="selected_project === project" data-ng-click='toggle_include_files_expanded()')
               th
-              th(colspan="2")
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="include_files_expanded")
+                i.fa.fa-chevron-circle-right(data-ng-if="!include_files_expanded")
+              th
                 | Include Files
-            tr(data-ng-if="selected_project === project && project_resource.include_files" data-ng-repeat = "file in project_resource.include_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file)')
+            tr(data-ng-if="selected_project === project && include_files_expanded" data-ng-repeat = "file in project_resource.include_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "include")')
               td
               td
               td
                 i.fa.fa-file-o
                 |  
                 | {{file.name}}
-            tr(data-ng-if="selected_project === project && project_resource.source_files")
+            tr(data-ng-if="selected_project === project" data-ng-click='toggle_src_files_expanded()')
               th
-              th(colspan="2")
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="src_files_expanded")
+                i.fa.fa-chevron-circle-right(data-ng-if="!src_files_expanded")
+              th
                 | Source Files
-            tr(data-ng-if="selected_project === project && project_resource.source_files" data-ng-repeat = "file in project_resource.source_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file)')
+            tr(data-ng-show="selected_project === project && src_files_expanded" data-ng-repeat = "file in project_resource.source_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "src")')
               td
               td
+                i.fa.fa-chevron-circle-down(data-ng-if="!src_files_expanded")
               td
                 i.fa.fa-file-o
                 |  
                 | {{file.name}}
-            tr(data-ng-if="selected_project === project && project_resource.data_files")
+            tr(data-ng-if="selected_project === project"  data-ng-click='toggle_data_files_expanded()')
               th
-              th(colspan="2")
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="data_files_expanded")
+                i.fa.fa-chevron-circle-right(data-ng-if="!data_files_expanded")
+              th
                 | User Data Files
-            tr(data-ng-if="selected_project === project && project_resource.data_files" data-ng-repeat-end data-ng-repeat = "file in project_resource.data_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file)')
+            tr(data-ng-if="selected_project === project && data_files_expanded" data-ng-repeat-end data-ng-repeat = "file in project_resource.data_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "data")')
               td
               td
               td
