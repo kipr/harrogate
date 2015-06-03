@@ -12,9 +12,7 @@ class SettingsManager
     @settings = require @settings_file_paht
 
   update: (value) =>
-    console.log @settings
     @settings =  _.merge(@settings, value)
-    console.log @settings
     fs.writeFile @settings_file_paht, JSON.stringify(@settings, null, 2), 'utf8'
     return
 
