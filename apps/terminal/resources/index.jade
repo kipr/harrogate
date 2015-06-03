@@ -1,15 +1,12 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
-block view-content
-  .container
-    .row
-      .panel.panel-default
-        .panel-heading
-          .panel-title
-            | Terminal
-            |  
-            span.btn-group
-              button.btn.btn-default(type='button', data-ng-click='refresh()')
-                i.fa.fa-refresh
+block view-toolbar-left
+  .btn-group
+   button.btn.btn-default(type='button', data-ng-click='restart()')
+      i.fa.fa-refresh
+      br
+      small.small Restart
 
-        textarea#terminal.panel-body
+block view-content
+  .panel.panel-default
+    textarea#terminal.panel-body

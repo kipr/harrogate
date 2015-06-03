@@ -62,7 +62,7 @@ exports.controller = ($scope, app_catalog_provider) ->
 
     return
 
-  $scope.refresh = ->
+  $scope.restart = ->
     append_text '\n\n\n'
 
     if socket? and events?
