@@ -1,7 +1,6 @@
 {
   "name": "Host Filesystem",
   "priority": 10,
-  "navbar": false,
   "exec": "exec.coffee",
   "fonticon": "fa-hdd-o",
   "description": "Host filesystem manager",

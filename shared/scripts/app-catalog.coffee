@@ -31,7 +31,6 @@ class AppCatalog
 
       # Bot UI data
       manifest['priority'] ?= 0
-      manifest['navbar'] ?= false
       manifest['hidden'] ?= false
       manifest['fonticon'] ?= 'fa-exclamation-triangle'
       manifest['category'] ?= 'General'

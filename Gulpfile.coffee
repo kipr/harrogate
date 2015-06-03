@@ -171,5 +171,6 @@ gulp.task 'watch', ->
   gulp.watch 'shared/client/css/*.css', ['shared_styles']
   gulp.watch 'shared/client/scripts/*.coffee', ['scripts']
 
+  gulp.watch 'shared/client/views/templates/**/*.jade', ['app_views']
   gulp.watch 'apps/**/resources/**/*.jade', ['app_views']
   gulp.watch 'apps/**/resources/*.coffee', ['scripts']

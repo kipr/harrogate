@@ -1,65 +1,68 @@
-.container
-  .row.toolbar
-    span.btn-group
-      button.btn.btn-default.btn-toolbar(type='button', data-ng-class='{disabled: !home_uri}', data-ng-click='home()')
-        i.fa.fa-home
-        br
-        small.small Home
-      button.btn.btn-default.btn-toolbar(type='button', data-ng-click='root()')
-        i.fa.fa-hdd-o
-        br
-        small.small Root
-      button.btn.btn-default.btn-toolbar(type='button', data-ng-click='up()' data-ng-class='{disabled: !can_up()}')
-        i.fa.fa-arrow-up
-        br
-        small.small Up
-      button.btn.btn-default.btn-toolbar(type='button', data-ng-click='reload()')
-        i.fa.fa-refresh
-        br
-        small.small Refresh
-    |  
-    span.btn-group
-      button.btn.btn-default.btn-toolbar.disabled(type='button')
-        i.fa.fa-question-circle
-        br
-        small.small Help
+extends ../../../shared/client/views/templates/app-view-layout.jade
 
-  .row
-    .panel.panel-default
-      .panel-heading
-        | Content of
-        |  
-        strong {{current.name}}
-        | {{current.path ? " [  " + current.path + "  ]" : ""}}
-      table.panel-body.table
-        thead
-          tr
-            th Name
-            th MIME type
-            th 
-        tbody
-          tr(data-ng-repeat = "child in current.children" data-ng-class='{active: selected === child}' data-ng-click='select_child(child)')
-            th(scope="row")
-              i.fa.fa-folder-o(data-ng-if="child.type == 'Directory'")
-              i.fa.fa-file-o(data-ng-if="child.type != 'Directory'")
-              |  
-              {{child.name}}
-            td {{child.type}}
-            td 
-              span.btn-group-xs.pull-right
-                button.btn.btn-default(type='button' data-ng-show="selected === child && selected.type == 'Directory'" data-ng-click="open_directory(selected)")
-                  i.fa.fa-folder-open-o
-                  |  
-                  small.small Open
-                a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type != 'Directory'" data-ng-href="/#/apps/kiss?path={{selected.links.self.href | escape}}")
-                  i.fa.fa-file-text-o
-                  |  
-                  small.small Edith
-                a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type != 'Directory'" data-ng-href="{{selected.links.self.href}}?mode=raw" download)
-                  i.fa.fa-download
-                  |  
-                  small.small Download
-                button.btn.btn-default.disabled(type='button' data-ng-show="selected === child")
-                  i.fa.fa-trash-o
-                  |  
-                  small.small Delete
+block view-content
+  .container
+    .row.toolbar
+      span.btn-group
+        button.btn.btn-default.btn-toolbar(type='button', data-ng-class='{disabled: !home_uri}', data-ng-click='home()')
+          i.fa.fa-home
+          br
+          small.small Home
+        button.btn.btn-default.btn-toolbar(type='button', data-ng-click='root()')
+          i.fa.fa-hdd-o
+          br
+          small.small Root
+        button.btn.btn-default.btn-toolbar(type='button', data-ng-click='up()' data-ng-class='{disabled: !can_up()}')
+          i.fa.fa-arrow-up
+          br
+          small.small Up
+        button.btn.btn-default.btn-toolbar(type='button', data-ng-click='reload()')
+          i.fa.fa-refresh
+          br
+          small.small Refresh
+      |  
+      span.btn-group
+        button.btn.btn-default.btn-toolbar.disabled(type='button')
+          i.fa.fa-question-circle
+          br
+          small.small Help
+
+    .row
+      .panel.panel-default
+        .panel-heading
+          | Content of
+          |  
+          strong {{current.name}}
+          | {{current.path ? " [  " + current.path + "  ]" : ""}}
+        table.panel-body.table
+          thead
+            tr
+              th Name
+              th MIME type
+              th 
+          tbody
+            tr(data-ng-repeat = "child in current.children" data-ng-class='{active: selected === child}' data-ng-click='select_child(child)')
+              th(scope="row")
+                i.fa.fa-folder-o(data-ng-if="child.type == 'Directory'")
+                i.fa.fa-file-o(data-ng-if="child.type != 'Directory'")
+                |  
+                {{child.name}}
+              td {{child.type}}
+              td 
+                span.btn-group-xs.pull-right
+                  button.btn.btn-default(type='button' data-ng-show="selected === child && selected.type == 'Directory'" data-ng-click="open_directory(selected)")
+                    i.fa.fa-folder-open-o
+                    |  
+                    small.small Open
+                  a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type != 'Directory'" data-ng-href="/#/apps/kiss?path={{selected.links.self.href | escape}}")
+                    i.fa.fa-file-text-o
+                    |  
+                    small.small Edith
+                  a.btn.btn-default(type='button' data-ng-show="selected === child && selected.type != 'Directory'" data-ng-href="{{selected.links.self.href}}?mode=raw" download)
+                    i.fa.fa-download
+                    |  
+                    small.small Download
+                  button.btn.btn-default.disabled(type='button' data-ng-show="selected === child")
+                    i.fa.fa-trash-o
+                    |  
+                    small.small Delete

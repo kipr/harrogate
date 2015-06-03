@@ -4,7 +4,6 @@
   "fonticon": "fa-home",
   "description": "The launchpad",
   "category": "System",
-  "navbar": true,
   "hidden": true,
   "angular_ctrl": "resources/home-view-controller.coffee"
 }

@@ -56,11 +56,9 @@
     <Content Include="apps\user\resources\users-view-controller.coffee" />
     <Content Include="settings.json" />
     <Content Include="shared\client\css\style.css" />
-    <Content Include="shared\client\views\includes\navbar.jade" />
-    <Content Include="shared\client\views\includes\footer.jade" />
+    <Content Include="shared\client\views\templates\app-view-layout.jade" />
     <Content Include="shared\client\views\index.jade" />
     <Content Include="shared\client\scripts\app-catalog-provider.coffee" />
-    <Content Include="shared\client\scripts\navbar-controller.coffee" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
     <Content Include="apps\categories.json" />
@@ -77,9 +75,6 @@
     <Content Include="apps\home\server.coffee" />
     <Content Include="apps\kiss\manifest.json" />
     <Content Include="apps\kiss\exec.coffee" />
-    <Content Include="shared\client\views\login.jade" />
-    <Content Include="shared\client\views\includes\scripts.jade" />
-    <Content Include="shared\client\views\includes\styles.jade" />
     <Content Include="shared\scripts\app-catalog.coffee" />
     <Content Include="apps\motors\manifest.json" />
     <Content Include="apps\motors\exec.coffee" />
@@ -117,7 +112,7 @@
     <Folder Include="apps\terminal\resources\" />
     <Folder Include="apps\user\resources\" />
     <Folder Include="shared\client\views\" />
-    <Folder Include="shared\client\views\includes\" />
+    <Folder Include="shared\client\views\templates\" />
     <Folder Include="shared\scripts\" />
     <Folder Include="apps\kiss" />
     <Folder Include="apps\motors" />

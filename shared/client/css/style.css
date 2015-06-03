@@ -1,14 +1,28 @@
 ﻿@charset "UTF-8";
 
+body
+{
+    padding-top: 70px;
+}
+
 .toolbar
 {
     padding-bottom: 5px;
+}
+
+.navbar-form
+{
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .btn-toolbar
 {
     min-width: 60px;
     height: 50px;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .tree-table th:not(:last-child), .tree-table td:not(:last-child)

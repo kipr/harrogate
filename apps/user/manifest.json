@@ -2,7 +2,6 @@
   "name": "User Preferences",
   "fonticon": "fa-user",
   "exec": "exec.coffee",
-  "navbar": true,
   "description": "Set owner information, enable accessibility tools, and more.",
   "category": "System",
   "angular_ctrl": "resources/users-view-controller.coffee"
