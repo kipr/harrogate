@@ -1,111 +1,99 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
-block view-content
-  .container
-    .row
-      .col-xs-3
-        .panel.panel-default
-          .panel-heading
-            .panel-title Projects:
-          table.panel-body.table.tree-table
-            tbody
-              tr(data-ng-repeat-start = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
-                th
-                  i.fa.fa-chevron-circle-down(data-ng-if="selected_project === project")
-                  i.fa.fa-chevron-circle-right(data-ng-if="selected_project !== project")
-                th(colspan="2")
-                  | {{project.name}}
-                  |  
-                  small [{{project.parameters.language}}]
-              tr(data-ng-if="selected_project === project" data-ng-click='toggle_include_files_expanded()')
-                th
-                th
-                  i.fa.fa-chevron-circle-down(data-ng-if="include_files_expanded")
-                  i.fa.fa-chevron-circle-right(data-ng-if="!include_files_expanded")
-                th
-                  | Include Files
-              tr(data-ng-if="selected_project === project && include_files_expanded" data-ng-repeat = "file in project_resource.include_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "include")')
-                td
-                td
-                td
-                  i.fa.fa-file-o
-                  |  
-                  | {{file.name}}
-              tr(data-ng-if="selected_project === project" data-ng-click='toggle_src_files_expanded()')
-                th
-                th
-                  i.fa.fa-chevron-circle-down(data-ng-if="src_files_expanded")
-                  i.fa.fa-chevron-circle-right(data-ng-if="!src_files_expanded")
-                th
-                  | Source Files
-              tr(data-ng-show="selected_project === project && src_files_expanded" data-ng-repeat = "file in project_resource.source_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "src")')
-                td
-                td
-                  i.fa.fa-chevron-circle-down(data-ng-if="!src_files_expanded")
-                td
-                  i.fa.fa-file-o
-                  |  
-                  | {{file.name}}
-              tr(data-ng-if="selected_project === project"  data-ng-click='toggle_data_files_expanded()')
-                th
-                th
-                  i.fa.fa-chevron-circle-down(data-ng-if="data_files_expanded")
-                  i.fa.fa-chevron-circle-right(data-ng-if="!data_files_expanded")
-                th
-                  | User Data Files
-              tr(data-ng-if="selected_project === project && data_files_expanded" data-ng-repeat-end data-ng-repeat = "file in project_resource.data_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "data")')
-                td
-                td
-                td
-                  i.fa.fa-file-o
-                  |  
-                  | {{file.name}}
-      .col-xs-9
-        .panel.panel-default(data-ng-show="displayed_file")
-          .panel-heading
-            .panel-title
-              | {{displayed_file ? displayed_file.name : 'Unnamed File'}}
-              |  
-              span.btn-group
-                button.btn(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-click='save()')
-                  i.fa.fa-floppy-o
-                button.btn.btn-default(type='button', data-ng-click='refresh()')
-                  i.fa.fa-refresh
-                button.btn(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-disabled='!documentChanged', data-ng-click='uploadToCloud()')
-                  i.fa.fa-cloud
-                button.btn(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-disabled='!documentChanged',data-ng-click='downloadFile()')
-                  i.fa.fa-download
-              |  
-              span.btn-group
-                button.btn.btn-default.disabled(type='button', data-ng-click='cut()')
-                  i.fa.fa-scissors
-                button.btn.btn-default.disabled(type='button', data-ng-click='copy()')
-                  i.fa.fa-copy
-                button.btn.btn-default.disabled(type='button', data-ng-click='paste()')
-                  i.fa.fa-clipboard
-              |  
-              span.btn-group
-                button.btn.btn-default(type='button', data-ng-click='undo()')
-                  i.fa.fa-undo
-                button.btn.btn-default(type='button', data-ng-click='redo()')
-                  i.fa.fa-repeat
-              |  
-              span.btn-group
-                button.btn.btn-default(type='button', data-ng-click='compile()')
-                  i.fa.fa-th
-              |  
-              span.btn-group
-                button.btn.btn-default(type='button', data-ng-click='find()')
-                  i.fa.fa-binoculars
-              |  
-              span.btn-group
-                button.btn.btn-default(type='button', data-ng-click='zoomIn()')
-                  i.fa.fa-search-plus
-                button.btn.btn-default(type='button', data-ng-click='zoomOut()')
-                  i.fa.fa-search-minus
-              |  
-              span.btn-group
-                button.btn.btn-default.disabled(type='button', data-toggle='tooltip', data-placement='top', title='Help', data-ng-click='help()')
-                  i.fa.fa-question-circle
+block view-toolbar-left
+  .btn-group
+    button.btn.btn-toolbar(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-click='save()')
+      i.fa.fa-floppy-o
+        br
+        small.small Save
+    button.btn.btn-toolbar.btn-default(type='button', data-ng-click='refresh()')
+      i.fa.fa-refresh
+        br
+        small.small Reload
+    button.btn.btn-toolbar.btn-default.disabled(type='button' data-ng-click='uploadToCloud()')
+      i.fa.fa-cloud
+        br
+        small.small Upload to Cloud
+    button.btn.btn-toolbar.btn-default.disabled(type='button', data-ng-click='downloadFile()')
+      i.fa.fa-download
+        br
+        small.small Download
 
-          textarea#editor.panel-body
+  .btn-group
+    button.btn.btn-toolbar.btn-default(type='button', data-ng-click='undo()')
+      i.fa.fa-undo
+        br
+        small.small Undo
+    button.btn.btn-toolbar.btn-default(type='button', data-ng-click='redo()')
+      i.fa.fa-repeat
+        br
+        small.small Redo
+
+
+block view-content
+  .row
+    .col-xs-3
+      .panel.panel-default
+        .panel-heading
+          .panel-title Projects:
+        table.panel-body.table.tree-table
+          tbody
+            tr(data-ng-repeat-start = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="selected_project === project")
+                i.fa.fa-chevron-circle-right(data-ng-if="selected_project !== project")
+              th(colspan="2")
+                | {{project.name}}
+                |  
+                small [{{project.parameters.language}}]
+            tr(data-ng-if="selected_project === project" data-ng-click='toggle_include_files_expanded()')
+              th
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="include_files_expanded")
+                i.fa.fa-chevron-circle-right(data-ng-if="!include_files_expanded")
+              th
+                | Include Files
+            tr(data-ng-if="selected_project === project && include_files_expanded" data-ng-repeat = "file in project_resource.include_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "include")')
+              td
+              td
+              td
+                i.fa.fa-file-o
+                |  
+                | {{file.name}}
+            tr(data-ng-if="selected_project === project" data-ng-click='toggle_src_files_expanded()')
+              th
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="src_files_expanded")
+                i.fa.fa-chevron-circle-right(data-ng-if="!src_files_expanded")
+              th
+                | Source Files
+            tr(data-ng-show="selected_project === project && src_files_expanded" data-ng-repeat = "file in project_resource.source_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "src")')
+              td
+              td
+                i.fa.fa-chevron-circle-down(data-ng-if="!src_files_expanded")
+              td
+                i.fa.fa-file-o
+                |  
+                | {{file.name}}
+            tr(data-ng-if="selected_project === project"  data-ng-click='toggle_data_files_expanded()')
+              th
+              th
+                i.fa.fa-chevron-circle-down(data-ng-if="data_files_expanded")
+                i.fa.fa-chevron-circle-right(data-ng-if="!data_files_expanded")
+              th
+                | User Data Files
+            tr(data-ng-if="selected_project === project && data_files_expanded" data-ng-repeat-end data-ng-repeat = "file in project_resource.data_files" data-ng-class='{info: selected_file === file}' data-ng-click='select_file(file, "data")')
+              td
+              td
+              td
+                i.fa.fa-file-o
+                |  
+                | {{file.name}}
+
+    .col-xs-9
+      .panel.panel-default(data-ng-show="displayed_file")
+        .panel-heading
+          .panel-title
+            | {{displayed_file ? displayed_file.name : 'Unnamed File'}}
+
+        textarea#editor.panel-body
