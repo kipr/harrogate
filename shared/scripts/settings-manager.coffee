@@ -19,7 +19,7 @@ class SettingsManager
     return
 
   set: (value) =>
-    @settings =  Object.freeze value
+    @settings =  value
     fs.writeFile @settings_file_paht, JSON.stringify(@settings, null, 2), 'utf8'
     return
 
