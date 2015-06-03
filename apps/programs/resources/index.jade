@@ -1,60 +1,52 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
-block view-content
-  .container
-    .row.toolbar
-      span.btn-group
-        button.btn.btn-default.btn-toolbar.disabled(type='button')
-          i.fa.fa-folder-open-o
-          br
-          small.small Change Workspace
-        button.btn.btn-default.btn-toolbar.disabled(type='button')
-          i.fa.fa-download
-          br
-          small.small Download Workspace
-        button.btn.btn-default.btn-toolbar.disabled(type='button')
-          i.fa.fa-plus
-          br
-          small.small New Project
-        button.btn.btn-default.btn-toolbar.disabled(type='button')
-          i.fa.fa-refresh
-          br
-          small.small Refresh
-      |  
-      span.btn-group
-        button.btn.btn-default.btn-toolbar.disabled(type='button')
-          i.fa.fa-question-circle
-          br
-          small.small Help
+block view-toolbar-left
+  .btn-group
+    button.btn.btn-default.btn-toolbar.disabled(type='button')
+      i.fa.fa-folder-open-o
+      br
+      small.small Change Workspace
+    button.btn.btn-default.btn-toolbar.disabled(type='button')
+      i.fa.fa-download
+      br
+      small.small Download Workspace
+    button.btn.btn-default.btn-toolbar.disabled(type='button')
+      i.fa.fa-plus
+      br
+      small.small New Project
+    button.btn.btn-default.btn-toolbar.disabled(type='button')
+      i.fa.fa-refresh
+      br
+      small.small Reload
 
-    .row
-      .panel.panel-default
-        .panel-heading Current Workspace
-        table.panel-body.table
-          thead
-            tr
-              th Project Name
-              th Language
-              th 
-          tbody
-            tr(data-ng-repeat = "project in ws.projects" data-ng-class='{active: selected === project}' data-ng-click='select_project(project)')
-              th(scope="row") {{project.name}}
-              td {{project.parameters.language}}
-              td 
-                span.btn-group-xs.pull-right
-                  button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
-                    i.fa.fa-play
-                    |  
-                    small.small Run
-                  button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
-                    i.fa.fa-folder-open-o
-                    |  
-                    small.small Open
-                  a.btn.btn-default.disabled(type='button' data-ng-show="selected === project" data-ng-href="{TBD}}?mode=raw" download)
-                    i.fa.fa-download
-                    |  
-                    small.small Download
-                  button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
-                    i.fa.fa-trash-o
-                    |  
-                    small.small Delete
+block view-content
+  .panel.panel-default
+    .panel-heading Current Workspace
+    table.panel-body.table
+      thead
+        tr
+          th Project Name
+          th Language
+          th 
+      tbody
+        tr(data-ng-repeat = "project in ws.projects" data-ng-class='{active: selected === project}' data-ng-click='select_project(project)')
+          th(scope="row") {{project.name}}
+          td {{project.parameters.language}}
+          td 
+            span.btn-group-xs.pull-right
+              button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
+                i.fa.fa-play
+                |  
+                small.small Run
+              button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
+                i.fa.fa-folder-open-o
+                |  
+                small.small Open
+              a.btn.btn-default.disabled(type='button' data-ng-show="selected === project" data-ng-href="{TBD}}?mode=raw" download)
+                i.fa.fa-download
+                |  
+                small.small Download
+              button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
+                i.fa.fa-trash-o
+                |  
+                small.small Delete
