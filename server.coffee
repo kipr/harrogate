@@ -5,7 +5,7 @@ cookie_parser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 session = require 'express-session'
 passport = require 'passport'
-BasicStrategy =  require('passport-http').BasicStrategy
+LocalStrategy =  require('passport-local').Strategy
 ON_DEATH = require 'death'
 
 app_catalog = require './shared/scripts/app-catalog.coffee'
@@ -15,8 +15,13 @@ SettingsManager = require './shared/scripts/settings-manager'
 harrogate_app = express()
 harrogate_app.use cookie_parser()
 harrogate_app.use bodyParser.json({limit: '5mb'})
-harrogate_app.use session(secret: 'B on harrogate')
+harrogate_app.use session(
+  secret: 'B on harrogate'
+  resave: false
+  saveUninitialized: true
+)
 harrogate_app.use passport.initialize()
+harrogate_app.use passport.session()
 
 # create the server
 server = http.createServer harrogate_app
@@ -25,18 +30,48 @@ server = http.createServer harrogate_app
 io = require('socket.io')(server)
 
 # setup passport
-passport.use new BasicStrategy (username, password, done) ->
-  if password is 'test'
-    done null, username
-  else
-    done null, false
+passport.serializeUser (user, done) ->
+  done null, user
+  return
 
-# All the /app stuff requires auth
-harrogate_app.use '/apps', passport.authenticate('basic', {session: false}), (request, response, next) ->
+passport.deserializeUser (user, done) ->
+  done null, user
+  return
+
+passport.use new LocalStrategy (username, password, done) ->
+  if not username?
+    return done null, false
+
+  if password is 'test'
+    return done null, username
+  else
+    return done null, false
+
+check_authenticated = (request, response, next) ->
+  if request.isAuthenticated()
+    return next()
+  else
+    response.writeHead 401, { 'Content-Type': 'application/json' }
+    response.end "#{JSON.stringify(error: 'Authentication required')}", 'utf8'
+    return
+
+# handling login
+harrogate_app.post '/login', passport.authenticate('local'),  (request, response, next) ->
+  response.writeHead 204
+  return response.end()
+
+# handling logout
+harrogate_app.post '/logout', (request, response, next) ->
+  request.logout()
+  response.writeHead 204
+  return response.end()
+
+# All the /api routes need auth!!
+harrogate_app.use '/api', check_authenticated, (request, response, next) ->
   next()
 
 # Serve /apps/catalog.json
-harrogate_app.use '/apps/catalog.json', (request, response, next) ->
+harrogate_app.get '/apps/catalog.json', (request, response, next) ->
   app_catalog.handle request, response
 
 # Init the apps

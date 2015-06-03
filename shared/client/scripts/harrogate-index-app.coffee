@@ -13,9 +13,27 @@ app.filter 'capitalize', ->
   return (input) ->
     return if input? then input.charAt(0).toUpperCase() + input.substr(1) else ''
 
+app.service 'authRequiredInterceptor', ['$q', '$location', ($q, $location) ->
+  service =
+    response: (response) ->
+      if response.status is 401
+        console.log "zzz"
+        console.log response.data
+      return response or $q.when response
+
+    responseError: (response) ->
+      console.log response.status
+      if response.status is 401
+        console.log response.data
+        $location.path '/apps/user'
+      return $q.reject response
+
+  return service
+]
+
 app.config([
-  '$routeProvider'
-  ($routeProvider) ->
+  '$routeProvider', '$httpProvider', 
+  ($routeProvider, $httpProvider, $location) ->
     
     # redirect by default to home (let's hope that an app called 'home' always exists...)
     $routeProvider.when('/', redirectTo: '/apps/home')
@@ -33,7 +51,9 @@ app.config([
         $routeProvider.when(app_obj.angularjs_route,
           templateUrl: app_obj.nodejs_route
         )
-    
+
+    # setup 401 interception
+    $httpProvider.interceptors.push 'authRequiredInterceptor'
     return
 ])
 

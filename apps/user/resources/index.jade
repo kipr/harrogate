@@ -1,5 +1,23 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
-  p Hello from users/index.jade
-  p Hello from {{test}}
+  .row
+    .col-xs-3
+    .col-xs-6
+      .alert.alert-warning
+        p
+          strong Login required!
+        p Please authenticate yourself with your username and password
+
+  .row
+    .col-xs-3
+    .col-xs-6
+      .panel.panel-default
+        form.panel-body
+          .form-group
+            label(for='username') Username
+            input.form-control#username(type='text' placeholder='Username' data-ng-model='username')
+          .form-group
+            label(for='password') Password
+            input.form-control#password(type='password' placeholder='Password' data-ng-model='password')
+          button.btn.btn-default(data-ng-click='login()') Login
