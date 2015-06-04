@@ -2,8 +2,8 @@
 
 exports.inject = (app) ->
   # inject fs angular modules
-  require('./fs-view-controller').inject app
+  require('./fs-view-controller.coffee').inject app
   return
 
 # view controller
-exports.controller = require('./fs-view-controller').controller
+exports.controller = require('./fs-view-controller.coffee').controller
