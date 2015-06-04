@@ -2,9 +2,6 @@
 path = require 'path'
 _ = require 'lodash'
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
-TargetApp = AppCatalog.catalog['Target information'].get_instance()
-
 class SettingsManager
   constructor: ->
     @settings_file_paht = path.join process.cwd(), 'settings.json'
@@ -27,14 +24,6 @@ class SettingsManager
     # Server settings
     settings.server =
       port: 8888
-
-    # Workspace settings
-    settings.workspace = {}
-
-    if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
-      settings.workspace.path = path.join process.env['USERPROFILE'], 'Documents', 'KISS'
-    else
-      settings.workspace.path = path.join process.env['HOME'], 'Documents', 'KISS'
 
     @set settings
     return

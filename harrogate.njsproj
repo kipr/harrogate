@@ -31,6 +31,8 @@
     <Content Include="apps\fs\file.coffee" />
     <Content Include="apps\fs\directory.coffee" />
     <Content Include="apps\fs\host-fs.coffee" />
+    <Content Include="apps\fs\resources\harrogate-fs-injector.coffee" />
+    <Content Include="apps\fs\api-router\fs.coffee" />
     <Content Include="apps\kiss\resources\kiss-view-controller.coffee" />
     <Content Include="apps\kiss\resources\index.jade" />
     <Content Include="apps\fs\exec.coffee" />
@@ -54,8 +56,10 @@
     <Content Include="apps\terminal\resources\terminal-view-controller.coffee" />
     <Content Include="apps\user\resources\index.jade" />
     <Content Include="apps\user\resources\users-view-controller.coffee" />
+    <Content Include="apps\user\rest-resources\user-resource.coffee" />
     <Content Include="settings.json" />
     <Content Include="shared\client\css\style.css" />
+    <Content Include="shared\client\scripts\user-manager-service.coffee" />
     <Content Include="shared\client\views\templates\app-view-layout.jade" />
     <Content Include="shared\client\views\index.jade" />
     <Content Include="shared\client\scripts\app-catalog-provider.coffee" />
@@ -90,6 +94,9 @@
     <Content Include="shared\scripts\program.coffee" />
     <Content Include="shared\scripts\server-error.coffee" />
     <Content Include="shared\scripts\settings-manager.coffee" />
+    <Content Include="shared\scripts\user-manager.coffee" />
+    <Content Include="shared\scripts\user.coffee" />
+    <Content Include="users.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps" />
@@ -97,6 +104,7 @@
     <Folder Include="apps\camera\resources\" />
     <Folder Include="apps\cloud" />
     <Folder Include="apps\cloud\resources\" />
+    <Folder Include="apps\fs\api-router\" />
     <Folder Include="apps\home" />
     <Folder Include="apps\home\resources\" />
     <Folder Include="apps\home\resources\includes\" />
@@ -110,6 +118,7 @@
     <Folder Include="apps\target\" />
     <Folder Include="apps\terminal\" />
     <Folder Include="apps\terminal\resources\" />
+    <Folder Include="apps\user\rest-resources\" />
     <Folder Include="apps\user\resources\" />
     <Folder Include="shared\client\views\" />
     <Folder Include="shared\client\views\templates\" />

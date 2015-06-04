@@ -1,10 +1,16 @@
 exports.name = 'fs_view_controller'
 
 exports.inject = (app) ->
-  app.controller exports.name, ['$scope', '$http', 'app_catalog_provider', exports.controller]
+  app.controller exports.name, [
+    '$scope'
+    '$http'
+    'app_catalog_provider'
+    'user_manager_service'
+    exports.controller
+  ]
   exports.controller
 
-exports.controller = ($scope, $http, app_catalog_provider) ->
+exports.controller = ($scope, $http, app_catalog_provider, user_manager_service) ->
   open_dir = (uri) ->
     $scope.current = undefined
     $scope.selected = undefined
@@ -24,7 +30,10 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
     if fs_api?
       open_dir(fs_api.uri)
       root_dir_uri = fs_api.uri
-      $scope.home_uri = fs_api.home_uri
+    return
+
+  user_manager_service.get_current_user().then (current_user) ->
+    $scope.home_uri = current_user?.preferences?.workspace?.links?.self?.href
     return
 
   $scope.open_directory = (directory) ->

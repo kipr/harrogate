@@ -9,7 +9,9 @@ LocalStrategy =  require('passport-local').Strategy
 ON_DEATH = require 'death'
 
 app_catalog = require './shared/scripts/app-catalog.coffee'
-SettingsManager = require './shared/scripts/settings-manager'
+SettingsManager = require './shared/scripts/settings-manager.coffee'
+User = require './shared/scripts/user.coffee'
+UserManager = require './shared/scripts/user-manager.coffee'
 
 # create the app
 harrogate_app = express()
@@ -43,12 +45,23 @@ passport.use new LocalStrategy (username, password, done) ->
     return done null, false
 
   if password is 'test'
+     # create a new user if it is not existing
+    if not UserManager.users[username]?
+      UserManager.add_user new User(username)
+
     return done null, username
   else
     return done null, false
 
 check_authenticated = (request, response, next) ->
   if request.isAuthenticated()
+
+    # add the logged_in_user to the request
+    if UserManager.users[request.user]?
+      request.logged_in_user = UserManager.users[request.user]
+    else # should never happen
+      console.log "Unexpected user: #{request.user}"
+
     return next()
   else
     response.writeHead 401, { 'Content-Type': 'application/json' }

@@ -7,7 +7,6 @@ Url = require 'url'
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 Project = require './project.coffee'
 ServerError = require '../../shared/scripts/server-error.coffee'
-SettingsManager = require '../../shared/scripts/settings-manager'
 Workspace = require './workspace.coffee'
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
@@ -34,7 +33,7 @@ router.use '/', (request, response, next) ->
   ws_resource = null
 
   # Create the ws resource
-  HostFileSystem.open SettingsManager.settings.workspace.path
+  HostFileSystem.open request.logged_in_user.preferences.workspace.path
   .then (ws_directory) ->
     # return 400 if it is a file
     if ws_directory not instanceof Directory

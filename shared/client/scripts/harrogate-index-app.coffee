@@ -4,6 +4,7 @@ require 'angular-route'
 app = angular.module 'harrogateIndexApp', ['ngRoute']
 
 require('./app-catalog-provider.coffee').inject app
+require('./user-manager-service.coffee').inject app
 
 # from http://stackoverflow.com/questions/14512583/how-to-generate-url-encoded-anchor-links-with-angularjs
 app.filter 'escape', ->

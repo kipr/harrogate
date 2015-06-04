@@ -4,5 +4,11 @@
   "exec": "exec.coffee",
   "description": "Set owner information, enable accessibility tools, and more.",
   "category": "System",
-  "angular_ctrl": "resources/users-view-controller.coffee"
+  "angular_ctrl": "resources/users-view-controller.coffee",
+  "web_api": {
+    "users": {
+      "uri": "/api/users",
+      "description": "Provides access to the settings"
+    }
+  }
 }

@@ -5,7 +5,7 @@
   "fonticon": "fa-hdd-o",
   "description": "Host filesystem manager",
   "category": "System",
-  "angular_ctrl": "resources/fs-view-controller.coffee",
+  "angular_ctrl": "resources/harrogate-fs-injector.coffee",
   "web_api": {
     "fs": {
       "uri": "/api/fs",
