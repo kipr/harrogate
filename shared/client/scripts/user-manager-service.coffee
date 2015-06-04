@@ -26,7 +26,6 @@ exports.service = ($http, $q, $location, authRequiredInterceptor) ->
         return
 
     login: (username, password) ->
-      console.log { username: username, password: password }
       $http.post('/login', { username: username, password: password })
       .success (data, status, headers, config) ->
         if authRequiredInterceptor.last_intercepted_path?
