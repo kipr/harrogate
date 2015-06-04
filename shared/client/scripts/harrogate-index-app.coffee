@@ -14,21 +14,17 @@ app.filter 'capitalize', ->
     return if input? then input.charAt(0).toUpperCase() + input.substr(1) else ''
 
 app.service 'authRequiredInterceptor', ['$q', '$location', ($q, $location) ->
-  service =
-    response: (response) ->
-      if response.status is 401
-        console.log "zzz"
-        console.log response.data
-      return response or $q.when response
+  class AuthRequiredInterceptor
+    constructor: ->
+      @last_intercepted_path = null
 
-    responseError: (response) ->
-      console.log response.status
+    responseError: (response) =>
       if response.status is 401
-        console.log response.data
+        @last_intercepted_path = $location.path()
         $location.path '/apps/user'
       return $q.reject response
 
-  return service
+  return new AuthRequiredInterceptor
 ]
 
 app.config([

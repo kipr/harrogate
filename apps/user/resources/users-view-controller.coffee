@@ -5,15 +5,20 @@ exports.inject = (app) ->
     [
       '$scope'
       '$http'
+      '$location'
+      'authRequiredInterceptor'
       exports.controller
     ]
   exports.controller
 
-exports.controller = ($scope, $http) ->
+exports.controller = ($scope, $http, $location, authRequiredInterceptor) ->
 
   $scope.login = ->
     $http.post('/login', { username: $scope.username, password: $scope.password })
     .success (data, status, headers, config) ->
-      alert 'saved'
+      if authRequiredInterceptor.last_intercepted_path?
+        $location.path authRequiredInterceptor.last_intercepted_path
+      else
+        $location.path '/'
       return
   return
