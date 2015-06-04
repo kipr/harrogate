@@ -20,14 +20,6 @@ AppManifest = require './manifest.json'
 router = Express.Router()
 
 class ProgramsApp
-
-  create_workspace: (path) ->
-    if path?
-      # update workspace path
-      SettingsManager.update { workspace: path: path }
-    else
-      path = SettingsManager.settings.workspace.path
-
   init: (app) ->
     # add the router
     app.web_api.projects['router'] = router
