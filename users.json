@@ -14,5 +14,53 @@
         "path": "C:\\Users\\stefa_000\\Documents\\KISS"
       }
     }
+  },
+  "test": {
+    "login": "test",
+    "preferences": {
+      "workspace": {
+        "path": "C:\\Users\\stefa_000\\Documents\\KISS"
+      }
+    }
+  },
+  "Caitlyn": {
+    "login": "Caitlyn",
+    "preferences": {
+      "workspace": {
+        "path": "C:\\Users\\stefa_000\\Documents\\KISS"
+      }
+    }
+  },
+  "Anna": {
+    "login": "Anna",
+    "preferences": {
+      "workspace": {
+        "path": "C:\\Users\\stefa_000\\Documents\\KISS"
+      }
+    }
+  },
+  "eVe": {
+    "login": "eVe",
+    "preferences": {
+      "workspace": {
+        "path": "C:\\Users\\stefa_000\\Documents\\KISS"
+      }
+    }
+  },
+  "westermann": {
+    "login": "westermann",
+    "preferences": {
+      "workspace": {
+        "path": "C:\\Users\\stefa_000\\Documents\\KISS"
+      }
+    }
+  },
+  "westerfrau": {
+    "login": "westerfrau",
+    "preferences": {
+      "workspace": {
+        "path": "C:\\Users\\stefa_000\\Documents\\KISS"
+      }
+    }
   }
 }

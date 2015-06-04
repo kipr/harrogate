@@ -26,12 +26,28 @@ exports.service = ($http, $q, $location, authRequiredInterceptor) ->
         return
 
     login: (username, password) ->
-      $http.post('/login', { username: username, password: password })
-      .success (data, status, headers, config) ->
-        if authRequiredInterceptor.last_intercepted_path?
-          $location.path authRequiredInterceptor.last_intercepted_path
-        else
-          $location.path '/'
+      return $q (resolve, reject) ->
+        $http.post('/login', { username: username, password: password })
+        .success (data, status, headers, config) ->
+          if authRequiredInterceptor.last_intercepted_path?
+            $location.path authRequiredInterceptor.last_intercepted_path
+            resolve()
+          else
+            $location.path '/'
+            resolve()
+        .error (data, status, headers, config) ->
+          reject()
+          return
+        return
+
+    logout: ->
+      return $q (resolve, reject) ->
+        $http.post('/logout')
+        .success (data, status, headers, config) ->
+            resolve()
+        .error (data, status, headers, config) ->
+          reject()
+          return
         return
 
   return new UserManagerService
