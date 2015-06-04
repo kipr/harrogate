@@ -4,11 +4,13 @@ exports.inject = (app) ->
   app.service exports.name, [
     '$http'
     '$q'
+    '$location'
+    'authRequiredInterceptor'
     exports.service
   ]
   exports.service
 
-exports.service = ($http, $q) ->
+exports.service = ($http, $q, $location, authRequiredInterceptor) ->
   user_api_uri = '/api/users'
 
   class UserManagerService
@@ -21,6 +23,16 @@ exports.service = ($http, $q) ->
         .error (data, status, headers, config) ->
           reject()
           return
+        return
+
+    login: (username, password) ->
+      console.log { username: username, password: password }
+      $http.post('/login', { username: username, password: password })
+      .success (data, status, headers, config) ->
+        if authRequiredInterceptor.last_intercepted_path?
+          $location.path authRequiredInterceptor.last_intercepted_path
+        else
+          $location.path '/'
         return
 
   return new UserManagerService
