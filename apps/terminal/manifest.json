@@ -9,7 +9,6 @@
   "event_groups": {
     "terminal_events": {
       "namespace": "/terminal",
-      "on_connection": "terminal_on_connection",
       "events": {
         "stdin": {
           "id": "stdin",

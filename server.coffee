@@ -98,10 +98,9 @@ for app_name, app of app_catalog.catalog
   if app.event_groups?
     for event_group_name of app.event_groups
       event_group = app.event_groups[event_group_name]
-      if event_group.namespace? and app.get_instance()[event_group.on_connection]?
+      if event_group.namespace? and app.get_instance().event_init?
         console.log "Add Event Namespace: #{event_group.namespace} --> #{app_name}"
-        ns = io.of event_group.namespace
-        ns.on 'connection', app.get_instance()[event_group.on_connection]
+        app.get_instance().event_init event_group_name, io.of(event_group.namespace)
       else
         console.warn "Warning: App #{app_name} has malformed event definitions"
 

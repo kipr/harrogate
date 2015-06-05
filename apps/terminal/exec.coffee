@@ -25,18 +25,23 @@ create_terminal_emulator = (socket) ->
     return process
   return undefined
 
-module.exports =
-  terminal_on_connection: (socket) ->
+
+terminal_on_connection = (socket) ->
+  process = create_terminal_emulator socket
+
+  socket.on events.stdin.id, (data) ->
+    process.stdin.write data + '\n'
+    return
+
+  socket.on events.restart.id, (data) ->
     process = create_terminal_emulator socket
+    return
 
-    socket.on events.stdin.id, (data) ->
-      process.stdin.write data + '\n'
-      return
+  return
 
-    socket.on events.restart.id, (data) ->
-      process = create_terminal_emulator socket
-      return
-
+module.exports =
+  event_init: (event_group_name, namespace) =>
+    namespace.on 'connection', terminal_on_connection
     return
 
   exec: ->

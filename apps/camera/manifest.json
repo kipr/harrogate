@@ -8,7 +8,6 @@
   "event_groups": {
     "camera_events": {
       "namespace": "/camera",
-      "on_connection": "camera_on_connection",
       "events": {
         "frame_arrived": {
           "id": "frame arrived",
