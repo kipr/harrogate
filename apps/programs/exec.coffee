@@ -118,7 +118,7 @@ router.get '/:project', (request, response, next) ->
 
     # did we found a project?
     if not project_resource?
-        throw new ServerError 404, 'Project ' + project_resource.name + ' does not exists'
+        throw new ServerError 404, 'Project ' + request.params.project + ' does not exists'
     else
       project_resource.get_representation()
       .then (representation) ->
