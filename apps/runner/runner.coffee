@@ -27,16 +27,14 @@ start_program = ->
     process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}"
 
     process.stdout.on 'data', (data) ->
-      console.log data.toString('utf8')
       namespace.emit events.stdout.id, data.toString('utf8')
       return
     process.stderr.on 'data', (data) ->
-      console.log data.toString('utf8')
       namespace.emit events.stderr.id, data.toString('utf8')
       return
     process.on 'exit', (code) ->
-      console.log "Program exited with code #{code}"
       namespace.emit events.stdout.id, "Program exited with code #{code}"
+      running = null
       return
 
   return
