@@ -83,18 +83,20 @@ class Workspace
       return representation
 
   init: =>
-    
 
   create_project: (name, language) =>
-    # create a subdirectory for the project
-    return @ws_directory.create_subdirectory name
-    .then (project_directory) =>
-
-      # create the project file
-      content = JSON.stringify language: language
-      return project_directory.create_file '.project.json', content, 'ascii'
-      .then (project_file) =>
-        return new Project project_directory
-
+    # create the project file
+    content = JSON.stringify language: language
+    return @ws_directory.create_file name + '.project.json', content, 'ascii'
+    .then (project_file) =>
+      return new Project(
+        name
+        project_file
+        Directory.create_from_path Path.join @include_directory.path, name
+        Directory.create_from_path Path.join @src_directory.path, name
+        Directory.create_from_path Path.join @data_directory.path, name
+        Directory.create_from_path Path.join @bin_directory.path, name
+        Directory.create_from_path Path.join @lib_directory.path, name
+      )
 
 module.exports = Workspace

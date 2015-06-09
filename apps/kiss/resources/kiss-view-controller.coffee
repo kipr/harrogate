@@ -99,7 +99,6 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
       # load project files
       $http.get(project.links.self.href)
       .success (data, status, headers, config) ->
-        console.log data
         $scope.project_resource = data
         return
       .error (data, status, headers, config) ->
@@ -146,6 +145,123 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
 
   $scope.redo = ->
     editor.redo()
+    return
+
+  $scope.show_add_include_file_modal = ->
+    $('#new-include-file').modal('show')
+    return
+
+  $scope.add_include_file = () ->
+    $('#new-include-file').modal('hide')
+    if $scope.ws? and $scope.project_resource?
+      $http.post($scope.ws.links.include_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+      .finally ->
+        $http.post($scope.project_resource.links.include_directory.href,  {name: $("#includeFileName").val(), type: 'file'})
+        .success (data, status, headers, config) ->
+          app_catalog_provider.catalog.then (app_catalog) ->
+            projects_resource = app_catalog['Programs']?.web_api?.projects
+            if projects_resource?
+              $http.get(projects_resource.uri)
+              .success (data, status, headers, config) ->
+                $scope.ws = data
+                return
+              .error (data, status, headers, config) ->
+                console.log "Could not get #{uri}"
+                return
+            return
+          return
+        .error (data, status, headers, config) ->
+          console.log "Could not get #{$scope.project_resource.links.include_directory.href}"
+          return
+        return
+    return
+
+  $scope.show_add_source_file_modal = ->
+    $('#new-source-file').modal('show')
+    return
+
+  $scope.add_source_file = () ->
+    $('#new-source-file').modal('hide')
+    if $scope.ws? and $scope.project_resource?
+      $http.post($scope.ws.links.src_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+      .finally ->
+        $http.post($scope.project_resource.links.src_directory.href,  {name: $("#sourceFileName").val(), type: 'file'})
+        .success (data, status, headers, config) ->
+          app_catalog_provider.catalog.then (app_catalog) ->
+            projects_resource = app_catalog['Programs']?.web_api?.projects
+            if projects_resource?
+              $http.get(projects_resource.uri)
+              .success (data, status, headers, config) ->
+                $scope.ws = data
+                return
+              .error (data, status, headers, config) ->
+                console.log "Could not get #{uri}"
+                return
+            return
+          return
+        .error (data, status, headers, config) ->
+          console.log "Could not get #{$scope.project_resource.links.src_directory.href}"
+          return
+        return
+    return
+
+  $scope.show_add_data_file_modal = ->
+    $('#new-data-file').modal('show')
+    return
+
+  $scope.add_data_file = () ->
+    $('#new-data-file').modal('hide')
+    if $scope.ws? and $scope.project_resource?
+      $http.post($scope.ws.links.data_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+      .finally ->
+        $http.post($scope.project_resource.links.data_directory.href,  {name: $("#dataFileName").val(), type: 'file'})
+        .success (data, status, headers, config) ->
+          app_catalog_provider.catalog.then (app_catalog) ->
+            projects_resource = app_catalog['Programs']?.web_api?.projects
+            if projects_resource?
+              $http.get(projects_resource.uri)
+              .success (data, status, headers, config) ->
+                $scope.ws = data
+                return
+              .error (data, status, headers, config) ->
+                console.log "Could not get #{uri}"
+                return
+            return
+          return
+        .error (data, status, headers, config) ->
+          console.log "Could not get #{$scope.project_resource.links.data_directory.href}"
+          return
+        return
+    return
+
+  $scope.show_add_project_modal = ->
+    $('#new-project').modal('show')
+    return
+
+  $scope.add_project = () ->
+    $('#new-project').modal('hide')
+    app_catalog_provider.catalog.then (app_catalog) ->
+      projects_resource = app_catalog['Programs']?.web_api?.projects
+      if projects_resource?
+        $http.post(projects_resource.uri,  {name: $("#projectName").val(), language: 'C' })
+        .success (data, status, headers, config) ->
+          app_catalog_provider.catalog.then (app_catalog) ->
+            projects_resource = app_catalog['Programs']?.web_api?.projects
+            if projects_resource?
+              $http.get(projects_resource.uri)
+              .success (data, status, headers, config) ->
+                $scope.ws = data
+                return
+              .error (data, status, headers, config) ->
+                console.log "Could not get #{uri}"
+                return
+            return
+          return
+        .error (data, status, headers, config) ->
+          console.log "Could not get #{projects_resource.uri}"
+          return
+      return
+
     return
 
   return

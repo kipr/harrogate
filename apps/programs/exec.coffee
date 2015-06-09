@@ -82,7 +82,7 @@ router.get '/', (request, response, next) ->
 
 router.post '/', (request, response, next) ->
   # We only support application/json
-  if request.headers['content-type'] isnt 'application/json'
+  if not /application\/json/i.test request.headers['content-type']
     response.writeHead 415, { 'Content-Type': 'application/json' }
     return response.end "#{JSON.stringify(error: 'Only content-type application/json supported')}", 'utf8'
 
