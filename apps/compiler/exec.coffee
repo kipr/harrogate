@@ -74,7 +74,7 @@ router.post '/', (request, response, next) ->
         console.log gcc_cmd
         exec gcc_cmd, (error, stdout, stderr) ->
           result = {error: error, stdout: stdout, stderr: stderr}
-          response.writeHead 20, { 'Content-Type': 'application/json' }
+          response.writeHead 200, { 'Content-Type': 'application/json' }
           return response.end "#{JSON.stringify(result: result)}", 'utf8'
         return
   .catch (e) ->
