@@ -13,7 +13,7 @@ events = AppCatalog.catalog['Runner'].event_groups.runner_events.events
 
 # information about the program which is currently running
 class RunningProgram
-  constructor: (@name) ->
+  constructor: (@resource) ->
 
 # the currently runned program
 running = null
@@ -22,15 +22,23 @@ running = null
 namespace = null
 
 start_program = ->
-  tick = ->
-    try
-      if namespace?
-        console.log 'hello world'
-        namespace.emit events.stdout.id, 'hello World'
-      setTimeout(tick, 2000)
-    return
+  if running?.resource?
+    console.log "#{running.resource.bin_directory.path}/#{running.resource.name}"
+    process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}"
 
-  tick()
+    process.stdout.on 'data', (data) ->
+      console.log data.toString('utf8')
+      namespace.emit events.stdout.id, data.toString('utf8')
+      return
+    process.stderr.on 'data', (data) ->
+      console.log data.toString('utf8')
+      namespace.emit events.stderr.id, data.toString('utf8')
+      return
+    process.on 'exit', (code) ->
+      console.log "Program exited with code #{code}"
+      namespace.emit events.stdout.id, "Program exited with code #{code}"
+      return
+
   return
 
 # the runner router
@@ -79,7 +87,7 @@ router.post '/', (request, response, next) ->
       if running?
         throw new ServerError 409, request.body.name + ' is already running'
 
-      running = new RunningProgram project_resource.name
+      running = new RunningProgram project_resource
       start_program()
 
       response.writeHead 201, { 'Content-Type': 'application/json' }
