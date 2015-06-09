@@ -2,11 +2,11 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group
-    button.btn.btn-toolbar(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-click='save()')
+    button.btn.btn-toolbar(type='button', data-ng-class="{'disabled' : !documentChanged || !displayed_file, 'btn-danger' : documentChanged}", data-ng-click='save()')
       i.fa.fa-floppy-o
         br
         small.small Save
-    button.btn.btn-toolbar.btn-default(type='button', data-ng-click='refresh()')
+    button.btn.btn-toolbar.btn-default(type='button', data-ng-class="{'disabled' : !displayed_file}", data-ng-click='refresh()')
       i.fa.fa-refresh
         br
         small.small Reload
@@ -20,20 +20,24 @@ block view-toolbar-left
         small.small Download
 
   .btn-group
-    button.btn.btn-toolbar.btn-default(type='button', data-ng-click='undo()')
+    button.btn.btn-toolbar.btn-default(type='button', data-ng-class="{'disabled' : !displayed_file}", data-ng-click='undo()')
       i.fa.fa-undo
         br
         small.small Undo
-    button.btn.btn-toolbar.btn-default(type='button', data-ng-click='redo()')
+    button.btn.btn-toolbar.btn-default(type='button', data-ng-class="{'disabled' : !displayed_file}", data-ng-click='redo()')
       i.fa.fa-repeat
         br
         small.small Redo
 
   .btn-group
-    button.btn.btn-toolbar(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-click='compile()')
+    button.btn.btn-toolbar.btn-default(type='button',  data-ng-class="{'disabled' : !selected_project || !project_resource.source_files}", data-ng-click='compile()')
       i.fa.fa-link
         br
         small.small Compile
+    button.btn.btn-toolbar.btn-default.disabled(type='button')
+      i.fa.fa-rocket
+        br
+        small.small Run
 
 
 block view-content

@@ -15,6 +15,7 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     .success (data, status, headers, config) ->
       $scope.displayed_file = data
       editor.setValue(new Buffer($scope.displayed_file.content, 'base64').toString('ascii'));
+      $scope.documentChanged = false
 
       setTimeout -> 
         editor.refresh()
@@ -26,14 +27,20 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
   close_file = ->
     $scope.displayed_file = null
     editor.setValue ''
+    $scope.documentChanged = false
     return
 
-  document.getElementById('editor')
   editor = code_mirror.fromTextArea(document.getElementById('editor'),
     mode: 'text/x-csrc'
     lineNumbers: true
-    theme : 'eclipse'
+    theme: 'eclipse'
   )
+
+  editor.on 'change', (e, obj) ->
+    $scope.$apply ->
+      $scope.documentChanged = true
+      return
+    return
 
   # do we have to open a file?
   if $location.search().path?
@@ -121,14 +128,19 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
 
     return
 
-  $scope.save = ->
+  save_file = ->
     if $scope.displayed_file?
       content = editor.getValue()
       content = new Buffer(content).toString('base64')
 
-      $http.put($scope.displayed_file.links.self.href, { content: content, encoding: 'ascii' })
+      return $http.put($scope.displayed_file.links.self.href, { content: content, encoding: 'ascii' })
+
+  $scope.save = ->
+    if $scope.displayed_file?
+      save_file()
       .success (data, status, headers, config) ->
         alert 'saved'
+        $scope.documentChanged = false
         return
       .error (data, status, headers, config) ->
         console.log "Could not get #{file_uri}"
@@ -266,13 +278,30 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
 
   $scope.compile = ->
     if $scope.selected_project?
-      $http.post('/api/compile', {name: $scope.selected_project.name})
-      .success (data, status, headers, config) ->
-        $scope.compiler_output = data.result.stderr
-        return
-      .error (data, status, headers, config) ->
-        console.log "Could not post to /api/compile"
-        return
-    return
+      if $scope.displayed_file? 
+        save_file()
+        .success (data, status, headers, config) ->
+          alert 'saved'
+          $scope.documentChanged = false
+          $http.post('/api/compile', {name: $scope.selected_project.name})
+          .success (data, status, headers, config) ->
+            $scope.compiler_output = data.result.stderr
+            return
+          .error (data, status, headers, config) ->
+            console.log "Could not post to /api/compile"
+            return
+          return
+        .error (data, status, headers, config) ->
+          console.log "Could not get #{file_uri}"
+          return
+      else
+        $http.post('/api/compile', {name: $scope.selected_project.name})
+        .success (data, status, headers, config) ->
+          $scope.compiler_output = data.result.stderr
+          return
+        .error (data, status, headers, config) ->
+          console.log "Could not post to /api/compile"
+          return
+      return
 
   return
