@@ -8,6 +8,8 @@ events = AppCatalog.catalog['Terminal'].event_groups.terminal_events.events
 terminal_emulator = undefined
 if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
   terminal_emulator = 'cmd'
+else
+  terminal_emulator = 'sh'
 
 create_terminal_emulator = (socket) ->
   if terminal_emulator?
