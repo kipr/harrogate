@@ -67,4 +67,14 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
   $scope.restart = ->
     return
 
+  $scope.launch = ->
+    if $scope.selected_project?
+      $http.post('/api/run', {name: $scope.selected_project.name})
+      .success (data, status, headers, config) ->
+        return
+      .error (data, status, headers, config) ->
+        console.log "Could not post to /api/run"
+        return
+    return
+
   return
