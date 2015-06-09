@@ -1,7 +1,7 @@
-code_mirror = require 'codemirror/lib/codemirror'
+﻿code_mirror = require 'codemirror/lib/codemirror'
 io = require 'socket.io-client'
 
-exports.name = 'runner_view_controller'
+exports.name = 'compiler_view_controller'
 
 exports.inject = (app) ->
   app.controller exports.name, [
@@ -17,7 +17,7 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
   events = undefined
   editor = undefined
 
-  editor = code_mirror.fromTextArea(document.getElementById('runner'),
+  editor = code_mirror.fromTextArea(document.getElementById('output'),
     lineNumbers: false
     theme: 'eclipse'
   )
@@ -46,25 +46,6 @@ exports.controller = ($scope, $http, app_catalog_provider) ->
     if editor?
       editor.replaceRange text, code_mirror.Pos(editor.lastLine())
       editor.setCursor editor.lineCount(), 0
-    return
-
-  app_catalog_provider.catalog.then (app_catalog) ->
-    events =  app_catalog['Runner']?.event_groups?.runner_events.events
-    events_namespace =  app_catalog['Runner']?.event_groups?.runner_events.namespace
-    if events?
-      socket = io ':8888' + events_namespace
-
-      socket.on events.stdout.id, (msg) ->
-        append_text msg
-        return
-
-      socket.on events.stderr.id, (msg) ->
-        append_text msg
-        return
-
-    return
-
-  $scope.restart = ->
     return
 
   return

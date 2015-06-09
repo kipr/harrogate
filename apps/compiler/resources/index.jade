@@ -1,0 +1,27 @@
+﻿extends ../../../shared/client/views/templates/app-view-layout.jade
+
+block view-toolbar-left
+  .btn-group
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='compile()')
+        i.fa.fa-link
+        br
+        small.small Compile
+
+block view-content
+  .row
+    .col-xs-3
+      .panel.panel-default
+        .panel-heading
+          .panel-title Projects:
+        table.panel-body.table.tree-table
+          tbody
+            tr(data-ng-repeat = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
+              th
+              th {{project.name}}
+
+    .col-xs-9
+      .panel.panel-default
+        .panel-heading
+          .panel-title Compilation Output
+
+        textarea#output.panel-body

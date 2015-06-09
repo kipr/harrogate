@@ -1,4 +1,4 @@
-Express = require 'express'
+﻿Express = require 'express'
 spawn = require('child_process').spawn
 
 ServerError = require '../../shared/scripts/server-error.coffee'
@@ -9,37 +9,8 @@ HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 Workspace = require AppCatalog.catalog['Programs'].path +  '/workspace.coffee'
 
-events = AppCatalog.catalog['Runner'].event_groups.runner_events.events
-
-# information about the program which is currently running
-class RunningProgram
-  constructor: (@name) ->
-
-# the currently runned program
-running = null
-
-# the socket.io namespace
-namespace = null
-
-start_program = ->
-  tick = ->
-    try
-      if namespace?
-        console.log 'hello world'
-        namespace.emit events.stdout.id, 'hello World'
-      setTimeout(tick, 2000)
-    return
-
-  tick()
-  return
-
-# the runner router
+# the compiler router
 router = Express.Router()
-
-# get information about the currently running program
-router.get '/current', (request, response, next) ->
-  response.writeHead 200, { 'Content-Type': 'application/json' }
-  return response.end "#{JSON.stringify(running: running)}", 'utf8'
 
 # get information about the currently running program
 router.post '/', (request, response, next) ->
@@ -79,11 +50,8 @@ router.post '/', (request, response, next) ->
       if running?
         throw new ServerError 409, request.body.name + ' is already running'
 
-      running = new RunningProgram project_resource.name
-      start_program()
-
       response.writeHead 201, { 'Content-Type': 'application/json' }
-      return response.end "#{JSON.stringify(running: running)}", 'utf8'
+      return response.end "#{JSON.stringify(result: project_resource.name)}", 'utf8'
   .catch (e) ->
     if e instanceof ServerError
       response.writeHead e.code, { 'Content-Type': 'application/javascript' }
@@ -93,16 +61,7 @@ router.post '/', (request, response, next) ->
   .done()
   return
 
-# get information about the currently running program
-router.delete '/current', (request, response, next) ->
-  response.writeHead 200, { 'Content-Type': 'application/json' }
-  return response.end "#{JSON.stringify(running: running)}", 'utf8'
-
 module.exports =
-  event_init: (event_group_name, ns) ->
-    namespace = ns
-    return
-
   init: (app) =>
     # add the router
     app.web_api.run['router'] = router

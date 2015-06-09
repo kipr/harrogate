@@ -28,6 +28,10 @@
     <Content Include=".jshintrc" />
     <Content Include="apps\cloud\resources\index.jade" />
     <Content Include="apps\cloud\resources\cloud-view-controller.coffee" />
+    <Content Include="apps\compiler\exec.coffee" />
+    <Content Include="apps\compiler\manifest.json" />
+    <Content Include="apps\compiler\resources\compiler-view-controller.coffee" />
+    <Content Include="apps\compiler\resources\index.jade" />
     <Content Include="apps\fs\file.coffee" />
     <Content Include="apps\fs\directory.coffee" />
     <Content Include="apps\fs\host-fs.coffee" />
@@ -104,6 +108,7 @@
     <Folder Include="apps\camera\resources\" />
     <Folder Include="apps\cloud" />
     <Folder Include="apps\cloud\resources\" />
+    <Folder Include="apps\compiler\resources\" />
     <Folder Include="apps\fs\api-router\" />
     <Folder Include="apps\home" />
     <Folder Include="apps\home\resources\" />
@@ -112,6 +117,7 @@
     <Folder Include="apps\fs\" />
     <Folder Include="apps\fs\resources\" />
     <Folder Include="apps\motors\resources\" />
+    <Folder Include="apps\compiler\" />
     <Folder Include="apps\programs\resources\" />
     <Folder Include="apps\runner\resources\" />
     <Folder Include="apps\settings\resources\" />

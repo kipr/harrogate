@@ -1,6 +1,35 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
+block view-toolbar-left
+  .btn-group
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='launch()')
+        i.fa.fa-play
+        br
+        small.small Launch
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='stop()')
+        i.fa.fa-stop
+        br
+        small.small Restart
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='restart()')
+        i.fa.fa-refresh
+        br
+        small.small Restart
+
 block view-content
-  div(class='container')
-    div(class=['embed-responsive', 'embed-responsive-16by9'])
-      img#graphics(class='embed-responsive-item')
+  .row
+    .col-xs-3
+      .panel.panel-default
+        .panel-heading
+          .panel-title Projects:
+        table.panel-body.table.tree-table
+          tbody
+            tr(data-ng-repeat = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
+              th
+              th {{project.name}}
+
+    .col-xs-9
+      .panel.panel-default
+        .panel-heading
+          .panel-title Program Output
+
+        textarea#runner.panel-body

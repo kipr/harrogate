@@ -40,7 +40,7 @@ terminal_on_connection = (socket) ->
   return
 
 module.exports =
-  event_init: (event_group_name, namespace) =>
+  event_init: (event_group_name, namespace) ->
     namespace.on 'connection', terminal_on_connection
     return
 

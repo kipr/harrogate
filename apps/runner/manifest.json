@@ -1,6 +1,7 @@
 {
-  "name": "runner",
+  "name": "Runner",
   "hidden": false,
+  "fonticon": "fa-rocket",
   "exec": "runner.coffee",
   "description": "Runs a user program",
   "category": "System",
@@ -9,6 +10,23 @@
     "run": {
       "uri": "/api/run",
       "description": "Start, stop and get information about running robot programs"
+    }
+  },
+  "event_groups": {
+    "runner_events": {
+      "namespace": "/runner",
+      "events": {
+        "stdout": {
+          "id": "stdout",
+          "publisher": "SERVER",
+          "description": "stdout sent from the program."
+        },
+        "stderr": {
+          "id": "stderr",
+          "publisher": "SERVER",
+          "description": "stderr sent from the program."
+        }
+      }
     }
   }
 }

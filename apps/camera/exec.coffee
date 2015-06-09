@@ -31,12 +31,11 @@ camera_on_connection = (socket) ->
       boyd.close(cam.handle) if cam?
       cam = undefined
     return
+  return
 
 module.exports =
-  event_init: (event_group_name, namespace) =>
+  event_init: (event_group_name, namespace) ->
     namespace.on 'connection', camera_on_connection
-    return
-
     return
 
   exec: ->
