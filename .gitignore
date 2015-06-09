@@ -1,6 +1,13 @@
+# users file
+users.json
+
 .DS_Store
 node_modules
 public
+*.log
+
+# VIM
+*.swp
 
 # Visual Studio
 bin

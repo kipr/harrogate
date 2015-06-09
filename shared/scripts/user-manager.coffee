@@ -9,7 +9,10 @@ class UserManager
   constructor: ->
     @users_file_paht = path.join process.cwd(), 'users.json'
 
-    @users = require @users_file_paht
+    try
+      @users = require @users_file_paht
+    catch
+      @users = {}
 
   update_user: (user) =>
     assert(user instanceof User)
