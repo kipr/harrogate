@@ -68,10 +68,9 @@ router.post '/', (request, response, next) ->
       
         gcc_cmd = "gcc -I#{project_resource.include_directory.path} -Wall -o #{project_resource.bin_directory.path}/#{project_resource.name} "
         for src in src_files
-          if Path.basename src.path isnt '.DS_Store'
+          if Path.basename(src.path).charAt(0) isnt '.'
             gcc_cmd += src.path + ' '
       
-        console.log gcc_cmd
         exec gcc_cmd, (error, stdout, stderr) ->
           result = {error: error, stdout: stdout, stderr: stderr}
           response.writeHead 200, { 'Content-Type': 'application/json' }
