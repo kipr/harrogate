@@ -29,6 +29,12 @@ block view-toolbar-left
         br
         small.small Redo
 
+  .btn-group
+    button.btn.btn-toolbar(type='button', data-ng-class="{'btn-default' : !documentChanged, 'btn-danger' : documentChanged}", data-ng-click='compile()')
+      i.fa.fa-link
+        br
+        small.small Compile
+
 
 block view-content
   .row
@@ -121,6 +127,14 @@ block view-content
             | {{displayed_file ? displayed_file.name : 'Unnamed File'}}
 
         textarea#editor.panel-body
+
+    .col-xs-9
+      .panel.panel-default(data-ng-show="compiler_output")
+        .panel-heading
+          .panel-title Compilation Output
+
+        pre.panel-body
+          code {{compiler_output}}
 
   // Modals
   #new-include-file.modal.fade(role='dialog')
