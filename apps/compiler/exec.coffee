@@ -1,5 +1,6 @@
 ﻿Express = require 'express'
-spawn = require('child_process').spawn
+exec = require('child_process').exec
+Path = require 'path'
 
 ServerError = require '../../shared/scripts/server-error.coffee'
 
@@ -20,6 +21,7 @@ router.post '/', (request, response, next) ->
       return response.end "#{JSON.stringify(error: 'Parameter \'name\' missing')}", 'utf8'
 
   ws_resource = null
+  project_resource = null
 
   # Create the ws resource
   HostFileSystem.open request.logged_in_user.preferences.workspace.path
@@ -46,12 +48,35 @@ router.post '/', (request, response, next) ->
     # did we found a project?
     if not project_resource?
         throw new ServerError 404, 'Project ' + request.body.name + ' does not exists'
-    else
-      if running?
-        throw new ServerError 409, request.body.name + ' is already running'
 
-      response.writeHead 201, { 'Content-Type': 'application/json' }
-      return response.end "#{JSON.stringify(result: project_resource.name)}", 'utf8'
+    # create the bin folder
+    return ws_resource.bin_directory.create_subdirectory project_resource.name
+    .catch ->
+      return # ignore file exist error
+    .finally ->
+
+      # get source files
+      console.log project_resource.src_directory.path
+      return project_resource.src_directory.is_valid()
+      .then (valid) ->
+
+        if not valid
+          throw new ServerError 404, 'Project ' + request.body.name + ' does not contain any source files'
+
+        return project_resource.src_directory.get_children()
+      .then (src_files) ->
+      
+        gcc_cmd = "gcc -I#{project_resource.include_directory.path} -Wall -o #{project_resource.bin_directory.path}/#{project_resource.name} "
+        for src in src_files
+          if Path.basename src.path isnt '.DS_Store'
+            gcc_cmd += src.path + ' '
+      
+        console.log gcc_cmd
+        exec gcc_cmd, (error, stdout, stderr) ->
+          result = {error: error, stdout: stdout, stderr: stderr}
+          response.writeHead 20, { 'Content-Type': 'application/json' }
+          return response.end "#{JSON.stringify(result: result)}", 'utf8'
+        return
   .catch (e) ->
     if e instanceof ServerError
       response.writeHead e.code, { 'Content-Type': 'application/javascript' }
