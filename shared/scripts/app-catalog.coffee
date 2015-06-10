@@ -49,6 +49,12 @@ class AppCatalog
         manifest['angularjs_route'] = "#{@apps_angularjs_route_base}/#{app}"
         manifest['nodejs_route'] = "#{@apps_nodejs_route_base}/#{app}"
 
+      # Client side data (view only)
+      else if not manifest['hidden']
+        manifest['url'] = "/##{@apps_angularjs_route_base}/#{app}"
+        manifest['angularjs_route'] = "#{@apps_angularjs_route_base}/#{app}"
+        manifest['nodejs_route'] = "#{@apps_nodejs_route_base}/#{app}"
+
       # Web API data
       # manifest['web_api'] nothing to do
 
