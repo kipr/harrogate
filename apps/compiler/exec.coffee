@@ -10,6 +10,52 @@ HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 Workspace = require AppCatalog.catalog['Programs'].path +  '/workspace.coffee'
 
+# get available compilation environments
+class VisualStudio12CompilationEnvironment
+  @compile: (project_resource, cb) ->
+    project_resource.src_directory.is_valid()
+    .then (valid) ->
+
+      if not valid
+        throw new ServerError 404, 'Project ' + project_resource.name + ' does not contain any source files'
+
+      return project_resource.src_directory.get_children()
+    .then (src_files) ->
+      cl_cmd = "/I\"#{project_resource.include_directory.path}\"
+                /Fe\"#{project_resource.bin_directory.path}\\#{project_resource.name}\" "
+      for src in src_files
+        cl_cmd += "\"#{src.path}\" "
+
+      exec 'vs12_compiler.bat ' + cl_cmd, {cwd: __dirname}, cb
+      return
+    .catch (e) ->
+      console.log e
+    .done()
+    return
+
+
+class GCCCompilationEnvironment
+  @compile: (project_resource, cb) ->
+    project_resource.src_directory.is_valid()
+    .then (valid) ->
+
+      if not valid
+        throw new ServerError 404, 'Project ' + project_resource.name + ' does not contain any source files'
+
+      return project_resource.src_directory.get_children()
+    .then (src_files) ->
+      gcc_cmd = "gcc -I#{project_resource.include_directory.path} -Wall -o #{project_resource.bin_directory.path}/#{project_resource.name} "
+      for src in src_files
+        if Path.basename(src.path).charAt(0) isnt '.'
+          gcc_cmd += src.path + ' '
+      
+      exec gcc_cmd, cb
+      return
+    .catch (e) ->
+      console.log e
+    .done()
+    return
+
 # the compiler router
 router = Express.Router()
 
@@ -54,28 +100,17 @@ router.post '/', (request, response, next) ->
     .catch ->
       return # ignore file exist error
     .finally ->
+      if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
+        compile = VisualStudio12CompilationEnvironment.compile
+      else
+        compile = GCCCompilationEnvironment.compile
 
-      # get source files
-      console.log project_resource.src_directory.path
-      return project_resource.src_directory.is_valid()
-      .then (valid) ->
+      compile project_resource, (error, stdout, stderr) ->
+        result = {error: error, stdout: stdout, stderr: stderr}
+        response.writeHead 200, { 'Content-Type': 'application/json' }
+        return response.end "#{JSON.stringify(result: result)}", 'utf8'
 
-        if not valid
-          throw new ServerError 404, 'Project ' + request.body.name + ' does not contain any source files'
-
-        return project_resource.src_directory.get_children()
-      .then (src_files) ->
-      
-        gcc_cmd = "gcc -I#{project_resource.include_directory.path} -Wall -o #{project_resource.bin_directory.path}/#{project_resource.name} "
-        for src in src_files
-          if Path.basename(src.path).charAt(0) isnt '.'
-            gcc_cmd += src.path + ' '
-      
-        exec gcc_cmd, (error, stdout, stderr) ->
-          result = {error: error, stdout: stdout, stderr: stderr}
-          response.writeHead 200, { 'Content-Type': 'application/json' }
-          return response.end "#{JSON.stringify(result: result)}", 'utf8'
-        return
+      return
   .catch (e) ->
     if e instanceof ServerError
       response.writeHead e.code, { 'Content-Type': 'application/javascript' }

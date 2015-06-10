@@ -285,7 +285,7 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
           $scope.documentChanged = false
           $http.post('/api/compile', {name: $scope.selected_project.name})
           .success (data, status, headers, config) ->
-            $scope.compiler_output = data.result.stderr
+            $scope.compiler_output = data.result.stderr + data.result.stdout
             return
           .error (data, status, headers, config) ->
             console.log "Could not post to /api/compile"

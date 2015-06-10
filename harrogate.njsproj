@@ -32,6 +32,7 @@
     <Content Include="apps\compiler\manifest.json" />
     <Content Include="apps\compiler\resources\compiler-view-controller.coffee" />
     <Content Include="apps\compiler\resources\index.jade" />
+    <Content Include="apps\compiler\vs12_compiler.bat" />
     <Content Include="apps\fs\file.coffee" />
     <Content Include="apps\fs\directory.coffee" />
     <Content Include="apps\fs\host-fs.coffee" />
