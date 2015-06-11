@@ -42,15 +42,15 @@ class AppCatalog
         manifest['get_instance'] = -> require "#{@exec_path}"
       # manifest['closing'] nothing to do
 
-      # Client side data ('angular_ctrl' is set)
+      # Client view + angular controller ('angular_ctrl' is set)
       if manifest['angular_ctrl']?
         manifest['angular_ctrl'] = "#{path}/#{manifest['angular_ctrl']}"
-        manifest['url'] = "/##{@apps_angularjs_route_base}/#{app}"
-        manifest['angularjs_route'] = "#{@apps_angularjs_route_base}/#{app}"
-        manifest['nodejs_route'] = "#{@apps_nodejs_route_base}/#{app}"
+        # controller implies view
+        manifest['view'] = true
 
-      # Client side data (view only)
-      else if not manifest['hidden']
+      # Client view
+      manifest['view'] ?= false
+      if manifest['view']
         manifest['url'] = "/##{@apps_angularjs_route_base}/#{app}"
         manifest['angularjs_route'] = "#{@apps_angularjs_route_base}/#{app}"
         manifest['nodejs_route'] = "#{@apps_nodejs_route_base}/#{app}"
