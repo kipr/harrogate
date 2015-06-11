@@ -1,11 +1,7 @@
-class FsApp
-  constructor: ->
-
-  init: (app) =>
+module.exports = 
+  init: (app) ->
     # add the the router
-    app.web_api.fs['router'] = require './api-router/fs.coffee'
+    app.web_api.fs['router'] = require './api-routes/fs.coffee'
 
   exec: ->
-
-# export the app object
-module.exports = new FsApp
+    return

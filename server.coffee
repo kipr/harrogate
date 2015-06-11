@@ -1,46 +1,46 @@
-fs = require 'fs'
-http = require 'http'
-express = require 'express'
-cookie_parser = require 'cookie-parser'
-bodyParser = require 'body-parser'
-session = require 'express-session'
-passport = require 'passport'
+BodyParser = require 'body-parser'
+CookieParser = require 'cookie-parser'
+Express = require 'express'
+Http = require 'http'
 LocalStrategy =  require('passport-local').Strategy
 ON_DEATH = require 'death'
+Passport = require 'passport'
+Session = require 'express-session'
 
-app_catalog = require './shared/scripts/app-catalog.coffee'
+AppCatalog = require './shared/scripts/app-catalog.coffee'
 SettingsManager = require './shared/scripts/settings-manager.coffee'
+ServerError = require './shared/scripts/server-error.coffee'
 User = require './shared/scripts/user.coffee'
 UserManager = require './shared/scripts/user-manager.coffee'
 
 # create the app
-harrogate_app = express()
-harrogate_app.use cookie_parser()
-harrogate_app.use bodyParser.json({limit: '5mb'})
-harrogate_app.use session(
+harrogate_app = Express()
+harrogate_app.use CookieParser()
+harrogate_app.use BodyParser.json({limit: '5mb'})
+harrogate_app.use Session(
   secret: 'B on harrogate'
   resave: false
   saveUninitialized: true
 )
-harrogate_app.use passport.initialize()
-harrogate_app.use passport.session()
+harrogate_app.use Passport.initialize()
+harrogate_app.use Passport.session()
 
 # create the server
-server = http.createServer harrogate_app
+server = Http.createServer harrogate_app
 
 # create the socket.io object
 io = require('socket.io')(server)
 
 # setup passport
-passport.serializeUser (user, done) ->
+Passport.serializeUser (user, done) ->
   done null, user
   return
 
-passport.deserializeUser (user, done) ->
+Passport.deserializeUser (user, done) ->
   done null, user
   return
 
-passport.use new LocalStrategy (username, password, done) ->
+Passport.use new LocalStrategy (username, password, done) ->
   if not username?
     return done null, false
 
@@ -69,7 +69,7 @@ check_authenticated = (request, response, next) ->
     return
 
 # handling login
-harrogate_app.post '/login', passport.authenticate('local'),  (request, response, next) ->
+harrogate_app.post '/login', Passport.authenticate('local'),  (request, response, next) ->
   response.writeHead 204
   return response.end()
 
@@ -85,16 +85,16 @@ harrogate_app.use '/api', check_authenticated, (request, response, next) ->
 
 # Serve /apps/catalog.json
 harrogate_app.get '/apps/catalog.json', (request, response, next) ->
-  app_catalog.handle request, response
+  AppCatalog.handle request, response
 
 # Init the apps
-for app_name, app of app_catalog.catalog
+for app_name, app of AppCatalog.catalog
   if app.get_instance()['init']?
     console.log "Init #{app_name}"
     app.get_instance().init(app)
 
 # Register the events
-for app_name, app of app_catalog.catalog
+for app_name, app of AppCatalog.catalog
   if app.event_groups?
     for event_group_name of app.event_groups
       event_group = app.event_groups[event_group_name]
@@ -105,7 +105,7 @@ for app_name, app of app_catalog.catalog
         console.warn "Warning: App #{app_name} has malformed event definitions"
 
 # Register app web-api routes
-for app_name, app of app_catalog.catalog
+for app_name, app of AppCatalog.catalog
   if app.web_api?
     for api of app.web_api
       if app.web_api[api].router?
@@ -115,12 +115,12 @@ for app_name, app of app_catalog.catalog
         console.warn "Warning: App #{app_name} defines web api '#{api}' but no router"
 
 # Start the apps
-for app_name, app of app_catalog.catalog
+for app_name, app of AppCatalog.catalog
   console.log "Starting #{app_name}"
   app.get_instance().exec() if app.get_instance()['exec']?
 
 # Route to static content
-harrogate_app.use express.static(__dirname + '/public')
+harrogate_app.use Express.static(__dirname + '/public')
 
 # Error handling
 harrogate_app.use (error, request, response, next) ->
@@ -128,6 +128,12 @@ harrogate_app.use (error, request, response, next) ->
   if error instanceof SyntaxError
     response.writeHead 400, { 'Content-Type': 'application/json' }
     return response.end "#{JSON.stringify(error: 'Malformed syntax, could not parse request')}", 'utf8'
+
+  # harrogate server error
+  if error instanceof ServerError
+    response.writeHead error.code, { 'Content-Type': 'application/javascript' }
+    response.end "#{JSON.stringify(error: error.message)}", 'utf8'
+    return
 
   # Server error?!
   console.error '!!!!INTERNAL SERVER ERROR!!!!'
@@ -147,7 +153,7 @@ ON_DEATH (signal, err) ->
   server.close()
 
   # Stop apps
-  for app_name, app of app_catalog.catalog
+  for app_name, app of AppCatalog.catalog
     console.log "Stopping #{app_name}"
     app.get_instance().closing() if app.get_instance()['closing']
   return

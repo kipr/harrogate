@@ -29,9 +29,9 @@ app.service 'authRequiredInterceptor', ['$q', '$location', ($q, $location) ->
 ]
 
 app.controller('statusBarCtrl'
-  ['$scope', 'user_manager_service'
-  ($scope, user_manager_service) ->
-    user_manager_service.get_current_user().then (current_user) ->
+  ['$scope', 'UserManagerService'
+  ($scope, UserManagerService) ->
+    UserManagerService.get_current_user().then (current_user) ->
       $scope.current_user = current_user
       return
   

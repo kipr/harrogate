@@ -1,0 +1,8 @@
+{
+  "name": "Sensors",
+  "fonticon": "fa-lightbulb-o",
+  "exec": "exec.coffee",
+  "description": "Display analog and digital sensors plugged into the system",
+  "category": "Sensors",
+  "view": true
+}

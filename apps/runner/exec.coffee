@@ -23,7 +23,6 @@ namespace = null
 
 start_program = ->
   if running?.resource?
-    console.log "#{running.resource.bin_directory.path}/#{running.resource.name}"
     process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}"
 
     process.stdout.on 'data', (data) ->

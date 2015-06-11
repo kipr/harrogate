@@ -1,13 +1,17 @@
 code_mirror = require 'codemirror/lib/codemirror'
 io = require 'socket.io-client'
 
-exports.name = 'terminal_view_controller'
+exports.name = 'TerminalViewController'
 
 exports.inject = (app) ->
-  app.controller exports.name, ['$scope', 'app_catalog_provider', exports.controller]
-  exports.controller
+  app.controller exports.name, [
+    '$scope'
+    'AppCatalogProvider'
+    exports.controller
+  ]
+  return
 
-exports.controller = ($scope, app_catalog_provider) ->
+exports.controller = ($scope, AppCatalogProvider) ->
   socket = undefined
   events = undefined
   editor = undefined
@@ -46,7 +50,7 @@ exports.controller = ($scope, app_catalog_provider) ->
       read_only_ch = editor.getCursor().ch - 1
     return
 
-  app_catalog_provider.catalog.then (app_catalog) ->
+  AppCatalogProvider.catalog.then (app_catalog) ->
     events =  app_catalog['Terminal']?.event_groups?.terminal_events.events
     events_namespace =  app_catalog['Terminal']?.event_groups?.terminal_events.namespace
     if events?

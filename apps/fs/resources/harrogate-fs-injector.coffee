@@ -1,4 +1,4 @@
-﻿exports.name = 'harrogate_fs_injector'
+﻿exports.name = 'HarrogateFsInjector'
 
 exports.inject = (app) ->
   # inject fs angular modules

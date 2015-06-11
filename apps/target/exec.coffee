@@ -1,4 +1,4 @@
-os = require 'os'
+Os = require 'os'
 
 class TargetInformation
   constructor: ->
@@ -15,7 +15,7 @@ class TargetInformation
       OSX: 2
     @os = undefined
 
-    switch os.platform()
+    switch Os.platform()
       when 'win32'
         @platform = @supported_platforms.WINDOWS_PC
         @os = @supported_os.WINDOWS
@@ -31,7 +31,6 @@ class TargetInformation
 
     app['supported_os'] = @supported_os
     app['os'] = @os
+    return
 
 module.exports = new TargetInformation
-
-

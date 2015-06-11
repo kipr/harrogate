@@ -1,17 +1,25 @@
 require 'codemirror/mode/clike/clike'
 code_mirror = require 'codemirror/lib/codemirror'
 
-exports.name = 'kiss_view_controller'
+exports.name = 'KissViewController'
 
 exports.inject = (app) ->
-  app.controller exports.name, ['$scope', '$location', '$http', 'app_catalog_provider', exports.controller]
-  exports.controller
+  app.controller exports.name, [
+    '$scope'
+    '$location'
+    '$http'
+    'AppCatalogProvider'
+    exports.controller
+  ]
+  return
 
-exports.controller = ($scope, $location, $http, app_catalog_provider) ->
+exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
+
   open_file = (file_uri) ->
     close_file()
 
     $http.get(file_uri)
+
     .success (data, status, headers, config) ->
       $scope.displayed_file = data
       editor.setValue(new Buffer($scope.displayed_file.content, 'base64').toString('ascii'));
@@ -20,9 +28,12 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
       setTimeout -> 
         editor.refresh()
       return
+
     .error (data, status, headers, config) ->
       console.log "Could not get #{file_uri}"
       return
+
+    return
 
   close_file = ->
     $scope.displayed_file = null
@@ -47,16 +58,19 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     file_uri = $location.search().path
     open_file file_uri
 
-  app_catalog_provider.catalog.then (app_catalog) ->
+  AppCatalogProvider.catalog.then (app_catalog) ->
     projects_resource = app_catalog['Programs']?.web_api?.projects
     if projects_resource?
       $http.get(projects_resource.uri)
+
       .success (data, status, headers, config) ->
         $scope.ws = data
         return
+
       .error (data, status, headers, config) ->
         console.log "Could not get #{uri}"
         return
+
     return
 
   $scope.toggle_include_files_expanded = ->
@@ -114,6 +128,7 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     return
 
   $scope.selected_file_categorie = null
+
   $scope.select_file = (file, categorie) ->
     # toggle selection
     if $scope.selected_file is file
@@ -138,13 +153,17 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
   $scope.save = ->
     if $scope.displayed_file?
       save_file()
+
       .success (data, status, headers, config) ->
         alert 'saved'
         $scope.documentChanged = false
         return
+
       .error (data, status, headers, config) ->
         console.log "Could not get #{file_uri}"
         return
+
+    return
 
   $scope.refresh = ->
     if $scope.displayed_file?
@@ -167,25 +186,34 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     $('#new-include-file').modal('hide')
     if $scope.ws? and $scope.project_resource?
       $http.post($scope.ws.links.include_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+
       .finally ->
         $http.post($scope.project_resource.links.include_directory.href,  {name: $("#includeFileName").val(), type: 'file'})
+
         .success (data, status, headers, config) ->
-          app_catalog_provider.catalog.then (app_catalog) ->
+          AppCatalogProvider.catalog.then (app_catalog) ->
             projects_resource = app_catalog['Programs']?.web_api?.projects
             if projects_resource?
               $http.get(projects_resource.uri)
+
               .success (data, status, headers, config) ->
                 $scope.ws = data
                 return
+
               .error (data, status, headers, config) ->
                 console.log "Could not get #{uri}"
                 return
+
             return
+
           return
+
         .error (data, status, headers, config) ->
           console.log "Could not get #{$scope.project_resource.links.include_directory.href}"
           return
+
         return
+
     return
 
   $scope.show_add_source_file_modal = ->
@@ -196,25 +224,36 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     $('#new-source-file').modal('hide')
     if $scope.ws? and $scope.project_resource?
       $http.post($scope.ws.links.src_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+
       .finally ->
         $http.post($scope.project_resource.links.src_directory.href,  {name: $("#sourceFileName").val(), type: 'file'})
+
         .success (data, status, headers, config) ->
-          app_catalog_provider.catalog.then (app_catalog) ->
+
+          AppCatalogProvider.catalog.then (app_catalog) ->
+
             projects_resource = app_catalog['Programs']?.web_api?.projects
             if projects_resource?
               $http.get(projects_resource.uri)
+
               .success (data, status, headers, config) ->
                 $scope.ws = data
                 return
+
               .error (data, status, headers, config) ->
                 console.log "Could not get #{uri}"
                 return
+
             return
+
           return
+
         .error (data, status, headers, config) ->
           console.log "Could not get #{$scope.project_resource.links.src_directory.href}"
           return
+
         return
+
     return
 
   $scope.show_add_data_file_modal = ->
@@ -225,25 +264,36 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     $('#new-data-file').modal('hide')
     if $scope.ws? and $scope.project_resource?
       $http.post($scope.ws.links.data_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+
       .finally ->
         $http.post($scope.project_resource.links.data_directory.href,  {name: $("#dataFileName").val(), type: 'file'})
+
         .success (data, status, headers, config) ->
-          app_catalog_provider.catalog.then (app_catalog) ->
+
+          AppCatalogProvider.catalog.then (app_catalog) ->
+
             projects_resource = app_catalog['Programs']?.web_api?.projects
             if projects_resource?
               $http.get(projects_resource.uri)
+
               .success (data, status, headers, config) ->
                 $scope.ws = data
                 return
+
               .error (data, status, headers, config) ->
                 console.log "Could not get #{uri}"
                 return
+
             return
+
           return
+
         .error (data, status, headers, config) ->
           console.log "Could not get #{$scope.project_resource.links.data_directory.href}"
           return
+
         return
+
     return
 
   $scope.show_add_project_modal = ->
@@ -251,27 +301,37 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     return
 
   $scope.add_project = () ->
+
     $('#new-project').modal('hide')
-    app_catalog_provider.catalog.then (app_catalog) ->
+
+    AppCatalogProvider.catalog.then (app_catalog) ->
       projects_resource = app_catalog['Programs']?.web_api?.projects
       if projects_resource?
         $http.post(projects_resource.uri,  {name: $("#projectName").val(), language: 'C' })
+
         .success (data, status, headers, config) ->
-          app_catalog_provider.catalog.then (app_catalog) ->
+
+          AppCatalogProvider.catalog.then (app_catalog) ->
             projects_resource = app_catalog['Programs']?.web_api?.projects
             if projects_resource?
               $http.get(projects_resource.uri)
+
               .success (data, status, headers, config) ->
                 $scope.ws = data
                 return
+
               .error (data, status, headers, config) ->
                 console.log "Could not get #{uri}"
                 return
+
             return
+
           return
+
         .error (data, status, headers, config) ->
           console.log "Could not get #{projects_resource.uri}"
           return
+
       return
 
     return
@@ -280,28 +340,37 @@ exports.controller = ($scope, $location, $http, app_catalog_provider) ->
     if $scope.selected_project?
       if $scope.displayed_file? 
         save_file()
+
         .success (data, status, headers, config) ->
           alert 'saved'
           $scope.documentChanged = false
           $http.post('/api/compile', {name: $scope.selected_project.name})
+
           .success (data, status, headers, config) ->
             $scope.compiler_output = data.result.stderr + data.result.stdout
             return
+
           .error (data, status, headers, config) ->
             console.log "Could not post to /api/compile"
             return
+
           return
+
         .error (data, status, headers, config) ->
           console.log "Could not get #{file_uri}"
           return
+
       else
         $http.post('/api/compile', {name: $scope.selected_project.name})
+
         .success (data, status, headers, config) ->
           $scope.compiler_output = data.result.stderr
           return
+
         .error (data, status, headers, config) ->
           console.log "Could not post to /api/compile"
           return
+
       return
 
   return

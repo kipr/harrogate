@@ -3,5 +3,6 @@
   "fonticon": "fa-car",
   "exec": "exec.coffee",
   "description": "Manually manipulate motors plugged into the system",
-  "category": "Sensors"
+  "category": "Sensors",
+  "view": true
 }

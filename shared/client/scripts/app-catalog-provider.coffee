@@ -1,5 +1,5 @@
 ﻿exports.inject = (app) ->
-  app.provider 'app_catalog_provider', exports.provider
+  app.provider 'AppCatalogProvider', exports.provider
   exports.provider
 
 exports.provider = ->
@@ -8,6 +8,7 @@ exports.provider = ->
 
   @$get = ['$http', '$q', ($http, $q) ->
     service =
+
       catalog: $q (resolve, reject) ->
         $http.get(app_catalog_url)
         .success (data, status, headers, config) ->

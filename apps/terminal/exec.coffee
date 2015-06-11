@@ -14,12 +14,15 @@ else
 create_terminal_emulator = (socket) ->
   if terminal_emulator?
     process = spawn terminal_emulator
+
     process.stdout.on 'data', (data) ->
       socket.emit events.stdout.id, data.toString('utf8')
       return
+
     process.stderr.on 'data', (data) ->
       socket.emit events.stderr.id, data.toString('utf8')
       return
+
     process.on 'exit', (code) ->
       socket.disconnect()
       return

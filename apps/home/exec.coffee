@@ -1,7 +1,6 @@
-url = require 'url'
-path_tools = require 'path'
-fs = require 'fs'
 app_catalog = require '../../shared/scripts/app-catalog.coffee'
+
+cats = require '../categories.json'
 
 app_categories = []
 
@@ -10,7 +9,6 @@ category_index = (name) ->
     return i if app_categories[i]['name'] is name
   return -1
 
-cats = JSON.parse(fs.readFileSync 'apps/categories.json', 'utf8')
 for c in cats
   app_categories.push
     name: c
@@ -32,5 +30,8 @@ for i in [0 .. app_categories.length - 1]
   app_categories[i]['list'].sort (a, b) -> a.priority - b.priority
 
 module.exports =
+
   exec: ->
+    return
+
   jade_locals: {apps: app_categories}

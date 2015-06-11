@@ -1,4 +1,4 @@
-﻿exports.name = 'user_manager_service'
+﻿exports.name = 'UserManagerService'
 
 exports.inject = (app) ->
   app.service exports.name, [

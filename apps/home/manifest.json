@@ -1,9 +1,9 @@
 {
   "name": "Home",
-  "exec": "server.coffee",
+  "exec": "exec.coffee",
   "fonticon": "fa-home",
   "description": "The launchpad",
   "category": "System",
   "hidden": true,
-  "angular_ctrl": "resources/home-view-controller.coffee"
+  "view": true
 }

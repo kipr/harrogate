@@ -2,7 +2,7 @@
   "name": "Runner",
   "hidden": false,
   "fonticon": "fa-rocket",
-  "exec": "runner.coffee",
+  "exec": "exec.coffee",
   "description": "Runs a user program",
   "category": "System",
   "angular_ctrl": "resources/runner-view-controller.coffee",
