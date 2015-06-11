@@ -1,11 +1,10 @@
 {
   "name": "Compiler",
-  "hidden": false,
+  "hidden": true,
   "fonticon": "fa-link",
   "exec": "exec.coffee",
   "description": "Compiles a user program",
   "category": "System",
-  "angular_ctrl": "resources/compiler-view-controller.coffee",
   "web_api": {
     "run": {
       "uri": "/api/compile",
