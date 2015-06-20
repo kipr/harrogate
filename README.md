@@ -12,14 +12,22 @@ Requirements
 Installing dependencies
 =======================
 
+This will fetch all required npm dependencies.
+
 	cd harrogate
 	npm install
 
 Launching gulp (development)
 ============================
 
-	cd harrogate
-	gulp
+Gulp is used to
+* Compile the jade sources and browserify the client scripts.
+* Start the Express server
+
+```
+cd harrogate
+gulp
+```
 
 Launching express server (production)
 =====================================
@@ -28,6 +36,10 @@ Launching express server (production)
 
 	cd harrogate
 	node server.js
+
+Open the harrogate web pages
+============================
+Open a web browser and navigate to `http://<IP of the harrogate server>:8888` (e.g. `http://127.0.0.1:8888`)
 
 Authors
 =======
