@@ -49,4 +49,4 @@ Authors
 
 License
 =======
-pcompiler is released under the terms of the GPLv3 license. For more information, see the LICENSE file in the root of this project.
+harrogate is released under the terms of the GPLv3 license. For more information, see the LICENSE file in the root of this project.
