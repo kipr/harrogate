@@ -6,14 +6,24 @@ block view-toolbar-left
         i.fa.fa-play
         br
         small.small Launch
-     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='stop()')
+     button.btn.btn-default.btn-toolbar.disabled(type='button', data-ng-click='stop()')
         i.fa.fa-stop
         br
         small.small Restart
-     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='restart()')
+     button.btn.btn-default.btn-toolbar.disabled(type='button', data-ng-click='restart()')
         i.fa.fa-refresh
         br
         small.small Restart
+
+  .btn-group
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='show_console()')
+        i.fa.fa-keyboard-o
+        br
+        small.small Show Console
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='show_gui()')
+        i.fa.fa-desktop
+        br
+        small.small Show GUIt
 
 block view-content
   .row
@@ -28,8 +38,8 @@ block view-content
               th {{project.name}}
 
     .col-xs-9
-      .panel.panel-default
-        .panel-heading
-          .panel-title Program Output
-
+      .panel.panel-default(data-ng-show="console_mode")
         textarea#runner.panel-body
+      .panel.panel-default(data-ng-show="!console_mode")
+        .embed-responsive.embed-responsive-16by9.panel-body
+          img.embed-responsive-item(data-ng-src="{{img_src}}" data-ng-mousemove="gui_mousemove($event)" data-ng-keypress="gui_keypress($event)")

@@ -347,7 +347,7 @@ exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
           $http.post('/api/compile', {name: $scope.selected_project.name})
 
           .success (data, status, headers, config) ->
-            $scope.compiler_output = data.result.stderr + data.result.stdout
+            $scope.compiler_output = 'Compilation finished:\n' + data.result.stderr + data.result.stdout
             return
 
           .error (data, status, headers, config) ->

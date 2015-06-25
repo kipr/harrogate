@@ -1,7 +1,9 @@
+Bson = require 'bson'
 Express = require 'express'
 spawn = require('child_process').spawn
 
 ServerError = require '../../shared/scripts/server-error.coffee'
+Daylite = require '../../shared/scripts/daylite.coffee'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
@@ -21,6 +23,8 @@ running = null
 # the socket.io namespace
 namespace = null
 
+client = null
+
 start_program = ->
   if running?.resource?
     process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}"
@@ -36,6 +40,16 @@ start_program = ->
       running = null
       return
 
+    setTimeout (->
+      client = Daylite.connect()
+      if client?
+        client.on 'data', (data) ->
+          doc = Bson.BSONPure.BSON.deserialize data
+          namespace.emit events.frame.id, doc.msg.data.toString('base64')
+          return
+        client.on 'close', ->
+          console.log 'close'
+      ), 1000
   return
 
 # the runner router
@@ -103,9 +117,17 @@ router.delete '/current', (request, response, next) ->
   response.writeHead 200, { 'Content-Type': 'application/json' }
   return response.end "#{JSON.stringify(running: running)}", 'utf8'
 
+runner_on_connection = (socket) ->
+  socket.on events.gui_input.id, (data) ->
+    if client?
+      doc = data
+      client.write Bson.BSONPure.BSON.serialize(doc, false, true, true)
+
 module.exports =
   event_init: (event_group_name, ns) ->
     namespace = ns
+
+    namespace.on 'connection', runner_on_connection
     return
 
   init: (app) =>

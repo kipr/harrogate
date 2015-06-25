@@ -17,6 +17,26 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
   events = undefined
   editor = undefined
 
+  $scope.console_mode = true
+
+  $scope.show_console = ->
+    $scope.console_mode = true
+    return
+
+  $scope.show_gui = ->
+    $scope.console_mode = false
+    return
+
+  $scope.gui_mousemove = ($event) ->
+    socket.emit events.gui_input.id, {mouse: {x: $event.offsetX, y: $event.offsetY}}
+    return
+
+  $scope.gui_keypress = ($event) ->
+    return
+
+  window.addEventListener 'keydown', (event) ->
+    return
+
   editor = CodeMirror.fromTextArea(document.getElementById('runner'),
     lineNumbers: false
     theme: 'eclipse'
@@ -64,6 +84,11 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
       socket.on events.stderr.id, (msg) ->
         append_text msg
         return
+
+      socket.on events.frame.id, (msg) ->
+        $scope.$apply ->
+          $scope.img_src = "data:image/png;base64,#{msg}"
+          return
 
     return
 

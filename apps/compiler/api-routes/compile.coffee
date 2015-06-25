@@ -64,9 +64,9 @@ router.post '/', (request, response, next) ->
     .finally ->
 
       compilation_environment.compile project_resource, (error, stdout, stderr) ->
-        if error?
-          next error
-          return
+        #if error?
+        #  next error
+        #  return
 
         result = {stdout: stdout, stderr: stderr}
         response.writeHead 200, { 'Content-Type': 'application/json' }
