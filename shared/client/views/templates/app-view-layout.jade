@@ -1,5 +1,5 @@
 ﻿// Navbar
-nav.navbar.navbar-default.navbar-fixed-top
+nav.navbar.navbar-default.navbar-fixed-top.desktop-only
   .container-fluid
     form.navbar-form.navbar-left
       .form-group
@@ -27,12 +27,26 @@ nav.navbar.navbar-default.navbar-fixed-top
               br
               small.small Help
 
+nav.btn-group.btn-group-justified.compact-only#top-compact-navbar
+  a.btn.btn-toolbar.btn-info(type="button" href='/#/apps/home')
+    i.fa.fa-bars
+    |  
+    small.small Menu
+  a.btn.btn-toolbar.btn-info.disabled(type="button")
+    i.fa.fa-exclamation-circle
+    |  
+    small.small About
+  a.btn.btn-toolbar.btn-info.disabled(type="button")
+    i.fa.fa-question-circle
+    |  
+    small.small Help
+
 // content
 .container-fluid
   block view-content
 
 // footer = status bar
-nav.navbar.navbar-default.navbar-fixed-bottom#status-bar(ng-controller='statusBarCtrl')
+nav.navbar.navbar-default.navbar-fixed-bottom.desktop-only#status-bar(ng-controller='statusBarCtrl')
   .container-fluid
     form.navbar-form.navbar-left
       .form-group.btn-group-xs
@@ -49,3 +63,6 @@ nav.navbar.navbar-default.navbar-fixed-bottom#status-bar(ng-controller='statusBa
         | Copyright &copy; 2015
         |  
         a(href='http://www.kipr.org/') KISS Insitute for Practical Robotics
+
+nav.btn-group.btn-group-justified.compact-only#bottom-compact-navbar
+  block bottom-compact-navbar-buttons

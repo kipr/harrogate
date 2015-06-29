@@ -2,14 +2,14 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
   .row(data-ng-show="current_user")
-    .col-xs-4
-      .row
+    .col-md-4
+      .row.desktop-only
         .col-xs-3
         .col-xs-2
             i.fa.fa-5x.fa-user
         .col-xs-5
             h1 {{current_user.login}}
-      .row
+      .row.desktop-only
         .col-xs-5
         .col-xs-5
           button.btn.btn-default.bnt-lg(type='button' data-ng-click='logout()')
@@ -17,7 +17,7 @@ block view-content
             |  
             | Logout {{current_user.login}}
 
-    .col-xs-8
+    .col-md-8
       h2  User Preferences
       .panel.panel-default
         .panel-body
@@ -32,16 +32,16 @@ block view-content
                   input.form-control(type='text' readonly data-ng-attr-id="path" value="{{current_user.preferences.workspace.path}}")
 
   .row(data-ng-show="!current_user")
-    .col-xs-3
-    .col-xs-6
+    .col-xs-1.col-md-3
+    .col-xs-10.col-md-6
       .alert.alert-warning
         p
           strong Login required!
-        p Please authenticate yourself with your username and password
+        p.desktop-only Please authenticate yourself with your username and password
 
   .row(data-ng-show="!current_user")
-    .col-xs-3
-    .col-xs-6
+    .col-xs-1.col-md-3
+    .col-xs-10.col-md-6
       .panel.panel-default
         form.panel-body
           .form-group
@@ -54,3 +54,13 @@ block view-content
             i.fa.fa-sign-in
             |  
             | Login
+
+
+block bottom-compact-navbar-buttons
+  a.btn.btn-toolbar.btn-info(type="button" data-ng-show="current_user" data-ng-click='logout()')
+    i.fa.fa-bars
+    |  
+    small.small Logout {{current_user.login}}
+  a.btn.btn-toolbar.btn-info.disabled(type="button" data-ng-show="!current_user")
+  a.btn.btn-toolbar.btn-info.disabled(type="button")
+  a.btn.btn-toolbar.btn-info.disabled(type="button")

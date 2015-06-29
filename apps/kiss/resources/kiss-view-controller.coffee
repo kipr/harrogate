@@ -73,6 +73,10 @@ exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
 
     return
 
+  $scope.show_open = ->
+    close_file()
+    return
+
   $scope.toggle_include_files_expanded = ->
     $scope.include_files_expanded = not $scope.include_files_expanded
     if not $scope.include_files_expanded and $scope.selected_file_categorie is 'include'

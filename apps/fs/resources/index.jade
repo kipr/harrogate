@@ -58,3 +58,21 @@ block view-content
                 i.fa.fa-trash-o
                 |  
                 small.small Delete
+
+block bottom-compact-navbar-buttons
+  a.btn.btn-toolbar.btn-info(type='button', data-ng-class='{disabled: !home_uri}', data-ng-click='home()')
+    i.fa.fa-home
+    |  
+    small.small Home
+  a.btn.btn-toolbar.btn-info(type='button', data-ng-click='root()')
+    i.fa.fa-hdd-o
+    |  
+    small.small Root
+  a.btn.btn-toolbar.btn-info(type='button', data-ng-click='up()' data-ng-class='{disabled: !can_up()}')
+    i.fa.fa-arrow-up
+    |  
+    small.small Up
+  a.btn.btn-toolbar.btn-info(type='button', data-ng-click='reload()')
+    i.fa.fa-refresh
+    |  
+    small.small Refresh

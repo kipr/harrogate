@@ -29,6 +29,7 @@
     <Content Include="apps\compiler\api-routes\compile.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\gcc.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.coffee" />
+    <Content Include="apps\home\resources\index.jade" />
     <Content Include="apps\programs\api-routes\projects.coffee" />
     <Content Include="apps\sensors\exec.coffee" />
     <Content Include="apps\sensors\manifest.json" />
@@ -82,7 +83,6 @@
     <Content Include="apps\camera\resources\camera-view-controller.coffee" />
     <Content Include="apps\camera\exec.coffee" />
     <Content Include="apps\home\manifest.json" />
-    <Content Include="apps\home\resources\index.jade" />
     <Content Include="apps\home\resources\includes\program_list.jade" />
     <Content Include="apps\home\exec.coffee" />
     <Content Include="apps\kiss\manifest.json" />

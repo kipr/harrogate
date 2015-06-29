@@ -42,8 +42,8 @@ block view-toolbar-left
 
 block view-content
   .row
-    .col-xs-3
-      .panel.panel-default
+    .col-md-3
+      .panel.panel-default(data-ng-class='{"desktop-only": displayed_file}')
         .panel-heading
           .panel-title Projects:
         table.panel-body.table.tree-table
@@ -124,7 +124,7 @@ block view-content
              td(colspan="2")
               | Add Project
 
-    .col-xs-9
+    .col-md-9
       .panel.panel-default(data-ng-show="displayed_file")
         .panel-heading
           .panel-title
@@ -203,3 +203,21 @@ block view-content
         .modal-footer
           button.btn.btn-default(data-dismiss='modal') Cancel
           button.btn.btn-primary(data-ng-click='add_project()') Create
+          
+block bottom-compact-navbar-buttons
+  a.btn.btn-toolbar.btn-info(type='button', data-ng-click='show_open()')
+    i.fa.fa-folder-open-o
+    |  
+    small.small Open
+  a.btn.btn-toolbar.btn-info(type='button', data-ng-class="{'disabled' : !documentChanged || !displayed_file, 'btn-danger' : documentChanged}", data-ng-click='save()')
+    i.fa.fa-floppy-o
+    |  
+    small.small Save
+  a.btn.btn-toolbar.btn-info(type='button', data-ng-class="{'disabled' : !selected_project || !project_resource.source_files}", data-ng-click='compile()')
+    i.fa.fa-link
+    |  
+    small.small Compile
+  a.btn.btn-toolbar.btn-info.disabled(type='button')
+    i.fa.fa-ellipsis-h
+    |  
+    small.small More

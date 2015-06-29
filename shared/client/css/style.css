@@ -1,11 +1,5 @@
 ﻿@charset "UTF-8";
 
-#view-container
-{
-    padding-top: 70px;
-    padding-bottom: 40px;
-}
-
 .toolbar
 {
     padding-bottom: 5px;
@@ -53,4 +47,60 @@
 {
     margin-top: 3px;
     margin-bottom: 4px;
+}
+
+@media (min-width: 1024px)
+{
+    .compact-only
+    {
+        display: none;
+    }
+
+    #view-container
+    {
+        padding-top: 70px;
+        padding-bottom: 40px;
+    }
+}
+
+@media (max-width: 1023px)
+{
+    .desktop-only
+    {
+        display: none;
+    }
+    
+    #view-container
+    {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    #top-compact-navbar
+    {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        height: 30px;
+        z-index: 100;
+    }
+
+    #bottom-compact-navbar
+    {
+        position: fixed;
+        left: 0px;
+        bottom: 0px;
+        height: 30px;
+        z-index: 100;
+    }
+
+    nav .btn-toolbar
+    {
+        height: inherit;
+    }
+
+    nav .btn
+    {
+        padding: 0px;
+    }
 }
