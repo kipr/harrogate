@@ -1,4 +1,4 @@
-﻿Express = require 'Express'
+﻿Express = require 'express'
 Url = require 'url'
 
 AppCatalog = require '../../../shared/scripts/app-catalog.coffee'
