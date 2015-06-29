@@ -3,19 +3,28 @@ harrogate
 
 The UI for the Link2
 
-Requirements
-============
+Install harrogate from source
+=============================
+**Requirements:**
 
 * Node.js v 0.10 (node-boyd is not compatible with newer versions!)
 * OpenCV (required by node-boyd)
 
-Installing dependencies
-=======================
-
+**Install dependencies:**
 This will fetch all required npm dependencies.
 
 	cd harrogate
 	npm install
+
+**Robot programs requirements:**
+These libraries are required to compile a robot program with harrogate.
+
+* zlib v 1.2
+* libpng v 1.6
+* libbson v 1.1
+* daylite
+
+Note: harrogate assumes that those dependencies are installed into `<harrogate-dir>\..\prefix\usr\`
 
 Launching gulp (development)
 ============================
