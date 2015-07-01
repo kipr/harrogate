@@ -16,6 +16,8 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
   socket = undefined
   events = undefined
   editor = undefined
+  img_width = undefined
+  img_height = undefined
 
   $scope.console_mode = true
 
@@ -28,7 +30,44 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
     return
 
   $scope.gui_mousemove = ($event) ->
-    socket.emit events.gui_input.id, {mouse: {x: $event.offsetX, y: $event.offsetY}}
+    return if not img_width or not img_height
+
+    client_rect = document.getElementById('graphics_window').getBoundingClientRect()
+
+    x = ($event.clientX - client_rect.left) / client_rect.width * img_width
+    y = ($event.clientY - client_rect.top) / client_rect.height * img_height
+
+    x = img_width if x > img_width
+    x = 0 if x < 0
+
+    y = img_height if y > img_height
+    y = 0 if y < 0
+
+    socket.emit events.gui_input.id, {mouse: pos: {x: x | 0, y: y | 0}}
+    return
+
+  $scope.gui_mousedown = ($event) ->
+
+    msg = mouse: { button_down: {} }
+    switch $event.which
+      when 1 then msg.mouse.button_down['left'] = true
+      when 2 then msg.mouse.button_down['middle'] = true
+      when 3 then msg.mouse.button_down['right'] = true
+    socket.emit events.gui_input.id, msg
+
+    $event.preventDefault()
+    return
+
+  $scope.gui_mouseup = ($event) ->
+
+    msg = mouse: { button_down: {} }
+    switch $event.which
+      when 1 then msg.mouse.button_down['left'] = false
+      when 2 then msg.mouse.button_down['middle'] = false
+      when 3 then msg.mouse.button_down['right'] = false
+    socket.emit events.gui_input.id, msg
+
+    $event.preventDefault()
     return
 
   $scope.gui_keypress = ($event) ->
@@ -86,8 +125,11 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
         return
 
       socket.on events.frame.id, (msg) ->
+        img_width = msg.width
+        img_height = msg.height
+
         $scope.$apply ->
-          $scope.img_src = "data:image/png;base64,#{msg}"
+          $scope.img_src = "data:image/png;base64,#{msg.data}"
           return
 
     return

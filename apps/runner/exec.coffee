@@ -1,5 +1,6 @@
 Bson = require 'bson'
 Express = require 'express'
+Path = require 'path'
 spawn = require('child_process').spawn
 
 ServerError = require '../../shared/scripts/server-error.coffee'
@@ -25,9 +26,15 @@ namespace = null
 
 client = null
 
+child_env = Object.create(process.env)
+if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
+  # assume that the install prefix of the kipr libraries is <harrogate>/../prefix/usr
+  bin_dir = Path.resolve Path.resolve __dirname, '..', '..', '..' , 'prefix', 'usr', 'bin'
+  child_env.PATH += Path.delimiter + bin_dir
+
 start_program = ->
   if running?.resource?
-    process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}"
+    process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}", [], env: child_env
 
     process.stdout.on 'data', (data) ->
       namespace.emit events.stdout.id, data.toString('utf8')
@@ -43,9 +50,33 @@ start_program = ->
     setTimeout (->
       client = Daylite.connect()
       if client?
+        buffer = null
         client.on 'data', (data) ->
-          doc = Bson.BSONPure.BSON.deserialize data
-          namespace.emit events.frame.id, doc.msg.data.toString('base64')
+
+          # append data
+          buffer = if buffer then Buffer.concat [buffer, data] else data
+          # how much data do we expect?
+          packet_size = buffer.readInt32LE 0, 4
+
+
+          # if we gont enough
+          if buffer.length >= packet_size
+            packet_data = buffer.slice 0, packet_size
+
+            # emit the frame
+            doc = Bson.BSONPure.BSON.deserialize packet_data
+            msg = 
+              width: doc.msg.width
+              height: doc.msg.height
+              data: doc.msg.data.toString('base64')
+
+            namespace.emit events.frame.id, msg
+
+            if buffer.length isnt packet_size
+              buffer = buffer.slice packet_size
+            else
+              buffer = null
+
           return
         client.on 'close', ->
           console.log 'close'
@@ -120,7 +151,10 @@ router.delete '/current', (request, response, next) ->
 runner_on_connection = (socket) ->
   socket.on events.gui_input.id, (data) ->
     if client?
-      doc = data
+      doc =
+        topic: '/aurora/mouse'
+        msg: data.mouse
+
       client.write Bson.BSONPure.BSON.serialize(doc, false, true, true)
 
 module.exports =

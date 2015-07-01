@@ -42,4 +42,9 @@ block view-content
         textarea#runner.panel-body
       .panel.panel-default(data-ng-show="!console_mode")
         .embed-responsive.embed-responsive-16by9.panel-body
-          img.embed-responsive-item(data-ng-src="{{img_src}}" data-ng-mousemove="gui_mousemove($event)" data-ng-keypress="gui_keypress($event)")
+          img.embed-responsive-item#graphics_window(data-ng-src="{{img_src}}"
+            data-ng-mousemove="gui_mousemove($event)"
+            data-ng-mousedown="gui_mousedown($event)"
+            data-ng-mouseup="gui_mouseup($event)"
+            oncontextmenu="return false;"
+            data-ng-keypress="gui_keypress($event)")
