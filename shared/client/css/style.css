@@ -1,5 +1,11 @@
 ﻿@charset "UTF-8";
 
+.CodeMirror
+{
+    border: 1px solid #eee;
+    height: auto;
+}
+
 .toolbar
 {
     padding-bottom: 5px;
@@ -9,6 +15,24 @@
 {
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+/* Stretches a xxx bootstrap container over the full height */
+.row-stretch, .col-stretch, .panel-stretch
+{
+    height: 100%;
+}
+
+.panel-stretch
+{
+    margin-bottom: -20px;
+}
+
+.panel-stretch > .scrollable-panel-body-container
+{
+    max-height: calc(100% - 43.333px);
+
+    overflow: auto;
 }
 
 .btn-toolbar
@@ -49,6 +73,15 @@
     margin-bottom: 4px;
 }
 
+#view-container
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
 @media (min-width: 1024px)
 {
     .compact-only
@@ -56,10 +89,15 @@
         display: none;
     }
 
-    #view-container
+    #view-content-container
     {
-        padding-top: 70px;
-        padding-bottom: 40px;
+        position: absolute;
+        top: 70px;
+        bottom: 40px;
+        right: 0;
+        left: 0;
+        
+        overflow: auto;
     }
 }
 
@@ -70,10 +108,15 @@
         display: none;
     }
     
-    #view-container
+    #view-content-container
     {
-        padding-top: 30px;
-        padding-bottom: 30px;
+        position: absolute;
+        top: 30px;
+        bottom: 30px;
+        right: 0;
+        left: 0;
+        
+        overflow: auto;
     }
 
     #top-compact-navbar

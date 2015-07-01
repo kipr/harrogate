@@ -45,6 +45,7 @@ exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
     mode: 'text/x-csrc'
     lineNumbers: true
     theme: 'eclipse'
+    viewportMargin: Infinity
   )
 
   editor.on 'change', (e, obj) ->
