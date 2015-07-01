@@ -1,6 +1,7 @@
 browserify = require 'browserify'
 coffee = require 'coffee-script'
 data = require 'gulp-data'
+fs = require 'fs'
 gulp = require 'gulp'
 gulp_filter = require 'gulp-filter'
 gutil = require 'gulp-util'
@@ -9,6 +10,7 @@ minify_css = require 'gulp-minify-css'
 nodemon = require 'gulp-nodemon'
 path_tools = require 'path'
 rename = require 'gulp-rename'
+request = require 'request'
 transform = require 'vinyl-transform'
 through = require 'through'
 
@@ -69,6 +71,7 @@ gulp.task 'shared_3rd_party_libs', [
   'font-awesome'
   'code-mirror'
   'code-mirror-themes'
+  'angular-ui'
 ], ->
 
 # bootstrap
@@ -100,6 +103,11 @@ gulp.task 'code-mirror', ->
 gulp.task 'code-mirror-themes', ->
   gulp.src('node_modules/codemirror/theme/*.css')
   .pipe gulp.dest('public/css/codemirror-theme/')
+
+# AngularUI
+gulp.task 'angular-ui', ->
+  request('http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js')
+  .pipe fs.createWriteStream('public/scripts/ui-bootstrap-tpls.min.js')
 
 # Scripts task
 gulp.task 'scripts', ->
