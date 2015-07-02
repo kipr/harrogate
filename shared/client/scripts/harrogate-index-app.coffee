@@ -63,4 +63,25 @@ app.config([
     return
 ])
 
+app.directive 'setFocus', ($timeout, $parse) ->
+  return {
+    link: (scope, element, attrs) ->
+      model = $parse(attrs.setFocus)
+
+      scope.$watch model, (value) ->
+        console.log 'value=', value
+        if value == true
+
+          $timeout ->
+            element[0].focus()
+            return
+        return
+
+      element.bind 'blur', ->
+        console.log 'blur'
+        scope.$apply model.assign(scope, false)
+        return
+      return
+    }
+
 app.run()

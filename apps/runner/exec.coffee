@@ -150,10 +150,17 @@ router.delete '/current', (request, response, next) ->
 
 runner_on_connection = (socket) ->
   socket.on events.gui_input.id, (data) ->
-    if client?
+    if client? and data.mouse?
       doc =
         topic: '/aurora/mouse'
         msg: data.mouse
+
+      client.write Bson.BSONPure.BSON.serialize(doc, false, true, true)
+
+    if client? and data.keyboard?
+      doc =
+        topic: '/aurora/key'
+        msg: data.keyboard
 
       client.write Bson.BSONPure.BSON.serialize(doc, false, true, true)
 

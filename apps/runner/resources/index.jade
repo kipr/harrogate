@@ -9,7 +9,7 @@ block view-toolbar-left
      button.btn.btn-default.btn-toolbar.disabled(type='button', data-ng-click='stop()')
         i.fa.fa-stop
         br
-        small.small Restart
+        small.small Stop
      button.btn.btn-default.btn-toolbar.disabled(type='button', data-ng-click='restart()')
         i.fa.fa-refresh
         br
@@ -17,13 +17,17 @@ block view-toolbar-left
 
   .btn-group
      button.btn.btn-default.btn-toolbar(type='button', data-ng-click='show_console()')
-        i.fa.fa-keyboard-o
+        i.fa.fa-terminal
         br
         small.small Show Console
      button.btn.btn-default.btn-toolbar(type='button', data-ng-click='show_gui()')
         i.fa.fa-desktop
         br
-        small.small Show GUIt
+        small.small Show GUI
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='graphics_window_focus = true')
+        i.fa.fa-keyboard-o
+        br
+        small.small Keyboard Input
 
 block view-content
   .row
@@ -47,4 +51,5 @@ block view-content
             data-ng-mousedown="gui_mousedown($event)"
             data-ng-mouseup="gui_mouseup($event)"
             oncontextmenu="return false;"
-            data-ng-keypress="gui_keypress($event)")
+            set-focus="graphics_window_focus"
+            tabindex="0")

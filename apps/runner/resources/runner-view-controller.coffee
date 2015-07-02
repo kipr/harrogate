@@ -70,11 +70,24 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
     $event.preventDefault()
     return
 
-  $scope.gui_keypress = ($event) ->
-    return
+  pressed_keys = []
 
-  window.addEventListener 'keydown', (event) ->
-    return
+  document.getElementById('graphics_window').addEventListener 'keydown', (event) ->
+    if pressed_keys.indexOf(event.keyCode) is -1
+      pressed_keys.push event.keyCode
+      msg = keyboard: { key_pressed: pressed_keys }
+      socket.emit events.gui_input.id, msg
+
+    event.preventDefault()
+    return false
+
+  document.getElementById('graphics_window').addEventListener 'keyup', (event) ->
+    pressed_keys.splice index, 1 if (index = pressed_keys.indexOf event.keyCode) isnt -1
+    msg = keyboard: { key_pressed: pressed_keys }
+    socket.emit events.gui_input.id, msg
+
+    event.preventDefault()
+    return false
 
   editor = CodeMirror.fromTextArea(document.getElementById('runner'),
     lineNumbers: false
