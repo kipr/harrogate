@@ -48,6 +48,10 @@ start_program = ->
 
     setTimeout (->
       client = new Daylite.DayliteClient
+
+      client.on 'error', ->
+        return
+
       client.join_daylite 8374
 
       client.on 'connected', ->

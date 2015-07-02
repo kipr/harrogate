@@ -33,14 +33,14 @@ class DayliteClient extends EventEmitter
             buffer = null
         return
 
-      @client.on 'close', =>
-        @client = null
-        @emit 'close'
-        return
+    @client.on 'close', =>
+      @client = null
+      @emit 'close'
+      return
 
-      @client.on 'error', (e) =>
-        @emit 'error', e
-        return
+    @client.on 'error', (e) =>
+      @emit 'error', e
+      return
 
       return
 
