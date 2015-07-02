@@ -1,4 +1,3 @@
-Bson = require 'bson'
 Express = require 'express'
 Path = require 'path'
 spawn = require('child_process').spawn
@@ -48,38 +47,26 @@ start_program = ->
       return
 
     setTimeout (->
-      client = Daylite.connect()
-      if client?
-        buffer = null
-        client.on 'data', (data) ->
+      client = new Daylite.DayliteClient
+      client.join_daylite 8374
 
-          # append data
-          buffer = if buffer then Buffer.concat [buffer, data] else data
-          # how much data do we expect?
-          packet_size = buffer.readInt32LE 0, 4
+      client.on 'connected', ->
 
+        client.subscribe '/aurora/frame', (msg) ->
+          repacked_msg =
+            width: msg.width
+            height: msg.height
+            data: msg.data.toString('base64')
 
-          # if we gont enough
-          if buffer.length >= packet_size
-            packet_data = buffer.slice 0, packet_size
-
-            # emit the frame
-            doc = Bson.BSONPure.BSON.deserialize packet_data
-            msg = 
-              width: doc.msg.width
-              height: doc.msg.height
-              data: doc.msg.data.toString('base64')
-
-            namespace.emit events.frame.id, msg
-
-            if buffer.length isnt packet_size
-              buffer = buffer.slice packet_size
-            else
-              buffer = null
-
+          namespace.emit events.frame.id, repacked_msg
           return
-        client.on 'close', ->
-          console.log 'close'
+
+        return
+
+      client.on 'close', ->
+        client = null
+        return
+
       ), 1000
   return
 
@@ -149,20 +136,14 @@ router.delete '/current', (request, response, next) ->
   return response.end "#{JSON.stringify(running: running)}", 'utf8'
 
 runner_on_connection = (socket) ->
+
   socket.on events.gui_input.id, (data) ->
     if client? and data.mouse?
-      doc =
-        topic: '/aurora/mouse'
-        msg: data.mouse
-
-      client.write Bson.BSONPure.BSON.serialize(doc, false, true, true)
+      client.publish '/aurora/mouse', data.mouse
 
     if client? and data.keyboard?
-      doc =
-        topic: '/aurora/key'
-        msg: data.keyboard
-
-      client.write Bson.BSONPure.BSON.serialize(doc, false, true, true)
+      client.publish '/aurora/key', data.keyboard
+    return
 
 module.exports =
   event_init: (event_group_name, ns) ->
