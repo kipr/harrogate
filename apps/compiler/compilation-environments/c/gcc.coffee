@@ -15,8 +15,7 @@ module.exports =
     .then (src_files) ->
       gcc_cmd = "gcc -I#{project_resource.include_directory.path}
                  -Wall
-                 -o #{project_resource.bin_directory.path}/#{project_resource.name}
-                 -laurora "
+                 -o #{project_resource.bin_directory.path}/#{project_resource.name} "
       for src in src_files
         if Path.basename(src.path).charAt(0) isnt '.'
           gcc_cmd += src.path + ' '

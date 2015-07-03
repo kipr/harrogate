@@ -3,28 +3,8 @@ Path = require 'path'
 
 exec = require('child_process').exec
 
-copyFile = (source, target, cb) ->
-  cbCalled = false
-  rd = Fs.createReadStream(source)
-
-  done = (err) ->
-    if !cbCalled
-      cb err
-      cbCalled = true
-    return
-
-  rd.on 'error', (err) ->
-    done err
-    return
-  wr = Fs.createWriteStream(target)
-  wr.on 'error', (err) ->
-    done err
-    return
-  wr.on 'close', (ex) ->
-    done()
-    return
-  rd.pipe wr
-  return
+# assume that the install prefix of the kipr libraries is <harrogate>/../prefix/usr
+install_prefix = Path.resolve Path.resolve __dirname, '..', '..', '..', '..', '..' , 'prefix', 'usr'
 
 module.exports =
 
@@ -43,19 +23,15 @@ module.exports =
       cl_cmd = "/I\"#{project_resource.include_directory.path}\"
                 /Fe\"#{project_resource.bin_directory.path}\\#{project_resource.name}\" "
 
-      #aurora
-      aurora_base_path = Path.resolve __dirname, '..', '..', '..', '..', '..' , 'libaurora', 'build', 'install'
-      aurora_include_path = Path.resolve aurora_base_path, 'include'
-      aurora_lib_path = Path.resolve aurora_base_path, 'lib', 'aurora.lib'
-      aurora_bin_path = Path.resolve aurora_base_path, 'bin', 'aurora.dll'
-      cl_cmd += "/I\"#{aurora_include_path}\"
-                 /Fe\"#{project_resource.bin_directory.path}\\#{project_resource.name}\" "
+      # Add KIPR libraries include paths
+      cl_cmd += "/I\"#{Path.resolve(install_prefix, 'include')}\" "
 
       for src in src_files
         cl_cmd += "\"#{src.path}\" "
 
       #linker options
-      cl_cmd += "/link #{aurora_lib_path}"
+      #aurora
+      cl_cmd += "/link #{Path.resolve install_prefix, 'lib', 'aurora.lib'}"
 
       exec 'vs-cl-12.bat ' + cl_cmd, {cwd: Path.resolve(__dirname)}, cb
 
