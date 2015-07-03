@@ -23,6 +23,7 @@ These libraries are required to compile a robot program with harrogate.
 * libpng v 1.6
 * libbson v 1.1
 * daylite
+* libaurora
 
 Note: harrogate assumes that those dependencies are installed into `<harrogate-dir>\..\prefix\usr\`
 
