@@ -33,7 +33,7 @@ block view-content
         tab(heading='Console')
           terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input")
 
-        tab(heading='Graphics Window' select='select_graphics_window()' deselect='select_graphics_window()')
+        tab(heading='Graphics Window' select='select_graphics_window()' deselect='deselect_graphics_window()')
           .embed-responsive.embed-responsive-16by9
             img.embed-responsive-item#graphics_window(data-ng-src="{{img_src}}"
               data-ng-mousemove="gui_mousemove($event)"

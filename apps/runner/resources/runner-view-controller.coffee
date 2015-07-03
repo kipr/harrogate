@@ -17,6 +17,8 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
   events = undefined
   img_width = undefined
   img_height = undefined
+  
+  $scope.graphics_window_focus = false
 
   $scope.gui_mousemove = ($event) ->
     return if not img_width or not img_height
@@ -36,7 +38,6 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
     return
 
   $scope.gui_mousedown = ($event) ->
-
     msg = mouse: { button_down: {} }
     switch $event.which
       when 1 then msg.mouse.button_down['left'] = true
@@ -48,7 +49,6 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
     return
 
   $scope.gui_mouseup = ($event) ->
-
     msg = mouse: { button_down: {} }
     switch $event.which
       when 1 then msg.mouse.button_down['left'] = false
