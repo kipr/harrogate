@@ -18,7 +18,7 @@
 }
 
 /* Stretches a xxx bootstrap container over the full height */
-.row-stretch, .col-stretch, .panel-stretch
+.row-stretch, .col-stretch, .panel-stretch, .tabset-stretch
 {
     height: 100%;
 }
@@ -33,6 +33,23 @@
     max-height: calc(100% - 43.333px);
 
     overflow: auto;
+}
+
+.tabset-stretch > .tab-content
+{
+    height: calc(100% - 40px);
+
+    overflow: auto;
+}
+
+.tabset-stretch > .tab-content > .tab-pane
+{
+    height: 100%;
+}
+
+.terminal-stretch > .CodeMirror
+{
+    height: 100%;
 }
 
 .btn-toolbar

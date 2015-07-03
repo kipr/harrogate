@@ -1,9 +1,10 @@
 ﻿angular = require 'angular'
 require 'angular-route'
 
-app = angular.module 'harrogateIndexApp', ['ngRoute']
+app = angular.module 'harrogateIndexApp', ['ngRoute', 'ui.bootstrap']
 
 require('./app-catalog-provider.coffee').inject app
+require('./terminal-directive.coffee').inject app
 require('./user-manager-service.coffee').inject app
 
 # from http://stackoverflow.com/questions/14512583/how-to-generate-url-encoded-anchor-links-with-angularjs
@@ -69,7 +70,6 @@ app.directive 'setFocus', ($timeout, $parse) ->
       model = $parse(attrs.setFocus)
 
       scope.$watch model, (value) ->
-        console.log 'value=', value
         if value == true
 
           $timeout ->
@@ -78,7 +78,6 @@ app.directive 'setFocus', ($timeout, $parse) ->
         return
 
       element.bind 'blur', ->
-        console.log 'blur'
         scope.$apply model.assign(scope, false)
         return
       return

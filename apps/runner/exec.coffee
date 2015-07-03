@@ -19,6 +19,7 @@ class RunningProgram
 
 # the currently runned program
 running = null
+running_process = null
 
 # the socket.io namespace
 namespace = null
@@ -33,17 +34,18 @@ if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
 
 start_program = ->
   if running?.resource?
-    process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}", [], env: child_env
+    running_process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}", [], env: child_env
 
-    process.stdout.on 'data', (data) ->
+    running_process.stdout.on 'data', (data) ->
       namespace.emit events.stdout.id, data.toString('utf8')
       return
-    process.stderr.on 'data', (data) ->
+    running_process.stderr.on 'data', (data) ->
       namespace.emit events.stderr.id, data.toString('utf8')
       return
-    process.on 'exit', (code) ->
+    running_process.on 'exit', (code) ->
       namespace.emit events.stdout.id, "Program exited with code #{code}"
       running = null
+      running_process = null
       return
 
     setTimeout (->
@@ -147,6 +149,11 @@ runner_on_connection = (socket) ->
 
     if client? and data.keyboard?
       client.publish '/aurora/key', data.keyboard
+    return
+
+  socket.on events.stdin.id, (data) ->
+    if running_process?
+      running_process.stdin.write data + '\n'
     return
 
 module.exports =

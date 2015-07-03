@@ -15,41 +15,30 @@ block view-toolbar-left
         br
         small.small Restart
 
-  .btn-group
-     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='show_console()')
-        i.fa.fa-terminal
-        br
-        small.small Show Console
-     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='show_gui()')
-        i.fa.fa-desktop
-        br
-        small.small Show GUI
-     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='graphics_window_focus = true')
-        i.fa.fa-keyboard-o
-        br
-        small.small Keyboard Input
-
 block view-content
-  .row
-    .col-xs-3
-      .panel.panel-default
+  .row.row-stretch
+    .col-xs-3.col-stretch
+      .panel.panel-default.panel-stretch
         .panel-heading
           .panel-title Projects:
-        table.panel-body.table.tree-table
-          tbody
-            tr(data-ng-repeat = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
-              th
-              th {{project.name}}
+        .scrollable-panel-body-container
+          table.panel-body.table.tree-table
+            tbody
+              tr(data-ng-repeat = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
+                th
+                th {{project.name}}
 
-    .col-xs-9
-      .panel.panel-default(data-ng-show="console_mode")
-        textarea#runner.panel-body
-      .panel.panel-default(data-ng-show="!console_mode")
-        .embed-responsive.embed-responsive-16by9.panel-body
-          img.embed-responsive-item#graphics_window(data-ng-src="{{img_src}}"
-            data-ng-mousemove="gui_mousemove($event)"
-            data-ng-mousedown="gui_mousedown($event)"
-            data-ng-mouseup="gui_mouseup($event)"
-            oncontextmenu="return false;"
-            set-focus="graphics_window_focus"
-            tabindex="0")
+    .col-xs-9.col-stretch
+      tabset.tabset-stretch(type='pills')
+        tab(heading='Console')
+          terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input")
+
+        tab(heading='Graphics Window' select='select_graphics_window()' deselect='select_graphics_window()')
+          .embed-responsive.embed-responsive-16by9
+            img.embed-responsive-item#graphics_window(data-ng-src="{{img_src}}"
+              data-ng-mousemove="gui_mousemove($event)"
+              data-ng-mousedown="gui_mousedown($event)"
+              data-ng-mouseup="gui_mouseup($event)"
+              oncontextmenu="return false;"
+              set-focus="graphics_window_focus"
+              tabindex="0")

@@ -14,41 +14,6 @@ exports.inject = (app) ->
 exports.controller = ($scope, AppCatalogProvider) ->
   socket = undefined
   events = undefined
-  editor = undefined
-  read_only_ch = -1
-
-  on_enter = (e) ->
-    if socket? and events?
-      socket.emit events.stdin.id, e.getLine(e.lastLine()).substring(read_only_ch + 1)
-
-    read_only_ch = -1
-
-    return code_mirror.Pass
-
-  editor = code_mirror.fromTextArea(document.getElementById('terminal'),
-    lineNumbers: false
-    theme: 'eclipse'
-    extraKeys:
-      Enter: on_enter
-  )
-
-  editor.on 'beforeChange', (e, obj) ->
-    # allow only changes to the last line
-    if obj.to.line isnt e.lastLine()
-      obj.cancel()
-      return
-    # and only after read_only_ch
-    if obj.to.ch <= read_only_ch
-      obj.cancel()
-      return
-    return
-
-  append_text = (text) ->
-    if editor?
-      editor.replaceRange text, code_mirror.Pos(editor.lastLine())
-      editor.setCursor editor.lineCount(), 0
-      read_only_ch = editor.getCursor().ch - 1
-    return
 
   AppCatalogProvider.catalog.then (app_catalog) ->
     events =  app_catalog['Terminal']?.event_groups?.terminal_events.events
@@ -57,17 +22,22 @@ exports.controller = ($scope, AppCatalogProvider) ->
       socket = io ':8888' + events_namespace
 
       socket.on events.stdout.id, (msg) ->
-        append_text msg
+        $scope.$broadcast 'terminal-output', msg
         return
 
       socket.on events.stderr.id, (msg) ->
-        append_text msg
+        $scope.$broadcast 'terminal-output', msg
         return
 
     return
 
+  $scope.$on 'terminal-input', (event, text) ->
+    if socket? and events?
+      socket.emit events.stdin.id, text
+    return
+
   $scope.restart = ->
-    append_text '\n\n\n'
+    $scope.$broadcast 'terminal-output', '\n\n\n'
 
     if socket? and events?
       socket.emit events.restart.id

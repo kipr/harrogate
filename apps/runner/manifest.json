@@ -16,6 +16,11 @@
     "runner_events": {
       "namespace": "/runner",
       "events": {
+        "stdin": {
+          "id": "stdin",
+          "publisher": "CLIENT",
+          "description": "stdin sent to the program."
+        },
         "stdout": {
           "id": "stdout",
           "publisher": "SERVER",

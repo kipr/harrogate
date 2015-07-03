@@ -15,19 +15,8 @@ exports.inject = (app) ->
 exports.controller = ($scope, $http, AppCatalogProvider) ->
   socket = undefined
   events = undefined
-  editor = undefined
   img_width = undefined
   img_height = undefined
-
-  $scope.console_mode = true
-
-  $scope.show_console = ->
-    $scope.console_mode = true
-    return
-
-  $scope.show_gui = ->
-    $scope.console_mode = false
-    return
 
   $scope.gui_mousemove = ($event) ->
     return if not img_width or not img_height
@@ -72,27 +61,34 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
 
   pressed_keys = []
 
-  document.getElementById('graphics_window').addEventListener 'keydown', (event) ->
+  keydown_event = (event) ->
     if pressed_keys.indexOf(event.keyCode) is -1
       pressed_keys.push event.keyCode
       msg = keyboard: { key_pressed: pressed_keys }
       socket.emit events.gui_input.id, msg
-
+ 
     event.preventDefault()
     return false
 
-  document.getElementById('graphics_window').addEventListener 'keyup', (event) ->
+  keyup_event = (event) ->
     pressed_keys.splice index, 1 if (index = pressed_keys.indexOf event.keyCode) isnt -1
     msg = keyboard: { key_pressed: pressed_keys }
     socket.emit events.gui_input.id, msg
-
+ 
     event.preventDefault()
     return false
 
-  editor = CodeMirror.fromTextArea(document.getElementById('runner'),
-    lineNumbers: false
-    theme: 'eclipse'
-  )
+  $scope.select_graphics_window = ->
+    $scope.graphics_window_focus = true
+    document.getElementById('graphics_window').addEventListener 'keydown', keydown_event
+    document.getElementById('graphics_window').addEventListener 'keyup', keyup_event
+    return
+
+  $scope.deselect_graphics_window = ->
+    $scope.graphics_window_focus = false
+    document.getElementById('graphics_window').removeEventListener 'keydown', keydown_event
+    document.getElementById('graphics_window').removeEventListener 'keyup', keyup_event
+    return
 
   AppCatalogProvider.catalog.then (app_catalog) ->
     projects_resource = app_catalog['Programs']?.web_api?.projects
@@ -117,12 +113,6 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
       $scope.selected_project = project
     return
 
-  append_text = (text) ->
-    if editor?
-      editor.replaceRange text, CodeMirror.Pos(editor.lastLine())
-      editor.setCursor editor.lineCount(), 0
-    return
-
   AppCatalogProvider.catalog.then (app_catalog) ->
     events =  app_catalog['Runner']?.event_groups?.runner_events.events
     events_namespace =  app_catalog['Runner']?.event_groups?.runner_events.namespace
@@ -130,11 +120,11 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
       socket = Io ':8888' + events_namespace
 
       socket.on events.stdout.id, (msg) ->
-        append_text msg
+        $scope.$broadcast 'runner-program-output', msg
         return
 
       socket.on events.stderr.id, (msg) ->
-        append_text msg
+        $scope.$broadcast 'runner-program-output', msg
         return
 
       socket.on events.frame.id, (msg) ->
@@ -145,6 +135,11 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
           $scope.img_src = "data:image/png;base64,#{msg.data}"
           return
 
+    return
+
+  $scope.$on 'runner-program-input', (event, text) ->
+    if socket? and events?
+      socket.emit events.stdin.id, text
     return
 
   $scope.restart = ->

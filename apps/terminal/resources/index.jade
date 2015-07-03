@@ -8,5 +8,8 @@ block view-toolbar-left
         small.small Restart
 
 block view-content
-  .panel.panel-default
-    textarea#terminal.panel-body
+  .panel.panel-default.panel-stretch
+    .scrollable-panel-body-container
+    terminal.terminal-stretch(output-event="terminal-output"
+      input-event="terminal-input"
+      reset-event="terminal-reset")
