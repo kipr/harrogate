@@ -34,6 +34,8 @@ if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
 
 start_program = ->
   if running?.resource?
+    namespace.emit events.starting.id, running.resource.name
+
     running_process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}", [], env: child_env
 
     running_process.stdout.on 'data', (data) ->
@@ -44,6 +46,7 @@ start_program = ->
       return
     running_process.on 'exit', (code) ->
       namespace.emit events.stdout.id, "Program exited with code #{code}"
+      namespace.emit events.ended.id
       running = null
       running_process = null
       return

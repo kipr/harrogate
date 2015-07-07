@@ -71,6 +71,7 @@
     <Content Include="apps\user\rest-resources\user-resource.coffee" />
     <Content Include="settings.json" />
     <Content Include="shared\client\css\style.css" />
+    <Content Include="shared\client\scripts\program-service.coffee" />
     <Content Include="shared\client\scripts\terminal-directive.coffee" />
     <Content Include="shared\client\scripts\user-manager-service.coffee" />
     <Content Include="shared\client\views\templates\app-view-layout.jade" />

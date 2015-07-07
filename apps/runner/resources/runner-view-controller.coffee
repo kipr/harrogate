@@ -8,16 +8,19 @@ exports.inject = (app) ->
     '$scope'
     '$http'
     'AppCatalogProvider'
+    'ProgramService'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $http, AppCatalogProvider) ->
+exports.controller = ($scope, $http, AppCatalogProvider, ProgramService) ->
+  $scope.ProgramService = ProgramService
+
   socket = undefined
   events = undefined
   img_width = undefined
   img_height = undefined
-  
+
   $scope.graphics_window_focus = false
 
   $scope.gui_mousemove = ($event) ->
@@ -142,46 +145,19 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
       socket.emit events.stdin.id, text
     return
 
-  $scope.launch = ->
+  $scope.run = ->
     if $scope.selected_project?
-      $http.post('/api/run', {name: $scope.selected_project.name})
-
-      .success (data, status, headers, config) ->
-        return
-
-      .error (data, status, headers, config) ->
-        console.log "Could not post to /api/run"
-        return
-
+      ProgramService.run $scope.selected_project.name
     return
 
   $scope.stop = ->
-    $http.delete('/api/run/current')
-
-    .success (data, status, headers, config) ->
-      return
-
-    .error (data, status, headers, config) ->
-      console.log "Could not post to /api/run"
-      return
-
+    ProgramService.stop()
     return
 
   $scope.restart = ->
-    $http.delete('/api/run/current')
-
-    .success (data, status, headers, config) ->
+    ProgramService.stop()
+    .then ->
       if $scope.selected_project?
-        $http.post('/api/run', {name: $scope.selected_project.name})
+        return ProgramService.run $scope.selected_project.name
 
-        .success (data, status, headers, config) ->
-          return
-
-        .error (data, status, headers, config) ->
-          console.log "Could not post to /api/run"
-          return
-      return
-    
     return
-
-  return

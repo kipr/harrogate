@@ -16,6 +16,16 @@
     "runner_events": {
       "namespace": "/runner",
       "events": {
+        "starting": {
+          "id": "starting",
+          "publisher": "SERVER",
+          "description": "Sent before the program is started."
+        },
+        "ended": {
+          "id": "ended",
+          "publisher": "SERVER",
+          "description": "Sent after the program has ended."
+        },
         "stdin": {
           "id": "stdin",
           "publisher": "CLIENT",
