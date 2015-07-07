@@ -142,9 +142,6 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
       socket.emit events.stdin.id, text
     return
 
-  $scope.restart = ->
-    return
-
   $scope.launch = ->
     if $scope.selected_project?
       $http.post('/api/run', {name: $scope.selected_project.name})
@@ -156,6 +153,35 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
         console.log "Could not post to /api/run"
         return
 
+    return
+
+  $scope.stop = ->
+    $http.delete('/api/run/current')
+
+    .success (data, status, headers, config) ->
+      return
+
+    .error (data, status, headers, config) ->
+      console.log "Could not post to /api/run"
+      return
+
+    return
+
+  $scope.restart = ->
+    $http.delete('/api/run/current')
+
+    .success (data, status, headers, config) ->
+      if $scope.selected_project?
+        $http.post('/api/run', {name: $scope.selected_project.name})
+
+        .success (data, status, headers, config) ->
+          return
+
+        .error (data, status, headers, config) ->
+          console.log "Could not post to /api/run"
+          return
+      return
+    
     return
 
   return

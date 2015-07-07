@@ -76,6 +76,16 @@ start_program = ->
       ), 1000
   return
 
+stop_program = -> 
+  if running_process?
+    running_process.kill()
+    running_process = null
+
+  if running?
+    running = null
+
+  return
+
 # the runner router
 router = Express.Router()
 
@@ -136,8 +146,9 @@ router.post '/', (request, response, next) ->
   .done()
   return
 
-# get information about the currently running program
+# stop the currently running program
 router.delete '/current', (request, response, next) ->
+  stop_program()
   response.writeHead 200, { 'Content-Type': 'application/json' }
   return response.end "#{JSON.stringify(running: running)}", 'utf8'
 

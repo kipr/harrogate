@@ -2,15 +2,15 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group
-     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='launch()')
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-class='{disabled: !selected_project}' data-ng-click='launch()')
         i.fa.fa-play
         br
         small.small Launch
-     button.btn.btn-default.btn-toolbar.disabled(type='button', data-ng-click='stop()')
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='stop()')
         i.fa.fa-stop
         br
         small.small Stop
-     button.btn.btn-default.btn-toolbar.disabled(type='button', data-ng-click='restart()')
+     button.btn.btn-default.btn-toolbar(type='button', data-ng-click='restart()')
         i.fa.fa-refresh
         br
         small.small Restart
