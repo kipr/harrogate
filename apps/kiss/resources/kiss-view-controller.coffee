@@ -341,6 +341,12 @@ exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
 
     return
 
+  $scope.indent = ->
+    editor.execCommand 'selectAll'
+    editor.execCommand 'indentAuto'
+    editor.setCursor editor.lineCount(), 0
+    return
+
   $scope.compile = ->
     if $scope.selected_project?
       if $scope.displayed_file? 

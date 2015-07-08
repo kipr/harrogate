@@ -30,6 +30,12 @@ block view-toolbar-left
         small.small Redo
 
   .btn-group
+    button.btn.btn-toolbar.btn-default(type='button',  data-ng-class="{'disabled' : !displayed_file}", data-ng-click='indent()')
+      i.fa.fa-indent
+        br
+        small.small Indent
+
+  .btn-group
     button.btn.btn-toolbar.btn-default(type='button',  data-ng-class="{'disabled' : !selected_project || !project_resource.source_files}", data-ng-click='compile()')
       i.fa.fa-link
         br
