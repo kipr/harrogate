@@ -4,9 +4,13 @@ require 'angular-route'
 app = angular.module 'harrogateIndexApp', ['ngRoute', 'ui.bootstrap']
 
 require('./app-catalog-provider.coffee').inject app
-require('./program-service.coffee').inject app
 require('./terminal-directive.coffee').inject app
 require('./user-manager-service.coffee').inject app
+
+# inject the apps
+for app_name, app_obj of app_catalog
+  if app_obj.angular_ctrl?
+    require(app_name).inject app
 
 # from http://stackoverflow.com/questions/14512583/how-to-generate-url-encoded-anchor-links-with-angularjs
 app.filter 'escape', ->
@@ -49,8 +53,6 @@ app.config([
     # add the routes for the apps
     for app_name, app_obj of app_catalog
       if app_obj.angular_ctrl?
-        require(app_name).inject app
-    
         $routeProvider.when(app_obj.angularjs_route,
           templateUrl: app_obj.nodejs_route
           controller: require(app_name).controller

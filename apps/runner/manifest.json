@@ -5,7 +5,7 @@
   "exec": "exec.coffee",
   "description": "Runs a user program",
   "category": "System",
-  "angular_ctrl": "resources/runner-view-controller.coffee",
+  "angular_ctrl": "resources/runner-injector.coffee",
   "web_api": {
     "run": {
       "uri": "/api/run",

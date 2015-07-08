@@ -12,13 +12,14 @@ html(lang="en" data-ng-app='harrogateIndexApp')
     script(src='/scripts/jquery.min.js')
     script(src='/scripts/bootstrap.min.js')
     meta(name='viewport', content=['width=device-width', 'initial-scale=1', 'maximum-scale=1', 'user-scalable=no'])
-    script(src='/scripts/harrogate-index-app.js')
-    script(src='/scripts/ui-bootstrap-tpls.min.js')
 
-    // Load the app catalog
     script(type='text/javascript').
       var app_catalog = undefined; function app_catalog_jsonp_callback(data){app_catalog = data;}
     script(src='/apps/catalog.json?callback=app_catalog_jsonp_callback')
+
+    script(src='/scripts/harrogate-index-app.js')
+    script(src='/scripts/ui-bootstrap-tpls.min.js')
+
   body
     // App view container
     #view-container(data-ng-view='')

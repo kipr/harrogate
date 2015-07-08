@@ -31,6 +31,7 @@
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.coffee" />
     <Content Include="apps\home\resources\index.jade" />
     <Content Include="apps\programs\api-routes\projects.coffee" />
+    <Content Include="apps\runner\resources\runner-injector.coffee" />
     <Content Include="apps\sensors\exec.coffee" />
     <Content Include="apps\sensors\manifest.json" />
     <Content Include="apps\sensors\resources\index.jade" />
@@ -71,7 +72,7 @@
     <Content Include="apps\user\rest-resources\user-resource.coffee" />
     <Content Include="settings.json" />
     <Content Include="shared\client\css\style.css" />
-    <Content Include="shared\client\scripts\program-service.coffee" />
+    <Content Include="apps\runner\resources\program-service.coffee" />
     <Content Include="shared\client\scripts\terminal-directive.coffee" />
     <Content Include="shared\client\scripts\user-manager-service.coffee" />
     <Content Include="shared\client\views\templates\app-view-layout.jade" />
