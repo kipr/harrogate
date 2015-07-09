@@ -38,6 +38,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     return
 
   close_file = ->
+    $scope.compiler_output = ''
     $scope.displayed_file = null
     editor.setValue ''
     $scope.documentChanged = false

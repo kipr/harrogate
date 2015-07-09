@@ -23,6 +23,17 @@
     height: 100%;
 }
 
+.row-stretch-60
+{
+    height: 60%;
+}
+
+.row-stretch-40
+{
+    height: 40%;
+    padding-top: 5px;
+}
+
 .panel-stretch
 {
     margin-bottom: -20px;

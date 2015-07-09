@@ -132,19 +132,26 @@ block view-content
                 | Add Project
 
     .col-md-9.col-stretch
-      .panel.panel-default(data-ng-show="displayed_file")
-        .panel-heading
-          .panel-title
-            | {{displayed_file ? displayed_file.name : 'Unnamed File'}}
+      .row(data-ng-class="{'row-stretch-60' : compiler_output, 'row-stretch' : !compiler_output}")
+        .col-xs-12.col-stretch
+          .panel.panel-default.panel-stretch(data-ng-show="displayed_file")
+            .panel-heading
+              .panel-title
+                | {{displayed_file ? displayed_file.name : 'Unnamed File'}}
 
-        textarea#editor.panel-body
+            .scrollable-panel-body-container
+              textarea#editor.panel-body.terminal-stretch
 
-      .panel.panel-default(data-ng-show="compiler_output")
-        .panel-heading
-          .panel-title Compilation Output
+      .row.row-stretch-40(data-ng-show="compiler_output")
+        .col-xs-12.col-stretch
+          .panel.panel-default.panel-stretch
+            .panel-heading
+              button.close(type='button' data-ng-click='compiler_output = ""') &times;
+              .panel-title Compilation Output
 
-        pre.panel-body
-          code {{compiler_output}}
+            .scrollable-panel-body-container
+              pre.panel-body
+                code {{compiler_output}}
 
   // Modals
   #new-include-file.modal.fade(role='dialog')
@@ -159,6 +166,7 @@ block view-content
             .form-group
               label(for='includeFileName') Include file name
               input#includeFileName.form-control(type='text' placeholder='Include file name')
+
         .modal-footer
           button.btn.btn-default(data-dismiss='modal') Cancel
           button.btn.btn-primary(data-ng-click='add_include_file()') Create
@@ -175,6 +183,7 @@ block view-content
             .form-group
               label(for='sourceFileName') Source file name
               input#sourceFileName.form-control(type='text' placeholder='Source file name')
+
         .modal-footer
           button.btn.btn-default(data-dismiss='modal') Cancel
           button.btn.btn-primary(data-ng-click='add_source_file()') Create
@@ -191,6 +200,7 @@ block view-content
             .form-group
               label(for='dataFileName') User data file name
               input#dataFileName.form-control(type='text' placeholder='User data file name')
+
         .modal-footer
           button.btn.btn-default(data-dismiss='modal') Cancel
           button.btn.btn-primary(data-ng-click='add_data_file()') Create
@@ -207,6 +217,7 @@ block view-content
             .form-group
               label(for='projectName') Project name
               input#projectName.form-control(type='text' placeholder='Project name')
+
         .modal-footer
           button.btn.btn-default(data-dismiss='modal') Cancel
           button.btn.btn-primary(data-ng-click='add_project()') Create

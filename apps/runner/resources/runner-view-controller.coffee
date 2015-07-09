@@ -159,6 +159,7 @@ exports.controller = ($scope, $http, AppCatalogProvider, ProgramService) ->
     ProgramService.stop()
     .then ->
       if $scope.selected_project?
+        $scope.$broadcast "runner-reset-terminal"
         return ProgramService.run $scope.selected_project.name
 
     return
