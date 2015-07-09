@@ -118,18 +118,18 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
       $scope.selected_project = null
       $scope.selected_file = null
 
-      $scope.include_files_expanded = true
+      $scope.include_files_expanded = false
       $scope.src_files_expanded = true
-      $scope.data_files_expanded = true
+      $scope.data_files_expanded = false
 
     else
       close_file()
       $scope.selected_project = project
       $scope.selected_file = null
 
-      $scope.include_files_expanded = true
+      $scope.include_files_expanded = false
       $scope.src_files_expanded = true
-      $scope.data_files_expanded = true
+      $scope.data_files_expanded = false
 
       # load project files
       $http.get(project.links.self.href)

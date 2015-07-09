@@ -40,7 +40,7 @@ block view-toolbar-left
       i.fa.fa-link
         br
         small.small Compile
-    button.btn.btn-toolbar.btn-default.disabled(type='button')
+    a.btn.btn-toolbar.btn-default(type='button' data-ng-class="{'disabled' : !selected_project}" href='/#/apps/runner')
       i.fa.fa-rocket
         br
         small.small Run
