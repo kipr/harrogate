@@ -6,14 +6,16 @@ exports.name = 'KissViewController'
 exports.inject = (app) ->
   app.controller exports.name, [
     '$scope'
+    '$rootScope'
     '$location'
     '$http'
+    '$modal'
     'AppCatalogProvider'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
+exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogProvider) ->
 
   open_file = (file_uri) ->
     close_file()
@@ -52,6 +54,12 @@ exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
     $scope.$apply ->
       $scope.documentChanged = true
       return
+    return
+
+  saving = false
+  editor.on 'beforeChange', (e, obj) ->
+    if saving
+      obj.cancel()
     return
 
   # do we have to open a file?
@@ -157,17 +165,51 @@ exports.controller = ($scope, $location, $http, AppCatalogProvider) ->
 
   $scope.save = ->
     if $scope.displayed_file?
+      saving = true
       save_file()
 
       .success (data, status, headers, config) ->
-        alert 'saved'
+        saving = false
         $scope.documentChanged = false
         return
 
       .error (data, status, headers, config) ->
-        console.log "Could not get #{file_uri}"
+        saving = false
         return
 
+    return
+
+  on_window_beforeunload = ->
+    if $scope.documentChanged
+      return 'You have unsaved changes. Are you sure you want to leave this page and discard your changes?'
+    else
+      return
+
+  window.addEventListener 'beforeunload', on_window_beforeunload
+
+  onRouteChangeOff = $rootScope.$on '$locationChangeStart', (event, newUrl) ->
+    if $scope.documentChanged
+      modalInstance = $modal.open(
+        templateUrl: 'apps/kiss/discard-change-modal.html'
+        controller: 'DiscardChangeModalController'
+      )
+      modalInstance.result.then (button) ->
+        $scope.save()
+        $location.path newUrl.substring($location.absUrl().length - ($location.url().length))
+        onRouteChangeOff()
+        window.removeEventListener 'beforeunload', on_window_beforeunload
+        return
+      , (button) ->
+        if button is 'Discard'
+          $location.path newUrl.substring($location.absUrl().length - ($location.url().length))
+          onRouteChangeOff()
+          window.removeEventListener 'beforeunload', on_window_beforeunload
+        return
+
+      event.preventDefault()
+    else
+      onRouteChangeOff()
+      window.removeEventListener 'beforeunload', on_window_beforeunload
     return
 
   $scope.refresh = ->

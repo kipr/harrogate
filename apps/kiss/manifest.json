@@ -5,5 +5,5 @@
   "fonticon": "fa-file-code-o",
   "description": "Edit and compile programs for the device",
   "category": "General",
-  "angular_ctrl": "resources/kiss-view-controller.coffee"
+  "angular_ctrl": "resources/kiss-injector.coffee"
 }

@@ -30,6 +30,9 @@
     <Content Include="apps\compiler\compilation-environments\c\gcc.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.coffee" />
     <Content Include="apps\home\resources\index.jade" />
+    <Content Include="apps\kiss\resources\discard-change-modal-controller.coffee" />
+    <Content Include="apps\kiss\resources\discard-change-modal.jade" />
+    <Content Include="apps\kiss\resources\kiss-injector.coffee" />
     <Content Include="apps\programs\api-routes\projects.coffee" />
     <Content Include="apps\runner\resources\runner-injector.coffee" />
     <Content Include="apps\sensors\exec.coffee" />
