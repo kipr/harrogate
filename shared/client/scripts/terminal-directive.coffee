@@ -37,7 +37,12 @@ exports.directive = ->
           Enter: on_enter
       )
 
+      reset_mode = false
+
       editor.on 'beforeChange', (e, obj) ->
+        # allow changes if we are in reset_mode
+        return if reset_mode
+
         # allow only changes to the last line
         if obj.to.line isnt e.lastLine()
           obj.cancel()
@@ -57,9 +62,11 @@ exports.directive = ->
 
       if $scope.resetEvent?
         $scope.$on $scope.resetEvent, (event) ->
+          reset_mode = true
           editor.setValue ''
           editor.setCursor editor.lineCount(), 0
           read_only_ch = editor.getCursor().ch - 1
+          reset_mode = false
           return
 
       return

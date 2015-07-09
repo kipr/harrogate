@@ -31,7 +31,7 @@ block view-content
     .col-xs-9.col-stretch
       tabset.tabset-stretch(type='pills')
         tab(heading='Console')
-          terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input")
+          terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input" reset-event="runner-reset-terminal")
 
         tab(heading='Graphics Window' select='select_graphics_window()' deselect='deselect_graphics_window()')
           .embed-responsive.embed-responsive-16by9
