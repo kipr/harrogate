@@ -2,7 +2,7 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group
-    button.btn.btn-toolbar(type='button', data-ng-class="{'disabled' : !documentChanged || !displayed_file, 'btn-danger' : documentChanged}", data-ng-click='save()')
+    button.btn.btn-toolbar(type='button', data-ng-class="{'disabled' : !documentChanged || !displayed_file, 'btn-success' : !documentChanged && displayed_file, 'btn-danger' : documentChanged}", data-ng-click='save()')
       i.fa.fa-floppy-o
         br
         small.small Save
