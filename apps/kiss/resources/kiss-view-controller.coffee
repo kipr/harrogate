@@ -395,7 +395,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
         save_file()
 
         .success (data, status, headers, config) ->
-          alert 'saved'
           $scope.documentChanged = false
           $http.post('/api/compile', {name: $scope.selected_project.name})
 
