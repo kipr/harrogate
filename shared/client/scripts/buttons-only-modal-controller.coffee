@@ -21,4 +21,8 @@ exports.controller = ($scope, $modalInstance, title, content, button_captions) -
     $modalInstance.close button
     return
 
+  $scope.dismiss = ->
+    $modalInstance.dismiss()
+    return
+
   return

@@ -1,11 +1,11 @@
 ﻿.modal-header
-  button.close(type='button' dismiss='modal') &times;
+  button.close(type='button' ng-click='dismiss()') &times;
   h4.modal-title {{title}}
 
 .modal-body
   p {{content}}
 
 .modal-footer
-  button.btn(ng-repeat='button_caption in button_captions',
+  button.btn(ng-repeat='button_caption in button_captions'
              ng-class='{"btn-primary": $first, "btn-default": !$first}'
              ng-click='click(button_caption)') {{button_caption}}
