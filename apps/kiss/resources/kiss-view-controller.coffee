@@ -191,17 +191,20 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
   onRouteChangeOff = $rootScope.$on '$locationChangeStart', (event, newUrl) ->
     if $scope.documentChanged
       modalInstance = $modal.open(
-        templateUrl: 'apps/kiss/discard-change-modal.html'
-        controller: 'DiscardChangeModalController'
+        templateUrl: 'buttons-only-modal.html'
+        controller: 'ButtonsOnlyModalController'
+        resolve:
+          title: -> 'You have unsaved changes'
+          content: -> 'You have unsaved changes! Would you like to save them before leaving this page?'
+          button_captions: -> [ 'Save', 'Discard', 'Cancel' ]
       )
       modalInstance.result.then (button) ->
-        $scope.save()
-        $location.path newUrl.substring($location.absUrl().length - ($location.url().length))
-        onRouteChangeOff()
-        window.removeEventListener 'beforeunload', on_window_beforeunload
-        return
-      , (button) ->
-        if button is 'Discard'
+        if button is 'Save'
+          $scope.save()
+          $location.path newUrl.substring($location.absUrl().length - ($location.url().length))
+          onRouteChangeOff()
+          window.removeEventListener 'beforeunload', on_window_beforeunload
+        else if button is 'Discard'
           $location.path newUrl.substring($location.absUrl().length - ($location.url().length))
           onRouteChangeOff()
           window.removeEventListener 'beforeunload', on_window_beforeunload
