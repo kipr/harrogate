@@ -29,24 +29,24 @@ block view-content
           th Language
           th 
       tbody
-        tr(data-ng-repeat = "project in ws.projects" data-ng-class='{active: selected === project}' data-ng-click='select_project(project)')
+        tr(ng-repeat = "project in ws.projects" ng-class='{active: selected === project}' ng-click='select_project(project)')
           th(scope="row") {{project.name}}
           td {{project.parameters.language}}
           td 
             span.btn-group-xs.pull-right
-              button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
+              button.btn.btn-default.disabled(type='button' ng-show="selected === project")
                 i.fa.fa-play
                 |  
                 small.small Run
-              button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
+              button.btn.btn-default.disabled(type='button' ng-show="selected === project")
                 i.fa.fa-folder-open-o
                 |  
                 small.small Open
-              a.btn.btn-default.disabled(type='button' data-ng-show="selected === project" data-ng-href="{TBD}}?mode=raw" download)
+              a.btn.btn-default.disabled(type='button' ng-show="selected === project" ng-href="{TBD}}?mode=raw" download)
                 i.fa.fa-download
                 |  
                 small.small Download
-              button.btn.btn-default.disabled(type='button' data-ng-show="selected === project")
+              button.btn.btn-default.disabled(type='button' ng-show="selected === project")
                 i.fa.fa-trash-o
                 |  
                 small.small Delete

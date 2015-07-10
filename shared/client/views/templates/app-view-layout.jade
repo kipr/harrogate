@@ -52,9 +52,9 @@ nav.navbar.navbar-default.navbar-fixed-bottom.desktop-only#status-bar(ng-control
       .form-group.btn-group-xs
         label.small User:
         |  
-        a.btn.btn-xs(type="button" href='/#/apps/user' data-ng-class="{'btn-success' : current_user, 'btn-warning' : !current_user}")
-          i.fa.fa-user(data-ng-show="current_user")
-          i.fa.fa-user-times(data-ng-show="!current_user")
+        a.btn.btn-xs(type="button" href='/#/apps/user' ng-class="{'btn-success' : current_user, 'btn-warning' : !current_user}")
+          i.fa.fa-user(ng-show="current_user")
+          i.fa.fa-user-times(ng-show="!current_user")
           |  
           |  {{current_user ? current_user.login : ""}}
 

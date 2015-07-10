@@ -2,15 +2,15 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group
-     button.btn.btn-default.btn-toolbar(type='button' data-ng-class='{disabled: !selected_project}' data-ng-click='run()')
+     button.btn.btn-default.btn-toolbar(type='button' ng-class='{disabled: !selected_project}' ng-click='run()')
         i.fa.fa-play
         br
         small.small Run
-     button.btn.btn-default.btn-toolbar(type='button' data-ng-class='{disabled: !ProgramService.running}' data-ng-click='stop()')
+     button.btn.btn-default.btn-toolbar(type='button' ng-class='{disabled: !ProgramService.running}' ng-click='stop()')
         i.fa.fa-stop
         br
         small.small Stop
-     button.btn.btn-default.btn-toolbar(type='button' data-ng-class='{disabled: !ProgramService.running}' data-ng-click='restart()')
+     button.btn.btn-default.btn-toolbar(type='button' ng-class='{disabled: !ProgramService.running}' ng-click='restart()')
         i.fa.fa-refresh
         br
         small.small Restart
@@ -24,7 +24,7 @@ block view-content
         .scrollable-panel-body-container
           table.panel-body.table.tree-table
             tbody
-              tr(data-ng-repeat = "project in ws.projects" data-ng-class='{info: selected_project === project}' data-ng-click='select_project(project)')
+              tr(ng-repeat = "project in ws.projects" ng-class='{info: selected_project === project}' ng-click='select_project(project)')
                 th
                 th {{project.name}}
 
@@ -35,10 +35,10 @@ block view-content
 
         tab(heading='Graphics Window' select='select_graphics_window()' deselect='deselect_graphics_window()')
           .embed-responsive.embed-responsive-16by9
-            img.embed-responsive-item#graphics_window(data-ng-src="{{img_src}}"
-              data-ng-mousemove="gui_mousemove($event)"
-              data-ng-mousedown="gui_mousedown($event)"
-              data-ng-mouseup="gui_mouseup($event)"
+            img.embed-responsive-item#graphics_window(ng-src="{{img_src}}"
+              ng-mousemove="gui_mousemove($event)"
+              ng-mousedown="gui_mousedown($event)"
+              ng-mouseup="gui_mouseup($event)"
               oncontextmenu="return false;"
               set-focus="graphics_window_focus"
               tabindex="0")
