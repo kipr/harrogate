@@ -25,9 +25,7 @@ gulp.task 'default', ['dev']
 
 # Start the development server
 gulp.task 'dev', [
-  'shared'
-  'apps'
-  'watch'
+  'create'
 ], ->
   nodemon(
     script: 'server.js'
@@ -37,6 +35,13 @@ gulp.task 'dev', [
     console.log 'restarted!'
     return
   return
+
+# Create all
+gulp.task 'create', [
+  'shared'
+  'apps'
+  'watch'
+], ->
 
 # Create the shared static content
 gulp.task 'shared', [
