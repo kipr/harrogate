@@ -7,19 +7,21 @@ mixin app(name, fonticon, descr, url)
       p #{descr}
 
 - for(var i = 0; i < apps.length; ++i) {
-.panel.panel-primary
-  .panel-heading
-    .panel-title #{apps[i]['name']}
-  .panel-body
-    - for(var j = 0; j < apps[i]['list'].length; ++j) {
-    .row
-      // left column
-      .col-md-6
-        +app(apps[i]['list'][j]['name'], apps[i]['list'][j]['fonticon'], apps[i]['list'][j]['description'], apps[i]['list'][j]['url'])
-      // right column
-      .col-md-6
-        - ++j
-        - if(j < apps[i]['list'].length)
+  - if(apps[i]['list'].length > 0) {
+  .panel.panel-primary
+    .panel-heading
+      .panel-title #{apps[i]['name']}
+    .panel-body
+      - for(var j = 0; j < apps[i]['list'].length; ++j) {
+      .row
+        // left column
+        .col-md-6
           +app(apps[i]['list'][j]['name'], apps[i]['list'][j]['fonticon'], apps[i]['list'][j]['description'], apps[i]['list'][j]['url'])
-    -}
+        // right column
+        .col-md-6
+          - ++j
+          - if(j < apps[i]['list'].length)
+            +app(apps[i]['list'][j]['name'], apps[i]['list'][j]['fonticon'], apps[i]['list'][j]['description'], apps[i]['list'][j]['url'])
+      -}
+  - }
 - }
