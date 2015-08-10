@@ -20,10 +20,6 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
         $scope.settings = data
         return
 
-      .error (data, status, headers, config) ->
-        console.log "Could not get #{uri}"
-        return
-
     return
 
   return

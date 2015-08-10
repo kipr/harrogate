@@ -20,10 +20,6 @@ exports.controller = ($scope, $http, AppCatalogProvider) ->
         $scope.ws = data
         return
 
-      .error (data, status, headers, config) ->
-        console.log "Could not get #{uri}"
-        return
-
     return
 
   $scope.select_project = (project) ->

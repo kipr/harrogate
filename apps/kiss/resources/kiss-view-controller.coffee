@@ -31,10 +31,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
         editor.refresh()
       return
 
-    .error (data, status, headers, config) ->
-      console.log "Could not get #{file_uri}"
-      return
-
     return
 
   close_file = ->
@@ -75,10 +71,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
 
       .success (data, status, headers, config) ->
         $scope.ws = data
-        return
-
-      .error (data, status, headers, config) ->
-        console.log "Could not get #{uri}"
         return
 
     return
@@ -136,9 +128,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
       .success (data, status, headers, config) ->
         $scope.project_resource = data
         return
-      .error (data, status, headers, config) ->
-        console.log "Could not get #{project.links.self.href}"
-        return
+
     return
 
   $scope.selected_file_categorie = null
@@ -251,16 +241,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
                 $scope.ws = data
                 return
 
-              .error (data, status, headers, config) ->
-                console.log "Could not get #{uri}"
-                return
-
             return
 
-          return
-
-        .error (data, status, headers, config) ->
-          console.log "Could not get #{$scope.project_resource.links.include_directory.href}"
           return
 
         return
@@ -291,16 +273,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
                 $scope.ws = data
                 return
 
-              .error (data, status, headers, config) ->
-                console.log "Could not get #{uri}"
-                return
-
             return
 
-          return
-
-        .error (data, status, headers, config) ->
-          console.log "Could not get #{$scope.project_resource.links.src_directory.href}"
           return
 
         return
@@ -331,16 +305,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
                 $scope.ws = data
                 return
 
-              .error (data, status, headers, config) ->
-                console.log "Could not get #{uri}"
-                return
-
             return
 
-          return
-
-        .error (data, status, headers, config) ->
-          console.log "Could not get #{$scope.project_resource.links.data_directory.href}"
           return
 
         return
@@ -371,16 +337,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
                 $scope.ws = data
                 return
 
-              .error (data, status, headers, config) ->
-                console.log "Could not get #{uri}"
-                return
-
             return
 
-          return
-
-        .error (data, status, headers, config) ->
-          console.log "Could not get #{projects_resource.uri}"
           return
 
       return
@@ -410,10 +368,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
             console.log "Could not post to /api/compile"
             return
 
-          return
-
-        .error (data, status, headers, config) ->
-          console.log "Could not get #{file_uri}"
           return
 
       else

@@ -21,10 +21,6 @@ exports.controller = ($scope, $http, AppCatalogProvider, UserManagerService) ->
       $scope.current = data
       return
 
-    .error (data, status, headers, config) ->
-      console.log "Could not get #{uri}"
-      return
-
     return
   
   root_dir_uri = undefined
