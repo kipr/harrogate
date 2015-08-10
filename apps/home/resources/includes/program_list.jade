@@ -19,6 +19,7 @@ mixin app(name, fonticon, descr, url)
       // right column
       .col-md-6
         - ++j
-        +app(apps[i]['list'][j]['name'], apps[i]['list'][j]['fonticon'], apps[i]['list'][j]['description'], apps[i]['list'][j]['url'])
+        - if(j < apps[i]['list'].length)
+          +app(apps[i]['list'][j]['name'], apps[i]['list'][j]['fonticon'], apps[i]['list'][j]['description'], apps[i]['list'][j]['url'])
     -}
 - }
