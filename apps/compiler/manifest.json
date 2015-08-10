@@ -4,7 +4,9 @@
   "fonticon": "fa-link",
   "exec": "exec.coffee",
   "description": "Compiles a user program",
-  "category": "System",
+  "category": "Development Tools",
+  "hidden": true,
+  "view": false,
   "web_api": {
     "run": {
       "uri": "/api/compile",

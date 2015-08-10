@@ -4,7 +4,9 @@
   "fonticon": "fa-rocket",
   "exec": "exec.coffee",
   "description": "Runs a user program",
-  "category": "System",
+  "category": "Programs",
+  "hidden": false,
+  "view": true,
   "angular_ctrl": "resources/runner-injector.coffee",
   "web_api": {
     "run": {

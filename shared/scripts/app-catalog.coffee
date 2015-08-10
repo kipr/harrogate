@@ -43,17 +43,18 @@ class AppCatalog
       # manifest['closing'] nothing to do
 
       # Client view + angular controller ('angular_ctrl' is set)
-      if manifest['angular_ctrl']?
-        manifest['angular_ctrl'] = "#{path}/#{manifest['angular_ctrl']}"
-        # controller implies view
-        manifest['view'] = true
-
-      # Client view
-      manifest['view'] ?= false
+      console.log "#{manifest['name']}: Waring! manifest['view'] is not set" if not manifest['view']?
       if manifest['view']
         manifest['url'] = "/##{@apps_angularjs_route_base}/#{app}"
+        if manifest['angular_ctrl']?
+          manifest['angular_ctrl'] = "#{path}/#{manifest['angular_ctrl']}"
         manifest['angularjs_route'] = "#{@apps_angularjs_route_base}/#{app}"
         manifest['nodejs_route'] = "#{@apps_nodejs_route_base}/#{app}"
+      else
+        manifest['url'] = null
+        manifest['angular_ctrl'] = null
+        manifest['angularjs_route'] = null
+        manifest['nodejs_route'] = null
 
       # Web API data
       # manifest['web_api'] nothing to do

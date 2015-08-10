@@ -4,7 +4,9 @@
   "exec": "exec.coffee",
   "fonticon": "fa-hdd-o",
   "description": "Host filesystem manager",
-  "category": "System",
+  "category": "System Tools",
+  "hidden": true,
+  "view": false,
   "angular_ctrl": "resources/harrogate-fs-injector.coffee",
   "web_api": {
     "fs": {

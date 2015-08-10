@@ -3,7 +3,7 @@
   "exec": "exec.coffee",
   "fonticon": "fa-home",
   "description": "The launchpad",
-  "category": "System",
+  "category": "System Tools",
   "hidden": true,
   "view": true
 }

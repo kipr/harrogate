@@ -4,7 +4,9 @@
   "fonticon": "fa-terminal",
   "exec": "exec.coffee",
   "description": "Opens a terminal to the target",
-  "category": "System",
+  "category": "System Tools",
+  "hidden": true,
+  "view": false,
   "angular_ctrl": "resources/terminal-view-controller.coffee",
   "event_groups": {
     "terminal_events": {

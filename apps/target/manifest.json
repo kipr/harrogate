@@ -1,7 +1,8 @@
 {
   "name": "Target information",
   "hidden": true,
+  "view": false,
   "exec": "exec.coffee",
   "description": "Contains information about the target",
-  "category": "System"
+  "category": "System Tools"
 }

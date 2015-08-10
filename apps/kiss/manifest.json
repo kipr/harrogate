@@ -4,6 +4,8 @@
   "exec": "exec.coffee",
   "fonticon": "fa-file-code-o",
   "description": "Edit and compile programs for the device",
-  "category": "General",
+  "category": "Development Tools",
+  "hidden": false,
+  "view": true,
   "angular_ctrl": "resources/kiss-injector.coffee"
 }

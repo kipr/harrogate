@@ -4,7 +4,9 @@
   "fonticon": "fa-wrench",
   "exec": "exec.coffee",
   "description": "Modify the system's settings, such as network, time, and more.",
-  "category": "System",
+  "category": "Settings",
+  "hidden": true,
+  "view": false,
   "angular_ctrl": "resources/settings-view-controller.coffee",
   "web_api": {
     "settings": {

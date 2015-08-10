@@ -3,6 +3,7 @@
   "fonticon": "fa-gears",
   "exec": "exec.coffee",
   "description": "Manually manipulate servos plugged into the system",
-  "category": "Sensors",
-  "view": true
+  "category": "Sensors and Actuators",
+  "hidden": true,
+  "view": false
 }

@@ -3,6 +3,7 @@
   "fonticon": "fa-lightbulb-o",
   "exec": "exec.coffee",
   "description": "Display analog and digital sensors plugged into the system",
-  "category": "Sensors",
-  "view": true
+  "category": "Sensors and Actuators",
+  "hidden": true,
+  "view": false
 }
