@@ -369,10 +369,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
             $scope.compiler_output = 'Compilation finished:\n' + data.result.stderr + data.result.stdout
             return
 
-          .error (data, status, headers, config) ->
-            console.log "Could not post to /api/compile"
-            return
-
           return
 
       else
@@ -380,10 +376,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
 
         .success (data, status, headers, config) ->
           $scope.compiler_output = data.result.stderr
-          return
-
-        .error (data, status, headers, config) ->
-          console.log "Could not post to /api/compile"
           return
 
       return
