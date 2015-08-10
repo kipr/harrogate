@@ -1,5 +1,6 @@
 ﻿FS = require 'fs'
 Path = require 'path'
+Rmdir = require 'rimraf'
 Q = require 'q'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
