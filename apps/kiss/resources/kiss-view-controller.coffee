@@ -40,6 +40,22 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     $scope.documentChanged = false
     return
 
+  $scope.delete_file = (file) ->
+    close_file()
+    modalInstance = $modal.open(
+      templateUrl: 'buttons-only-modal.html'
+      controller: 'ButtonsOnlyModalController'
+      resolve:
+        title: -> 'Delete File'
+        content: -> 'Are you sure you want to permanently delete this file?'
+        button_captions: -> [ 'Yes', 'No' ]
+    )
+    modalInstance.result.then (button) ->
+      if button is 'Yes'
+        $http.delete(file.links.self.href)
+        reload_project $scope.selected_project
+      return
+
   editor = code_mirror.fromTextArea(document.getElementById('editor'),
     mode: 'text/x-csrc'
     lineNumbers: true
@@ -123,11 +139,20 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     modalInstance.result.then (button) ->
       if button is 'Yes'
         $http.delete(project.links.self.href)
-        .success (project_resource, status, headers, config) ->
+        .success (data, status, headers, config) ->
           $scope.reload_ws()
           return
 
       return
+
+  reload_project = (project) ->
+    $http.get(project.links.self.href)
+    .success (data, status, headers, config) ->
+      $scope.project_resource = data
+      return
+
+    return
+    
 
   $scope.select_project = (project) ->
     # toggle selection
@@ -150,10 +175,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
       $scope.data_files_expanded = false
 
       # load project files
-      $http.get(project.links.self.href)
-      .success (data, status, headers, config) ->
-        $scope.project_resource = data
-        return
+      reload_project $scope.selected_project
 
     return
 
@@ -260,17 +282,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
         $http.post($scope.project_resource.links.include_directory.href,  {name: $("#includeFileName").val(), type: 'file'})
 
         .success (data, status, headers, config) ->
-          AppCatalogProvider.catalog.then (app_catalog) ->
-            projects_resource = app_catalog['Programs']?.web_api?.projects
-            if projects_resource?
-              $http.get(projects_resource.uri)
-
-              .success (data, status, headers, config) ->
-                $scope.ws = data
-                return
-
-            return
-
+          reload_project $scope.selected_project
           return
 
         return
@@ -290,19 +302,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
         $http.post($scope.project_resource.links.src_directory.href,  {name: $("#sourceFileName").val(), type: 'file'})
 
         .success (data, status, headers, config) ->
-
-          AppCatalogProvider.catalog.then (app_catalog) ->
-
-            projects_resource = app_catalog['Programs']?.web_api?.projects
-            if projects_resource?
-              $http.get(projects_resource.uri)
-
-              .success (data, status, headers, config) ->
-                $scope.ws = data
-                return
-
-            return
-
+          reload_project $scope.selected_project
           return
 
         return
@@ -322,19 +322,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
         $http.post($scope.project_resource.links.data_directory.href,  {name: $("#dataFileName").val(), type: 'file'})
 
         .success (data, status, headers, config) ->
-
-          AppCatalogProvider.catalog.then (app_catalog) ->
-
-            projects_resource = app_catalog['Programs']?.web_api?.projects
-            if projects_resource?
-              $http.get(projects_resource.uri)
-
-              .success (data, status, headers, config) ->
-                $scope.ws = data
-                return
-
-            return
-
+          reload_project $scope.selected_project
           return
 
         return
@@ -355,18 +343,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
         $http.post(projects_resource.uri,  {name: $("#projectName").val(), language: 'C' })
 
         .success (data, status, headers, config) ->
-
-          AppCatalogProvider.catalog.then (app_catalog) ->
-            projects_resource = app_catalog['Programs']?.web_api?.projects
-            if projects_resource?
-              $http.get(projects_resource.uri)
-
-              .success (data, status, headers, config) ->
-                $scope.ws = data
-                return
-
-            return
-
+          $scope.reload_ws()
           return
 
       return

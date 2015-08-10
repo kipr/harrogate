@@ -82,6 +82,11 @@ block view-content
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
+                  span.btn-group-xs.pull-right
+                    button.btn.btn-danger(type='button' ng-if='selected_file === file' ng-click='delete_file(file)')
+                      i.fa.fa-trash
+                      |  
+                      small.small Delete
               tr(ng-if='selected_project === project && include_files_expanded' ng-click='show_add_include_file_modal()')
                  td
                  td
@@ -103,6 +108,11 @@ block view-content
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
+                  span.btn-group-xs.pull-right
+                    button.btn.btn-danger(type='button' ng-if='selected_file === file' ng-click='delete_file(file)')
+                      i.fa.fa-trash
+                      |  
+                      small.small Delete
               tr(ng-if='selected_project === project && src_files_expanded' ng-click='show_add_source_file_modal()')
                  td
                  td
@@ -123,6 +133,11 @@ block view-content
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
+                  span.btn-group-xs.pull-right
+                    button.btn.btn-danger(type='button' ng-if='selected_file === file' ng-click='delete_file(file)')
+                      i.fa.fa-trash
+                      |  
+                      small.small Delete
               tr(ng-repeat-end ng-if='selected_project === project && data_files_expanded' ng-click='show_add_data_file_modal()')
                  td
                  td
