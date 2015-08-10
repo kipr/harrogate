@@ -64,16 +64,23 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     file_uri = $location.search().path
     open_file file_uri
 
-  AppCatalogProvider.catalog.then (app_catalog) ->
-    projects_resource = app_catalog['Programs']?.web_api?.projects
-    if projects_resource?
-      $http.get(projects_resource.uri)
+  $scope.reload_ws = ->
+    close_file()
 
-      .success (data, status, headers, config) ->
-        $scope.ws = data
-        return
+    AppCatalogProvider.catalog.then (app_catalog) ->
+      projects_resource = app_catalog['Programs']?.web_api?.projects
+      if projects_resource?
+        $http.get(projects_resource.uri)
+
+        .success (data, status, headers, config) ->
+          $scope.ws = data
+          return
+
+      return
 
     return
+
+  $scope.reload_ws()
 
   $scope.show_open = ->
     close_file()
@@ -102,6 +109,25 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
       $scope.selected_file_categorie = null
       close_file()
     return
+
+  $scope.delete_project = (project) ->
+    close_file()
+    modalInstance = $modal.open(
+      templateUrl: 'buttons-only-modal.html'
+      controller: 'ButtonsOnlyModalController'
+      resolve:
+        title: -> 'Delete Project'
+        content: -> 'Are you sure you want to permanently delete this project?'
+        button_captions: -> [ 'Yes', 'No' ]
+    )
+    modalInstance.result.then (button) ->
+      if button is 'Yes'
+        $http.delete(project.links.self.href)
+        .success (project_resource, status, headers, config) ->
+          $scope.reload_ws()
+          return
+
+      return
 
   $scope.select_project = (project) ->
     # toggle selection
@@ -209,6 +235,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
   $scope.refresh = ->
     if $scope.displayed_file?
       open_file $scope.displayed_file.links.self.href
+    else
+      $scope.reload_ws()
     return
 
   $scope.undo = ->

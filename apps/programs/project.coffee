@@ -27,6 +27,16 @@ get_file_representations = (directory) ->
         # add the children
         return (promise.value for promise in child_representation_promises when promise.state is 'fulfilled')
 
+delete_directory_helper = (directory) ->
+  return directory.is_valid()
+
+  .then (valid) =>
+    if valid
+      return directory.remove()
+
+    else
+      return Q undefined
+
 class Project
   constructor: (
     @name
@@ -43,6 +53,19 @@ class Project
 
   is_valid: =>
     return @project_file.is_valid()
+
+  remove: =>
+    return delete_directory_helper @include_directory
+    .then () =>
+      return delete_directory_helper @src_directory
+    .then () =>
+      return delete_directory_helper @data_directory
+    .then () =>
+      return delete_directory_helper @bin_directory
+    .then () =>
+      return delete_directory_helper @lib_directory
+    .then () =>
+      return @project_file.remove()
 
   get_representation: (verbose = true) =>
     representation =

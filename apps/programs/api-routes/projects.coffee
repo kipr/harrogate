@@ -123,6 +123,31 @@ router.get '/:project', (request, response, next) ->
   .done()
   return
 
+router.delete '/:project', (request, response, next) ->
+  request.ws_resource.get_projects()
+  .then (project_resources) ->
+
+    # search for project.name is request.params.project
+    project_resource = (project_resource for project_resource in project_resources when project_resource.name is request.params.project)[0]
+
+    # did we found a project?
+    if not project_resource?
+        throw new ServerError 404, 'Project ' + request.params.project + ' does not exists'
+    else
+      project_resource.remove()
+      .then ->
+        response.writeHead 204
+        response.end()
+        return
+  .catch (e) ->
+    if e instanceof ServerError
+      response.writeHead e.code, { 'Content-Type': 'application/javascript' }
+      return response.end "#{JSON.stringify(error: e.message)}", 'utf8'
+    else
+      next e
+  .done()
+  return
+
 # return unsupported method for anything not handlet yet
 router.use '/', (request, response, next) ->
   err_resp =
