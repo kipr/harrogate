@@ -1,30 +1,24 @@
 mixin app(name, fonticon, descr, url)
-  .media
+  .media.a.btn.btn-default(role='button' href='#{url}' style='margin-bottom:4px;white-space: normal;')
     .media-left.media-middle
-      a(href='#{url}')
-        i.fa.fa-4x.fa-fw(class="#{fonticon}")
+      i.fa.fa-4x.fa-fw(class='#{fonticon}')
     .media-body
-      a(href='#{url}')
-        h4.media-heading #{name}
+      h4.media-heading #{name}
       p #{descr}
 
-mixin app_group(name)
-  h2 #{name}
-
 - for(var i = 0; i < apps.length; ++i) {
-+app_group(apps[i]['name'])
-.row
-  // left column
-  .col-sm-6
-    .media-list
-      - for(var j = 0; j < apps[i]['list'].length; j+=2) {
+.panel.panel-primary
+  .panel-heading
+    .panel-title #{apps[i]['name']}
+  .panel-body
+    - for(var j = 0; j < apps[i]['list'].length; ++j) {
+    .row
+      // left column
+      .col-md-6
         +app(apps[i]['list'][j]['name'], apps[i]['list'][j]['fonticon'], apps[i]['list'][j]['description'], apps[i]['list'][j]['url'])
-      -}
-
-  // right column
-  .col-sm-6
-    .media-list
-      - for(var j = 1; j < apps[i]['list'].length; j+=2) {
+      // right column
+      .col-md-6
+        - ++j
         +app(apps[i]['list'][j]['name'], apps[i]['list'][j]['fonticon'], apps[i]['list'][j]['description'], apps[i]['list'][j]['url'])
-      -}
+    -}
 - }
