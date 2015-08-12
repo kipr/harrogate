@@ -1,163 +1,90 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
-  .btn-group
-    button.btn.btn-toolbar(type='button', ng-class="{'disabled' : !documentChanged || !displayed_file, 'btn-success' : !documentChanged && displayed_file, 'btn-danger' : documentChanged}", ng-click='save()')
+  .btn-group(ng-if='displayed_file')
+    button.btn.btn-toolbar(type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged}" ng-click='save()')
       i.fa.fa-floppy-o
-        br
-        small.small Save
-    button.btn.btn-toolbar.btn-default(type='button' ng-click='refresh()')
-      i.fa.fa-refresh
-        br
-        small.small Reload
-    button.btn.btn-toolbar.btn-default.disabled(type='button' ng-click='uploadToCloud()')
-      i.fa.fa-cloud
-        br
-        small.small Upload to Cloud
-    button.btn.btn-toolbar.btn-default.disabled(type='button', ng-click='downloadFile()')
+      br
+      small.small Save {{displayed_file.name}}
+    button.btn.btn-toolbar.btn-danger(type='button' ng-click='delete_file(displayed_file)')
+      i.fa.fa-trash
+      br
+      small.small Delete {{displayed_file.name}}
+    a.btn.btn-toolbar.btn-default(type='button' ng-href="{{displayed_file.links.self.href}}?mode=raw" download)
       i.fa.fa-download
-        br
-        small.small Download
+      br
+      small.small Download {{displayed_file.name}}
 
-  .btn-group
-    button.btn.btn-toolbar.btn-default(type='button', ng-class="{'disabled' : !displayed_file}", ng-click='undo()')
+  .btn-group(ng-if='displayed_file')
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='undo()')
       i.fa.fa-undo
-        br
-        small.small Undo
-    button.btn.btn-toolbar.btn-default(type='button', ng-class="{'disabled' : !displayed_file}", ng-click='redo()')
+      br
+      small.small Undo
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='redo()')
       i.fa.fa-repeat
-        br
-        small.small Redo
+      br
+      small.small Redo
 
-  .btn-group
-    button.btn.btn-toolbar.btn-default(type='button',  ng-class="{'disabled' : !displayed_file}", ng-click='indent()')
+  .btn-group(ng-if='displayed_file')
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='indent()')
       i.fa.fa-indent
-        br
-        small.small Indent
+      br
+      small.small Indent
 
-  .btn-group
-    button.btn.btn-toolbar.btn-default(type='button',  ng-class="{'disabled' : !selected_project || !project_resource.source_files}", ng-click='compile()')
+  .btn-group(ng-if='selected_project && !displayed_file')
+    button.btn.btn-toolbar.btn-danger(type='button' ng-click='delete_project(selected_project)')
+      i.fa.fa-trash
+      br
+      small.small Delete {{selected_project.name}}
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='download_project(selected_project)')
+      i.fa.fa-download
+      br
+      small.small Download {{selected_project.name}}
+
+  .btn-group(ng-if='selected_project')
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='compile()')
       i.fa.fa-link
-        br
-        small.small Compile
-    a.btn.btn-toolbar.btn-default(type='button' ng-class="{'disabled' : !selected_project}" href='/#/apps/runner')
+      br
+      small.small Compile {{selected_project.name}}
+    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner')
       i.fa.fa-rocket
-        br
-        small.small Run
-
+      br
+      small.small Run {{selected_project.name}}
 
 block view-content
   .row.row-stretch
-    .col-md-3.col-stretch
-      .panel.panel-default.panel-stretch(ng-class='{"desktop-only": displayed_file}')
-        .panel-heading
-          .panel-title Projects:
-        .scrollable-panel-body-container
-          table.panel-body.table.tree-table
-            tbody
-              tr(ng-repeat-start = 'project in ws.projects' ng-class='{info: selected_project === project}' ng-click='select_project(project)')
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='selected_project === project')
-                  i.fa.fa-chevron-circle-right(ng-if='selected_project !== project')
-                th(colspan="2")
-                  | {{project.name}}
-                  |  
-                  small [{{project.parameters.language}}]
-                  span.btn-group-xs.pull-right
-                    button.btn.btn-danger(type='button' ng-if='selected_project === project' ng-click='delete_project(selected_project)')
-                      i.fa.fa-trash
-                      |  
-                      small.small Delete
-              tr(ng-if="selected_project === project" ng-click='toggle_include_files_expanded()')
-                th
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='include_files_expanded')
-                  i.fa.fa-chevron-circle-right(ng-if='!include_files_expanded')
-                th
-                  | Include Files
-              tr(ng-if='selected_project === project && include_files_expanded' ng-repeat = 'file in project_resource.include_files' ng-class='{info: selected_file === file}' ng-click='select_file(file, "include")')
-                td
-                td
-                td
-                  i.fa.fa-file-o
-                  |  
-                  | {{file.name}}
-                  span.btn-group-xs.pull-right
-                    button.btn.btn-danger(type='button' ng-if='selected_file === file' ng-click='delete_file(file)')
-                      i.fa.fa-trash
-                      |  
-                      small.small Delete
-              tr(ng-if='selected_project === project && include_files_expanded' ng-click='show_add_include_file_modal()')
-                 td
-                 td
-                 td
-                  i.fa.fa-plus
-                  | Add File
-              tr(ng-if='selected_project === project' ng-click='toggle_src_files_expanded()')
-                th
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='src_files_expanded')
-                  i.fa.fa-chevron-circle-right(ng-if='!src_files_expanded')
-                th
-                  | Source Files
-              tr(ng-show='selected_project === project && src_files_expanded' ng-repeat = 'file in project_resource.source_files' ng-class='{info: selected_file === file}' ng-click='select_file(file, "src")')
-                td
-                td
-                  i.fa.fa-chevron-circle-down(ng-if='!src_files_expanded')
-                td
-                  i.fa.fa-file-o
-                  |  
-                  | {{file.name}}
-                  span.btn-group-xs.pull-right
-                    button.btn.btn-danger(type='button' ng-if='selected_file === file' ng-click='delete_file(file)')
-                      i.fa.fa-trash
-                      |  
-                      small.small Delete
-              tr(ng-if='selected_project === project && src_files_expanded' ng-click='show_add_source_file_modal()')
-                 td
-                 td
-                 td
-                  i.fa.fa-plus
-                  | Add File
-              tr(ng-if='selected_project === project'  ng-click='toggle_data_files_expanded()')
-                th
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='data_files_expanded')
-                  i.fa.fa-chevron-circle-right(ng-if='!data_files_expanded')
-                th
-                  | User Data Files
-              tr(ng-if='selected_project === project && data_files_expanded' ng-repeat = 'file in project_resource.data_files' ng-class='{info: selected_file === file}' ng-click='select_file(file, "data")')
-                td
-                td
-                td
-                  i.fa.fa-file-o
-                  |  
-                  | {{file.name}}
-                  span.btn-group-xs.pull-right
-                    button.btn.btn-danger(type='button' ng-if='selected_file === file' ng-click='delete_file(file)')
-                      i.fa.fa-trash
-                      |  
-                      small.small Delete
-              tr(ng-repeat-end ng-if='selected_project === project && data_files_expanded' ng-click='show_add_data_file_modal()')
-                 td
-                 td
-                 td
-                  i.fa.fa-plus
-                  | Add File
-
-              tr(ng-click='show_add_project_modal()')
-               td
-                i.fa.fa-plus
-               td(colspan='2')
-                | Add Project
-
     .col-md-9.col-stretch
       .row(ng-class="{'row-stretch-60' : compiler_output, 'row-stretch' : !compiler_output}")
         .col-xs-12.col-stretch
-          .panel.panel-default.panel-stretch(ng-show="displayed_file")
+          .panel.panel-primary.panel-stretch(ng-show="!displayed_file && selected_project")
             .panel-heading
               .panel-title
-                | {{displayed_file ? displayed_file.name : 'Unnamed File'}}
+                | Project: {{project_resource.name}}
+                span.btn-group-xs.pull-right
+                  button.btn.btn-default(type='button' ng-click='reload_file(displayed_file)')
+                    i.fa.fa-refresh
+                  button.btn.btn-danger(type='button' ng-click='close_project()')
+                    i.fa.fa-times
+            .panel-body
+              h4 Project Information
+              p Name: {{project_resource.name}}
+              p Language: {{project_resource.parameters.language}}
+              h4 Source Files
+              ul
+                li(ng-repeat = 'file in project_resource.source_files') {{file.path}}
+              h4 Include Files
+              ul
+                li(ng-repeat = 'file in project_resource.include_files') {{file.path}}
+
+          .panel.panel-primary.panel-stretch(ng-show="displayed_file")
+            .panel-heading
+              .panel-title
+                | File: {{displayed_file ? displayed_file.name : 'Unnamed File'}}
+                span.btn-group-xs.pull-right
+                  button.btn.btn-default(type='button' ng-click='reload_file(displayed_file)')
+                    i.fa.fa-refresh
+                  button.btn.btn-danger(type='button' ng-click='close_file()')
+                    i.fa.fa-times
 
             .scrollable-panel-body-container
               textarea#editor.panel-body.terminal-stretch
@@ -172,6 +99,93 @@ block view-content
             .scrollable-panel-body-container
               pre.panel-body
                 code {{compiler_output}}
+
+    .col-md-3.col-stretch
+      .panel.panel-primary.panel-stretch(ng-class='{"desktop-only": displayed_file, _file}')
+        .panel-heading
+          .panel-title
+            | Project Explorer
+            span.btn-group-xs.pull-right
+              button.btn.btn-default(type='button' ng-click='reload_project()')
+                i.fa.fa-refresh
+
+        .scrollable-panel-body-container
+          table.panel-body.table.tree-table
+            tbody
+              tr(ng-repeat-start = 'project in ws.projects' ng-class='{info: selected_project === project}' ng-click='select_project(project)')
+                th
+                  i.fa.fa-chevron-circle-down(ng-if='selected_project === project')
+                  i.fa.fa-chevron-circle-right(ng-if='selected_project !== project')
+                th(colspan="2")
+                  | {{project.name}}
+
+              tr(ng-if="selected_project === project" ng-click='toggle_include_files_expanded()' ng-class='{active: selected_file, info: !selected_file}')
+                th
+                th
+                  i.fa.fa-chevron-circle-down(ng-if='include_files_expanded')
+                  i.fa.fa-chevron-circle-right(ng-if='!include_files_expanded')
+                th
+                  | Include Files
+              tr(ng-if='selected_project === project && include_files_expanded' ng-repeat = 'file in project_resource.include_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "include")')
+                td
+                td
+                td
+                  i.fa.fa-file-o
+                  |  
+                  | {{file.name}}
+              tr(ng-if='selected_project === project && include_files_expanded' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_include_file_modal()')
+                 td
+                 td
+                 td
+                  i.fa.fa-plus
+                  | Add File
+              tr(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='toggle_src_files_expanded()')
+                th
+                th
+                  i.fa.fa-chevron-circle-down(ng-if='src_files_expanded')
+                  i.fa.fa-chevron-circle-right(ng-if='!src_files_expanded')
+                th
+                  | Source Files
+              tr(ng-show='selected_project === project && src_files_expanded' ng-repeat = 'file in project_resource.source_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "src")')
+                td
+                td
+                  i.fa.fa-chevron-circle-down(ng-if='!src_files_expanded')
+                td
+                  i.fa.fa-file-o
+                  |  
+                  | {{file.name}}
+              tr(ng-if='selected_project === project && src_files_expanded' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_source_file_modal()')
+                 td
+                 td
+                 td
+                  i.fa.fa-plus
+                  | Add File
+              tr(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='toggle_data_files_expanded()')
+                th
+                th
+                  i.fa.fa-chevron-circle-down(ng-if='data_files_expanded')
+                  i.fa.fa-chevron-circle-right(ng-if='!data_files_expanded')
+                th
+                  | User Data Files
+              tr(ng-if='selected_project === project && data_files_expanded' ng-repeat = 'file in project_resource.data_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "data")')
+                td
+                td
+                td
+                  i.fa.fa-file-o
+                  |  
+                  | {{file.name}}
+              tr(ng-repeat-end ng-if='selected_project === project && data_files_expanded' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_data_file_modal()')
+                 td
+                 td
+                 td
+                  i.fa.fa-plus
+                  | Add File
+
+              tr(ng-click='show_add_project_modal()')
+               td
+                i.fa.fa-plus
+               td(colspan='2')
+                | Add Project
 
   // Modals
   #new-include-file.modal.fade(role='dialog')

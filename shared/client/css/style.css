@@ -77,10 +77,25 @@
     white-space: nowrap;
 }
 
+.tree-table span.btn-group-xs.pull-right
+{
+    padding-left: 8px;
+}
+
+.tree-table th, .tree-table td
+{
+    border: none !important;
+}
+
 .tree-table th:last-child, .tree-table td:last-child
 {
     width: 99%;
     padding-left: 0px;
+}
+
+.panel-title .pull-right button
+{
+    margin-left: 4px;
 }
 
 #status-bar

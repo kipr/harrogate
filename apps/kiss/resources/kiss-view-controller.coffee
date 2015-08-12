@@ -18,7 +18,7 @@ exports.inject = (app) ->
 exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogProvider) ->
 
   open_file = (file_uri) ->
-    close_file()
+    $scope.close_file()
 
     $http.get(file_uri)
 
@@ -33,7 +33,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
 
     return
 
-  close_file = ->
+  $scope.close_file = ->
     $scope.compiler_output = ''
     $scope.displayed_file = null
     editor.setValue ''
@@ -41,7 +41,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     return
 
   $scope.delete_file = (file) ->
-    close_file()
     modalInstance = $modal.open(
       templateUrl: 'buttons-only-modal.html'
       controller: 'ButtonsOnlyModalController'
@@ -53,6 +52,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     modalInstance.result.then (button) ->
       if button is 'Yes'
         $http.delete(file.links.self.href)
+        $scope.close_file()
         reload_project $scope.selected_project
       return
 
@@ -81,7 +81,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     open_file file_uri
 
   $scope.reload_ws = ->
-    close_file()
+    $scope.close_file()
 
     AppCatalogProvider.catalog.then (app_catalog) ->
       projects_resource = app_catalog['Programs']?.web_api?.projects
@@ -99,7 +99,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
   $scope.reload_ws()
 
   $scope.show_open = ->
-    close_file()
+    $scope.close_file()
     return
 
   $scope.toggle_include_files_expanded = ->
@@ -107,7 +107,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     if not $scope.include_files_expanded and $scope.selected_file_categorie is 'include'
       $scope.selected_file = null
       $scope.selected_file_categorie = null
-      close_file()
+      $scope.close_file()
     return
 
   $scope.toggle_src_files_expanded = ->
@@ -115,7 +115,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     if not $scope.src_files_expanded and $scope.selected_file_categorie is 'src'
       $scope.selected_file = null
       $scope.selected_file_categorie = null
-      close_file()
+      $scope.close_file()
     return
 
   $scope.toggle_data_files_expanded = ->
@@ -123,11 +123,10 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     if not $scope.data_files_expanded and $scope.selected_file_categorie is 'data'
       $scope.selected_file = null
       $scope.selected_file_categorie = null
-      close_file()
+      $scope.close_file()
     return
 
   $scope.delete_project = (project) ->
-    close_file()
     modalInstance = $modal.open(
       templateUrl: 'buttons-only-modal.html'
       controller: 'ButtonsOnlyModalController'
@@ -140,6 +139,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
       if button is 'Yes'
         $http.delete(project.links.self.href)
         .success (data, status, headers, config) ->
+          $scope.close_project()
+          $scope.close_file()
           $scope.reload_ws()
           return
 
@@ -152,21 +153,24 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
       return
 
     return
-    
+
+  $scope.close_project = ->
+    $scope.close_file()
+    $scope.selected_project = null
+    $scope.selected_file = null
+
+    $scope.include_files_expanded = false
+    $scope.src_files_expanded = true
+    $scope.data_files_expanded = false
+    return
 
   $scope.select_project = (project) ->
     # toggle selection
     if $scope.selected_project is project
-      close_file()
-      $scope.selected_project = null
-      $scope.selected_file = null
-
-      $scope.include_files_expanded = false
-      $scope.src_files_expanded = true
-      $scope.data_files_expanded = false
+      $scope.close_project()
 
     else
-      close_file()
+      $scope.close_file()
       $scope.selected_project = project
       $scope.selected_file = null
 
@@ -186,7 +190,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
     if $scope.selected_file is file
       $scope.selected_file = null
       $scope.selected_file_categorie = null
-      close_file()
+      $scope.close_file()
 
     else
       $scope.selected_file = file
