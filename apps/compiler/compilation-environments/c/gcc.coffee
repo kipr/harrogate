@@ -14,14 +14,15 @@ module.exports =
 
     .then (src_files) ->
       gcc_cmd = "gcc -I\"#{project_resource.include_directory.path}\"
-                 -Wall
-                 -std=c++1y "
+                -I\"/opt/KIPR/KISS-web-ide/shared/include\"
+                -Wall "
 
       for src in src_files
         if Path.basename(src.path).charAt(0) isnt '.'
           gcc_cmd += '"' + src.path + "\" "
 
-      gcc_cmd += "-laurora
+      gcc_cmd += "-L\"/opt/KIPR/KISS-web-ide/shared/lib\"
+                  -laurora
                   -o \"#{project_resource.bin_directory.path}/#{project_resource.name}\" "
 
       exec gcc_cmd, cb
