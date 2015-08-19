@@ -32,8 +32,8 @@ if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
   bin_dir = Path.resolve Path.resolve __dirname, '..', '..', '..' , 'prefix', 'usr', 'bin'
   child_env.PATH += Path.delimiter + bin_dir
 else
-  usr_local_lib_path = Path.resolve '/', 'usr', 'local', 'lib'
-  child_env.LD_LIBRARY_PATH += Path.delimiter + usr_local_lib_path
+  usr_local_lib_path = Path.resolve '/', 'opt', 'KIPR', 'KISS-web-ide', 'shared', 'lib'
+  child_env.DYLD_LIBRARY_PATH += Path.delimiter + usr_local_lib_path
 
 start_program = ->
   if running?.resource?
