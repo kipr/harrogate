@@ -54,9 +54,7 @@ Passport.use new LocalStrategy (username, password, done) ->
     return done null, false
 
 check_authenticated = (request, response, next) ->
-  if true or request.isAuthenticated()
-    request.user = 'stefan'
-
+  if request.isAuthenticated()
     # add the logged_in_user to the request
     if UserManager.users[request.user]?
       request.logged_in_user = UserManager.users[request.user]
