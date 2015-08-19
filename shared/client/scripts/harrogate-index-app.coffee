@@ -4,7 +4,7 @@ require 'angular-route'
 app = angular.module 'harrogateIndexApp', ['ngRoute', 'ui.bootstrap']
 
 require('./app-catalog-provider.coffee').inject app
-require('./buttons-only-modal-controller.coffee').inject app
+require('./buttons-only-modal-factory-service.coffee').inject app
 require('./terminal-directive.coffee').inject app
 require('./user-manager-service.coffee').inject app
 

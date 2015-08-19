@@ -10,13 +10,13 @@ exports.inject = (app) ->
     '$location'
     '$http'
     '$timeout'
-    '$modal'
     'AppCatalogProvider'
+    'ButtonsOnlyModalFactory'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $rootScope, $location, $http, $timeout, $modal, AppCatalogProvider) ->
+exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ButtonsOnlyModalFactory) ->
 
   open_file = (file_uri) ->
     $scope.close_file()
@@ -43,15 +43,11 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, $modal, Ap
     return
 
   $scope.delete_file = (file) ->
-    modalInstance = $modal.open(
-      templateUrl: 'buttons-only-modal.html'
-      controller: 'ButtonsOnlyModalController'
-      resolve:
-        title: -> 'Delete File'
-        content: -> 'Are you sure you want to permanently delete this file?'
-        button_captions: -> [ 'Yes', 'No' ]
-    )
-    modalInstance.result.then (button) ->
+    ButtonsOnlyModalFactory.open(
+      'Delete File'
+      'Are you sure you want to permanently delete this file?'
+      [ 'Yes', 'No' ])
+    .then (button) ->
       if button is 'Yes'
         $http.delete(file.links.self.href)
         $scope.close_file()
@@ -129,15 +125,11 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, $modal, Ap
     return
 
   $scope.delete_project = (project) ->
-    modalInstance = $modal.open(
-      templateUrl: 'buttons-only-modal.html'
-      controller: 'ButtonsOnlyModalController'
-      resolve:
-        title: -> 'Delete Project'
-        content: -> 'Are you sure you want to permanently delete this project?'
-        button_captions: -> [ 'Yes', 'No' ]
-    )
-    modalInstance.result.then (button) ->
+    ButtonsOnlyModalFactory.open(
+      'Delete Project'
+      'Are you sure you want to permanently delete this project?'
+      [ 'Yes', 'No' ])
+    .then (button) ->
       if button is 'Yes'
         $http.delete(project.links.self.href)
         .success (data, status, headers, config) ->
@@ -234,15 +226,11 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, $modal, Ap
 
   onRouteChangeOff = $rootScope.$on '$locationChangeStart', (event, newUrl) ->
     if $scope.documentChanged
-      modalInstance = $modal.open(
-        templateUrl: 'buttons-only-modal.html'
-        controller: 'ButtonsOnlyModalController'
-        resolve:
-          title: -> 'You have unsaved changes'
-          content: -> 'You have unsaved changes! Would you like to save them before leaving this page?'
-          button_captions: -> [ 'Save', 'Discard', 'Cancel' ]
-      )
-      modalInstance.result.then (button) ->
+      ButtonsOnlyModalFactory.open(
+        'You have unsaved changes'
+        'You have unsaved changes! Would you like to save them before leaving this page?'
+        [ 'Save', 'Discard', 'Cancel' ])
+      .then (button) ->
         if button is 'Save'
           $scope.save()
           $location.path newUrl.substring($location.absUrl().length - ($location.url().length))
