@@ -29,6 +29,9 @@ module.exports =
       for src in src_files
         cl_cmd += "\"#{src.path}\" "
 
+      # add the init helper file
+      cl_cmd += "\"#{Path.resolve(__dirname, '_init_helper.c')}\" "
+
       #linker options
       #aurora
       cl_cmd += "/link #{Path.resolve install_prefix, 'lib', 'aurora.lib'}"

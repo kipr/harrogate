@@ -21,6 +21,9 @@ module.exports =
         if Path.basename(src.path).charAt(0) isnt '.'
           gcc_cmd += '"' + src.path + "\" "
 
+      # add the init helper file
+      gcc_cmd += "\"#{Path.resolve(__dirname, '_init_helper.c')}\" "
+
       gcc_cmd += "-L\"/opt/KIPR/KISS-web-ide/shared/lib\"
                   -laurora
                   -o \"#{project_resource.bin_directory.path}/#{project_resource.name}\" "

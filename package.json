@@ -43,7 +43,7 @@
     "through": "^2.3.6",
     "vinyl-transform": "^1.0.0"
   },
-  "scripts":{
+  "scripts": {
     "compile": "gulp compile"
   },
   "author": "Braden McDorman",
