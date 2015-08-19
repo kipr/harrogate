@@ -1,4 +1,4 @@
-Boyd = require 'node-boyd'
+# Boyd = require 'node-boyd'
 
 AppCatalog = require '../../shared/scripts/app-catalog.coffee'
 
@@ -9,6 +9,7 @@ clients = 0
 module.exports =
 
   event_init: (event_group_name, namespace) ->
+    return
 
     namespace.on 'connection', (socket) ->
       clients++
@@ -40,6 +41,8 @@ module.exports =
     return
 
   closing: ->
+    return
+
     Boyd.close cam.handle if cam?
     cam = undefined
     return
