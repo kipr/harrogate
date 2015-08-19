@@ -125,6 +125,12 @@
     left: 0;
 }
 
+#graphics_window
+{
+    width: auto;
+    height: auto;
+}
+
 @media (min-width: 1024px)
 {
     .compact-only
