@@ -54,6 +54,11 @@ Passport.use new LocalStrategy (username, password, done) ->
     return done null, false
 
 check_authenticated = (request, response, next) ->
+
+  # bypass authentication system for now
+  request.logged_in_user = new User 'Dummy'
+  return next()
+
   if request.isAuthenticated()
     # add the logged_in_user to the request
     if UserManager.users[request.user]?
