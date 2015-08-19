@@ -9,13 +9,14 @@ exports.inject = (app) ->
     '$rootScope'
     '$location'
     '$http'
+    '$timeout'
     '$modal'
     'AppCatalogProvider'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogProvider) ->
+exports.controller = ($scope, $rootScope, $location, $http, $timeout, $modal, AppCatalogProvider) ->
 
   open_file = (file_uri) ->
     $scope.close_file()
@@ -24,11 +25,12 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
 
     .success (data, status, headers, config) ->
       $scope.displayed_file = data
-      editor.setValue(new Buffer($scope.displayed_file.content, 'base64').toString('ascii'));
-      $scope.documentChanged = false
 
-      setTimeout -> 
+      $timeout ->
+        editor.setValue(new Buffer(data.content, 'base64').toString('ascii'))
         editor.refresh()
+        $timeout ->
+          $scope.documentChanged = false
       return
 
     return
@@ -64,7 +66,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $modal, AppCatalogPr
   )
 
   editor.on 'change', (e, obj) ->
-    $scope.$apply ->
+    $timeout ->
       $scope.documentChanged = true
       return
     return
