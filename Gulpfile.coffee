@@ -110,7 +110,9 @@ gulp.task 'code-mirror-themes', ->
   .pipe gulp.dest('public/css/codemirror-theme/')
 
 # AngularUI
-gulp.task 'angular-ui', ->
+gulp.task 'angular-ui', [
+  'scripts'
+],  ->
   request('http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js')
   .pipe fs.createWriteStream('public/scripts/ui-bootstrap-tpls.min.js')
 
