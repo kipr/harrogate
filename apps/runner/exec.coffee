@@ -39,14 +39,25 @@ start_program = ->
   if running?.resource?
     namespace.emit events.starting.id, running.resource.name
 
-    running_process = spawn "#{running.resource.bin_directory.path}/#{running.resource.name}", [], env: child_env
+    program_path = Path.resolve running.resource.bin_directory.path, "#{running.resource.name}"
+    running_process = spawn program_path, [], env: child_env
+
+    running_process.on 'error', (data) ->
+      console.log "Could not spawn #{program_path}!! Error details: #{JSON.stringify(error: data)}"
+      namespace.emit events.stderr.id, "Program crashed!\n\nError details:\n#{JSON.stringify(error: data,null,'\t')}"
+      namespace.emit events.ended.id
+      running = null
+      running_process = null
+      return
 
     running_process.stdout.on 'data', (data) ->
       namespace.emit events.stdout.id, data.toString('utf8')
       return
+
     running_process.stderr.on 'data', (data) ->
       namespace.emit events.stderr.id, data.toString('utf8')
       return
+
     running_process.on 'exit', (code) ->
       namespace.emit events.stdout.id, "Program exited with code #{code}"
       namespace.emit events.ended.id
@@ -79,7 +90,7 @@ start_program = ->
         client = null
         return
 
-      ), 1000
+      )
   return
 
 stop_program = -> 
