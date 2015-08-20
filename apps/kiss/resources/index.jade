@@ -188,57 +188,6 @@ block view-content
                 | Add Project
 
   // Modals
-  #new-include-file.modal.fade(role='dialog')
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button' dismiss='modal') &times;
-          h4.modal-title Create New Include File
-
-        .modal-body
-          .form
-            .form-group
-              label(for='includeFileName') Include file name
-              input#includeFileName.form-control(type='text' placeholder='Include file name')
-
-        .modal-footer
-          button.btn.btn-default(dismiss='modal') Cancel
-          button.btn.btn-primary(ng-click='add_include_file()') Create
-
-  #new-source-file.modal.fade(role='dialog')
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button' dismiss='modal') &times;
-          h4.modal-title Create New Source File
-
-        .modal-body
-          .form
-            .form-group
-              label(for='sourceFileName') Source file name
-              input#sourceFileName.form-control(type='text' placeholder='Source file name')
-
-        .modal-footer
-          button.btn.btn-default(dismiss='modal') Cancel
-          button.btn.btn-primary(ng-click='add_source_file()') Create
-
-  #new-data-file.modal.fade(role='dialog')
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button' dismiss='modal') &times;
-          h4.modal-title Create New User Data File
-
-        .modal-body
-          .form
-            .form-group
-              label(for='dataFileName') User data file name
-              input#dataFileName.form-control(type='text' placeholder='User data file name')
-
-        .modal-footer
-          button.btn.btn-default(dismiss='modal') Cancel
-          button.btn.btn-primary(ng-click='add_data_file()') Create
-
   #new-project.modal.fade(role='dialog')
     .modal-dialog
       .modal-content

@@ -12,11 +12,12 @@ exports.inject = (app) ->
     '$timeout'
     'AppCatalogProvider'
     'ButtonsOnlyModalFactory'
+    'FilenameModalFactory'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ButtonsOnlyModalFactory) ->
+exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ButtonsOnlyModalFactory, FilenameModalFactory) ->
 
   open_file = (file_uri) ->
     $scope.close_file()
@@ -264,64 +265,55 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     return
 
   $scope.show_add_include_file_modal = ->
-    $('#new-include-file').modal('show')
-    return
+    FilenameModalFactory.open(
+      'Create New Include File'
+      'Choose a filename:'
+      'Filename'
+      [ '.h' ]
+      'Create')
+      .then (data) ->
+        if $scope.ws? and $scope.project_resource?
+          $http.post($scope.ws.links.include_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
 
-  $scope.add_include_file = () ->
-    $('#new-include-file').modal('hide')
-    if $scope.ws? and $scope.project_resource?
-      $http.post($scope.ws.links.include_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+          .finally ->
+            $http.post($scope.project_resource.links.include_directory.href,  {name: data.filename + data.extension, type: 'file'})
 
-      .finally ->
-        $http.post($scope.project_resource.links.include_directory.href,  {name: $("#includeFileName").val(), type: 'file'})
-
-        .success (data, status, headers, config) ->
-          reload_project $scope.selected_project
-          return
-
-        return
-
-    return
+            .success (data, status, headers, config) ->
+              reload_project $scope.selected_project
 
   $scope.show_add_source_file_modal = ->
-    $('#new-source-file').modal('show')
-    return
+    FilenameModalFactory.open(
+      'Create New Source File'
+      'Choose a filename:'
+      'Filename'
+      [ '.c' ]
+      'Create')
+      .then (data) ->
+        if $scope.ws? and $scope.project_resource?
+          $http.post($scope.ws.links.src_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
 
-  $scope.add_source_file = () ->
-    $('#new-source-file').modal('hide')
-    if $scope.ws? and $scope.project_resource?
-      $http.post($scope.ws.links.src_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+          .finally ->
+            $http.post($scope.project_resource.links.src_directory.href,  {name: data.filename + data.extension, type: 'file'})
 
-      .finally ->
-        $http.post($scope.project_resource.links.src_directory.href,  {name: $("#sourceFileName").val(), type: 'file'})
-
-        .success (data, status, headers, config) ->
-          reload_project $scope.selected_project
-          return
-
-        return
-
-    return
+            .success (data, status, headers, config) ->
+              reload_project $scope.selected_project
 
   $scope.show_add_data_file_modal = ->
-    $('#new-data-file').modal('show')
-    return
+    FilenameModalFactory.open(
+      'Create User Data File'
+      'Choose a filename:'
+      'Filename'
+      null
+      'Create')
+      .then (data) ->
+        if $scope.ws? and $scope.project_resource?
+          $http.post($scope.ws.links.data_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
 
-  $scope.add_data_file = () ->
-    $('#new-data-file').modal('hide')
-    if $scope.ws? and $scope.project_resource?
-      $http.post($scope.ws.links.data_directory.href,  {name: $scope.project_resource.name, type: 'directory'})
+          .finally ->
+            $http.post($scope.project_resource.links.data_directory.href,  {name: data.filename, type: 'file'})
 
-      .finally ->
-        $http.post($scope.project_resource.links.data_directory.href,  {name: $("#dataFileName").val(), type: 'file'})
-
-        .success (data, status, headers, config) ->
-          reload_project $scope.selected_project
-          return
-
-        return
-
-    return
+            .success (data, status, headers, config) ->
+              reload_project $scope.selected_project
 
   $scope.show_add_project_modal = ->
     $('#new-project').modal('show')

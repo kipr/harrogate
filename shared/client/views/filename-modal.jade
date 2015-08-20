@@ -1,0 +1,17 @@
+﻿.modal-header
+  button.close(type='button' ng-click='dismiss()') &times;
+  h4.modal-title {{title}}
+
+.modal-body
+  p {{content}}
+  .form-horizontal
+    .form-group
+      .col-xs-8
+        input.form-control(type='text' ng-model='data.filename' ng-attr-placeholder='{{placeholder}}')
+      .col-xs-4(ng-if='extensions')
+        select.form-control(ng-model='data.extension')
+          option(ng-repeat='extension in extensions' ng-attr-value='{{extension}}') {{extension}}
+
+.modal-footer
+  button.btn.btn-primary(type='button' ng-click='click()' ng-class='{disabled: !data.filename}') {{button_caption}}
+  button.btn.btn-default(type='button' ng-click='dismiss()') Cancel
