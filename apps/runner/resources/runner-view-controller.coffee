@@ -15,6 +15,10 @@ exports.inject = (app) ->
   return
 
 exports.controller = ($scope, $http, $location, AppCatalogProvider, ProgramService) ->
+
+  $scope.show_console = true
+  $scope.show_graphics_window = false
+
   $scope.ProgramService = ProgramService
 
   socket = undefined
@@ -149,6 +153,7 @@ exports.controller = ($scope, $http, $location, AppCatalogProvider, ProgramServi
 
   $scope.run = ->
     if $scope.selected_project?
+      $scope.img_src = "data:image/png;base64,"
       $scope.$broadcast "runner-reset-terminal"
       ProgramService.run $scope.selected_project.name
     return
