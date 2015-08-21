@@ -59,10 +59,8 @@ block view-content
           .panel-title
             | Graphics Window
             span.btn-group-xs.pull-right
-              button.btn.btn-default(type='button' ng-class='{info: graphics_window_focus}' ng-click='deselect_graphics_window()')
-                | Set Keyboard Focus (step A)
               button.btn.btn-default(type='button' ng-class='{info: graphics_window_focus}' ng-click='select_graphics_window()')
-                | (step B)
+                i.fa.fa-keyboard-o
 
         .scrollable-panel-body-container
           .panel-body

@@ -8,13 +8,14 @@ exports.inject = (app) ->
     '$scope'
     '$http'
     '$location'
+    '$timeout'
     'AppCatalogProvider'
     'ProgramService'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $http, $location, AppCatalogProvider, ProgramService) ->
+exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider, ProgramService) ->
 
   $scope.show_console = true
   $scope.show_graphics_window = false
@@ -87,16 +88,13 @@ exports.controller = ($scope, $http, $location, AppCatalogProvider, ProgramServi
     return false
 
   $scope.select_graphics_window = ->
-    $scope.graphics_window_focus = true
-    document.getElementById('graphics_window').addEventListener 'keydown', keydown_event
-    document.getElementById('graphics_window').addEventListener 'keyup', keyup_event
-    return
+    if $scope.graphics_window_focus
+      $scope.graphics_window_focus = false
 
-  $scope.deselect_graphics_window = ->
-    $scope.graphics_window_focus = false
-    document.getElementById('graphics_window').removeEventListener 'keydown', keydown_event
-    document.getElementById('graphics_window').removeEventListener 'keyup', keyup_event
-    return
+    $timeout ->
+      $scope.graphics_window_focus = true
+      document.getElementById('graphics_window').addEventListener 'keydown', keydown_event
+      document.getElementById('graphics_window').addEventListener 'keyup', keyup_event
 
   AppCatalogProvider.catalog.then (app_catalog) ->
     projects_resource = app_catalog['Programs']?.web_api?.projects
