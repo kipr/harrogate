@@ -19,7 +19,7 @@ module.exports =
       return project_resource.src_directory.get_children()
 
     .then (src_files) ->
-      gcc_cmd = "\"#{mingw_prefix}\\gcc.exe\" -I\"#{project_resource.include_directory.path}\"
+      gcc_cmd = "\"#{__dirname}\\mingw.bat\" -I\"#{project_resource.include_directory.path}\"
                 -I\"/opt/KIPR/KISS-web-ide/shared/include\"
                 -Wall "
 
@@ -36,8 +36,8 @@ module.exports =
       #linker options
       gcc_cmd += "-L\"#{Path.resolve(install_prefix, 'lib')}\"
                   -laurora
-                  -o \"#{project_resource.bin_directory.path}/#{project_resource.name}\" "
-
+                  -o \"#{project_resource.bin_directory.path}\\#{project_resource.name}.exe\" "
+				  
       exec gcc_cmd, cb
       return
 
