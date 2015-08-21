@@ -27,6 +27,7 @@
     <Content Include=".gitignore" />
     <Content Include=".jshintrc" />
     <Content Include="apps\compiler\api-routes\compile.coffee" />
+    <Content Include="apps\compiler\compilation-environments\c\mingw.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\gcc.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\_init_helper.c" />

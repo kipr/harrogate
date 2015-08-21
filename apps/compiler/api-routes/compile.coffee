@@ -10,7 +10,7 @@ Workspace = require AppCatalog.catalog['Programs'].path +  '/workspace.coffee'
 
 # get the compilation environments
 if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
-  compilation_environment = require '../compilation-environments/c/vs-cl-12.coffee'
+  compilation_environment = require '../compilation-environments/c/mingw.coffee'
 else
   compilation_environment = require '../compilation-environments/c/gcc.coffee'
 
