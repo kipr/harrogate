@@ -19,13 +19,21 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ButtonsOnlyModalFactory, FilenameModalFactory) ->
 
-  open_file = (file_uri) ->
+  console.log 'aaa'
+
+  $scope.$on '$routeUpdate', (next, current) ->
+    if $scope.displayed_file.name is not $location.search.file or $scope.selected_project.name is not $location.search.project
+      $scope.reload_ws()
+
+  open_file = (file_uri, category) ->
     $scope.close_file()
 
     $http.get(file_uri)
 
     .success (data, status, headers, config) ->
       $scope.displayed_file = data
+      $location.search 'file', data.name
+      $location.search 'cat', category
 
       $timeout ->
         editor.setValue(new Buffer(data.content, 'base64').toString('ascii'))
@@ -41,6 +49,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     $scope.displayed_file = null
     editor.setValue ''
     $scope.documentChanged = false
+    $location.search 'file', null
+    $location.search 'cat', null
     return
 
   $scope.delete_file = (file) ->
@@ -74,11 +84,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
       obj.cancel()
     return
 
-  # do we have to open a file?
-  if $location.search().path?
-    file_uri = $location.search().path
-    open_file file_uri
-
   $scope.reload_ws = ->
     $scope.close_file()
 
@@ -89,6 +94,14 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
 
         .success (data, status, headers, config) ->
           $scope.ws = data
+
+          if $location.search().project?
+            selected = (project for project in $scope.ws.projects when project.name is $location.search().project)
+            if selected[0]
+              $scope.select_project selected[0]
+            else
+              $location.search 'project', null
+
           return
 
       return
@@ -145,6 +158,23 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     $http.get(project.links.self.href)
     .success (data, status, headers, config) ->
       $scope.project_resource = data
+
+
+      if $location.search().file?
+        selected = []
+        if $location.search().cat is 'include'
+          selected = (file for file in $scope.project_resource.include_files when file.name is $location.search().file)
+        else if $location.search().cat is 'src'
+          selected = (file for file in $scope.project_resource.source_files when file.name is $location.search().file)
+        else if $location.search().cat is 'data'
+          selected = (file for file in $scope.project_resource.data_files when file.name is $location.search().file)
+
+        if selected[0]
+          $scope.select_file selected[0], $location.search().cat
+        else
+          $location.search 'file', null
+          $location.search 'cat', null
+
       return
 
     return
@@ -157,6 +187,8 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     $scope.include_files_expanded = false
     $scope.src_files_expanded = true
     $scope.data_files_expanded = false
+
+    $location.search 'project', null
     return
 
   $scope.select_project = (project) ->
@@ -167,6 +199,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     else
       $scope.close_file()
       $scope.selected_project = project
+      $location.search 'project', project.name
       $scope.selected_file = null
 
       $scope.include_files_expanded = false
@@ -190,7 +223,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     else
       $scope.selected_file = file
       $scope.selected_file_categorie = categorie
-      open_file $scope.selected_file.links.self.href
+      open_file $scope.selected_file.links.self.href, categorie
 
     return
 
@@ -251,7 +284,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
 
   $scope.refresh = ->
     if $scope.displayed_file?
-      open_file $scope.displayed_file.links.self.href
+      open_file $scope.displayed_file.links.self.href, $scope.selected_file_categorie
     else
       $scope.reload_ws()
     return

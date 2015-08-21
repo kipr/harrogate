@@ -58,6 +58,7 @@ app.config([
         $routeProvider.when(app_obj.angularjs_route,
           templateUrl: app_obj.nodejs_route
           controller: require(app_name).controller
+          reloadOnSearch: false
         )
       else
         $routeProvider.when(app_obj.angularjs_route,
