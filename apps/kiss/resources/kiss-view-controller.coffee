@@ -19,51 +19,9 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ButtonsOnlyModalFactory, FilenameModalFactory) ->
 
-  console.log 'aaa'
-
   $scope.$on '$routeUpdate', (next, current) ->
-    if $scope.displayed_file.name is not $location.search.file or $scope.selected_project.name is not $location.search.project
+    if ($scope.displayed_file?.name isnt $location.search().file) or ($scope.selected_project?.name isnt $location.search().project)
       $scope.reload_ws()
-
-  open_file = (file_uri, category) ->
-    $scope.close_file()
-
-    $http.get(file_uri)
-
-    .success (data, status, headers, config) ->
-      $scope.displayed_file = data
-      $location.search 'file', data.name
-      $location.search 'cat', category
-
-      $timeout ->
-        editor.setValue(new Buffer(data.content, 'base64').toString('ascii'))
-        editor.refresh()
-        $timeout ->
-          $scope.documentChanged = false
-      return
-
-    return
-
-  $scope.close_file = ->
-    $scope.compiler_output = ''
-    $scope.displayed_file = null
-    editor.setValue ''
-    $scope.documentChanged = false
-    $location.search 'file', null
-    $location.search 'cat', null
-    return
-
-  $scope.delete_file = (file) ->
-    ButtonsOnlyModalFactory.open(
-      'Delete File'
-      'Are you sure you want to permanently delete this file?'
-      [ 'Yes', 'No' ])
-    .then (button) ->
-      if button is 'Yes'
-        $http.delete(file.links.self.href)
-        $scope.close_file()
-        reload_project $scope.selected_project
-      return
 
   editor = code_mirror.fromTextArea(document.getElementById('editor'),
     mode: 'text/x-csrc'
@@ -85,8 +43,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     return
 
   $scope.reload_ws = ->
-    $scope.close_file()
-
     AppCatalogProvider.catalog.then (app_catalog) ->
       projects_resource = app_catalog['Programs']?.web_api?.projects
       if projects_resource?
@@ -116,25 +72,25 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
 
   $scope.toggle_include_files_expanded = ->
     $scope.include_files_expanded = not $scope.include_files_expanded
-    if not $scope.include_files_expanded and $scope.selected_file_categorie is 'include'
+    if not $scope.include_files_expanded and $scope.selected_file_type is 'include'
       $scope.selected_file = null
-      $scope.selected_file_categorie = null
+      $scope.selected_file_type = null
       $scope.close_file()
     return
 
   $scope.toggle_src_files_expanded = ->
     $scope.src_files_expanded = not $scope.src_files_expanded
-    if not $scope.src_files_expanded and $scope.selected_file_categorie is 'src'
+    if not $scope.src_files_expanded and $scope.selected_file_type is 'src'
       $scope.selected_file = null
-      $scope.selected_file_categorie = null
+      $scope.selected_file_type = null
       $scope.close_file()
     return
 
   $scope.toggle_data_files_expanded = ->
     $scope.data_files_expanded = not $scope.data_files_expanded
-    if not $scope.data_files_expanded and $scope.selected_file_categorie is 'data'
+    if not $scope.data_files_expanded and $scope.selected_file_type is 'data'
       $scope.selected_file = null
-      $scope.selected_file_categorie = null
+      $scope.selected_file_type = null
       $scope.close_file()
     return
 
@@ -147,18 +103,32 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
       if button is 'Yes'
         $http.delete(project.links.self.href)
         .success (data, status, headers, config) ->
-          $scope.close_project()
+          $scope.select_project()
           $scope.close_file()
           $scope.reload_ws()
-          return
 
-      return
+  $scope.close_project = ->
+    $scope.close_file()
 
-  reload_project = (project) ->
+    $scope.project_resource = null
+
+    $location.search 'project', null
+    $scope.selected_project = null
+
+  $scope.select_project = (project) ->
+    $scope.selected_project = project
+    $location.search 'project', project.name if $location.search().project isnt project.name
+
+    $scope.include_files_expanded = false
+    $scope.src_files_expanded = true
+    $scope.data_files_expanded = false
+
     $http.get(project.links.self.href)
     .success (data, status, headers, config) ->
       $scope.project_resource = data
 
+      selected_file = null
+      selected_file_cat = null
 
       if $location.search().file?
         selected = []
@@ -168,64 +138,61 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
           selected = (file for file in $scope.project_resource.source_files when file.name is $location.search().file)
         else if $location.search().cat is 'data'
           selected = (file for file in $scope.project_resource.data_files when file.name is $location.search().file)
+        selected_file = selected[0]
+        selected_file_cat = $location.search().cat
 
-        if selected[0]
-          $scope.select_file selected[0], $location.search().cat
-        else
-          $location.search 'file', null
-          $location.search 'cat', null
+      if not selected_file
+        selected_file = $scope.project_resource.source_files[0]
+        selected_file_cat = 'src'
 
+      if selected_file
+        $scope.select_file selected_file, selected_file_cat
+      else
+        $scope.close_file()
+
+  $scope.selected_file_type = null
+
+  $scope.select_file = (file, file_type) ->
+    $scope.selected_file = file
+    $scope.selected_file_type = file_type
+    $scope.compiler_output = ''
+    $location.search 'file', file.name
+    $location.search 'cat', file_type
+
+    $http.get($scope.selected_file.links.self.href)
+    .success (data, status, headers, config) ->
+      $scope.displayed_file = data
+
+      $timeout ->
+        editor.setValue(new Buffer(data.content, 'base64').toString('ascii'))
+        editor.refresh()
+        $timeout ->
+          $scope.documentChanged = false
       return
 
     return
 
-  $scope.close_project = ->
-    $scope.close_file()
-    $scope.selected_project = null
+  $scope.close_file = ->
+    $scope.compiler_output = ''
+    $scope.displayed_file = null
     $scope.selected_file = null
+    $scope.selected_file_type = null
+    editor.setValue ''
+    $scope.documentChanged = false
+    $location.search 'file', null
+    $location.search 'cat', null
 
-    $scope.include_files_expanded = false
-    $scope.src_files_expanded = true
-    $scope.data_files_expanded = false
-
-    $location.search 'project', null
-    return
-
-  $scope.select_project = (project) ->
-    # toggle selection
-    if $scope.selected_project is project
-      $scope.close_project()
-
-    else
-      $scope.close_file()
-      $scope.selected_project = project
-      $location.search 'project', project.name
-      $scope.selected_file = null
-
-      $scope.include_files_expanded = false
-      $scope.src_files_expanded = true
-      $scope.data_files_expanded = false
-
-      # load project files
-      reload_project $scope.selected_project
-
-    return
-
-  $scope.selected_file_categorie = null
-
-  $scope.select_file = (file, categorie) ->
-    # toggle selection
-    if $scope.selected_file is file
-      $scope.selected_file = null
-      $scope.selected_file_categorie = null
-      $scope.close_file()
-
-    else
-      $scope.selected_file = file
-      $scope.selected_file_categorie = categorie
-      open_file $scope.selected_file.links.self.href, categorie
-
-    return
+  $scope.delete_file = (file) ->
+    ButtonsOnlyModalFactory.open(
+      'Delete File'
+      'Are you sure you want to permanently delete this file?'
+      [ 'Yes', 'No' ])
+    .then (button) ->
+      if button is 'Yes'
+        $http.delete(file.links.self.href)
+        $scope.close_file()
+        $scope.select_project $scope.selected_project
+      return
 
   save_file = ->
     if $scope.displayed_file?
@@ -283,11 +250,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     return
 
   $scope.refresh = ->
-    if $scope.displayed_file?
-      open_file $scope.displayed_file.links.self.href, $scope.selected_file_categorie
-    else
-      $scope.reload_ws()
-    return
 
   $scope.undo = ->
     editor.undo()
@@ -312,7 +274,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
             $http.post($scope.project_resource.links.include_directory.href,  {name: data.filename + data.extension, type: 'file'})
 
             .success (data, status, headers, config) ->
-              reload_project $scope.selected_project
+              $scope.select_project $scope.selected_project
 
   $scope.show_add_source_file_modal = ->
     FilenameModalFactory.open(
@@ -329,7 +291,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
             $http.post($scope.project_resource.links.src_directory.href,  {name: data.filename + data.extension, type: 'file'})
 
             .success (data, status, headers, config) ->
-              reload_project $scope.selected_project
+              $scope.select_project $scope.selected_project
 
   $scope.show_add_data_file_modal = ->
     FilenameModalFactory.open(
@@ -346,7 +308,7 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
             $http.post($scope.project_resource.links.data_directory.href,  {name: data.filename, type: 'file'})
 
             .success (data, status, headers, config) ->
-              reload_project $scope.selected_project
+              $scope.select_project $scope.selected_project
 
   $scope.show_add_project_modal = ->
     $('#new-project').modal('show')

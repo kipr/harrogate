@@ -10,10 +10,18 @@ block view-toolbar-left
         i.fa.fa-stop
         br
         small.small Stop
-     button.btn.btn-default.btn-toolbar(type='button' ng-class='{disabled: !ProgramService.running}' ng-click='restart()')
-        i.fa.fa-refresh
+        
+  .btn-group(ng-if='selected_project')
+     a.btn.btn-default.btn-toolbar(type='button' href='/#/apps/kiss?project={{selected_project.name}}')
+        i.fa.fa-file-code-o
         br
-        small.small Restart
+        small.small Edit {{selected_project.name}}
+        
+  .btn-group
+     a.btn.btn-default.btn-toolbar(type='button' href='/#/apps/kiss')
+        i.fa.fa-file-code-o
+        br
+        small.small KISS IDE
 
 block view-content
   .row.row-stretch

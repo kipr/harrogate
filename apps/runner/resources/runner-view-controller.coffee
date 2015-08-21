@@ -7,13 +7,14 @@ exports.inject = (app) ->
   app.controller exports.name, [
     '$scope'
     '$http'
+    '$location'
     'AppCatalogProvider'
     'ProgramService'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $http, AppCatalogProvider, ProgramService) ->
+exports.controller = ($scope, $http, $location, AppCatalogProvider, ProgramService) ->
   $scope.ProgramService = ProgramService
 
   socket = undefined
@@ -100,6 +101,11 @@ exports.controller = ($scope, $http, AppCatalogProvider, ProgramService) ->
 
       .success (data, status, headers, config) ->
         $scope.ws = data
+
+        if $location.search().project?
+          selected = (project for project in $scope.ws.projects when project.name is $location.search().project)
+          if selected[0]
+            $scope.select_project selected[0]
         return
 
     return
@@ -149,13 +155,4 @@ exports.controller = ($scope, $http, AppCatalogProvider, ProgramService) ->
 
   $scope.stop = ->
     ProgramService.stop()
-    return
-
-  $scope.restart = ->
-    ProgramService.stop()
-    .then ->
-      if $scope.selected_project?
-        $scope.$broadcast "runner-reset-terminal"
-        return ProgramService.run $scope.selected_project.name
-
     return

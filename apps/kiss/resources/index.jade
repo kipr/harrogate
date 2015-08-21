@@ -46,10 +46,16 @@ block view-toolbar-left
       i.fa.fa-link
       br
       small.small Compile {{selected_project.name}}
-    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner')
+    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}&autorun=true')
       i.fa.fa-rocket
       br
       small.small Run {{selected_project.name}}
+
+  .btn-group
+    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner')
+      i.fa.fa-rocket
+      br
+      small.small Programs
 
 block view-content
   .row.row-stretch
