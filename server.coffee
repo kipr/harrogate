@@ -3,8 +3,11 @@ CookieParser = require 'cookie-parser'
 Express = require 'express'
 Http = require 'http'
 LocalStrategy =  require('passport-local').Strategy
+Mkdirp = require 'mkdirp'
 ON_DEATH = require 'death'
+Os = require 'os'
 Passport = require 'passport'
+Path = require 'path'
 Session = require 'express-session'
 
 AppCatalog = require './shared/scripts/app-catalog.coffee'
@@ -12,6 +15,21 @@ SettingsManager = require './shared/scripts/settings-manager.coffee'
 ServerError = require './shared/scripts/server-error.coffee'
 User = require './shared/scripts/user.coffee'
 UserManager = require './shared/scripts/user-manager.coffee'
+
+# Hack to create the workspace
+if Os.platform() is 'win32'
+  workspace_path = Path.join process.env['USERPROFILE'], 'Documents', 'KISS'
+else
+  workspace_path = Path.join process.env['HOME'], 'Documents', 'KISS'
+
+Mkdirp.sync workspace_path
+Mkdirp.sync Path.join(workspace_path, 'bin')
+Mkdirp.sync Path.join(workspace_path, 'data')
+Mkdirp.sync Path.join(workspace_path, 'include')
+Mkdirp.sync Path.join(workspace_path, 'lib')
+Mkdirp.sync Path.join(workspace_path, 'src')
+
+console.log 'Workspace @ #{workspace_path}'
 
 # create the app
 harrogate_app = Express()
