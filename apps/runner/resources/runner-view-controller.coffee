@@ -139,7 +139,7 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider, Pr
         img_height = msg.height
 
         $scope.$apply ->
-          $scope.img_src = "data:image/png;base64,#{msg.data}"
+          $scope.img_src = '/api/run/current/graphics?' + new Date().getTime()
           return
 
     return
@@ -151,7 +151,7 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider, Pr
 
   $scope.run = ->
     if $scope.selected_project?
-      $scope.img_src = "data:image/png;base64,"
+      $scope.img_src = null
       $scope.$broadcast "runner-reset-terminal"
       ProgramService.run $scope.selected_project.name
     return

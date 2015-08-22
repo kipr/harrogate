@@ -50,8 +50,11 @@ block view-content
       .panel.panel-primary.panel-stretch
         .panel-heading(ng-click='select_graphics_window()')
           .panel-title Console Window
+            span.btn-group-xs.pull-right
+              button.btn.btn-danger(type='button' ng-click='show_console = !show_console')
+                i.fa.fa-times
         .scrollable-panel-body-container
-          terminal.panel-body.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input" reset-event="runner-reset-terminal")
+          terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input" reset-event="runner-reset-terminal")
 
     .col-stretch(ng-show='show_graphics_window' ng-class='{"col-xs-9": show_graphics_window && !show_console, "col-xs-5": show_graphics_window && show_console}' )
       .panel.panel-primary.panel-stretch
@@ -59,12 +62,16 @@ block view-content
           .panel-title
             | Graphics Window
             span.btn-group-xs.pull-right
-              button.btn.btn-default(type='button' ng-class='{info: graphics_window_focus}' ng-click='select_graphics_window()')
+              a.btn.btn-default(type='button' href="/api/run/current/graphics" download)
+                i.fa.fa-floppy-o
+              button.btn.btn-default(type='button' ng-click='select_graphics_window()')
                 i.fa.fa-keyboard-o
+              button.btn.btn-danger(type='button' ng-click='show_graphics_window = !show_graphics_window')
+                i.fa.fa-times
 
         .scrollable-panel-body-container
           .panel-body
-            .embed-responsive.embed-responsive-16by9
+            .embed-responsive.embed-responsive-16by9(ng-if='img_src')
               img.embed-responsive-item#graphics_window(ng-src="{{img_src}}"
                 ng-mousemove="gui_mousemove($event)"
                 ng-mousedown="gui_mousedown($event)"

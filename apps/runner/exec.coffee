@@ -35,6 +35,8 @@ else
   usr_local_lib_path = Path.resolve '/', 'opt', 'KIPR', 'KISS-web-ide', 'shared', 'lib'
   child_env.DYLD_LIBRARY_PATH += Path.delimiter + usr_local_lib_path
 
+latest_graphics_window_frame = null
+
 start_program = ->
   if running?.resource?
     namespace.emit events.starting.id, running.resource.name
@@ -79,7 +81,9 @@ start_program = ->
           repacked_msg =
             width: msg.width
             height: msg.height
-            data: msg.data.toString('base64')
+            # data: msg.data.toString('base64')
+
+          latest_graphics_window_frame = msg.data.buffer
 
           namespace.emit events.frame.id, repacked_msg
           return
@@ -109,14 +113,29 @@ router = Express.Router()
 # get information about the currently running program
 router.get '/current', (request, response, next) ->
   response.writeHead 200, { 'Content-Type': 'application/json' }
-  return response.end "#{JSON.stringify(running: running)}", 'utf8'
+  response.end "#{JSON.stringify(running: running)}", 'utf8'
+
+# get the current graphics window
+router.get '/current/graphics', (request, response, next) ->
+  if latest_graphics_window_frame?
+    response.setHeader "Cache-Control", "no-cache, no-store, must-revalidate"
+    response.setHeader "Pragma", "no-cache"
+    response.setHeader "Expires", "0"
+    response.writeHead 200, { 'Content-Type': 'image/png' }
+    response.end latest_graphics_window_frame, 'binary'
+  else
+    response.setHeader "Cache-Control", "no-cache, no-store, must-revalidate"
+    response.setHeader "Pragma", "no-cache"
+    response.setHeader "Expires", "0"
+    response.writeHead 404, { 'Content-Type': 'application/json' }
+    response.end "#{JSON.stringify(error: 'No program is running')}", 'utf8'
 
 # get information about the currently running program
 router.post '/', (request, response, next) ->
   # Validate the project name
   if not request.body.name?
       response.writeHead 422, { 'Content-Type': 'application/json' }
-      return response.end "#{JSON.stringify(error: 'Parameter \'name\' missing')}", 'utf8'
+      response.end "#{JSON.stringify(error: 'Parameter \'name\' missing')}", 'utf8'
 
   ws_resource = null
 
@@ -153,11 +172,11 @@ router.post '/', (request, response, next) ->
       start_program()
 
       response.writeHead 201, { 'Content-Type': 'application/json' }
-      return response.end "#{JSON.stringify(running: running)}", 'utf8'
+      response.end "#{JSON.stringify(running: running)}", 'utf8'
   .catch (e) ->
     if e instanceof ServerError
       response.writeHead e.code, { 'Content-Type': 'application/javascript' }
-      return response.end "#{JSON.stringify(error: e.message)}", 'utf8'
+      response.end "#{JSON.stringify(error: e.message)}", 'utf8'
     else
       next e
   .done()
@@ -167,7 +186,7 @@ router.post '/', (request, response, next) ->
 router.delete '/current', (request, response, next) ->
   stop_program()
   response.writeHead 200, { 'Content-Type': 'application/json' }
-  return response.end "#{JSON.stringify(running: running)}", 'utf8'
+  response.end "#{JSON.stringify(running: running)}", 'utf8'
 
 runner_on_connection = (socket) ->
 
