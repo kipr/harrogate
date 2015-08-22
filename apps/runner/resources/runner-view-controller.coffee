@@ -142,6 +142,14 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider, Pr
           $scope.img_src = '/api/run/current/graphics?' + new Date().getTime()
           return
 
+      socket.on events.ended.id, ->
+
+        $timeout ->
+          $scope.img_src = '/api/run/current/graphics?' + new Date().getTime()
+          return
+
+       return
+
     return
 
   $scope.$on 'runner-program-input', (event, text) ->
