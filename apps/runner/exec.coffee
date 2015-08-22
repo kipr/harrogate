@@ -39,6 +39,8 @@ latest_graphics_window_frame = null
 
 start_program = ->
   if running?.resource?
+    latest_graphics_window_frame = null
+
     namespace.emit events.starting.id, running.resource.name
 
     program_path = Path.resolve running.resource.bin_directory.path, "#{running.resource.name}"
@@ -48,8 +50,7 @@ start_program = ->
       console.log "Could not spawn #{program_path}!! Error details: #{JSON.stringify(error: data)}"
       namespace.emit events.stderr.id, "Program crashed!\n\nError details:\n#{JSON.stringify(error: data,null,'\t')}"
       namespace.emit events.ended.id
-      running = null
-      running_process = null
+      stop_program()
       return
 
     running_process.stdout.on 'data', (data) ->
@@ -63,8 +64,7 @@ start_program = ->
     running_process.on 'exit', (code) ->
       namespace.emit events.stdout.id, "Program exited with code #{code}"
       namespace.emit events.ended.id
-      running = null
-      running_process = null
+      stop_program()
       return
 
     setTimeout (->
