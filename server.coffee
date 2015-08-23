@@ -170,7 +170,7 @@ harrogate_app.use (error, request, response, next) ->
 server.listen SettingsManager.settings.server.port, ->
   console.log "\n\n\n\n"
   console.log "*************************************************************"
-  console.log "KISS IDE Server started"
+  console.log "KISS IDE Server 1.0.27 started"
   console.log "  Open your browser to 127.0.0.1:#{server.address().port}"
   console.log "  Close this terminal to kill the KISS IDE Server"
   console.log "*************************************************************"

@@ -14,7 +14,7 @@ module.exports =
 
     .then (src_files) ->
       gcc_cmd = "gcc -I\"#{project_resource.include_directory.path}\"
-                -I\"/opt/KIPR/KIPR-Software-Suite-1.0.26/shared/include\"
+                -I\"/opt/KIPR/KIPR-Software-Suite-1.0.27/shared/include\"
                 -Wall "
 
       for src in src_files
@@ -24,7 +24,7 @@ module.exports =
       # add the init helper file
       gcc_cmd += "\"#{Path.resolve(__dirname, '_init_helper.c')}\" "
 
-      gcc_cmd += "-L\"/opt/KIPR/KIPR-Software-Suite-1.0.26/shared/lib\"
+      gcc_cmd += "-L\"/opt/KIPR/KIPR-Software-Suite-1.0.27/shared/lib\"
                   -laurora
                   -o \"#{project_resource.bin_directory.path}/#{project_resource.name}\" "
 

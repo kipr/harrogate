@@ -32,7 +32,7 @@ if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
   bin_dir = Path.resolve Path.resolve __dirname, '..', '..', '..' , 'prefix', 'usr', 'bin'
   child_env.PATH += Path.delimiter + bin_dir
 else
-  usr_local_lib_path = Path.resolve '/', 'opt', 'KIPR', 'KIPR-Software-Suite-1.0.26', 'shared', 'lib'
+  usr_local_lib_path = Path.resolve '/', 'opt', 'KIPR', 'KIPR-Software-Suite-1.0.27', 'shared', 'lib'
   child_env.DYLD_LIBRARY_PATH += Path.delimiter + usr_local_lib_path
 
 latest_graphics_window_frame = null
