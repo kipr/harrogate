@@ -168,7 +168,12 @@ harrogate_app.use (error, request, response, next) ->
 
 # Start the server
 server.listen SettingsManager.settings.server.port, ->
-  console.log "Starting express.js server (#{server.address().address}:#{server.address().port})"
+  console.log "\n\n\n\n"
+  console.log "*************************************************************"
+  console.log "KISS IDE Server started"
+  console.log "  Open your browser to 127.0.0.1:#{server.address().port}"
+  console.log "  Close this terminal to kill the KISS IDE Server"
+  console.log "*************************************************************"
 
 ON_DEATH (signal, err) ->
   console.log "Stopping express.js server"
