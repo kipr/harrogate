@@ -70,12 +70,11 @@ block view-content
                 i.fa.fa-times
 
         .scrollable-panel-body-container
-          .panel-body
-            .embed-responsive.embed-responsive-16by9(ng-if='img_src')
-              img.embed-responsive-item#graphics_window(ng-src="{{img_src}}"
-                ng-mousemove="gui_mousemove($event)"
-                ng-mousedown="gui_mousedown($event)"
-                ng-mouseup="gui_mouseup($event)"
-                oncontextmenu="return false;"
-                set-focus="graphics_window_focus"
-                tabindex="0")
+          img#graphics_window.panel-body(ng-src="{{img_src}}"
+            ng-mousemove="gui_mousemove($event)"
+            ng-mousedown="gui_mousedown($event)"
+            ng-mouseup="gui_mouseup($event)"
+            oncontextmenu="return false;"
+            set-focus="graphics_window_focus"
+            tabindex="0"
+            ng-if='img_src')
