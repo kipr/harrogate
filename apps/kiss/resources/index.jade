@@ -46,16 +46,16 @@ block view-toolbar-left
       i.fa.fa-link
       br
       small.small Compile {{selected_project.name}}
-    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}&autorun=true')
+    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}')
       i.fa.fa-rocket
       br
-      small.small Run {{selected_project.name}}
+      small.small Goto Runner
 
-  .btn-group
+  .btn-group(ng-if='!selected_project')
     a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner')
       i.fa.fa-rocket
       br
-      small.small Programs
+      small.small Goto Runner
 
 block view-content
   .row.row-stretch
@@ -198,7 +198,7 @@ block view-content
     .modal-dialog
       .modal-content
         .modal-header
-          button.close(type='button' dismiss='modal') &times;
+          button.close(type='button' ng-click='hide_add_project_modal()') &times;
           h4.modal-title Create New Project
 
         .modal-body
@@ -208,7 +208,7 @@ block view-content
               input#projectName.form-control(type='text' placeholder='Project name')
 
         .modal-footer
-          button.btn.btn-default(dismiss='modal') Cancel
+          button.btn.btn-default(ng-click='hide_add_project_modal()') Cancel
           button.btn.btn-primary(ng-click='add_project()') Create
           
 block bottom-compact-navbar-buttons

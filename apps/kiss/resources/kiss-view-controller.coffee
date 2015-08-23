@@ -314,6 +314,10 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     $('#new-project').modal('show')
     return
 
+  $scope.hide_add_project_modal = ->
+    $('#new-project').modal('hide')
+    
+
   $scope.add_project = () ->
 
     $('#new-project').modal('hide')
