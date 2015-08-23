@@ -32,7 +32,7 @@ if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
   bin_dir = Path.resolve Path.resolve __dirname, '..', '..', '..' , 'prefix', 'usr', 'bin'
   child_env.PATH += Path.delimiter + bin_dir
 else
-  usr_local_lib_path = Path.resolve '/', 'opt', 'KIPR', 'KISS-web-ide', 'shared', 'lib'
+  usr_local_lib_path = Path.resolve '/', 'opt', 'KIPR', 'KIPR-Software-Suite-1.0.26', 'shared', 'lib'
   child_env.DYLD_LIBRARY_PATH += Path.delimiter + usr_local_lib_path
 
 latest_graphics_window_frame = null
@@ -67,10 +67,11 @@ start_program = ->
       stop_program()
       return
 
-    setTimeout (->
+    connect_to_daylite = ->
       client = new Daylite.DayliteClient
 
       client.on 'error', ->
+        setTimeout connect_to_daylite, 100
         return
 
       client.join_daylite 8374
@@ -94,7 +95,7 @@ start_program = ->
         client = null
         return
 
-      )
+    setTimeout connect_to_daylite, 100
   return
 
 stop_program = -> 
