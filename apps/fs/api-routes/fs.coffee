@@ -41,6 +41,9 @@ router.get '/*', (request, response, next) ->
     request.fs_resource.get_representation()
 
     .then (representation) ->
+      response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+      response.setHeader 'Pragma', 'no-cache'
+      response.setHeader 'Expires', '0'
       response.writeHead 200, { 'Content-Type': 'application/json' }
       response.end "#{JSON.stringify(representation)}", 'utf8'
       return

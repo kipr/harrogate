@@ -50,9 +50,15 @@ router.get '/', (request, response, next) ->
     callback = Url.parse(request.url, true).query['callback']
     # should we return JSON or JSONP (callback defined)?
     if callback?
+      response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+      response.setHeader 'Pragma', 'no-cache'
+      response.setHeader 'Expires', '0'
       response.writeHead 200, { 'Content-Type': 'application/javascript' }
       return response.end "#{callback}(#{JSON.stringify(representation)})", 'utf8'
     else
+      response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+      response.setHeader 'Pragma', 'no-cache'
+      response.setHeader 'Expires', '0'
       response.writeHead 200, { 'Content-Type': 'application/json' }
       return response.end "#{JSON.stringify(representation)}", 'utf8'
   .catch (e) ->
@@ -109,9 +115,15 @@ router.get '/:project', (request, response, next) ->
         callback = Url.parse(request.url, true).query['callback']
         # should we return JSON or JSONP (callback defined)?
         if callback?
+          response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+          response.setHeader 'Pragma', 'no-cache'
+          response.setHeader 'Expires', '0'
           response.writeHead 200, { 'Content-Type': 'application/javascript' }
           return response.end "#{callback}(#{JSON.stringify(representation)})", 'utf8'
         else
+          response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+          response.setHeader 'Pragma', 'no-cache'
+          response.setHeader 'Expires', '0'
           response.writeHead 200, { 'Content-Type': 'application/json' }
           return response.end "#{JSON.stringify(representation)}", 'utf8'
   .catch (e) ->

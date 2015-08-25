@@ -16,6 +16,9 @@ router.get '/current', (request, response, next) ->
     user_resource = new UserResource(request.logged_in_user)
     user_resource.get_representation()
     .then (representation) ->
+      response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+      response.setHeader 'Pragma', 'no-cache'
+      response.setHeader 'Expires', '0'
       response.writeHead 200, { 'Content-Type': 'application/json' }
       return response.end "#{JSON.stringify(representation)}", 'utf8'
     .catch (e) ->
@@ -47,6 +50,9 @@ router.get '/', (request, response, next) ->
     user_resource = new UserResource user
     representation.links.users.push { login: user_resource.user.login, href: user_resource.url }
 
+  response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+  response.setHeader 'Pragma', 'no-cache'
+  response.setHeader 'Expires', '0'
   response.writeHead 200, { 'Content-Type': 'application/json' }
   return response.end "#{JSON.stringify(representation)}", 'utf8'
 
