@@ -1,9 +1,9 @@
 ﻿Express = require 'express'
 Url = require 'url'
 
-AppCatalog = require '../../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 Project = require '../project.coffee'
-ServerError = require '../../../shared/scripts/server-error.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 Workspace = require '../workspace.coffee'
 
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'

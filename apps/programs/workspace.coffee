@@ -1,7 +1,7 @@
 ﻿Path = require 'path'
 Q = require 'q'
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 Project = require './project.coffee'
 
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()

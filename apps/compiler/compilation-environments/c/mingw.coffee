@@ -1,11 +1,7 @@
 ﻿exec = require('child_process').exec
 Path = require 'path'
 
-# assume that the install prefix of the kipr libraries is <harrogate>/../prefix/usr
-install_prefix = Path.resolve Path.resolve __dirname, '..', '..', '..', '..', '..' , 'prefix', 'usr'
-
-# assume that the MinGW prefix is <harrogate>/../MinGW
-mingw_prefix = Path.resolve Path.resolve __dirname, '..', '..', '..', '..', '..' , 'MinGW', 'bin'
+Config = require_harrogate_module 'config.coffee'
 
 module.exports =
 
@@ -19,12 +15,11 @@ module.exports =
       return project_resource.src_directory.get_children()
 
     .then (src_files) ->
-      gcc_cmd = "\"#{__dirname}\\mingw.bat\" -I\"#{project_resource.include_directory.path}\"
-                -I\"/opt/KIPR/KISS-web-ide/shared/include\"
+      gcc_cmd = "\"#{__dirname}\\mingw.bat\" \"#{Config.ext_deps.min_gw.bin_path}\"
+                -I\"#{project_resource.include_directory.path}\"
+                -I\"#{Config.ext_deps.include_path}\"
+                -g
                 -Wall "
-
-      # Add KIPR libraries include paths
-      gcc_cmd += "-I\"#{Path.resolve(install_prefix, 'include')}\" "
 
       for src in src_files
         if Path.basename(src.path).charAt(0) isnt '.'
@@ -34,10 +29,10 @@ module.exports =
       gcc_cmd += "\"#{Path.resolve(__dirname, '_init_helper.c')}\" "
 
       #linker options
-      gcc_cmd += "-L\"#{Path.resolve(install_prefix, 'lib')}\"
+      gcc_cmd += "-L\"#{Config.ext_deps.lib_path}\"
                   -laurora
                   -o \"#{project_resource.bin_directory.path}\\#{project_resource.name}.exe\" "
-				  
+
       exec gcc_cmd, cb
       return
 

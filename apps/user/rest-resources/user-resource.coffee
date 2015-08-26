@@ -1,8 +1,8 @@
 ﻿assert = require 'assert'
 Q = require 'q'
 
-AppCatalog = require '../../../shared/scripts/app-catalog.coffee'
-User = require '../../../shared/scripts/user.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+User = require_harrogate_module '/shared/scripts/user.coffee'
 
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
 

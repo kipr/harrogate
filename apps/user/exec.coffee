@@ -1,8 +1,8 @@
 Express = require 'express'
 Url = require 'url'
 
-ServerError = require '../../shared/scripts/server-error.coffee'
-UserManager = require '../../shared/scripts/user-manager.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+UserManager = require_harrogate_module '/shared/scripts/user-manager.coffee'
 UserResource = require './rest-resources/user-resource.coffee'
 
 AppManifest = require './manifest.json'

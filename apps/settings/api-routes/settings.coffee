@@ -1,6 +1,6 @@
 ﻿Express = require 'express'
 
-SettingsManager = require '../../../shared/scripts/settings-manager.coffee'
+SettingsManager = require_harrogate_module '/shared/scripts/settings-manager.coffee'
 
 # the fs router
 router = Express.Router()

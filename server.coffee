@@ -10,11 +10,17 @@ Passport = require 'passport'
 Path = require 'path'
 Session = require 'express-session'
 
-AppCatalog = require './shared/scripts/app-catalog.coffee'
-SettingsManager = require './shared/scripts/settings-manager.coffee'
-ServerError = require './shared/scripts/server-error.coffee'
-User = require './shared/scripts/user.coffee'
-UserManager = require './shared/scripts/user-manager.coffee'
+# avoid require '../../.. ... for shared harrogate module
+if not global.require_harrogate_module?
+  global.require_harrogate_module = (module) ->
+    require __dirname + '/' + module
+
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+Config = require './config.coffee'
+SettingsManager = require_harrogate_module '/shared/scripts/settings-manager.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+User = require_harrogate_module '/shared/scripts/user.coffee'
+UserManager = require_harrogate_module '/shared/scripts/user-manager.coffee'
 
 # Hack to create the workspace
 if Os.platform() is 'win32'
@@ -170,7 +176,7 @@ harrogate_app.use (error, request, response, next) ->
 server.listen SettingsManager.settings.server.port, ->
   console.log "\n\n\n\n"
   console.log "*************************************************************"
-  console.log "KISS IDE Server 1.0.27 started"
+  console.log "KISS IDE Server #{Config.version.major}.#{Config.version.minor}.#{Config.version.build_number} started"
   console.log "  Open your browser to 127.0.0.1:#{server.address().port}"
   console.log "  Close this terminal to kill the KISS IDE Server"
   console.log "*************************************************************"

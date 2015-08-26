@@ -1,6 +1,6 @@
 spawn = require('child_process').spawn
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 
 events = AppCatalog.catalog['Terminal'].event_groups.terminal_events.events

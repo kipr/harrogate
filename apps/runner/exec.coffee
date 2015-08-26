@@ -2,10 +2,11 @@ Express = require 'express'
 Path = require 'path'
 spawn = require('child_process').spawn
 
-ServerError = require '../../shared/scripts/server-error.coffee'
-Daylite = require '../../shared/scripts/daylite.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+Daylite = require_harrogate_module '/shared/scripts/daylite.coffee'
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+Config = require_harrogate_module 'config.coffee'
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
 HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.coffee'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
@@ -28,12 +29,9 @@ client = null
 
 child_env = Object.create(process.env)
 if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
-  # assume that the install prefix of the kipr libraries is <harrogate>/../prefix/usr
-  bin_dir = Path.resolve Path.resolve __dirname, '..', '..', '..' , 'prefix', 'usr', 'bin'
-  child_env.PATH += Path.delimiter + bin_dir
+  child_env.Path += Path.delimiter + "#{Config.ext_deps.bin_path}"
 else
-  usr_local_lib_path = Path.resolve '/', 'opt', 'KIPR', 'KIPR-Software-Suite-1.0.27', 'shared', 'lib'
-  child_env.DYLD_LIBRARY_PATH += Path.delimiter + usr_local_lib_path
+  child_env.DYLD_LIBRARY_PATH += Path.delimiter + "#{Config.ext_deps.lib_path}"
 
 latest_graphics_window_frame = null
 
@@ -68,32 +66,33 @@ start_program = ->
       return
 
     connect_to_daylite = ->
-      client = new Daylite.DayliteClient
+      if running_process?
+        client = new Daylite.DayliteClient
 
-      client.on 'error', ->
-        setTimeout connect_to_daylite, 100
-        return
-
-      client.join_daylite 8374
-
-      client.on 'connected', ->
-
-        client.subscribe '/aurora/frame', (msg) ->
-          repacked_msg =
-            width: msg.width
-            height: msg.height
-            # data: msg.data.toString('base64')
-
-          latest_graphics_window_frame = msg.data.buffer
-
-          namespace.emit events.frame.id, repacked_msg
+        client.on 'error', (error) ->
+          setTimeout connect_to_daylite, 100
           return
 
-        return
+        client.join_daylite 8374
 
-      client.on 'close', ->
-        client = null
-        return
+        client.on 'connected', ->
+
+          client.subscribe '/aurora/frame', (msg) ->
+            repacked_msg =
+              width: msg.width
+              height: msg.height
+              # data: msg.data.toString('base64')
+
+            latest_graphics_window_frame = msg.data.buffer
+
+            namespace.emit events.frame.id, repacked_msg
+            return
+
+          return
+
+        client.on 'close', ->
+          client = null
+          return
 
     setTimeout connect_to_daylite, 100
   return

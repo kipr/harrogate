@@ -24,8 +24,11 @@ These libraries are required to compile a robot program with harrogate.
 * libbson v 1.1
 * daylite
 * libaurora
+* MinGW (Windows) or Visual C++ Compiler (Windows)
 
-Note: harrogate assumes that those dependencies are installed into `<harrogate-dir>\..\prefix\usr\`
+
+Note: harrogate assumes that those dependencies were installed into `<harrogate-dir>\..\prefix\usr\`.
+Modify `<harrogate-dir>\config.coffee` if you installed them into a different location.
 
 Launching gulp (development)
 ============================

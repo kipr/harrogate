@@ -1,3 +1,7 @@
 @echo off
-cd  %~dp0..\..\..\..\..\MinGW\bin
-gcc.exe %*
+
+for /f "tokens=1,* delims= " %%a in ("%*") do set GCC_ARGUMENTS=%%b
+
+cd  %1
+
+gcc.exe %GCC_ARGUMENTS%

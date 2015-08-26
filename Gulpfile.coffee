@@ -14,9 +14,14 @@ request = require 'request'
 transform = require 'vinyl-transform'
 through = require 'through'
 
+# avoid require '../../.. ... for shared harrogate module
+if not global.require_harrogate_module?
+  global.require_harrogate_module = (module) ->
+    require __dirname + '/' + module
+
 # Create the app instances
 app_instances = {}
-app_catalog = require './shared/scripts/app-catalog.coffee'
+app_catalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 for app_name, app of app_catalog.catalog
   app_instances[path_tools.basename(app['path'])] = app.get_instance()
 

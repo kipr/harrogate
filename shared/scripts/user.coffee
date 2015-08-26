@@ -1,6 +1,6 @@
 ﻿Path = require 'path'
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 
 class User

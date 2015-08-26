@@ -1,6 +1,8 @@
 ﻿exec = require('child_process').exec
 Path = require 'path'
 
+Config = require_harrogate_module 'config.coffee'
+
 module.exports =
 
   compile: (project_resource, cb) ->
@@ -14,7 +16,7 @@ module.exports =
 
     .then (src_files) ->
       gcc_cmd = "gcc -I\"#{project_resource.include_directory.path}\"
-                -I\"/opt/KIPR/KIPR-Software-Suite-1.0.27/shared/include\"
+                -I\"#{Config.ext_deps.include_path}\"
                 -Wall "
 
       for src in src_files
@@ -24,7 +26,7 @@ module.exports =
       # add the init helper file
       gcc_cmd += "\"#{Path.resolve(__dirname, '_init_helper.c')}\" "
 
-      gcc_cmd += "-L\"/opt/KIPR/KIPR-Software-Suite-1.0.27/shared/lib\"
+      gcc_cmd += "-L\"#{Config.ext_deps.lib_path}\"
                   -laurora
                   -o \"#{project_resource.bin_directory.path}/#{project_resource.name}\" "
 

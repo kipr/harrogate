@@ -3,9 +3,9 @@ Path = require 'path'
 Q = require 'q'
 Mime = require 'mime'
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 HostFileSystem = require './host-fs.coffee'
-ServerError = require '../../shared/scripts/server-error.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 

@@ -1,8 +1,8 @@
 ﻿Express = require 'express'
 
-ServerError = require '../../../shared/scripts/server-error.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 
-AppCatalog = require '../../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
 HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.coffee'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()

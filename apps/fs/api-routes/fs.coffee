@@ -4,7 +4,7 @@ Url = require 'url'
 Directory = require '../directory.coffee'
 File = require '../file.coffee'
 HostFileSystem = require '../host-fs.coffee'
-ServerError = require '../../../shared/scripts/server-error.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 
 # the fs router
 router = Express.Router()

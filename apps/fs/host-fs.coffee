@@ -3,8 +3,8 @@ Path = require 'path'
 Q = require 'q'
 spawn = require('child_process').spawn
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
-ServerError = require '../../shared/scripts/server-error.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 

@@ -1,6 +1,6 @@
 # Boyd = require 'node-boyd'
 
-AppCatalog = require '../../shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 
 events = AppCatalog.catalog['Camera'].event_groups.camera_events.events
 
