@@ -33,6 +33,14 @@
     <Content Include="apps\compiler\compilation-environments\c\_init_helper.c" />
     <Content Include="apps\home\resources\index.jade" />
     <Content Include="config.coffee" />
+    <Content Include="installer-resources\Windows\KISS IDE.url" />
+    <Content Include="installer-resources\Windows\KISS.nsi" />
+    <Content Include="installer-resources\Windows\run_harrogate.bat" />
+    <Content Include="installer-resources\Windows\start_browser.bat" />
+    <Content Include="installer-resources\Windows\vcredist_x86.exe" />
+    <Content Include="installer-resources\Windows\vcredist_x86_2010.exe" />
+    <Content Include="installer-resources\Windows\vcredist_x86_2012.exe" />
+    <Content Include="installer-resources\Windows\windows_icon.ico" />
     <Content Include="shared\client\scripts\filename-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\buttons-only-modal-factory-service.coffee" />
     <Content Include="shared\client\views\filename-modal.jade" />
@@ -146,6 +154,8 @@
     <Folder Include="apps\terminal\resources\" />
     <Folder Include="apps\user\rest-resources\" />
     <Folder Include="apps\user\resources\" />
+    <Folder Include="installer-resources\" />
+    <Folder Include="installer-resources\Windows\" />
     <Folder Include="shared\client\views\" />
     <Folder Include="shared\client\views\templates\" />
     <Folder Include="shared\scripts\" />
