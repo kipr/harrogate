@@ -66,10 +66,6 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
 
   $scope.reload_ws()
 
-  $scope.show_open = ->
-    $scope.close_file()
-    return
-
   $scope.toggle_include_files_expanded = ->
     $scope.include_files_expanded = not $scope.include_files_expanded
     if not $scope.include_files_expanded and $scope.selected_file_type is 'include'

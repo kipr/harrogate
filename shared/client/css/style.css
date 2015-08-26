@@ -169,8 +169,22 @@
         bottom: 30px;
         right: 0;
         left: 0;
+        padding: 0;
+        margin: 0;
         
         overflow: auto;
+    }
+
+    #view-content-container .row-stretch, #view-content-container .row-stretch-40, #view-content-container .row-stretch-60
+    {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #view-content-container .row-stretch .col-stretch, #view-content-container .row-stretch-40 .col-stretch, #view-content-container .row-stretch-60 .col-stretch
+    {
+        padding-left: 0;
+        padding-right: 0;
     }
 
     #top-compact-navbar

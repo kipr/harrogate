@@ -59,7 +59,7 @@ block view-toolbar-left
 
 block view-content
   .row.row-stretch
-    .col-md-9.col-stretch
+    .col-md-9.col-stretch(ng-class='{"desktop-only": !selected_project}')
       .row(ng-class="{'row-stretch-60' : compiler_output, 'row-stretch' : !compiler_output}")
         .col-xs-12.col-stretch
           .panel.panel-primary.panel-stretch(ng-show="!displayed_file && selected_project")
@@ -109,8 +109,8 @@ block view-content
               pre.panel-body
                 code {{compiler_output}}
 
-    .col-md-3.col-stretch
-      .panel.panel-primary.panel-stretch(ng-class='{"desktop-only": displayed_file}')
+    .col-md-3.col-stretch(ng-class='{"desktop-only": selected_project}')
+      .panel.panel-primary.panel-stretch
         .panel-heading
           .panel-title
             | Project Explorer
@@ -216,21 +216,21 @@ block view-content
         .modal-footer
           button.btn.btn-default(ng-click='hide_add_project_modal()') Cancel
           button.btn.btn-primary(ng-click='add_project()') Create
-          
+
 block bottom-compact-navbar-buttons
-  a.btn.btn-toolbar.btn-info(type='button', ng-click='show_open()')
+  a.btn.btn-toolbar.btn-info(type='button', ng-click='close_project()')
     i.fa.fa-folder-open-o
     |  
     small.small Open
-  a.btn.btn-toolbar.btn-info(type='button', ng-class="{'disabled' : !documentChanged || !displayed_file, 'btn-danger' : documentChanged}", ng-click='save()')
-    i.fa.fa-floppy-o
-    |  
-    small.small Save
-  a.btn.btn-toolbar.btn-info(type='button', ng-class="{'disabled' : !selected_project || !project_resource.source_files}", ng-click='compile()')
+  a.btn.btn-toolbar.btn-info(type='button', ng-class="{'disabled' : !selected_project}", ng-click='compile()')
     i.fa.fa-link
     |  
     small.small Compile
-  a.btn.btn-toolbar.btn-info.disabled(type='button')
-    i.fa.fa-ellipsis-h
+  a.btn.btn-toolbar.btn-info(ng-if='selected_project' type='button' href='/#/apps/runner?project={{selected_project.name|escape}}')
+    i.fa.fa-rocket
     |  
-    small.small More
+    small.small Goto Runner
+  a.btn.btn-toolbar.btn-info(ng-if='!selected_project' type='button' href='/#/apps/runner')
+    i.fa.fa-rocket
+    |  
+    small.small Goto Runner
