@@ -2,6 +2,7 @@
 Path = require 'path'
 
 Config = require_harrogate_module 'config.coffee'
+ServerError = require_harrogate_module 'shared/scripts/server-error.coffee'
 
 module.exports =
 

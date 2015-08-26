@@ -341,28 +341,32 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
     editor.setCursor editor.lineCount(), 0
     return
 
+  compile = (project_name) ->
+    $http.post('/api/compile', {name: project_name})
+
+    .success (data, status, headers, config) ->
+      if data.result.error?
+        $scope.compilation_state = 'Compilation Failed'
+        if data.result.error?.message?
+          $scope.compiler_output = 'Compilation Failed\n\n' + data.result.error.message
+        else
+          $scope.compiler_output = 'Compilation Failed\n\n' + data.result.stderr + data.result.stdout
+      else if data.result.stderr
+        $scope.compilation_state = 'Compilation Succeeded with Warnings'
+        $scope.compiler_output = 'Compilation Succeeded with Warnings\n\n' + data.result.stderr + data.result.stdout
+      else
+        $scope.compilation_state = 'Compilation succeeded'
+        $scope.compiler_output = 'Compilation succeeded\n\n' + data.result.stdout
+
   $scope.compile = ->
+    $scope.compiler_output = null
     if $scope.selected_project?
       if $scope.displayed_file? 
         save_file()
 
         .success (data, status, headers, config) ->
           $scope.documentChanged = false
-          $http.post('/api/compile', {name: $scope.selected_project.name})
-
-          .success (data, status, headers, config) ->
-            $scope.compiler_output = 'Compilation finished:\n' + data.result.stderr + data.result.stdout
-            return
-
-          return
+          compile $scope.selected_project.name
 
       else
-        $http.post('/api/compile', {name: $scope.selected_project.name})
-
-        .success (data, status, headers, config) ->
-          $scope.compiler_output = 'Compilation finished:\n' + data.result.stderr + data.result.stdout
-          return
-
-      return
-
-  return
+        compile $scope.selected_project.name

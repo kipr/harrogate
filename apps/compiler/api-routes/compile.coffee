@@ -72,11 +72,7 @@ router.post '/', (request, response, next) ->
   .then ->
 
     compilation_environment.compile project_resource, (error, stdout, stderr) ->
-      #if error?
-      #  next error
-      #  return
-
-      result = {stdout: stdout, stderr: stderr}
+      result = {stdout: stdout, stderr: stderr, error: error}
       response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
       response.setHeader 'Pragma', 'no-cache'
       response.setHeader 'Expires', '0'

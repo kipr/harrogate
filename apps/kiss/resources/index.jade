@@ -97,10 +97,13 @@ block view-content
 
       .row.row-stretch-40(ng-show='compiler_output')
         .col-xs-12.col-stretch
-          .panel.panel-default.panel-stretch
+          .panel.panel-stretch(ng-class='{"panel-success": compilation_state == "Compilation succeeded", "panel-danger": compilation_state == "Compilation Failed", "panel-warning": compilation_state == "Compilation Succeeded with Warnings"}')
             .panel-heading
-              button.close(type='button' ng-click='compiler_output = ""') &times;
-              .panel-title Compilation Output
+              .panel-title
+                | {{compilation_state}}
+                span.btn-group-xs.pull-right
+                  button.btn.btn-danger(type='button' ng-click='compiler_output = ""')
+                    i.fa.fa-times
 
             .scrollable-panel-body-container
               pre.panel-body
