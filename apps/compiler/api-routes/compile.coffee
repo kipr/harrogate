@@ -55,31 +55,35 @@ router.post '/', (request, response, next) ->
     if not project_resource?
       throw new ServerError 404, 'Project ' + request.body.name + ' does not exists'
 
+    # delete the bin folder if it is existing
+    return ws_resource.bin_directory.get_child project_resource.name
+
+  .then ( (child) ->
+    console.log child
+    # bin folder exists, delete it
+    return child.remove()
+    
+  ), ->
+    return # No child exist, continue
+
+  .then ->
     # create the bin folder
     return ws_resource.bin_directory.create_subdirectory project_resource.name
 
-    .catch ->
-      return # ignore file exist error
+  .then ->
 
-    .finally ->
+    compilation_environment.compile project_resource, (error, stdout, stderr) ->
+      #if error?
+      #  next error
+      #  return
 
-      compilation_environment.compile project_resource, (error, stdout, stderr) ->
-        #if error?
-        #  next error
-        #  return
-
-        result = {stdout: stdout, stderr: stderr}
-        response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
-        response.setHeader 'Pragma', 'no-cache'
-        response.setHeader 'Expires', '0'
-        response.writeHead 200, { 'Content-Type': 'application/json' }
-        response.end "#{JSON.stringify(result: result)}", 'utf8'
-        return
-
+      result = {stdout: stdout, stderr: stderr}
+      response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+      response.setHeader 'Pragma', 'no-cache'
+      response.setHeader 'Expires', '0'
+      response.writeHead 200, { 'Content-Type': 'application/json' }
+      response.end "#{JSON.stringify(result: result)}", 'utf8'
       return
-
-    .done()
-    return
 
   .catch (error) ->
     next error
