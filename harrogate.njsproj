@@ -32,6 +32,7 @@
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\_init_helper.c" />
     <Content Include="apps\home\resources\index.jade" />
+    <Content Include="config.coffee" />
     <Content Include="shared\client\scripts\filename-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\buttons-only-modal-factory-service.coffee" />
     <Content Include="shared\client\views\filename-modal.jade" />
