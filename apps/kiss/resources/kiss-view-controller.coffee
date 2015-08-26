@@ -132,16 +132,16 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
 
       if $location.search().file?
         selected = []
-        if $location.search().cat is 'include'
+        if $location.search().cat is 'include' and $scope.project_resource.include_files?
           selected = (file for file in $scope.project_resource.include_files when file.name is $location.search().file)
-        else if $location.search().cat is 'src'
+        else if $location.search().cat is 'src' and $scope.project_resource.source_files?
           selected = (file for file in $scope.project_resource.source_files when file.name is $location.search().file)
-        else if $location.search().cat is 'data'
+        else if $location.search().cat is 'data' and $scope.project_resource.data_files?
           selected = (file for file in $scope.project_resource.data_files when file.name is $location.search().file)
         selected_file = selected[0]
         selected_file_cat = $location.search().cat
 
-      if not selected_file
+      if not selected_file and $scope.project_resource.source_files
         selected_file = $scope.project_resource.source_files[0]
         selected_file_cat = 'src'
 
