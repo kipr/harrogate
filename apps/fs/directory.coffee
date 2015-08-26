@@ -44,6 +44,15 @@ class Directory
       else # there exists a parent
         return Directory.create_from_path parent_path
 
+  get_child: (name) =>
+    return @get_children()
+    .then (children) =>
+      child = (child for child in children when child.name is name)[0]
+      if not child?
+        throw new ServerError 404, name + ' is not a child of ' + @path
+
+      return child
+
   get_children: () =>
     if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC and @path is ''
       # Children = windows drive letters
