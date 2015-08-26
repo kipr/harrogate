@@ -101,10 +101,9 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
       [ 'Yes', 'No' ])
     .then (button) ->
       if button is 'Yes'
+        $scope.close_project()
         $http.delete(project.links.self.href)
         .success (data, status, headers, config) ->
-          $scope.select_project()
-          $scope.close_file()
           $scope.reload_ws()
 
   $scope.close_project = ->
