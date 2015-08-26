@@ -59,7 +59,6 @@ router.post '/', (request, response, next) ->
     return ws_resource.bin_directory.get_child project_resource.name
 
   .then ( (child) ->
-    console.log child
     # bin folder exists, delete it
     return child.remove()
     
