@@ -147,6 +147,7 @@ block view-content
                  td
                  td
                   i.fa.fa-plus
+                  |  
                   | Add File
               tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='toggle_src_files_expanded()')
                 th
@@ -168,6 +169,7 @@ block view-content
                  td
                  td
                   i.fa.fa-plus
+                  |  
                   | Add File
               tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='toggle_data_files_expanded()')
                 th
@@ -188,6 +190,7 @@ block view-content
                  td
                  td
                   i.fa.fa-plus
+                  |  
                   | Add File
 
               tr.cursor-pointer(ng-click='show_add_project_modal()')
