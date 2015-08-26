@@ -72,6 +72,11 @@
     text-align: center;
 }
 
+.cursor-pointer
+{
+    cursor: pointer;
+}
+
 .tree-table th:not(:last-child), .tree-table td:not(:last-child)
 {
     white-space: nowrap;
