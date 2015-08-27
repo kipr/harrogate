@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cp /opt/KIPR/KIPR-Software-Suite-1.0.27/Start\ KISS\ IDE\ Server.command ~/Desktop/Start\ KISS\ IDE\ Server.command
