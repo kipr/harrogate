@@ -9,6 +9,8 @@
       .list-group
         a.list-group-item(ng-href="{{project_resource.links.self.href}}?mode=packed" download)
           | Download {{project_resource.name}} as .tar archive
+        a.list-group-item(ng-href="{{project_resource.links.self.href}}?mode=compressed" download)
+          | Download {{project_resource.name}} as .tar.gz archive
     .col-md-2
 
 .modal-footer

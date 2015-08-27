@@ -3,6 +3,7 @@ Fs = require 'fs'
 Tar = require 'tar-stream'
 Q = require 'q'
 Url = require 'url'
+Zlib = require 'zlib'
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 Project = require '../project.coffee'
@@ -117,7 +118,7 @@ router.get '/:project', (request, response, next) ->
       # which mode is requested
       response_mode = Url.parse(request.url, true).query['mode']
 
-      # reply .tar.gz
+      # reply .tar
       if response_mode? and response_mode is 'packed'
         packer = Tar.pack()
 
@@ -126,6 +127,19 @@ router.get '/:project', (request, response, next) ->
           response.setHeader 'Content-disposition', 'attachment; filename=' + project_resource.name + '.tar'
           response.writeHead 200, { 'Content-Type', 'application/octet-stream' }
           packer.pipe response
+          packer.finalize()
+          return
+
+      # reply .tar.gz
+      else if response_mode? and response_mode is 'compressed'
+        packer = Tar.pack()
+
+        project_resource.pack(packer)
+        .then (p) ->
+          response.setHeader 'Content-disposition', 'attachment; filename=' + project_resource.name + '.tar.gz'
+          response.writeHead 200, { 'Content-Type', 'application/octet-stream' }
+          packer.pipe Zlib.createGzip()
+          .pipe response
           packer.finalize()
           return
 
