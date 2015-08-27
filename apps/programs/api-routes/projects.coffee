@@ -120,27 +120,27 @@ router.get '/:project', (request, response, next) ->
 
       # reply .tar
       if response_mode? and response_mode is 'packed'
-        packer = Tar.pack()
+        pack = Tar.pack()
 
-        project_resource.pack(packer)
+        project_resource.pack(pack)
         .then (p) ->
           response.setHeader 'Content-disposition', 'attachment; filename=' + project_resource.name + '.tar'
           response.writeHead 200, { 'Content-Type', 'application/octet-stream' }
-          packer.pipe response
-          packer.finalize()
+          pack.pipe response
+          pack.finalize()
           return
 
       # reply .tar.gz
       else if response_mode? and response_mode is 'compressed'
-        packer = Tar.pack()
+        pack = Tar.pack()
 
-        project_resource.pack(packer)
+        project_resource.pack(pack)
         .then (p) ->
           response.setHeader 'Content-disposition', 'attachment; filename=' + project_resource.name + '.tar.gz'
           response.writeHead 200, { 'Content-Type', 'application/octet-stream' }
-          packer.pipe Zlib.createGzip()
+          pack.pipe Zlib.createGzip()
           .pipe response
-          packer.finalize()
+          pack.finalize()
           return
 
       # reply JSON
