@@ -12,12 +12,22 @@ exports.inject = (app) ->
     '$timeout'
     'AppCatalogProvider'
     'ButtonsOnlyModalFactory'
+    'DownloadProjectModalFactory'
     'FilenameModalFactory'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ButtonsOnlyModalFactory, FilenameModalFactory) ->
+exports.controller = (
+  $scope
+  $rootScope
+  $location
+  $http
+  $timeout
+  AppCatalogProvider
+  ButtonsOnlyModalFactory
+  DownloadProjectModalFactory
+  FilenameModalFactory) ->
 
   $scope.$on '$routeUpdate', (next, current) ->
     if ($scope.displayed_file?.name isnt $location.search().file) or ($scope.selected_project?.name isnt $location.search().project)
@@ -253,6 +263,9 @@ exports.controller = ($scope, $rootScope, $location, $http, $timeout, AppCatalog
   $scope.redo = ->
     editor.redo()
     return
+
+  $scope.download_project = (project) ->
+    DownloadProjectModalFactory.open project
 
   $scope.show_add_include_file_modal = ->
     FilenameModalFactory.open(

@@ -1,4 +1,7 @@
 ﻿Express = require 'express'
+Fs = require 'fs'
+Tar = require 'tar-stream'
+Q = require 'q'
 Url = require 'url'
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
@@ -109,23 +112,41 @@ router.get '/:project', (request, response, next) ->
     # did we found a project?
     if not project_resource?
         throw new ServerError 404, 'Project ' + request.params.project + ' does not exists'
+
     else
-      project_resource.get_representation()
-      .then (representation) ->
-        callback = Url.parse(request.url, true).query['callback']
-        # should we return JSON or JSONP (callback defined)?
-        if callback?
-          response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
-          response.setHeader 'Pragma', 'no-cache'
-          response.setHeader 'Expires', '0'
-          response.writeHead 200, { 'Content-Type': 'application/javascript' }
-          return response.end "#{callback}(#{JSON.stringify(representation)})", 'utf8'
-        else
-          response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
-          response.setHeader 'Pragma', 'no-cache'
-          response.setHeader 'Expires', '0'
-          response.writeHead 200, { 'Content-Type': 'application/json' }
-          return response.end "#{JSON.stringify(representation)}", 'utf8'
+      # which mode is requested
+      response_mode = Url.parse(request.url, true).query['mode']
+
+      # reply .tar.gz
+      if response_mode? and response_mode is 'packed'
+        packer = Tar.pack()
+
+        project_resource.pack(packer)
+        .then (p) ->
+          response.setHeader 'Content-disposition', 'attachment; filename=' + project_resource.name + '.tar'
+          response.writeHead 200, { 'Content-Type', 'application/octet-stream' }
+          packer.pipe response
+          packer.finalize()
+          return
+
+      # reply JSON
+      else
+        project_resource.get_representation()
+        .then (representation) ->
+          callback = Url.parse(request.url, true).query['callback']
+          # should we return JSON or JSONP (callback defined)?
+          if callback?
+            response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+            response.setHeader 'Pragma', 'no-cache'
+            response.setHeader 'Expires', '0'
+            response.writeHead 200, { 'Content-Type': 'application/javascript' }
+            return response.end "#{callback}(#{JSON.stringify(representation)})", 'utf8'
+          else
+            response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+            response.setHeader 'Pragma', 'no-cache'
+            response.setHeader 'Expires', '0'
+            response.writeHead 200, { 'Content-Type': 'application/json' }
+            return response.end "#{JSON.stringify(representation)}", 'utf8'
   .catch (e) ->
     if e instanceof ServerError
       response.writeHead e.code, { 'Content-Type': 'application/javascript' }

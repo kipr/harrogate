@@ -1,0 +1,15 @@
+﻿.modal-header
+  button.close(type='button' ng-click='dismiss()') &times;
+  h4.modal-title Download / Export {{project_resource.name}}
+
+.modal-body.container-fluid
+  .row
+    .col-md-2
+    .col-md-8
+      .list-group
+        a.list-group-item(ng-href="{{project_resource.links.self.href}}?mode=packed" download)
+          | Download {{project_resource.name}} as .tar archive
+    .col-md-2
+
+.modal-footer
+  button.btn.btn-default(type='button' ng-click='dismiss()') Close

@@ -41,8 +41,10 @@
     <Content Include="installer-resources\Windows\vcredist_x86_2010.exe" />
     <Content Include="installer-resources\Windows\vcredist_x86_2012.exe" />
     <Content Include="installer-resources\Windows\windows_icon.ico" />
+    <Content Include="shared\client\scripts\download-project-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\filename-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\buttons-only-modal-factory-service.coffee" />
+    <Content Include="shared\client\views\download-project-modal.jade" />
     <Content Include="shared\client\views\filename-modal.jade" />
     <Content Include="shared\client\views\buttons-only-modal.jade" />
     <Content Include="apps\kiss\resources\kiss-injector.coffee" />

@@ -1,4 +1,4 @@
-﻿FS = require 'fs'
+﻿Fs = require 'fs'
 Path = require 'path'
 Q = require 'q'
 _ = require 'lodash'
@@ -37,6 +37,30 @@ delete_directory_helper = (directory) ->
     else
       return Q undefined
 
+pack_helper = (packer, folder_resource, prefix) ->
+  return folder_resource.is_valid()
+  .then (valid) ->
+    if valid
+      return folder_resource.get_children()
+    else
+      return Q(undefined)
+
+  .then (children) ->
+    if children?
+      promises = []
+      for child in children
+        promises.push Q.Promise( (resolve, reject, notify) ->
+          name = "#{prefix}/#{child.name}"
+          Fs.readFile child.path, (error, content) ->
+            packer.entry { name: name }, content
+            resolve child
+        )
+      return Q.all promises
+
+    else
+      return Q(undefined)
+
+
 class Project
   constructor: (
     @name
@@ -67,6 +91,13 @@ class Project
     .then () =>
       return @project_file.remove()
 
+  pack: (packer) =>
+    return Q.all [
+      pack_helper packer, @include_directory, "#{@name}/include"
+      pack_helper packer, @src_directory, "#{@name}/src"
+      pack_helper packer, @data_directory, "#{@name}/data"
+    ]
+
   get_representation: (verbose = true) =>
     representation =
       name: @name
@@ -93,7 +124,7 @@ class Project
 
     # >>> Async part. Return a promise and continue
     # get the .project.json file content
-    return Q.nfcall FS.readFile, @project_file.path
+    return Q.nfcall Fs.readFile, @project_file.path
     .then (content) =>
       project_parameters = JSON.parse content
 
