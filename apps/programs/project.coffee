@@ -37,7 +37,7 @@ delete_directory_helper = (directory) ->
     else
       return Q undefined
 
-pack_helper = (packer, folder_resource, prefix) ->
+pack_helper = (pack, folder_resource, prefix) ->
   return folder_resource.is_valid()
   .then (valid) ->
     if valid
@@ -52,14 +52,13 @@ pack_helper = (packer, folder_resource, prefix) ->
         promises.push Q.Promise( (resolve, reject, notify) ->
           name = "#{prefix}/#{child.name}"
           Fs.readFile child.path, (error, content) ->
-            packer.entry { name: name }, content
+            pack.entry { name: name }, content
             resolve child
         )
       return Q.all promises
 
     else
       return Q(undefined)
-
 
 class Project
   constructor: (
@@ -91,11 +90,11 @@ class Project
     .then () =>
       return @project_file.remove()
 
-  pack: (packer) =>
+  pack: (pack) =>
     return Q.all [
-      pack_helper packer, @include_directory, "#{@name}/include"
-      pack_helper packer, @src_directory, "#{@name}/src"
-      pack_helper packer, @data_directory, "#{@name}/data"
+      pack_helper pack, @include_directory, "#{@name}/include"
+      pack_helper pack, @src_directory, "#{@name}/src"
+      pack_helper pack, @data_directory, "#{@name}/data"
     ]
 
   get_representation: (verbose = true) =>
