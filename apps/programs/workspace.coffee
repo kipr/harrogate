@@ -1,8 +1,11 @@
-﻿Path = require 'path'
+﻿Fs = require 'fs'
+Path = require 'path'
 Q = require 'q'
+Tar = require 'tar-stream'
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 Project = require './project.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
@@ -32,6 +35,15 @@ class Workspace
     .then (values) ->
       return values.reduce (previousValue, currentValue) ->
         return previousValue and currentValue
+
+  get_project: (name) =>
+    return @get_projects()
+    .then (projects) =>
+      project = (project for project in projects when project.name is name)[0]
+      if not project?
+        throw new ServerError 404, 'This workspace does not contain a project named ' +name
+
+      return project
 
   get_projects: =>
     # a project has at least a project file *.project.json located in the workspace root
@@ -83,6 +95,84 @@ class Workspace
       return representation
 
   init: =>
+
+  import_from_archive: (pack) =>
+    return Q.Promise (resolve, reject, notify) =>
+
+      extract = Tar.extract()
+      extract.on 'entry', (header, stream, callback) =>
+        [ project_name, type, file_name ] = header.name.split '/'
+
+        # skip this file if any of project_name, type, file_name is not set
+        if not project_name? or not type? or not file_name?
+          callback()
+          return
+
+        type_root_directory_resource = switch type
+          when 'include' then @include_directory
+          when 'src' then @src_directory
+          when 'data' then @data_directory
+
+        if not type_root_directory_resource?
+          callback()
+          return
+
+        return type_root_directory_resource.is_valid()
+
+        .then (valid) =>
+          # create <ws>/<type> if it is not existing
+          return if not valid then Q.nfcall Fs.mkdir, type_root_directory_resource.path else Q(undefined)
+
+        .then =>
+          # get the project resource
+          return @get_project project_name
+        .then ( (project_resource) =>
+          # the project already exist
+          return project_resource
+         ), (error) =>
+          if error?.code? and error.code is 404
+            # the project does not exist yet, create it
+            return @create_project project_name, 'C'
+          else
+            # some other error happended, rethrow
+            throw error
+
+        # get the directory resource and check if it is valid (= existing)
+        .then (project_resource) =>
+          directory_resource = switch type
+            when 'include' then project_resource.include_directory
+            when 'src' then project_resource.src_directory
+            when 'data' then project_resource.data_directory
+
+          return [ Q(directory_resource), directory_resource.is_valid() ]
+
+        .spread (directory_resource, valid) =>
+          # create <ws>/<type>/<prj> if it is not existing
+          return [ Q(directory_resource), if not valid then Q.nfcall Fs.mkdir, directory_resource.path else Q(undefined) ]
+
+        .spread (directory_resource) =>
+          # create the file
+          fs_write_stream = Fs.createWriteStream Path.join directory_resource.path, file_name
+
+          stream.pipe fs_write_stream
+          stream.on 'end', =>
+            callback()
+
+        .catch (error) =>
+          # an error happened, continue with the next file
+          console.log "Unexpected error while importing #{project_name}/#{type}/#{file_name}"
+          console.log error
+          callback()
+
+        .done()
+
+      extract.on 'error', (error) ->
+        reject error
+
+      extract.on 'finish', ->
+        resolve()
+
+      pack.pipe extract
 
   create_project: (name, language) =>
     # create the project file
