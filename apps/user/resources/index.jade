@@ -2,7 +2,7 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
   .row(ng-show="current_user")
-    .col-md-4
+    //-.col-md-4
       .row.desktop-only
         .col-xs-3
         .col-xs-2
@@ -16,8 +16,9 @@ block view-content
             i.fa.fa-sign-out
             |  
             | Logout {{current_user.login}}
-
-    .col-md-8
+ 
+    //-.col-md-8
+    .col-md-12
       h2  User Preferences
       .panel.panel-default
         .panel-body
@@ -29,7 +30,13 @@ block view-content
               .panel-body
                 .form-group
                   label Path
-                  input.form-control(type='text' readonly ng-attr-id="path" value="{{current_user.preferences.workspace.path}}")
+                  .input-group
+                    input.form-control(type='text' ng-attr-id="path" ng-model="current_user.preferences.workspace.path")
+                    .input-group-btn
+                      button.btn.btn-default(type='button' ng-click='apply_change()')
+                        i.fa.fa-check
+                      button.btn.btn-default(type='button' ng-click='reset()')
+                        i.fa.fa-times
 
   .row(ng-show="!current_user")
     .col-xs-1.col-md-3
@@ -39,7 +46,7 @@ block view-content
           strong Login required!
         p.desktop-only Please authenticate yourself with your username and password
 
-  .row(ng-show="!current_user")
+  //-.row(ng-show="!current_user")
     .col-xs-1.col-md-3
     .col-xs-10.col-md-6
       .panel.panel-default

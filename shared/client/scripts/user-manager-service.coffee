@@ -6,11 +6,12 @@ exports.inject = (app) ->
     '$q'
     '$location'
     'authRequiredInterceptor'
+    'ButtonsOnlyModalFactory'
     exports.service
   ]
   exports.service
 
-exports.service = ($http, $q, $location, authRequiredInterceptor) ->
+exports.service = ($http, $q, $location, authRequiredInterceptor, ButtonsOnlyModalFactory) ->
   user_api_uri = '/api/users'
 
   class UserManagerService
@@ -24,6 +25,12 @@ exports.service = ($http, $q, $location, authRequiredInterceptor) ->
           reject()
           return
         return
+
+    change_workspace_path: (user, path) ->
+      $q (resolve, reject) ->
+        $http.put(user_api_uri + '/' + user, {preferences: {workspace: {path: path}}})
+        .success -> resolve()
+        .error (data, status) -> reject(status)
 
     login: (username, password) ->
       return $q (resolve, reject) ->

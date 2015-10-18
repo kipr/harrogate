@@ -14,11 +14,10 @@ class UserManager
     catch
       @users = {}
 
-  update_user: (user) =>
-    assert(user instanceof User)
-    assert(user.login?)
+  update_user: (login, data) =>
+    assert(@users[login]?)
 
-    @users =  _.merge(@users[user.login], user)
+    @users[login] =  _.merge(@users[login], data)
     Fs.writeFile @users_file_paht, JSON.stringify(@users, null, 2), 'utf8'
     return
 

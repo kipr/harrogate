@@ -22,20 +22,13 @@ ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 User = require_harrogate_module '/shared/scripts/user.coffee'
 UserManager = require_harrogate_module '/shared/scripts/user-manager.coffee'
 
-# Hack to create the workspace
-if Os.platform() is 'win32'
-  workspace_path = Path.join process.env['USERPROFILE'], 'Documents', 'KISS'
-else
-  workspace_path = Path.join process.env['HOME'], 'Documents', 'KISS'
-
-Mkdirp.sync workspace_path
-Mkdirp.sync Path.join(workspace_path, 'bin')
-Mkdirp.sync Path.join(workspace_path, 'data')
-Mkdirp.sync Path.join(workspace_path, 'include')
-Mkdirp.sync Path.join(workspace_path, 'lib')
-Mkdirp.sync Path.join(workspace_path, 'src')
-
-console.log 'Workspace @ #{workspace_path}'
+init_workspace = (workspace_path) ->
+  Mkdirp.sync workspace_path
+  Mkdirp.sync Path.join(workspace_path, 'bin')
+  Mkdirp.sync Path.join(workspace_path, 'data')
+  Mkdirp.sync Path.join(workspace_path, 'include')
+  Mkdirp.sync Path.join(workspace_path, 'lib')
+  Mkdirp.sync Path.join(workspace_path, 'src')
 
 # create the app
 harrogate_app = Express()
@@ -80,12 +73,20 @@ Passport.use new LocalStrategy (username, password, done) ->
 check_authenticated = (request, response, next) ->
 
   # bypass authentication system for now
-  request.logged_in_user = new User 'Dummy'
+  if not UserManager.users['User']?
+    UserManager.add_user(new User 'User')
+
+  # init workspace
+  init_workspace UserManager.users['User'].preferences.workspace.path
+
+  request.logged_in_user = UserManager.users['User']
+
   return next()
 
   if request.isAuthenticated()
     # add the logged_in_user to the request
     if UserManager.users[request.user]?
+
       request.logged_in_user = UserManager.users[request.user]
     else # should never happen
       console.log "Unexpected user: #{request.user}"
