@@ -182,6 +182,18 @@ class Directory
         # return the file resource once the write has finished
         return file_resource
 
+  create: =>
+    # Handle 'This PC'
+    if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC and @path is ''
+      throw new ServerError 403, 'Cannot create \'This PC\''
+
+    # >>> Async part. Return a promise and continue
+    # create the directory
+    return Q.nfcall FS.mkdir, @path
+    .then () =>
+      # directory created, return resource
+      return this
+
   create_subdirectory: (name) =>
     # Handle 'This PC'
     if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC and @path is ''
