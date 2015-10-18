@@ -95,7 +95,6 @@
 .tree-table th:last-child, .tree-table td:last-child
 {
     width: 99%;
-    padding-left: 0px;
 }
 
 .panel-title .pull-right button

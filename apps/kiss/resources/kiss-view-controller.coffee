@@ -76,30 +76,6 @@ exports.controller = (
 
   $scope.reload_ws()
 
-  $scope.toggle_include_files_expanded = ->
-    $scope.include_files_expanded = not $scope.include_files_expanded
-    if not $scope.include_files_expanded and $scope.selected_file_type is 'include'
-      $scope.selected_file = null
-      $scope.selected_file_type = null
-      $scope.close_file()
-    return
-
-  $scope.toggle_src_files_expanded = ->
-    $scope.src_files_expanded = not $scope.src_files_expanded
-    if not $scope.src_files_expanded and $scope.selected_file_type is 'src'
-      $scope.selected_file = null
-      $scope.selected_file_type = null
-      $scope.close_file()
-    return
-
-  $scope.toggle_data_files_expanded = ->
-    $scope.data_files_expanded = not $scope.data_files_expanded
-    if not $scope.data_files_expanded and $scope.selected_file_type is 'data'
-      $scope.selected_file = null
-      $scope.selected_file_type = null
-      $scope.close_file()
-    return
-
   $scope.delete_project = (project) ->
     ButtonsOnlyModalFactory.open(
       'Delete Project'
@@ -123,10 +99,6 @@ exports.controller = (
   $scope.select_project = (project) ->
     $scope.selected_project = project
     $location.search 'project', project.name if $location.search().project isnt project.name
-
-    $scope.include_files_expanded = false
-    $scope.src_files_expanded = true
-    $scope.data_files_expanded = false
 
     $http.get(project.links.self.href)
     .success (data, status, headers, config) ->
@@ -155,17 +127,15 @@ exports.controller = (
       else
         $scope.close_file()
 
-  $scope.selected_file_type = null
-
   $scope.select_file = (file, file_type) ->
     $scope.selected_file = file
-    $scope.selected_file_type = file_type
     $scope.compiler_output = ''
     $location.search 'file', file.name
     $location.search 'cat', file_type
 
     $http.get($scope.selected_file.links.self.href)
     .success (data, status, headers, config) ->
+      $scope.display_file_menu = false
       $scope.displayed_file = data
 
       $timeout ->
@@ -179,9 +149,9 @@ exports.controller = (
 
   $scope.close_file = ->
     $scope.compiler_output = ''
+    $scope.display_file_menu = false
     $scope.displayed_file = null
     $scope.selected_file = null
-    $scope.selected_file_type = null
     editor.setValue ''
     $scope.documentChanged = false
     $location.search 'file', null
@@ -317,6 +287,12 @@ exports.controller = (
 
             .success (data, status, headers, config) ->
               $scope.select_project $scope.selected_project
+
+  $scope.close_file_menu = ->
+    $scope.display_file_menu = false
+
+  $scope.open_file_menu = ->
+    $scope.display_file_menu = true
 
   $scope.show_add_project_modal = ->
     $('#new-project').modal('show')

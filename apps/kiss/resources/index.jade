@@ -1,21 +1,29 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
-  .btn-group(ng-if='displayed_file')
+  .btn-group(ng-if='displayed_file && !display_file_menu')
     button.btn.btn-toolbar(type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged}" ng-click='save()')
       i.fa.fa-floppy-o
       br
       small.small Save {{displayed_file.name}}
-    button.btn.btn-toolbar.btn-danger(type='button' ng-click='delete_file(displayed_file)')
-      i.fa.fa-trash
-      br
-      small.small Delete {{displayed_file.name}}
-    a.btn.btn-toolbar.btn-default(type='button' ng-href="{{displayed_file.links.self.href}}?mode=raw" download)
-      i.fa.fa-download
-      br
-      small.small Download {{displayed_file.name}}
 
   .btn-group(ng-if='displayed_file')
+    button.btn.btn-toolbar.btn-default(ng-if='!display_file_menu' type='button' ng-click='open_file_menu()')
+      i.fa.fa-file
+      br
+      small.small File Menu
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='close_file()')
+      i.fa.fa-archive
+      br
+      small.small Project Menu
+
+  .btn-group(ng-if='displayed_file && display_file_menu')
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='close_file_menu()')
+      i.fa.fa-file-code-o
+      br
+      small.small Edit {{displayed_file.name}}
+
+  .btn-group(ng-if='displayed_file && !display_file_menu')
     button.btn.btn-toolbar.btn-default(type='button' ng-click='undo()')
       i.fa.fa-undo
       br
@@ -25,21 +33,11 @@ block view-toolbar-left
       br
       small.small Redo
 
-  .btn-group(ng-if='displayed_file')
+  .btn-group(ng-if='displayed_file && !display_file_menu')
     button.btn.btn-toolbar.btn-default(type='button' ng-click='indent()')
       i.fa.fa-indent
       br
       small.small Indent
-
-  .btn-group(ng-if='selected_project && !displayed_file')
-    button.btn.btn-toolbar.btn-danger(type='button' ng-click='delete_project(selected_project)')
-      i.fa.fa-trash
-      br
-      small.small Delete {{selected_project.name}}
-    button.btn.btn-toolbar.btn-default(type='button' ng-click='download_project(selected_project)')
-      i.fa.fa-download
-      br
-      small.small Download {{selected_project.name}}
 
   .btn-group(ng-if='selected_project')
     button.btn.btn-toolbar.btn-default(type='button' ng-click='compile()')
@@ -62,6 +60,8 @@ block view-content
     .col-md-9.col-stretch(ng-class='{"desktop-only": !selected_project}')
       .row(ng-class="{'row-stretch-60' : compiler_output, 'row-stretch' : !compiler_output}")
         .col-xs-12.col-stretch
+
+          //- Project menu
           .panel.panel-primary.panel-stretch(ng-show="!displayed_file && selected_project")
             .panel-heading
               .panel-title
@@ -72,17 +72,60 @@ block view-content
                   button.btn.btn-danger(type='button' ng-click='close_project()')
                     i.fa.fa-times
             .panel-body
+              h4 Project Operations
+              .btn-group
+                button.btn.btn-toolbar.btn-danger(type='button' ng-click='delete_project(selected_project)')
+                  i.fa.fa-trash
+                  br
+                  small.small Delete {{selected_project.name}}
+
+              .btn-group
+                button.btn.btn-toolbar.btn-default(type='button' ng-click='download_project(selected_project)')
+                  i.fa.fa-download
+                  br
+                  small.small Download {{selected_project.name}}
+
               h4 Project Information
               p Name: {{project_resource.name}}
               p Language: {{project_resource.parameters.language}}
-              h4 Source Files
-              ul
-                li(ng-repeat = 'file in project_resource.source_files') {{file.path}}
-              h4 Include Files
-              ul
-                li(ng-repeat = 'file in project_resource.include_files') {{file.path}}
 
-          .panel.panel-primary.panel-stretch(ng-show="displayed_file")
+              h4(ng-if='project_resource.source_files') Source Files
+              ul(ng-if='project_resource.source_files')
+                li(ng-repeat = 'file in project_resource.source_files') {{file.path}}
+              h4(ng-if='project_resource.include_files') Include Files
+              ul(ng-if='project_resource.include_files')
+                li(ng-repeat = 'file in project_resource.include_files') {{file.path}}
+              h4(ng-if='project_resource.data_files') Data Files
+              ul(ng-if='project_resource.data_files')
+                li(ng-repeat = 'file in project_resource.data_files') {{file.path}}
+
+          //- File menu
+          .panel.panel-primary.panel-stretch(ng-show="displayed_file && display_file_menu")
+            .panel-heading
+              .panel-title
+                | File: {{displayed_file ? displayed_file.name : 'Unnamed File'}}
+                span.btn-group-xs.pull-right
+                  button.btn.btn-danger(type='button' ng-click='close_file_menu()')
+                    i.fa.fa-times
+            .panel-body
+              .btn-group
+                button.btn.btn-toolbar.btn-danger(type='button' ng-click='delete_file(displayed_file)')
+                  i.fa.fa-trash
+                  br
+                  small.small Delete {{displayed_file.name}}
+
+              .btn-group
+                a.btn.btn-toolbar.btn-default(type='button' ng-href="{{displayed_file.links.self.href}}?mode=raw" download)
+                  i.fa.fa-download
+                  br
+                  small.small Download {{displayed_file.name}}
+
+              h4 File Information
+              p Name: {{displayed_file.name}}
+              p Path: {{displayed_file.path}}
+
+          //- File content
+          .panel.panel-primary.panel-stretch(ng-show="displayed_file && !display_file_menu")
             .panel-heading
               .panel-title
                 | File: {{displayed_file ? displayed_file.name : 'Unnamed File'}}
@@ -122,70 +165,57 @@ block view-content
           table.panel-body.table.tree-table
             tbody
               tr.cursor-pointer(ng-repeat-start = 'project in ws.projects' ng-class='{info: selected_project === project}' ng-click='select_project(project)')
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='selected_project === project')
-                  i.fa.fa-chevron-circle-right(ng-if='selected_project !== project')
-                th(colspan="2")
+                th(colspan="3")
                   | {{project.name}}
 
-              tr.cursor-pointer(ng-if="selected_project === project" ng-click='toggle_include_files_expanded()' ng-class='{active: selected_file, info: !selected_file}')
+              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}')
                 th
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='include_files_expanded')
-                  i.fa.fa-chevron-circle-right(ng-if='!include_files_expanded')
-                th
+                th(colspan="2")
                   | Include Files
-              tr.cursor-pointer(ng-if='selected_project === project && include_files_expanded' ng-repeat = 'file in project_resource.include_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "include")')
+              tr.cursor-pointer(ng-if='selected_project === project' ng-repeat = 'file in project_resource.include_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "include")')
                 td
                 td
                 td
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
-              tr.cursor-pointer(ng-if='selected_project === project && include_files_expanded' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_include_file_modal()')
+              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_include_file_modal()')
                  td
                  td
                  td
                   i.fa.fa-plus
                   |  
                   | Add File
-              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='toggle_src_files_expanded()')
+              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}')
                 th
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='src_files_expanded')
-                  i.fa.fa-chevron-circle-right(ng-if='!src_files_expanded')
-                th
+                th(colspan="2")
                   | Source Files
-              tr.cursor-pointer(ng-show='selected_project === project && src_files_expanded' ng-repeat = 'file in project_resource.source_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "src")')
+              tr.cursor-pointer(ng-show='selected_project === project' ng-repeat = 'file in project_resource.source_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "src")')
                 td
                 td
-                  i.fa.fa-chevron-circle-down(ng-if='!src_files_expanded')
                 td
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
-              tr.cursor-pointer(ng-if='selected_project === project && src_files_expanded' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_source_file_modal()')
+              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_source_file_modal()')
                  td
                  td
                  td
                   i.fa.fa-plus
                   |  
                   | Add File
-              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='toggle_data_files_expanded()')
+              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}')
                 th
-                th
-                  i.fa.fa-chevron-circle-down(ng-if='data_files_expanded')
-                  i.fa.fa-chevron-circle-right(ng-if='!data_files_expanded')
-                th
+                th(colspan="2")
                   | User Data Files
-              tr.cursor-pointer(ng-if='selected_project === project && data_files_expanded' ng-repeat = 'file in project_resource.data_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "data")')
+              tr.cursor-pointer(ng-if='selected_project === project' ng-repeat = 'file in project_resource.data_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "data")')
                 td
                 td
                 td
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
-              tr.cursor-pointer(ng-repeat-end ng-if='selected_project === project && data_files_expanded' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_data_file_modal()')
+              tr.cursor-pointer(ng-repeat-end ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_data_file_modal()')
                  td
                  td
                  td
@@ -194,9 +224,9 @@ block view-content
                   | Add File
 
               tr.cursor-pointer(ng-click='show_add_project_modal()')
-               td
+               td(colspan='3')
                 i.fa.fa-plus
-               td(colspan='2')
+                |  
                 | Add Project
 
   // Modals
