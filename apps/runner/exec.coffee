@@ -45,14 +45,13 @@ start_program = ->
 
     namespace.emit events.starting.id, running.resource.name
 
-    program_path = Path.resolve running.resource.bin_directory.path, "#{running.resource.name}"
-    if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
-      program_path += '.exe'
-
-    running_process = spawn program_path, [], { env: child_env, cwd: Path.resolve running.resource.data_directory.path }
+    running_process = spawn running.resource.binary.path, [], {
+      env: child_env
+      cwd: Path.resolve running.resource.data_directory.path
+    }
 
     running_process.on 'error', (data) ->
-      console.log "Could not spawn #{program_path}!! Error details: #{JSON.stringify(error: data)}"
+      console.log "Could not spawn #{running.resource.binary.path}!! Error details: #{JSON.stringify(error: data)}"
       namespace.emit events.stderr.id, "Program crashed!\n\nError details:\n#{JSON.stringify(error: data,null,'\t')}"
       namespace.emit events.ended.id
       stop_program()

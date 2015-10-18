@@ -7,6 +7,9 @@ AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 
 FsApp = AppCatalog.catalog['Host Filesystem'].get_instance()
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
+File = require AppCatalog.catalog['Host Filesystem'].path + '/file.coffee'
+
+TargetApp = AppCatalog.catalog['Target information'].get_instance()
 
 AppManifest = require './manifest.json'
 
@@ -74,6 +77,12 @@ class Project
   ) ->
     @uri = AppManifest.web_api.projects.uri + '/' + encodeURIComponent @name
 
+    binary_path = Path.resolve @bin_directory.path, @name
+    if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
+      binary_path += '.exe'
+
+    @binary = File.create_from_path binary_path
+
   is_valid: =>
     return @project_file.is_valid()
 
@@ -117,6 +126,8 @@ class Project
             href: @data_directory.uri
           bin_directory:
             href: @bin_directory.uri
+          binary:
+            href: @binary.uri
           lib_directory:
             href: @lib_directory.uri
       )
