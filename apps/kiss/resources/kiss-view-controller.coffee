@@ -29,6 +29,8 @@ exports.controller = (
   DownloadProjectModalFactory
   FilenameModalFactory) ->
 
+  $scope.documentChanged = false
+
   $scope.$on '$routeUpdate', (next, current) ->
     if ($scope.displayed_file?.name isnt $location.search().file) or ($scope.selected_project?.name isnt $location.search().project)
       $scope.reload_ws()
@@ -201,6 +203,18 @@ exports.controller = (
   window.addEventListener 'beforeunload', on_window_beforeunload
 
   onRouteChangeOff = $rootScope.$on '$locationChangeStart', (event, newUrl) ->
+
+    # workaround to detect in-app url updates
+    if newUrl.indexOf('/#/apps/kiss') isnt -1
+      return
+
+    # remove query string
+    if newUrl.indexOf('?') isnt -1
+      newUrl = newUrl.substring 0, newUrl.indexOf('?')
+
+    # remove host:port
+    newUrl = newUrl.substring($location.absUrl().length - ($location.url().length))
+
     if $scope.documentChanged
       ButtonsOnlyModalFactory.open(
         'You have unsaved changes'
@@ -213,7 +227,7 @@ exports.controller = (
           onRouteChangeOff()
           window.removeEventListener 'beforeunload', on_window_beforeunload
         else if button is 'Discard'
-          $location.path newUrl.substring($location.absUrl().length - ($location.url().length))
+          $location.path newUrl
           onRouteChangeOff()
           window.removeEventListener 'beforeunload', on_window_beforeunload
         return
