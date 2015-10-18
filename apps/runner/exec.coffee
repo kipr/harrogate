@@ -39,10 +39,15 @@ start_program = ->
   if running?.resource?
     latest_graphics_window_frame = null
 
+    # TODO: change me!!
+    # Create data directory
+    running.resource.data_directory.create()
+
     namespace.emit events.starting.id, running.resource.name
 
     program_path = Path.resolve running.resource.bin_directory.path, "#{running.resource.name}"
-    running_process = spawn program_path, [], env: child_env
+
+    running_process = spawn program_path, [], { env: child_env, cwd: Path.resolve running.resource.data_directory.path }
 
     running_process.on 'error', (data) ->
       console.log "Could not spawn #{program_path}!! Error details: #{JSON.stringify(error: data)}"
