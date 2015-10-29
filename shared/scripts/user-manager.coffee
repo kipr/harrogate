@@ -5,9 +5,16 @@ _ = require 'lodash'
 
 User = require './user.coffee'
 
+sys_app_data_path = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + 'Library/Preference' : '/var/local')
+harrogate_app_data_path = Path.join sys_app_data_path, 'KIPR Software Suite'
+try
+  Fs.mkdirSync harrogate_app_data_path
+
 class UserManager
   constructor: ->
-    @users_file_paht = Path.join process.cwd(), 'users.json'
+    @users_file_paht = Path.join harrogate_app_data_path, 'users.json'
+
+    console.log 'User settings file path: ' + @users_file_paht
 
     try
       @users = require @users_file_paht
