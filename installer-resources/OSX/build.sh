@@ -182,7 +182,6 @@ run_npm harrogate "${PWD}/node-v0.10.40-darwin-x64/bin/npm" "install"
 run_npm harrogate "${PWD}/node-v0.10.40-darwin-x64/bin/npm" "run compile"
 
 cp -r harrogate "${INSTALL}/../"
-chmod a+rw "${INSTALL}/../harrogate/users.json"
 cp -r node-v0.10.40-darwin-x64/* "${INSTALL}/"
 
 echo "#!/usr/bin/env bash
