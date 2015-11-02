@@ -5,7 +5,7 @@ _ = require 'lodash'
 
 User = require './user.coffee'
 
-sys_app_data_path = process.env.APPDATA or (if process.platform is 'darwin' then process.env.HOME + 'Library/Preference' else '/var/local')
+sys_app_data_path = process.env.APPDATA or (if process.platform is 'darwin' then Path.join process.env.HOME, 'Library/Preferences' else '/var/local')
 harrogate_app_data_path = Path.join sys_app_data_path, 'KIPR Software Suite'
 try
   Fs.mkdirSync harrogate_app_data_path
