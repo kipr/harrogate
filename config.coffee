@@ -3,8 +3,8 @@
 module.exports =
   version:
     major: 1
-    minor: 0
-    build_number: 30
+    minor: 1
+    build_number: 4
 
   ext_deps:
     include_path: Path.join __dirname, '..', 'shared', 'include'
