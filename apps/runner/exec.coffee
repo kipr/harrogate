@@ -42,65 +42,66 @@ start_program = ->
     # TODO: change me!!
     # Create data directory
     running.resource.data_directory.create()
+    .then ->
 
-    namespace.emit events.starting.id, running.resource.name
+      namespace.emit events.starting.id, running.resource.name
 
-    running_process = spawn running.resource.binary.path, [], {
-      env: child_env
-      cwd: Path.resolve running.resource.data_directory.path
-    }
+      running_process = spawn running.resource.binary.path, [], {
+        env: child_env
+        cwd: Path.resolve running.resource.data_directory.path
+      }
 
-    running_process.on 'error', (data) ->
-      console.log "Could not spawn #{running.resource.binary.path}!! Error details: #{JSON.stringify(error: data)}"
-      namespace.emit events.stderr.id, "Program crashed!\n\nError details:\n#{JSON.stringify(error: data,null,'\t')}"
-      namespace.emit events.ended.id
-      stop_program()
-      return
+      running_process.on 'error', (data) ->
+        console.log "Could not spawn #{running.resource.binary.path}!! Error details: #{JSON.stringify(error: data)}"
+        namespace.emit events.stderr.id, "Program crashed!\n\nError details:\n#{JSON.stringify(error: data,null,'\t')}"
+        namespace.emit events.ended.id
+        stop_program()
+        return
 
-    running_process.stdout.on 'data', (data) ->
-      namespace.emit events.stdout.id, data.toString('utf8')
-      return
+      running_process.stdout.on 'data', (data) ->
+        namespace.emit events.stdout.id, data.toString('utf8')
+        return
 
-    running_process.stderr.on 'data', (data) ->
-      namespace.emit events.stderr.id, data.toString('utf8')
-      return
+      running_process.stderr.on 'data', (data) ->
+        namespace.emit events.stderr.id, data.toString('utf8')
+        return
 
-    running_process.on 'exit', (code) ->
-      namespace.emit events.stdout.id, "Program exited with code #{code}"
-      namespace.emit events.ended.id
-      stop_program()
-      return
+      running_process.on 'exit', (code) ->
+        namespace.emit events.stdout.id, "Program exited with code #{code}"
+        namespace.emit events.ended.id
+        stop_program()
+        return
 
-    connect_to_daylite = ->
-      if running_process?
-        client = new Daylite.DayliteClient
+      connect_to_daylite = ->
+        if running_process?
+          client = new Daylite.DayliteClient
 
-        client.on 'error', (error) ->
-          setTimeout connect_to_daylite, 100
-          return
-
-        client.join_daylite 8374
-
-        client.on 'connected', ->
-
-          client.subscribe '/aurora/frame', (msg) ->
-            repacked_msg =
-              width: msg.width
-              height: msg.height
-              # data: msg.data.toString('base64')
-
-            latest_graphics_window_frame = msg.data.buffer
-
-            namespace.emit events.frame.id, repacked_msg
+          client.on 'error', (error) ->
+            setTimeout connect_to_daylite, 100
             return
 
-          return
+          client.join_daylite 8374
 
-        client.on 'close', ->
-          client = null
-          return
+          client.on 'connected', ->
 
-    setTimeout connect_to_daylite, 100
+            client.subscribe '/aurora/frame', (msg) ->
+              repacked_msg =
+                width: msg.width
+                height: msg.height
+                # data: msg.data.toString('base64')
+
+              latest_graphics_window_frame = msg.data.buffer
+
+              namespace.emit events.frame.id, repacked_msg
+              return
+
+            return
+
+          client.on 'close', ->
+            client = null
+            return
+
+      setTimeout connect_to_daylite, 100
   return
 
 stop_program = -> 
