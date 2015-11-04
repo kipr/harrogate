@@ -42,7 +42,7 @@ start_program = ->
     # TODO: change me!!
     # Create data directory
     running.resource.data_directory.create()
-    .then ->
+    .finally ->
 
       namespace.emit events.starting.id, running.resource.name
 
