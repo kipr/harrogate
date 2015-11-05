@@ -4,7 +4,7 @@ module.exports =
   version:
     major: 1
     minor: 1
-    build_number: 4
+    build_number: 5
 
   ext_deps:
     include_path: Path.join __dirname, '..', 'shared', 'include'
