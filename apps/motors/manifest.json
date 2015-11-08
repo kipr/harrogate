@@ -4,6 +4,6 @@
   "exec": "exec.coffee",
   "description": "Manually manipulate motors plugged into the system",
   "category": "Sensors and Actuators",
-  "hidden": true,
-  "view": false
+  "hidden": false,
+  "view": true
 }
