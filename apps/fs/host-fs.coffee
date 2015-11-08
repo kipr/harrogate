@@ -26,6 +26,9 @@ class HostFileSystem
         return
       list.on 'exit', (code) ->
         return
+      list.on 'error', (data) ->
+        console.log "Could get the Windows drive letters! Error details: #{JSON.stringify(error: data)}"
+        return
       list.stdin.write 'wmic logicaldisk get name\n'
       list.stdin.end()
 
