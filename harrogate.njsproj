@@ -36,6 +36,8 @@
     <Content Include="apps\motors\resources\motors-view-controller.coffee" />
     <Content Include="apps\sensors\resources\sensors-injector.coffee" />
     <Content Include="apps\sensors\resources\sensors-view-controller.coffee" />
+    <Content Include="apps\servos\resources\servos-injector.coffee" />
+    <Content Include="apps\servos\resources\servos-view-controller.coffee" />
     <Content Include="config.coffee" />
     <Content Include="installer-resources\Windows\KISS IDE.url" />
     <Content Include="installer-resources\Windows\KISS.nsi" />
