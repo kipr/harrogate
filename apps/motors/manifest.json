@@ -5,5 +5,6 @@
   "description": "Manually manipulate motors plugged into the system",
   "category": "Sensors and Actuators",
   "hidden": false,
-  "view": true
+  "view": true,
+  "angular_ctrl": "resources/motors-injector.coffee"
 }

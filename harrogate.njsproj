@@ -32,6 +32,8 @@
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\_init_helper.c" />
     <Content Include="apps\home\resources\index.jade" />
+    <Content Include="apps\motors\resources\motors-injector.coffee" />
+    <Content Include="apps\motors\resources\motors-view-controller.coffee" />
     <Content Include="apps\sensors\resources\sensors-injector.coffee" />
     <Content Include="apps\sensors\resources\sensors-view-controller.coffee" />
     <Content Include="config.coffee" />

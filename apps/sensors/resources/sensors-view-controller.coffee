@@ -1,6 +1,3 @@
-require 'codemirror/mode/clike/clike'
-code_mirror = require 'codemirror/lib/codemirror'
-
 exports.name = 'SensorsViewController'
 
 exports.inject = (app) ->
