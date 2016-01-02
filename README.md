@@ -7,8 +7,7 @@ Install harrogate from source
 =============================
 **Requirements:**
 
-* Node.js v 0.10 (node-boyd is not compatible with newer versions!)
-* OpenCV (required by node-boyd)
+* Node.js v 4.2.4 LTS
 
 **Install dependencies:**
 This will fetch all required npm dependencies.
