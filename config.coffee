@@ -1,10 +1,12 @@
 ﻿Path = require 'path'
 
+version = require('./package.json').version.split '.'
+
 module.exports =
   version:
-    major: 1
-    minor: 1
-    build_number: 6
+    major: version[0]
+    minor: version[1]
+    build_number: version[2]
 
   ext_deps:
     include_path: Path.join __dirname, '..', 'shared', 'include'
