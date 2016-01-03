@@ -10,17 +10,26 @@ Passport = require 'passport'
 Path = require 'path'
 Session = require 'express-session'
 
+Config = require './config.coffee'
+
+# Add daylite, ... to the Windows path
+if Os.platform() is 'win32'
+  process.env.PATH += Path.delimiter + "#{Config.ext_deps.bin_path}"
+else
+  process.env.DYLD_LIBRARY_PATH += Path.delimiter + "#{Config.ext_deps.lib_path}"
+
 # avoid require '../../.. ... for shared harrogate module
 if not global.require_harrogate_module?
   global.require_harrogate_module = (module) ->
     require __dirname + '/' + module
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
-Config = require './config.coffee'
 SettingsManager = require_harrogate_module '/shared/scripts/settings-manager.coffee'
 ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+TargetApp = AppCatalog.catalog['Target information'].get_instance()
 User = require_harrogate_module '/shared/scripts/user.coffee'
 UserManager = require_harrogate_module '/shared/scripts/user-manager.coffee'
+
 
 init_workspace = (workspace_path) ->
   Mkdirp.sync workspace_path

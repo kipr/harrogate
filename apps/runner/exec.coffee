@@ -1,9 +1,9 @@
+Daylite = require 'node-daylite'
 Express = require 'express'
 Path = require 'path'
 spawn = require('child_process').spawn
 
 ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
-Daylite = require_harrogate_module '/shared/scripts/daylite.coffee'
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 Config = require_harrogate_module 'config.coffee'
@@ -27,11 +27,11 @@ namespace = null
 
 client = null
 
-child_env = Object.create(process.env)
-if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
-  child_env.Path += Path.delimiter + "#{Config.ext_deps.bin_path}"
-else
-  child_env.DYLD_LIBRARY_PATH += Path.delimiter + "#{Config.ext_deps.lib_path}"
+#child_env = Object.create(process.env)
+#if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
+#  child_env.Path += Path.delimiter + "#{Config.ext_deps.bin_path}"
+#else
+#  child_env.DYLD_LIBRARY_PATH += Path.delimiter + "#{Config.ext_deps.lib_path}"
 
 latest_graphics_window_frame = null
 
@@ -47,7 +47,7 @@ start_program = ->
       namespace.emit events.starting.id, running.resource.name
 
       running_process = spawn running.resource.binary.path, [], {
-        env: child_env
+        # env: child_env
         cwd: Path.resolve running.resource.data_directory.path
       }
 
@@ -82,19 +82,18 @@ start_program = ->
 
           client.join_daylite 8374
 
-          client.on 'connected', ->
+          client.subscribe '/aurora/frame', (msg) ->
+  
+            console.log "GOT MESSAGE"
 
-            client.subscribe '/aurora/frame', (msg) ->
-              repacked_msg =
-                width: msg.width
-                height: msg.height
-                # data: msg.data.toString('base64')
+            repacked_msg =
+              width: msg.width
+              height: msg.height
+              #data: msg.data.toString('base64')
 
-              latest_graphics_window_frame = msg.data.buffer
+            latest_graphics_window_frame = msg.data
 
-              namespace.emit events.frame.id, repacked_msg
-              return
-
+            namespace.emit events.frame.id, repacked_msg
             return
 
           client.on 'close', ->

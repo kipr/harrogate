@@ -7,11 +7,20 @@ gulp_filter = require 'gulp-filter'
 gutil = require 'gulp-util'
 jade = require 'gulp-jade'
 nodemon = require 'gulp-nodemon'
+os = require 'os'
 path_tools = require 'path'
 rename = require 'gulp-rename'
 request = require 'request'
 transform = require 'vinyl-transform'
 through = require 'through'
+
+config = require './config.coffee'
+
+# Add daylite, ... to the Windows path
+if os.platform() is 'win32'
+  process.env.PATH += path_tools.delimiter + "#{config.ext_deps.bin_path}"
+else
+  process.env.DYLD_LIBRARY_PATH += path_tools.delimiter + "#{config.ext_deps.lib_path}"
 
 # avoid require '../../.. ... for shared harrogate module
 if not global.require_harrogate_module?
