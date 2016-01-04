@@ -1,4 +1,4 @@
-if process.env.CROSSCOMPILE
+if not process.env.CROSSCOMPILE
   Daylite = require 'node-daylite'
 Express = require 'express'
 Path = require 'path'
