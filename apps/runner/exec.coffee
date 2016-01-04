@@ -1,4 +1,5 @@
-Daylite = require 'node-daylite'
+if process.env.CROSSCOMPILE
+  Daylite = require 'node-daylite'
 Express = require 'express'
 Path = require 'path'
 spawn = require('child_process').spawn
