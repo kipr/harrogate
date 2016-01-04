@@ -17,6 +17,11 @@
     margin-bottom: 0px;
 }
 
+.chartist-container
+{
+    height: calc(100% - 43.333px);
+}
+
 /* Stretches a xxx bootstrap container over the full height */
 .row-stretch, .col-stretch, .panel-stretch, .tabset-stretch
 {
@@ -26,6 +31,7 @@
 .row-stretch-60
 {
     height: 60%;
+    padding-top: 5px;
 }
 
 .row-stretch-40
@@ -214,3 +220,57 @@
         padding: 0px;
     }
 }
+
+.slider
+{
+    margin: 15px;
+}
+
+.slider .rs-handle
+{
+    background-color: transparent;
+    border: 8px solid transparent;
+    border-right-color: black;
+    margin: -6px 0px 0px 14px !important;
+    border-width: 6px 104px 6px 4px;
+}
+
+.slider .rs-handle:before
+{
+    display: block;
+    content: " ";
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    background: black;
+    right: -11px;
+    bottom: -11px;
+    border-radius: 100px;
+}
+
+.slider .rs-range-color
+{
+    background-color: #337ab7;
+}
+
+.slider .rs-path-color
+{
+    background-color: #d9edf7;
+}
+
+.slider .rs-tooltip
+{
+    top: 75%;
+    font-size: 11px;
+}
+
+.slider .rs-tooltip div
+{
+    text-align: center;
+    background: orange;
+    color: white;
+    border-radius: 4px;
+    padding: 1px 5px 2px;
+    margin-top: 4px;
+}
+

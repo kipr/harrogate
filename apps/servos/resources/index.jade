@@ -1,8 +1,105 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
-  .alert.alert-danger(role="alert")
-    h1
-      i.fa.fa-exclamation-triangle
-      |  
-      | Under Construction!
+  .col.col-stretch
+    .row.row-stretch-40
+      .col-xs-12.col-stretch
+        .panel.panel-primary.panel-stretch
+          .panel-heading
+            .panel-title
+              | servos
+          .scrollable-panel-body-container
+            .panel-body
+              .row.row-stretch
+                .col-xs-6.col-stretch
+                  table.table
+                    thead
+                      tr
+                        th Name
+                        th Speed
+                        th Power
+                        th Position
+                        th
+                    tbody
+                      tr(ng-repeat='servo in servos' ng-class='{info: servo == selected_servo}' ng-click='select_servo(servo)' ng-if='$even')
+                        td {{servo.name}}
+                        td {{servo.speed}}
+                        td {{servo.power}}
+                        td {{servo.position}}
+                        td
+                          button.btn.btn-danger.btn-xs(ng-click='stop_servo(servo)')
+                            small
+                              i.fa.fa-stop
+                                
+                .col-xs-6.col-stretch
+                  table.table
+                    thead
+                      tr
+                        th Name
+                        th Speed
+                        th Power
+                        th Position
+                        th
+                    tbody
+                      tr(ng-repeat='servo in servos' ng-class='{info: servo == selected_servo}' ng-click='select_servo(servo)' ng-if='$odd')
+                        td {{servo.name}}
+                        td {{servo.speed}}
+                        td {{servo.power}}
+                        td {{servo.position}}
+                        td
+                          button.btn.btn-danger.btn-xs(ng-click='stop_servo(servo)')
+                            small
+                              i.fa.fa-stop
+
+    .row.row-stretch-60
+      .col-md-3.col-stretch
+        .panel.panel-primary.panel-stretch
+          .panel-heading
+            .panel-title
+              | Speed of {{selected_servo.name}}
+
+          .panel.panel-body
+            #speed-slider.slider
+
+      .col-md-3.col-stretch
+        .panel.panel-primary.panel-stretch
+          .panel-heading
+            .panel-title
+              | Power of {{selected_servo.name}}
+
+          .panel.panel-body
+            #power-slider.slider
+
+      .col-md-6.col-stretch
+        .panel.panel-primary.panel-stretch
+          .panel-heading
+            .panel-title
+              | Set Goal Position of {{selected_servo.name}}
+
+          .panel.panel-body
+            form
+              .form-group
+                label
+                  input(type='radio' name='input_type' value='speed_input')
+                  | Speed
+                  |  
+                  |  
+                  input(type='radio' name='input_type' value='power_input')
+                  | Power
+                input.form-control(type='number')
+                
+              .form-group
+                label Goal Position
+                .input-group
+                  .input-group-btn
+                    button.btn.btn-default()
+                      i.fa.fa-rotate-left
+                    button.btn.btn-default()
+                      i.fa.fa-rotate-right
+                  input.form-control(type='text')
+                  
+              .form-group
+                button.btn.btn-success()
+                  | GO
+                  |  
+                  i.fa.fa-play

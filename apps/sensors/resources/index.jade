@@ -1,8 +1,40 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
-  .alert.alert-danger(role="alert")
-    h1
-      i.fa.fa-exclamation-triangle
-      |  
-      | Under Construction!
+  .row.row-stretch
+    .col-md-6.col-stretch
+      .row.row-stretch
+        .col-xs-12.col-stretch
+          .panel.panel-primary.panel-stretch
+            .panel-heading
+              .panel-title
+                | Sensor List
+            .scrollable-panel-body-container
+              table.panel-body.table
+                thead
+                  tr
+                    th
+                    th Name
+                    th Value
+                    th Pull-Up
+                tbody
+                  tr(ng-repeat='sensor in sensors' ng-class='{info: sensor.show_graph}' ng-click='toggle_show_graph(sensor)')
+                    td
+                      span.label(ng-class='{"label-default": !sensor.show_graph, "label-success": sensor.show_graph}')
+                        i.fa.fa-line-chart
+                    td {{sensor.name}}
+                    td {{sensor.value}}
+                    td
+                      button.btn.btn-default.btn-sm(ng-if='sensor.type == "analog"' ng-click='toggle_pull_up(sensor)')
+                        i.fa(ng-class='{"fa-long-arrow-up": sensor.pull_up, "fa-long-arrow-down": !sensor.pull_up}')
+                    
+    .col-md-6.col-stretch
+      .row.row-stretch
+        .col-xs-12.col-stretch
+          .panel.panel-primary.panel-stretch
+            .panel-heading
+              .panel-title
+                | Sensor Graph
+
+            .panel.panel-body.chartist-container(ng-if='showGraph')
+              chartist.ct-chart(chartist-data='barData' chartist-chart-type='Line' chartist-chart-options='chartOptions')

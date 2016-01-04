@@ -4,6 +4,7 @@
   "exec": "exec.coffee",
   "description": "Manually manipulate servos plugged into the system",
   "category": "Sensors and Actuators",
-  "hidden": true,
-  "view": false
+  "hidden": false,
+  "view": true,
+  "angular_ctrl": "resources/servos-injector.coffee"
 }
