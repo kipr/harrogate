@@ -5,8 +5,8 @@
   "exec": "exec.coffee",
   "description": "Opens a terminal to the target",
   "category": "System Tools",
-  "hidden": true,
-  "view": false,
+  "hidden": false,
+  "view": true,
   "angular_ctrl": "resources/terminal-view-controller.coffee",
   "event_groups": {
     "terminal_events": {
