@@ -249,6 +249,11 @@
     {
         padding: 2px;
     }
+
+    form .form-group
+    {
+        margin-bottom: 5px;
+    }
 }
 
 .slider
@@ -262,7 +267,7 @@
     border: 8px solid transparent;
     border-right-color: black;
     margin: -6px 0px 0px 14px !important;
-    border-width: 6px 104px 6px 4px;
+    border-width: 6px 52px 6px 4px;
 }
 
 .slider .rs-handle:before
@@ -275,7 +280,7 @@
     background: black;
     right: -11px;
     bottom: -11px;
-    border-radius: 100px;
+    border-radius: 50px;
 }
 
 .slider .rs-range-color
@@ -302,6 +307,11 @@
     border-radius: 4px;
     padding: 1px 5px 2px;
     margin-top: 4px;
+}
+
+.btn-group-vertical > button
+{
+    margin-bottom: 2px;
 }
 
 /* Chartist */

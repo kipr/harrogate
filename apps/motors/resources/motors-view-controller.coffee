@@ -10,6 +10,11 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $interval) ->
 
+  $scope.selected_action = 'speed'
+
+  $scope.select_action = (action) ->
+    $scope.selected_action = action
+
   pps = 1000
 
   $scope.motors = 
@@ -42,10 +47,32 @@ exports.controller = ($scope, $interval) ->
     circleShape: 'pie'
     startAngle: 315
 
+  $('#speed-slider-compact').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    value: 75
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
   $('#power-slider').roundSlider
     sliderType: 'min-range'
     showTooltip: true
     radius: 105
+    width: 16
+    value: 75
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#power-slider-compact').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
     width: 16
     value: 75
     handleSize: 0
