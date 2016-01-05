@@ -10,16 +10,11 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $interval) ->
 
-  pps = 1000
-
   $scope.servos = 
     for i in [0...4]
       {
-        name: "Servos #{i}"
-        speed: 0
-        power: 0
+        name: "Servo #{i}"
         position: 0
-        selected: false
       }
 
   $scope.selected_servo = $scope.servos[0]
@@ -27,11 +22,7 @@ exports.controller = ($scope, $interval) ->
   $scope.select_servo = (servo) ->
     $scope.selected_servo = servo
 
-  $scope.stop_servo = (servo) ->
-    servo.speed = 0
-    servo.power = 0
-
-  $('#speed-slider').roundSlider
+  $('#servo-0-slider').roundSlider
     sliderType: 'min-range'
     showTooltip: true
     radius: 105
@@ -42,7 +33,7 @@ exports.controller = ($scope, $interval) ->
     circleShape: 'pie'
     startAngle: 315
 
-  $('#power-slider').roundSlider
+  $('#servo-1-slider').roundSlider
     sliderType: 'min-range'
     showTooltip: true
     radius: 105
@@ -53,10 +44,36 @@ exports.controller = ($scope, $interval) ->
     circleShape: 'pie'
     startAngle: 315
 
-  $interval(( ->
-    for servo in $scope.servos
-      servo.position += servo.power * 0.01 * pps
-      servo.speed = servo.power * 0.01 * pps
-    ), 1000)
+  $('#servo-2-slider').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 105
+    width: 16
+    value: 75
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
 
-  
+  $('#servo-3-slider').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 105
+    width: 16
+    value: 75
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+
+  $('#position-slider-compact').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    value: 75
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315

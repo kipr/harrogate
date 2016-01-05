@@ -1,9 +1,9 @@
 mixin app(name, fonticon, descr, url)
   a.media.btn.btn-default(role='button' href='#{url}' style='margin-bottom:4px;white-space: normal;')
     .media-left.media-middle
-      i.fa.fa-4x.fa-fw(class='#{fonticon}')
+      i.fa.fa-2x.fa-fw(class='#{fonticon}')
     .media-body
-      h4.media-heading #{name}
+      .media-heading #{name}
       p #{descr}
 
 - for(var i = 0; i < apps.length; ++i) {

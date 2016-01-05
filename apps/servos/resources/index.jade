@@ -1,13 +1,15 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
-  .col.col-stretch
+
+  // Desktop view
+  .col.col-stretch.desktop-only
     .row.row-stretch-40
       .col-xs-12.col-stretch
         .panel.panel-primary.panel-stretch
           .panel-heading
             .panel-title
-              | servos
+              | Servos
           .scrollable-panel-body-container
             .panel-body
               .row.row-stretch
@@ -16,15 +18,11 @@ block view-content
                     thead
                       tr
                         th Name
-                        th Speed
-                        th Power
                         th Position
                         th
                     tbody
                       tr(ng-repeat='servo in servos' ng-class='{info: servo == selected_servo}' ng-click='select_servo(servo)' ng-if='$even')
                         td {{servo.name}}
-                        td {{servo.speed}}
-                        td {{servo.power}}
                         td {{servo.position}}
                         td
                           button.btn.btn-danger.btn-xs(ng-click='stop_servo(servo)')
@@ -36,15 +34,11 @@ block view-content
                     thead
                       tr
                         th Name
-                        th Speed
-                        th Power
                         th Position
                         th
                     tbody
                       tr(ng-repeat='servo in servos' ng-class='{info: servo == selected_servo}' ng-click='select_servo(servo)' ng-if='$odd')
                         td {{servo.name}}
-                        td {{servo.speed}}
-                        td {{servo.power}}
                         td {{servo.position}}
                         td
                           button.btn.btn-danger.btn-xs(ng-click='stop_servo(servo)')
@@ -56,50 +50,81 @@ block view-content
         .panel.panel-primary.panel-stretch
           .panel-heading
             .panel-title
-              | Speed of {{selected_servo.name}}
+              | Position of Servo 0
 
           .panel.panel-body
-            #speed-slider.slider
+            #servo-0-slider.slider
 
       .col-md-3.col-stretch
         .panel.panel-primary.panel-stretch
           .panel-heading
             .panel-title
-              | Power of {{selected_servo.name}}
+              | Position of Servo 1
 
           .panel.panel-body
-            #power-slider.slider
+            #servo-1-slider.slider
 
-      .col-md-6.col-stretch
+      .col-md-3.col-stretch
         .panel.panel-primary.panel-stretch
           .panel-heading
             .panel-title
-              | Set Goal Position of {{selected_servo.name}}
+              | Position of Servo 2
 
           .panel.panel-body
-            form
-              .form-group
-                label
-                  input(type='radio' name='input_type' value='speed_input')
-                  | Speed
-                  |  
-                  |  
-                  input(type='radio' name='input_type' value='power_input')
-                  | Power
-                input.form-control(type='number')
-                
-              .form-group
-                label Goal Position
-                .input-group
-                  .input-group-btn
-                    button.btn.btn-default()
-                      i.fa.fa-rotate-left
-                    button.btn.btn-default()
-                      i.fa.fa-rotate-right
-                  input.form-control(type='text')
-                  
-              .form-group
-                button.btn.btn-success()
-                  | GO
-                  |  
-                  i.fa.fa-play
+            #servo-2-slider.slider
+
+      .col-md-3.col-stretch
+        .panel.panel-primary.panel-stretch
+          .panel-heading
+            .panel-title
+              | Position of Servo 3
+
+          .panel.panel-body
+            #servo-3-slider.slider
+
+
+  // Compact view
+  .col.col-stretch.compact-only
+    .row.row-stretch
+      .col-xs-12.col-stretch
+        .panel.panel-primary.panel-stretch
+          .panel-heading
+            .panel-title
+              | {{selected_servo.name}} &nbsp; - &nbsp; 
+              small Position {{selected_servo.position}}
+          .scrollable-panel-body-container
+            .panel-body
+              .row.row-stretch
+                .col-xs-4.col-stretch
+                  .btn-group-vertical(role='group')
+                    button.btn.btn-default.btn
+                      small
+                        i.fa.fa-rotate-left
+                        |  
+                        | Minimum Position
+                    button.btn.btn-default.btn
+                      small
+                        i.fa.fa-minus
+                        |  
+                        | One Step Left
+                    button.btn.btn-default.btn
+                      small
+                        i.fa.fa-plus
+                        |  
+                        | One Step Right
+                    button.btn.btn-default.btn
+                      small
+                        i.fa.fa-rotate-right
+                        |  
+                        | Maximum Position
+
+                .col-xs-1.col-stretch
+
+                .col-xs-6.col-stretch
+                  #position-slider-compact.slider
+                 
+block bottom-compact-navbar-buttons
+  a.btn.btn-toolbar.btn-info(type='button' ng-repeat='servo in servos' ng-click='select_servo(servo)')
+    i.fa.fa-car
+    |  
+    small.small {{servo.name}}
