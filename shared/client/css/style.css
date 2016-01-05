@@ -45,11 +45,36 @@
     margin-bottom: -20px;
 }
 
-.panel-stretch > .scrollable-panel-body-container
+.table tbody>tr>td
 {
-    max-height: calc(100% - 43.333px);
+    vertical-align: middle;
+}
 
-    overflow: auto;
+@media (min-width: 1024px)
+{
+    .panel-stretch > .scrollable-panel-body-container
+    {
+        max-height: calc(100% - 43.333px);
+        overflow: auto;
+    }
+}
+
+@media (max-width: 1023px)
+{
+    .panel-stretch > .scrollable-panel-body-container
+    {
+        max-height: calc(100% - 27px);
+        overflow: auto;
+    }
+    .panel-body
+    {
+        padding: 2px;
+    }
+    
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th 
+    {
+        padding: 7px;
+    }
 }
 
 .tabset-stretch > .tab-content
@@ -219,6 +244,11 @@
     {
         padding: 0px;
     }
+
+    .panel-heading
+    {
+        padding: 2px;
+    }
 }
 
 .slider
@@ -274,3 +304,9 @@
     margin-top: 4px;
 }
 
+/* Chartist */
+
+.ct-line
+{
+  stroke-width: 2px;
+}

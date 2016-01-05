@@ -10,6 +10,8 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $interval) ->
 
+  $scope.show_graph_view = true
+
   history_depth = 20
 
   $scope.toggle_show_graph = (sensor) ->
@@ -24,20 +26,20 @@ exports.controller = ($scope, $interval) ->
     showPoint: false
     lineSmooth: false
 
-  $scope.showGraph = false
+  $scope.show_graph = false
   $scope.barData =
                 labels: ['-20 s', '', '', '', '', '', '', '', '', '', '-10 s', '', '', '', '', '', '', '', '', 'now']
                 series: []
 
   update_bar_data = ->
-    $scope.showGraph = false
+    $scope.show_graph = false
     $scope.barData.series.length = 0
     for sensor in $scope.sensors
       if sensor.show_graph
         $scope.barData.series.push sensor.history
 
     if $scope.barData.series.length
-      $scope.showGraph = true
+      $scope.show_graph = true
 
   generate_sensors = ->
     sensors = []
