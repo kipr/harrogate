@@ -106,7 +106,7 @@ start_program = ->
 
 stop_program = -> 
   if running_process?
-    running_process.kill()
+    running_process.kill 'SIGINT'
     running_process = null
 
   if running?
