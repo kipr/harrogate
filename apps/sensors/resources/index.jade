@@ -16,7 +16,6 @@ block view-content
                     th
                     th Name
                     th Value
-                    th Pull-Up
                 tbody
                   tr(ng-repeat='sensor in sensors' ng-class='{info: sensor.show_graph}' ng-click='toggle_show_graph(sensor)')
                     td
@@ -24,9 +23,6 @@ block view-content
                         i.fa.fa-line-chart
                     td {{sensor.name}}
                     td {{sensor.value}}
-                    td
-                      button.btn.btn-default.btn-sm(ng-if='sensor.type == "analog"' ng-click='toggle_pull_up(sensor)')
-                        i.fa(ng-class='{"fa-long-arrow-up": sensor.pull_up, "fa-long-arrow-down": !sensor.pull_up}')
                     
     .col-md-6.col-stretch(ng-class='{"desktop-only": show_graph_view}')
       .row.row-stretch

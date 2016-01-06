@@ -17,9 +17,6 @@ exports.controller = ($scope, $interval) ->
   $scope.toggle_show_graph = (sensor) ->
     sensor.show_graph = not sensor.show_graph
 
-  $scope.toggle_pull_up = (sensor) ->
-    sensor.pull_up = not sensor.pull_up
-
   $scope.chartOptions =
     high: 1400
     low: 0
@@ -43,15 +40,14 @@ exports.controller = ($scope, $interval) ->
 
   generate_sensors = ->
     sensors = []
-    for i in [0...7]
+    for i in [0...6]
       sensors.push {
         name: "Analog Sensor #{i}"
         value: Math.round(Math.random()*1400)
         history: (0 for [1..history_depth])
         show_graph: false
-        type: 'analog'
-        pull_up: false}
-    for i in [8...15]
+        type: 'analog'}
+    for i in [0...10]
       sensors.push {
         name: "Digital Sensor #{i}"
         value: Math.round Math.random()
