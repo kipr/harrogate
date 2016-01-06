@@ -5,8 +5,8 @@
   "exec": "exec.coffee",
   "description": "Modify the system's settings, such as network, time, and more.",
   "category": "Settings",
-  "hidden": true,
-  "view": false,
+  "hidden": false,
+  "view": true,
   "angular_ctrl": "resources/settings-view-controller.coffee",
   "web_api": {
     "settings": {

@@ -314,6 +314,15 @@
     margin-bottom: 2px;
 }
 
+
+@media (max-width: 1023px)
+{
+    .settings-btn-group-justified
+    {
+        margin: 3px 0px 3px 0px;
+    }
+}
+
 /* Chartist */
 
 .ct-line

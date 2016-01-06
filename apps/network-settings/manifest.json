@@ -1,0 +1,17 @@
+{
+  "name": "Network-Settings",
+  "priority": -1,
+  "fonticon": "fa-wifi",
+  "exec": "exec.coffee",
+  "description": "Modify the system's network settings.",
+  "category": "Settings",
+  "hidden": true,
+  "view": true,
+  "angular_ctrl": "resources/network-settings-view-controller.coffee",
+  "web_api": {
+    "settings": {
+      "uri": "/api/network-settings",
+      "description": "Provides access to the network settings"
+    }
+  }
+}

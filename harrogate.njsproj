@@ -85,6 +85,9 @@
     <Content Include="apps\settings\api-routes\settings.coffee" />
     <Content Include="apps\settings\resources\index.jade" />
     <Content Include="apps\settings\resources\settings-view-controller.coffee" />
+    <Content Include="apps\network-settings\api-routes\network-settings.coffee" />
+    <Content Include="apps\network-settings\resources\index.jade" />
+    <Content Include="apps\network-settings\resources\network-settings-view-controller.coffee" />
     <Content Include="apps\target\exec.coffee" />
     <Content Include="apps\target\manifest.json" />
     <Content Include="apps\terminal\exec.coffee" />
@@ -123,6 +126,8 @@
     <Content Include="apps\runner\exec.coffee" />
     <Content Include="apps\settings\manifest.json" />
     <Content Include="apps\settings\exec.coffee" />
+    <Content Include="apps\network-settings\manifest.json" />
+    <Content Include="apps\network-settings\exec.coffee" />
     <Content Include="apps\user\manifest.json" />
     <Content Include="apps\user\exec.coffee" />
     <Content Include="shared\client\scripts\harrogate-index-app.coffee" />
@@ -157,6 +162,8 @@
     <Folder Include="apps\runner\resources\" />
     <Folder Include="apps\settings\api-routes\" />
     <Folder Include="apps\settings\resources\" />
+    <Folder Include="apps\network-settings\api-routes\" />
+    <Folder Include="apps\network-settings\resources\" />
     <Folder Include="apps\target\" />
     <Folder Include="apps\terminal\" />
     <Folder Include="apps\terminal\resources\" />
@@ -173,6 +180,7 @@
     <Folder Include="apps\programs\" />
     <Folder Include="apps\runner" />
     <Folder Include="apps\settings" />
+    <Folder Include="apps\network-settings\" />
     <Folder Include="apps\user" />
     <Folder Include="shared\client\css\" />
     <Folder Include="shared\client\" />

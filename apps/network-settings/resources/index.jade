@@ -1,0 +1,41 @@
+extends ../../../shared/client/views/templates/app-view-layout.jade
+
+block view-content
+  .row.row-stretch
+    .col-xs-6.col-stretch
+      .panel.panel-primary.panel-stretch
+        .panel-heading
+          .panel-title
+            | Wireless Networks
+            
+        .scrollable-panel-body-container
+          .list-group.panel-body
+            a.list-group-item Wireless Network I
+            a.list-group-item Wireless Network II
+            a.list-group-item Wireless Network III
+            a.list-group-item Wireless Network IV
+            
+    .col-xs-6.col-stretch
+      .panel.panel-primary.panel-stretch
+        .panel-heading
+          .panel-title
+            | Join Wireless Network
+            
+        .scrollable-panel-body-container
+          .panel-body
+            .form-group
+              label.desktop-only Network Name
+              input.form-control.desktop-only(type='text' readonly)
+              
+              label Security
+              select.form-control
+                option None
+                option WEP
+                option WPA
+                option WPA2
+
+              label Password
+              input.form-control(type='password')
+
+            button.btn.btn-success(type='button')
+              | Join
