@@ -53,8 +53,26 @@ block view-content
             span.btn-group-xs.pull-right
               button.btn.btn-danger(type='button' ng-click='show_console = !show_console')
                 i.fa.fa-times
-        .scrollable-panel-body-container
-          terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input" reset-event="runner-reset-terminal")
+
+        .panel-body-container-stretch
+          .btn-group.btn-group-justified
+            a.btn.btn-default(type="button")
+              small.small A
+            a.btn.btn-default(type="button")
+              small.small B
+            a.btn.btn-default(type="button")
+              small.small C
+
+          .scrollable-panel-button-container
+            terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input" reset-event="runner-reset-terminal")
+
+          .btn-group.btn-group-justified
+            a.btn.btn-default(type="button")
+              small.small X
+            a.btn.btn-default(type="button")
+              small.small Y
+            a.btn.btn-default(type="button")
+              small.small Z
 
     .col-stretch(ng-show='show_graphics_window' ng-class='{"col-md-9": show_graphics_window && !show_console, "col-md-5": show_graphics_window && show_console, "desktop-only": !selected_project}' )
       .panel.panel-primary.panel-stretch

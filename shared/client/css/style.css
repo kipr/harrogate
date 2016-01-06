@@ -57,6 +57,12 @@
         max-height: calc(100% - 43.333px);
         overflow: auto;
     }
+
+    .panel-stretch > .panel-body-container-stretch
+    {
+        height: calc(100% - 43.333px);
+        overflow: auto;
+    }
 }
 
 @media (max-width: 1023px)
@@ -66,6 +72,13 @@
         max-height: calc(100% - 27px);
         overflow: auto;
     }
+
+    .panel-stretch > .panel-body-container-stretch
+    {
+        height: calc(100% - 27px);
+        overflow: auto;
+    }
+
     .panel-body
     {
         padding: 2px;
@@ -322,6 +335,23 @@
         margin: 3px 0px 3px 0px;
     }
 }
+
+.panel-body-container-stretch > .btn-group
+{
+    height: 20px;
+}
+
+.panel-body-container-stretch > .scrollable-panel-button-container
+{
+    height: calc(100% - 66.66px);
+    overflow: auto;
+}
+
+.panel-body-container-stretch > .btn-group
+{
+    height: 20px;
+}
+
 
 /* Chartist */
 
