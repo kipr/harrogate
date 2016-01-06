@@ -6,5 +6,11 @@
   "category": "Sensors and Actuators",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/sensors-injector.coffee"
+  "angular_ctrl": "resources/sensors-injector.coffee",
+  "web_api": {
+    "sensors": {
+      "uri": "/api/sensors",
+      "description": "Provides robot sensor data"
+    }
+  }
 }

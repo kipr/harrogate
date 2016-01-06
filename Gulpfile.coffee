@@ -22,6 +22,8 @@ if os.platform() is 'win32'
 else
   process.env.DYLD_LIBRARY_PATH += path_tools.delimiter + "#{config.ext_deps.lib_path}"
 
+process.env.COMPILE = 1
+
 # avoid require '../../.. ... for shared harrogate module
 if not global.require_harrogate_module?
   global.require_harrogate_module = (module) ->

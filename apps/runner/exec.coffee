@@ -1,5 +1,4 @@
-if not process.env.CROSSCOMPILE
-  Daylite = require 'node-daylite'
+
 Express = require 'express'
 Path = require 'path'
 spawn = require('child_process').spawn
@@ -7,6 +6,7 @@ spawn = require('child_process').spawn
 ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+daylite = require_harrogate_module '/shared/scripts/daylite.coffee'
 Config = require_harrogate_module 'config.coffee'
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
 HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.coffee'
@@ -36,6 +36,8 @@ client = null
 
 latest_graphics_window_frame = null
 
+
+
 start_program = ->
   if running?.resource?
     latest_graphics_window_frame = null
@@ -44,7 +46,7 @@ start_program = ->
     # Create data directory
     running.resource.data_directory.create()
     .finally ->
-
+      
       namespace.emit events.starting.id, running.resource.name
 
       running_process = spawn running.resource.binary.path, [], {
@@ -75,15 +77,7 @@ start_program = ->
 
       connect_to_daylite = ->
         if running_process?
-          client = new Daylite.DayliteClient
-
-          client.on 'error', (error) ->
-            setTimeout connect_to_daylite, 100
-            return
-
-          client.join_daylite 8374
-
-          client.subscribe '/aurora/frame', (msg) ->
+          daylite.subscribe '/aurora/frame', (msg) ->
   
             console.log "GOT MESSAGE"
 
@@ -97,11 +91,9 @@ start_program = ->
             namespace.emit events.frame.id, repacked_msg
             return
 
-          client.on 'close', ->
+          daylite.on 'close', ->
             client = null
             return
-
-      setTimeout connect_to_daylite, 100
   return
 
 stop_program = -> 
