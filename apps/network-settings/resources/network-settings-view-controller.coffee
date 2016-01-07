@@ -11,6 +11,8 @@ exports.inject = (app) ->
 
 exports.controller = ($scope, $http, AppCatalogProvider) ->
 
+  $scope.show_wifi = true
+
   AppCatalogProvider.catalog.then (app_catalog) ->
     settings_api = app_catalog['Network-Settings']?.web_api?.settings
     #if settings_api?
