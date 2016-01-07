@@ -18,8 +18,8 @@ router.get '/', (request, response, next) ->
   if not state
     return response.end "#{JSON.stringify({})}", 'utf8'
   msg =
-    analogs: state.analog_state
-    digitals: state.digital_state
+    analogs: state.analog_states
+    digitals: state.digital_states
     battery: state.battery_state
     imu: state.imu_state
   response.end "#{JSON.stringify(msg)}", 'utf8'
