@@ -36,45 +36,141 @@ exports.controller = ($scope, $interval) ->
     motor.speed = 0
     motor.power = 0
 
-  $('#speed-slider').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 105
-    width: 16
-    value: 75
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#speed-slider-compact').roundSlider
+  $('#speed-slider-0').roundSlider
     sliderType: 'min-range'
     showTooltip: true
     radius: 75
     width: 16
-    value: 75
+    min: -1000
+    max: 1000
+    step: 20
+    value: 0
     handleSize: 0
     handleShape: 'square'
     circleShape: 'pie'
     startAngle: 315
 
-  $('#power-slider').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 105
-    width: 16
-    value: 75
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#power-slider-compact').roundSlider
+  $('#speed-slider-1').roundSlider
     sliderType: 'min-range'
     showTooltip: true
     radius: 75
     width: 16
-    value: 75
+    min: -1000
+    max: 1000
+    step: 20
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#speed-slider-2').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -1000
+    max: 1000
+    step: 20
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#speed-slider-3').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -1000
+    max: 1000
+    step: 20
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#speed-slider-4').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -1000
+    max: 1000
+    step: 20
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#power-slider-0').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -100
+    max: 100
+    step: 5
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#power-slider-1').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -100
+    max: 100
+    step: 5
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#power-slider-2').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -100
+    max: 100
+    step: 5
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#power-slider-3').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -100
+    max: 100
+    step: 5
+    value: 0
+    handleSize: 0
+    handleShape: 'square'
+    circleShape: 'pie'
+    startAngle: 315
+
+  $('#power-slider-4').roundSlider
+    sliderType: 'min-range'
+    showTooltip: true
+    radius: 75
+    width: 16
+    min: -100
+    max: 100
+    step: 5
+    value: 0
     handleSize: 0
     handleShape: 'square'
     circleShape: 'pie'
