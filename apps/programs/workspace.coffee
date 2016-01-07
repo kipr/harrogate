@@ -188,5 +188,20 @@ class Workspace
         Directory.create_from_path Path.join @bin_directory.path, name
         Directory.create_from_path Path.join @lib_directory.path, name
       )
+    .then (project_resource) =>
+      return project_resource.src_directory.create()
+      .then =>
+        content = """
+                  #include <kipr/botball.h>
+                          
+                  int main()
+                  {
+                      printf("Hello World\\n");
+                      return 0;
+                  }
+                  """
+        return project_resource.src_directory.create_file 'main.c', content, 'ascii'
+        .then => 
+          return project_resource
 
 module.exports = Workspace
