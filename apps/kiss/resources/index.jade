@@ -164,6 +164,12 @@ block view-content
         .scrollable-panel-body-container
           table.panel-body.table.tree-table
             tbody
+              tr.cursor-pointer(ng-click='show_add_project_modal()')
+               td(colspan='3')
+                i.fa.fa-plus
+                |  
+                | Add Project
+
               tr.cursor-pointer(ng-repeat-start = 'project in ws.projects' ng-class='{info: selected_project === project}' ng-click='select_project(project)')
                 th(colspan="3")
                   | {{project.name}}
@@ -222,12 +228,6 @@ block view-content
                   i.fa.fa-plus
                   |  
                   | Add File
-
-              tr.cursor-pointer(ng-click='show_add_project_modal()')
-               td(colspan='3')
-                i.fa.fa-plus
-                |  
-                | Add Project
 
   // Modals
   #new-project.modal.fade(role='dialog')
