@@ -97,26 +97,16 @@ block view-content
               .row.row-stretch
                 .col-xs-4.col-stretch
                   .btn-group-vertical(role='group')
-                    button.btn.btn-default.btn
+                    button.btn.btn-danger.btn(ng-if='selected_servo.started' ng-click='selected_servo.started = false')
                       small
-                        i.fa.fa-rotate-left
+                        i.fa.fa-stop
                         |  
-                        | Minimum Position
-                    button.btn.btn-default.btn
+                        | Disable
+                    button.btn.btn-default.btn(ng-if='!selected_servo.started' ng-click='selected_servo.started = true')
                       small
-                        i.fa.fa-minus
+                        i.fa.fa-play
                         |  
-                        | One Step Left
-                    button.btn.btn-default.btn
-                      small
-                        i.fa.fa-plus
-                        |  
-                        | One Step Right
-                    button.btn.btn-default.btn
-                      small
-                        i.fa.fa-rotate-right
-                        |  
-                        | Maximum Position
+                        | Enable
 
                 .col-xs-1.col-stretch
 

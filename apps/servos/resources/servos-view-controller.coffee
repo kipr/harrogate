@@ -15,6 +15,7 @@ exports.controller = ($scope, $interval) ->
       {
         name: "Servo #{i}"
         position: 0
+        started: false
       }
 
   $scope.selected_servo = $scope.servos[0]
