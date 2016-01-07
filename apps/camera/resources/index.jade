@@ -1,6 +1,131 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
+block view-toolbar-left
+  .btn-group
+    button.btn.btn-toolbar.btn-success(type='button')
+      i.fa.fa-floppy-o
+      br
+      small.small Save Configuration
+
+  .btn-group
+    button.btn.btn-toolbar.btn-default(ng-class='{"btn-primary": show_visual}' ng-click='show_visual = true')
+      i.fa.fa-object-group
+      br
+      small.small Visual Configuration
+    button.btn.btn-toolbar.btn-default(ng-class='{"btn-primary": !show_visual}' ng-click='show_visual = false')
+      i.fa.fa-sliders
+      br
+      small.small Manual Configuration
+
 block view-content
-  .container
-    .embed-responsive.embed-responsive-16by9
-      img.embed-responsive-item(ng-src="{{img_src}}")
+  .row.row-stretch
+    .col-md-9.col-stretch(ng-class='{"desktop-only": !selected_channel}')
+      .row.row-stretch
+        .col-xs-5.col-stretch
+          .panel.panel-primary.panel-stretch
+            .panel-heading
+              .panel-title
+                | Preview
+                
+            .panel-body-container-stretch
+              img.img-stretch-width.panel-body(src="http://www.kixor.net/school/2008spring/comp776/assn1/einstein_blobs.jpg")
+
+        .col-xs-7.col-stretch(ng-if='show_visual')
+          .panel.panel-primary.panel-stretch
+            .panel-heading
+              .panel-title
+                | Visual Configuration
+                        
+            .panel-body-container-stretch
+              img.img-stretch.panel-body(src="http://i125.photobucket.com/albums/p76/hecartha/Color%20and%20Calibration/Hue_Value_Gradient-ACDSee_Pro_4.png")
+
+        .col-xs-7.col-stretch(ng-if='!show_visual')
+          .panel.panel-primary.panel-stretch
+            .panel-heading
+              .panel-title
+                | Manual Configuration
+
+            .scrollable-panel-body-container
+              .panel-body
+                .row
+                  .col-xs-6
+                    .form
+                      .form-group
+                        label Hue
+                        input.form-control(type='number')
+
+                        label Saturation
+                        input.form-control(type='number')
+
+                        label Value
+                        input.form-control(type='number')
+                  .col-xs-6
+                    .form
+                      .form-group
+                        label to
+                        input.form-control(type='number')
+
+                        label to
+                        input.form-control(type='number')
+
+                        label to
+                        input.form-control(type='number')
+
+
+    .col-md-3.col-stretch(ng-class='{"desktop-only": selected_channel}')
+      .panel.panel-primary.panel-stretch
+        .panel-heading
+          .panel-title
+            | Configurations
+
+        .scrollable-panel-body-container
+          table.panel-body.table.tree-table
+            tbody
+              tr.cursor-pointer
+               td(colspan='2')
+                i.fa.fa-plus
+                |  
+                | Add configuration
+                
+              tr.cursor-pointer.info
+                th(colspan="2")
+                  | Configuration I
+
+              tr.cursor-pointer
+                 td
+                 td
+                  i.fa.fa-plus
+                  |  
+                  | Add Channel
+
+              tr.cursor-pointer.info(ng-click='selected_channel = true')
+                td
+                td
+                  i.fa.eyedropper
+                  |  
+                  | Channel I
+
+              tr.cursor-pointer(ng-click='selected_channel = true')
+                td
+                td
+                  i.fa.eyedropper
+                  |  
+                  | Channel II
+
+block bottom-compact-navbar-buttons
+  a.btn.btn-toolbar.btn-info(type='button', ng-click='selected_channel = false')
+    i.fa.fa-folder-open-o
+    |  
+    small.small Open
+  a.btn.btn-toolbar.btn-info(type='button')
+    i.fa.fa-floppy-o
+    |  
+    small.small Save
+  a.btn.btn-toolbar.btn-info(type='button' ng-class='{"btn-primary": show_visual}' ng-click='show_visual = true')
+    i.fa.fa-object-group
+    |  
+    small.small Visual
+  a.btn.btn-toolbar.btn-info(type='button' ng-class='{"btn-primary": !show_visual}' ng-click='show_visual = false')
+    i.fa.fa-sliders
+    |  
+    small.small Manual
