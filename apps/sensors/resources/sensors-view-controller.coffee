@@ -131,9 +131,9 @@ exports.controller = ($scope, $http, $interval) ->
       for sensor in $scope.sensors
         value = sensor.value
         if sensor.type is 'analog'
-          value = data.analogs.values[sensor.i]
+          value = data.analogs.value[sensor.i]
         else if sensor.type is 'digital'
-          value = data.digitals.values[sensor.i]
+          value = data.digitals.value[sensor.i]
         else if sensor.type is 'imu_accel_x'
           value = data.imu.accel_state.x
         else if sensor.type is 'imu_accel_y'

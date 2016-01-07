@@ -6,8 +6,6 @@ rs = require_harrogate_module '/shared/scripts/robot-state.coffee'
 # the fs router
 router = Express.Router()
 
-console.log "Loaded sensor API route"
-
 router.get '/', (request, response, next) ->
   response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
   response.setHeader 'Pragma', 'no-cache'
