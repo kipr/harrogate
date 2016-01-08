@@ -30,14 +30,14 @@ block view-content
             .panel-body-container-stretch
               img.img-stretch-width.panel-body(ng-src="{{img_src}}")
 
-        .col-xs-7.col-stretch(ng-if='show_visual')
+        .col-xs-7.col-stretch
           .panel.panel-primary.panel-stretch
             .panel-heading
               .panel-title
                 | Visual Configuration
                         
             .panel-body-container-stretch
-              img.img-stretch.panel-body(src="http://i125.photobucket.com/albums/p76/hecartha/Color%20and%20Calibration/Hue_Value_Gradient-ACDSee_Pro_4.png")
+              canvas.img-stretch.panel-body#color-picker
 
         .col-xs-7.col-stretch(ng-if='!show_visual')
           .panel.panel-primary.panel-stretch
