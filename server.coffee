@@ -199,4 +199,5 @@ ON_DEATH (signal, err) ->
   for app_name, app of AppCatalog.catalog
     console.log "Stopping #{app_name}"
     app.get_instance().closing() if app.get_instance()['closing']
-  return
+  
+  throw 'exiting'
