@@ -3,13 +3,13 @@ exports.name = 'MotorsViewController'
 exports.inject = (app) ->
   app.controller exports.name, [
     '$scope'
+    '$http'
     '$interval'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $interval) ->
-
+exports.controller = ($scope, $http, $interval) ->
   $scope.selected_action = 'speed'
 
   $scope.select_action = (action) ->
@@ -21,6 +21,7 @@ exports.controller = ($scope, $interval) ->
     for i in [0...4]
       {
         name: "Motor #{i}"
+        i: i
         speed: 0
         power: 0
         position: 0
@@ -176,11 +177,14 @@ exports.controller = ($scope, $interval) ->
     circleShape: 'pie'
     startAngle: 315
 
-  $interval(( ->
-    for motor in $scope.motors
-      motor.position += motor.power * 0.01 * pps
-      motor.speed = motor.power * 0.01 * pps
+  $scope.direction_multipliers = [0, 1, -1, 0]
 
-    ), 1000)
-
-  
+  $interval((->
+    $http.get('/api/motors', {}).success (data, status, headers, config) ->
+      for motor in $scope.motors
+        m = data.motor_state[motor.i]
+        mul = $scope.direction_multipliers[m.direction]
+        motor.power = mul * m.power
+        motor.speed = mul * m.goal_velocity
+        motor.position = m.goal_position
+  ), 500)

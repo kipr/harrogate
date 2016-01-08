@@ -1,5 +1,4 @@
-# Boyd = require 'node-boyd'
-
+daylite    = require_harrogate_module '/shared/scripts/daylite.coffee'
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 
 events = AppCatalog.catalog['Camera'].event_groups.camera_events.events
@@ -7,10 +6,7 @@ events = AppCatalog.catalog['Camera'].event_groups.camera_events.events
 clients = 0
 
 module.exports =
-
   event_init: (event_group_name, namespace) ->
-    return
-
     namespace.on 'connection', (socket) ->
       clients++
       cam = Boyd.open() unless cam

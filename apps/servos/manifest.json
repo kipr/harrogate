@@ -6,5 +6,11 @@
   "category": "Sensors and Actuators",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/servos-injector.coffee"
+  "angular_ctrl": "resources/servos-injector.coffee",
+  "web_api": {
+    "servos": {
+      "uri": "/api/servos",
+      "description": "Provides access to the servos"
+    }
+  }
 }

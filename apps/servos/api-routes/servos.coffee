@@ -1,4 +1,4 @@
-﻿Express = require 'express'
+Express = require 'express'
 Url = require 'url'
 
 rs = require_harrogate_module '/shared/scripts/robot-state.coffee'

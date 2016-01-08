@@ -6,5 +6,11 @@
   "category": "Sensors and Actuators",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/motors-injector.coffee"
+  "angular_ctrl": "resources/motors-injector.coffee",
+  "web_api": {
+    "motors": {
+      "uri": "/api/motors",
+      "description": "Provides access to the motors"
+    }
+  }
 }
