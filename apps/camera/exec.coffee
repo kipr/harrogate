@@ -1,6 +1,5 @@
 daylite    = require_harrogate_module '/shared/scripts/daylite.coffee'
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
-Png = require('png').Png;
 fs = require 'fs'
 Config = require_harrogate_module 'config.coffee'
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
@@ -14,6 +13,7 @@ clients = 0
 latest_camera_frame = null
 
 if daylite?
+  Png = require('png').Png;
   daylite.subscribe 'camera/frame_data', (msg) ->
     if not namespace?
       return
