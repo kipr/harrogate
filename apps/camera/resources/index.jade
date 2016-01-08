@@ -28,7 +28,7 @@ block view-content
                 | Preview
                 
             .panel-body-container-stretch
-              img.img-stretch-width.panel-body(src="http://www.kixor.net/school/2008spring/comp776/assn1/einstein_blobs.jpg")
+              img.img-stretch-width.panel-body(ng-src="{{img_src}}")
 
         .col-xs-7.col-stretch(ng-if='show_visual')
           .panel.panel-primary.panel-stretch

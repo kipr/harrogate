@@ -13,24 +13,24 @@ console.log events
 clients = 0
 latest_camera_frame = null
 
-daylite.subscribe 'camera/frame_data', (msg) ->
-  if not namespace?
-    return
-  png = new Png(msg.data, msg.width, msg.height, 'bgr');
-  png.encode (data, error) ->
-    if error
-      console.log "Error: #{error.toString()}"
+if daylite?
+  daylite.subscribe 'camera/frame_data', (msg) ->
+    if not namespace?
       return
-    latest_camera_frame = data.toString 'binary'
+    png = new Png(msg.data, msg.width, msg.height, 'bgr');
+    png.encode (data, error) ->
+      if error
+        console.log "Error: #{error.toString()}"
+        return
+      latest_camera_frame = data.toString 'binary'
     
-    repacked_msg =
-      width: msg.width
-      height: msg.height
-    namespace.emit events.frame_arrived.id, repacked_msg
+      repacked_msg =
+        width: msg.width
+        height: msg.height
+      namespace.emit events.frame_arrived.id, repacked_msg
 
 Express = require 'express'
 ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
-
 
 # the currently runned program
 running = null

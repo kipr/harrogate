@@ -5,7 +5,6 @@ app = angular.module 'harrogateIndexApp', [
   'ngRoute',
   'ui.bootstrap',
   'angular-chartist',
-  'angular-websocket'
 ]
 
 require('./app-catalog-provider.coffee').inject app
