@@ -1,9 +1,22 @@
 daylite    = require_harrogate_module '/shared/scripts/daylite.coffee'
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 
+Png = require('png').Png;
+
 events = AppCatalog.catalog['Camera'].event_groups.camera_events.events
 
 clients = 0
+
+latest_camera_frame = null
+
+daylite.subscribe 'camera/frame_data', (msg) ->
+  png = new Png(msg.data, msg.height, msg.height, 'bgr');
+  png.encode (data, error) ->
+    if error
+      console.log "Error: #{error.toString()}"
+      return
+    latest_camera_frame = data.toString('binary')
+    console.log "Successfully got new frame from boyd"
 
 module.exports =
   event_init: (event_group_name, namespace) ->

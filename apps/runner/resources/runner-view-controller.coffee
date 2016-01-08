@@ -143,7 +143,6 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider, Pr
           return
 
       socket.on events.ended.id, ->
-
         $timeout ->
           $scope.img_src = '/api/run/current/graphics?' + new Date().getTime()
           return
