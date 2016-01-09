@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "browserify": "^8.0.1",
+    "bufferutil": "^1.2.1",
     "connect-livereload": "^0.5.4",
     "gulp": "^3.9.0",
     "gulp-data": "^1.2.1",
@@ -43,6 +44,7 @@
     "gulp-util": "^3.0.7",
     "request": "^2.67.0",
     "through": "^2.3.8",
+    "utf-8-validate": "^1.2.1",
     "vinyl-transform": "^1.0.0"
   },
   "scripts": {
