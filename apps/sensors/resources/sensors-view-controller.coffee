@@ -127,7 +127,10 @@ exports.controller = ($scope, $http, $interval) ->
 
   $interval(( ->
     $http.get('/api/sensors', {}).success (data, status, headers, config) ->
-      console.log data
+
+      if 'sensors' not in data
+        return
+
       for sensor in $scope.sensors
         value = sensor.value
         if sensor.type is 'analog'

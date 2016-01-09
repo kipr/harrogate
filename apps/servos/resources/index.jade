@@ -1,102 +1,18 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
-
-  // Desktop view
-  .col.col-stretch.desktop-only
-    .row.row-stretch-40
-      .col-xs-12.col-stretch
-        .panel.panel-primary.panel-stretch
-          .panel-heading
-            .panel-title
-              | Servos
-          .scrollable-panel-body-container
-            .panel-body
-              .row.row-stretch
-                .col-xs-6.col-stretch
-                  table.table
-                    thead
-                      tr
-                        th Name
-                        th Position
-                        th
-                    tbody
-                      tr(ng-repeat='servo in servos' ng-class='{info: servo == selected_servo}' ng-click='select_servo(servo)' ng-if='$even')
-                        td {{servo.name}}
-                        td {{servo.position}}
-                        td
-                          button.btn.btn-danger.btn-xs(ng-click='stop_servo(servo)')
-                            small
-                              i.fa.fa-stop
-                                
-                .col-xs-6.col-stretch
-                  table.table
-                    thead
-                      tr
-                        th Name
-                        th Position
-                        th
-                    tbody
-                      tr(ng-repeat='servo in servos' ng-class='{info: servo == selected_servo}' ng-click='select_servo(servo)' ng-if='$odd')
-                        td {{servo.name}}
-                        td {{servo.position}}
-                        td
-                          button.btn.btn-danger.btn-xs(ng-click='stop_servo(servo)')
-                            small
-                              i.fa.fa-stop
-
-    .row.row-stretch-60
-      .col-md-3.col-stretch
-        .panel.panel-primary.panel-stretch
-          .panel-heading
-            .panel-title
-              | Position of Servo 0
-
-          .panel.panel-body
-            #servo-0-slider.slider
-
-      .col-md-3.col-stretch
-        .panel.panel-primary.panel-stretch
-          .panel-heading
-            .panel-title
-              | Position of Servo 1
-
-          .panel.panel-body
-            #servo-1-slider.slider
-
-      .col-md-3.col-stretch
-        .panel.panel-primary.panel-stretch
-          .panel-heading
-            .panel-title
-              | Position of Servo 2
-
-          .panel.panel-body
-            #servo-2-slider.slider
-
-      .col-md-3.col-stretch
-        .panel.panel-primary.panel-stretch
-          .panel-heading
-            .panel-title
-              | Position of Servo 3
-
-          .panel.panel-body
-            #servo-3-slider.slider
-
-
-  // Compact view
-  .col.col-stretch.compact-only
-    .row.row-stretch
-      .col-xs-12.col-stretch
-        .panel.panel-primary.panel-stretch
-          .panel-heading
-            .panel-title
-              | {{selected_servo.name}} &nbsp; - &nbsp; 
-              small Position {{selected_servo.position}}
-          .scrollable-panel-body-container
-            .panel-body
-              .row.row-stretch
-                .col-xs-4.col-stretch
-                  .btn-group-vertical(role='group')
+  .row.row-stretch-50-desktop-only
+    .col-md-6.col-stretch(ng-repeat='servo in servos' ng-class='{"desktop-only": servo != selected_servo}')
+      .panel.panel-primary.panel-stretch
+        .panel-heading
+          .panel-title
+            | {{servo.name}} &nbsp; - &nbsp; 
+            small Position {{servo.position}}
+        .scrollable-panel-body-container
+          .panel-body
+            .row.row-stretch
+              .col-xs-4.col-stretch
+                .btn-group-vertical(role='group')
                     button.btn.btn-danger.btn(ng-if='selected_servo.started' ng-click='selected_servo.started = false')
                       small
                         i.fa.fa-stop
@@ -108,11 +24,10 @@ block view-content
                         |  
                         | Enable
 
-                .col-xs-1.col-stretch
+              .col-xs-1.col-stretch
+              .col-xs-6.col-stretch
+                slider(ng-attr-id='{{"position-slider-" + servo.i}}')
 
-                .col-xs-6.col-stretch
-                  #position-slider-compact.slider
-                 
 block bottom-compact-navbar-buttons
   a.btn.btn-toolbar.btn-info(type='button' ng-repeat='servo in servos' ng-click='select_servo(servo)')
     i.fa.fa-car

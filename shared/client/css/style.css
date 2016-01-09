@@ -46,6 +46,23 @@
     padding-top: 5px;
 }
 
+@media (min-width: 1024px)
+{
+    .row-stretch-50-desktop-only
+    {
+        height: 50%;
+        padding-top: 5px;
+    }
+}
+
+@media (max-width: 1023px)
+{
+    .row-stretch-50-desktop-only
+    {
+        height: 100%;
+    }
+}
+
 .panel-stretch
 {
     margin-bottom: -20px;
