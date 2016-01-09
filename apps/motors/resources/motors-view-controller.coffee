@@ -5,17 +5,43 @@ exports.inject = (app) ->
     '$scope'
     '$http'
     '$interval'
+    '$timeout'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $http, $interval) ->
-  $scope.selected_action = 'speed'
+exports.controller = ($scope, $http, $interval, $timeout) ->
 
-  $scope.select_action = (action) ->
-    $scope.selected_action = action
+  set_speed = (motor, event) ->
+    $scope.$apply ->
+      motor.speed = event.value
 
-  pps = 1000
+      # Emit event here
+
+  set_power = (motor, event) ->
+    $scope.$apply ->
+      motor.power = event.value
+
+      # Emit event here
+
+  $scope.clear_position = (motor) ->
+    motor.position = 0
+
+    # Emit event here
+
+  $scope.stop_motor = (motor) ->
+    motor.speed = 0
+    motor.power = 0
+
+    update_slider motor
+
+    # Emit event here
+
+  update_slider = (motor) ->
+    console.log motor.power_slider
+    motor.power_slider.setValue(motor.power)
+    motor.speed_slider.setValue(motor.speed)
+    
 
   $scope.motors = 
     for i in [0...4]
@@ -26,6 +52,10 @@ exports.controller = ($scope, $http, $interval) ->
         power: 0
         position: 0
         selected: false
+        action: 'speed'
+
+        power_slider: null
+        speed_slider: null
       }
 
   $scope.selected_motor = $scope.motors[0]
@@ -33,158 +63,57 @@ exports.controller = ($scope, $http, $interval) ->
   $scope.select_motor = (motor) ->
     $scope.selected_motor = motor
 
-  $scope.stop_motor = (motor) ->
-    motor.speed = 0
-    motor.power = 0
+  $timeout (->
 
-  $('#speed-slider-0').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -1000
-    max: 1000
-    step: 20
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
+    # init the speed sliders
+    for i in [0...4]
+       $scope.motors[i].speed_slider = $('#speed-slider-' + i).roundSlider
+        sliderType: 'min-range'
+        showTooltip: true
+        radius: 75
+        width: 16
+        min: -1000
+        max: 1000
+        step: 20
+        value: 0
+        handleSize: 0
+        handleShape: 'square'
+        circleShape: 'pie'
+        startAngle: 315
+        change: set_speed.bind(undefined, $scope.motors[i])
 
-  $('#speed-slider-1').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -1000
-    max: 1000
-    step: 20
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
+    # init the power sliders
+    for i in [0...4]
+      $scope.motors[i].power_slider = $('#power-slider-' + i).roundSlider
+        sliderType: 'min-range'
+        showTooltip: true
+        radius: 75
+        width: 16
+        min: -100
+        max: 100
+        step: 5
+        value: 0
+        handleSize: 0
+        handleShape: 'square'
+        circleShape: 'pie'
+        startAngle: 315
+        change: set_power.bind(undefined, $scope.motors[i])
+  ), 100
 
-  $('#speed-slider-2').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -1000
-    max: 1000
-    step: 20
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#speed-slider-3').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -1000
-    max: 1000
-    step: 20
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#speed-slider-4').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -1000
-    max: 1000
-    step: 20
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#power-slider-0').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -100
-    max: 100
-    step: 5
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#power-slider-1').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -100
-    max: 100
-    step: 5
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#power-slider-2').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -100
-    max: 100
-    step: 5
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#power-slider-3').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -100
-    max: 100
-    step: 5
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $('#power-slider-4').roundSlider
-    sliderType: 'min-range'
-    showTooltip: true
-    radius: 75
-    width: 16
-    min: -100
-    max: 100
-    step: 5
-    value: 0
-    handleSize: 0
-    handleShape: 'square'
-    circleShape: 'pie'
-    startAngle: 315
-
-  $scope.direction_multipliers = [0, 1, -1, 0]
+  direction_multipliers = [0, 1, -1, 0]
 
   $interval((->
     $http.get('/api/motors', {}).success (data, status, headers, config) ->
+
+      if 'motor_state' not in data
+        return
+
       for motor in $scope.motors
         m = data.motor_state[motor.i]
         mul = $scope.direction_multipliers[m.direction]
         motor.power = mul * m.power
         motor.speed = mul * m.goal_velocity
         motor.position = m.goal_position
+
+        update_slider(motor)
   ), 500)
