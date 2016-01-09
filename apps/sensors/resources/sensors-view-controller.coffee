@@ -19,7 +19,7 @@ exports.controller = ($scope, $http, $interval) ->
     sensor.show_graph = not sensor.show_graph
 
   $scope.chartOptions =
-    high: 1400
+    high: 1023
     low: 0
     showPoint: false
     lineSmooth: false
@@ -160,4 +160,3 @@ exports.controller = ($scope, $http, $interval) ->
     update_bar_data()
     ), 500)
 
-  
