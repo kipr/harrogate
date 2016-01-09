@@ -36,7 +36,19 @@ client = null
 
 latest_graphics_window_frame = null
 
+if daylite
+  daylite.subscribe '/aurora/frame', (msg) ->
 
+    repacked_msg =
+      width: msg.width
+      height: msg.height
+
+    latest_graphics_window_frame = msg.data
+
+    if not namespace? or not running_process?
+      return
+
+    namespace.emit events.frame.id, repacked_msg
 
 start_program = ->
   if running?.resource?
@@ -50,7 +62,6 @@ start_program = ->
       namespace.emit events.starting.id, running.resource.name
 
       running_process = spawn running.resource.binary.path, [], {
-        # env: child_env
         cwd: Path.resolve running.resource.data_directory.path
       }
 
@@ -74,26 +85,6 @@ start_program = ->
         namespace.emit events.ended.id
         stop_program()
         return
-
-      connect_to_daylite = ->
-        if running_process?
-          daylite.subscribe '/aurora/frame', (msg) ->
-  
-            console.log "GOT MESSAGE"
-
-            repacked_msg =
-              width: msg.width
-              height: msg.height
-              #data: msg.data.toString('base64')
-
-            latest_graphics_window_frame = msg.data
-
-            namespace.emit events.frame.id, repacked_msg
-            return
-
-          daylite.on 'close', ->
-            client = null
-            return
   return
 
 stop_program = -> 

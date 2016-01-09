@@ -15,8 +15,10 @@ Config = require './config.coffee'
 # Add daylite, ... to the Windows path
 if Os.platform() is 'win32'
   process.env.PATH += Path.delimiter + "#{Config.ext_deps.bin_path}"
-else
+else if Os.platform() is 'darwin'
   process.env.DYLD_LIBRARY_PATH += Path.delimiter + "#{Config.ext_deps.lib_path}"
+else # Linux
+  process.env.LD_LIBRARY_PATH += Path.delimiter + "#{Config.ext_deps.lib_path}"
 
 # avoid require '../../.. ... for shared harrogate module
 if not global.require_harrogate_module?

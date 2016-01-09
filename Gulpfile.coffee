@@ -19,8 +19,10 @@ config = require './config.coffee'
 # Add daylite, ... to the Windows path
 if os.platform() is 'win32'
   process.env.PATH += path_tools.delimiter + "#{config.ext_deps.bin_path}"
-else
+else if os.platform() is 'darwin'
   process.env.DYLD_LIBRARY_PATH += path_tools.delimiter + "#{config.ext_deps.lib_path}"
+else # Linux
+  process.env.LD_LIBRARY_PATH += path_tools.delimiter + "#{config.ext_deps.lib_path}"
 
 process.env.COMPILE = 1
 
