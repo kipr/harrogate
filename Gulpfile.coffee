@@ -75,6 +75,11 @@ gulp.task 'shared_views', ->
   .pipe jade()
   .pipe gulp.dest('public/')
 
+# Shared favicon task
+gulp.task 'shared_favicon', ->
+  gulp.src('shared/client/favicon/*')
+  .pipe gulp.dest('public/favicon/')
+
 # Shared styles task
 gulp.task 'shared_styles', ->
   gulp.src('shared/client/css/*.css')
