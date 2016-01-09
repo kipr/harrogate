@@ -95,6 +95,16 @@ stop_program = ->
   if running?
     running = null
 
+  for i in [0..3]
+    daylite.publish 'robot/set_motor_state',
+      port: i
+      stop: true
+  for i in [0..3]
+    daylite.publish 'robot/set_servo_state',
+      port: i
+      enabled: false
+  
+
   return
 
 # the runner router
