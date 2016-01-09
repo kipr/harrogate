@@ -28,7 +28,10 @@ exports.controller = ($scope, $interval) ->
     showTooltip: true
     radius: 105
     width: 16
-    value: 75
+    min: 0
+    max: 2047
+    step: 16
+    value: 0
     handleSize: 0
     handleShape: 'square'
     circleShape: 'pie'
@@ -39,7 +42,10 @@ exports.controller = ($scope, $interval) ->
     showTooltip: true
     radius: 105
     width: 16
-    value: 75
+    min: 0
+    max: 2047
+    step: 16
+    value: 0
     handleSize: 0
     handleShape: 'square'
     circleShape: 'pie'
@@ -50,7 +56,10 @@ exports.controller = ($scope, $interval) ->
     showTooltip: true
     radius: 105
     width: 16
-    value: 75
+    min: 0
+    max: 2047
+    step: 16
+    value: 0
     handleSize: 0
     handleShape: 'square'
     circleShape: 'pie'
@@ -61,7 +70,10 @@ exports.controller = ($scope, $interval) ->
     showTooltip: true
     radius: 105
     width: 16
-    value: 75
+    min: 0
+    max: 2047
+    step: 16
+    value: 0
     handleSize: 0
     handleShape: 'square'
     circleShape: 'pie'
@@ -73,7 +85,10 @@ exports.controller = ($scope, $interval) ->
     showTooltip: true
     radius: 75
     width: 16
-    value: 75
+    min: 0
+    max: 2047
+    step: 16
+    value: 0
     handleSize: 0
     handleShape: 'square'
     circleShape: 'pie'
