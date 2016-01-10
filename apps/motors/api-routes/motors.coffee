@@ -19,6 +19,21 @@ router.get '/', (request, response, next) ->
     motors: state.motor_states
   response.end "#{JSON.stringify(msg)}", 'utf8'
   return
-  
+
+router.post '/', (request, response, next) ->
+  # We only support application/json
+  if not /application\/json/i.test request.headers['content-type']
+    next new ServerError(415, 'Only content-type application/json supported')
+    return
+
+  if daylite?
+    daylite.publish 'robot/set_motor_state', request.body
+    response.writeHead 201
+    response.end()
+  else
+    response.writeHead 503
+    response.end()
+
+module.exports = router
 # export the router object
 module.exports = router
