@@ -12,12 +12,12 @@ block view-content
           .row.row-stretch
             .col-xs-4.col-stretch
               .btn-group-vertical(role='group')
-                  button.btn.btn-danger.btn(ng-if='servo.started' ng-click='servo.started = false')
+                  button.btn.btn-danger.btn(ng-if='servo.enabled' ng-click='enable_servo(servo, false)')
                     small
                       i.fa.fa-stop
                       |  
                       | Disable
-                  button.btn.btn-default.btn(ng-if='!servo.started' ng-click='servo.started = true')
+                  button.btn.btn-default.btn(ng-if='!servo.enabled' ng-click='enable_servo(servo, true)')
                     small
                       i.fa.fa-play
                       |  

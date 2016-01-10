@@ -19,7 +19,7 @@ exports.controller = ($scope, $http, $interval, $timeout, $window) ->
         name: "Servo #{i}"
         i: i
         position: 0
-        started: false
+        enabled: false
       }
 
   $scope.selected_servo = $scope.servos[0]
@@ -28,8 +28,13 @@ exports.controller = ($scope, $http, $interval, $timeout, $window) ->
     $scope.selected_servo = servo
 
   $scope.on_slider_click = (servo) ->
-    console.log "#{servo.name}'s value was changed to #{servo.position}"
-    # TODO: Notify wallaby here
+
+  $scope.enable_servo = (servo, enable) ->
+    servo.enabled = enable
+    $http.post('/api/servos', {port: servo.i, position: servo.position, enabled: servo.enabled })
+
+  $scope.on_slider_click = (servo) ->
+    $http.post('/api/servos', {port: servo.i, position: servo.position, enabled: servo.enabled })
 
 #  $interval((->
 #    $http.get('/api/servos', {}).success (data, status, headers, config) ->
