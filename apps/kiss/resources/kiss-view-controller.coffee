@@ -28,6 +28,7 @@ exports.controller = (
   ButtonsOnlyModalFactory
   DownloadProjectModalFactory
   FilenameModalFactory) ->
+  $scope.is_compiling = false
 
   $scope.documentChanged = false
 
@@ -340,9 +341,11 @@ exports.controller = (
     return
 
   compile = (project_name) ->
+    $scope.is_compiling = true
     $http.post('/api/compile', {name: project_name})
 
     .success (data, status, headers, config) ->
+      $scope.is_compiling = false
       if data.result.error?
         $scope.compilation_state = 'Compilation Failed'
         if data.result.error?.message?

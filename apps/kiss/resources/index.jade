@@ -2,7 +2,7 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group(ng-if='displayed_file && !display_file_menu')
-    button.btn.btn-toolbar(type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged}" ng-click='save()')
+    button.btn.btn-toolbar(type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged, 'disabled': is_compiling}" ng-click='save()')
       i.fa.fa-floppy-o
       br
       small.small Save {{displayed_file.name}}
@@ -40,17 +40,17 @@ block view-toolbar-left
       small.small Indent
 
   .btn-group(ng-if='selected_project')
-    button.btn.btn-toolbar.btn-default(type='button' ng-click='compile()')
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='compile()' ng-class='{disabled: is_compiling, "btn-danger": is_compiling}')
       i.fa.fa-link
       br
       small.small Compile {{selected_project.name}}
-    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}')
+    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}' ng-class='{disabled: is_compiling}')
       i.fa.fa-rocket
       br
       small.small Goto Runner
 
   .btn-group(ng-if='!selected_project')
-    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner')
+    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner' ng-class'{disabled: is_compiling}')
       i.fa.fa-rocket
       br
       small.small Goto Runner
