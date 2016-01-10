@@ -79,7 +79,7 @@ exports.directive = ->
         # set the position
         canvas.onmousedown = (e) ->
           [x, y] =
-          if event.offsetX?
+          if e.offsetX?
             [e.offsetX, e.offsetY]
           else
             [e.layerX - e.currentTarget.offsetLeft, e.layerY - e.currentTarget.offsetTop]
