@@ -7,16 +7,6 @@ block view-toolbar-left
       br
       small.small Save Configuration
 
-  .btn-group
-    button.btn.btn-toolbar.btn-default(ng-class='{"btn-primary": show_visual}' ng-click='show_visual = true')
-      i.fa.fa-object-group
-      br
-      small.small Visual Configuration
-    button.btn.btn-toolbar.btn-default(ng-class='{"btn-primary": !show_visual}' ng-click='show_visual = false')
-      i.fa.fa-sliders
-      br
-      small.small Manual Configuration
-
 block view-content
   .row.row-stretch
     .col-md-9.col-stretch(ng-class='{"desktop-only": !selected_channel}')
@@ -31,46 +21,48 @@ block view-content
               img.img-stretch-width.panel-body(ng-src="{{img_src}}")
 
         .col-xs-7.col-stretch
-          .panel.panel-primary.panel-stretch
-            .panel-heading
-              .panel-title
-                | Visual Configuration
+          .row.row-stretch-50-desktop-only(ng-class='{"desktop-only": !show_visual}')
+            .col.col-stretch
+              .panel.panel-primary.panel-stretch
+                .panel-heading
+                  .panel-title
+                    | Visual Configuration
                         
-            .panel-body-container-stretch
-              canvas.img-stretch.panel-body#color-picker
+                .panel-body-container-stretch
+                  canvas#color-picker
 
-        .col-xs-7.col-stretch(ng-if='!show_visual')
-          .panel.panel-primary.panel-stretch
-            .panel-heading
-              .panel-title
-                | Manual Configuration
+          .row.row-stretch-50-desktop-only(ng-class='{"desktop-only": show_visual}')
+            .col.col-stretch
+              .panel.panel-primary.panel-stretch
+                .panel-heading
+                  .panel-title
+                    | Manual Configuration
 
-            .scrollable-panel-body-container
-              .panel-body
-                .row
-                  .col-xs-6
-                    .form
-                      .form-group
-                        label Hue
-                        input.form-control(type='number')
+                .scrollable-panel-body-container
+                  .panel-body
+                    .row
+                      .col-xs-6
+                        .form
+                          .form-group
+                            label Hue
+                            input.form-control(type='number' ng-model='channel.hue.from')
 
-                        label Saturation
-                        input.form-control(type='number')
+                            label Saturation
+                            input.form-control(type='number' ng-model='channel.saturation.from')
 
-                        label Value
-                        input.form-control(type='number')
-                  .col-xs-6
-                    .form
-                      .form-group
-                        label to
-                        input.form-control(type='number')
+                            label Value
+                            input.form-control(type='number' ng-model='channel.value.from')
+                      .col-xs-6
+                        .form
+                          .form-group
+                            label to
+                            input.form-control(type='number'  ng-model='channel.hue.to')
 
-                        label to
-                        input.form-control(type='number')
+                            label to
+                            input.form-control(type='test' ng-model='channel.saturation.to')
 
-                        label to
-                        input.form-control(type='number')
-
+                            label to
+                            input.form-control(type='text' ng-model='channel.value.to')
 
     .col-md-3.col-stretch(ng-class='{"desktop-only": selected_channel}')
       .panel.panel-primary.panel-stretch
@@ -81,22 +73,22 @@ block view-content
         .scrollable-panel-body-container
           table.panel-body.table.tree-table
             tbody
-              tr.cursor-pointer
-               td(colspan='2')
-                i.fa.fa-plus
-                |  
-                | Add configuration
+              //tr.cursor-pointer
+              // td(colspan='2')
+              //  i.fa.fa-plus
+              //  |  
+              //  | Add configuration
                 
               tr.cursor-pointer.info
                 th(colspan="2")
                   | Configuration I
 
-              tr.cursor-pointer
-                 td
-                 td
-                  i.fa.fa-plus
-                  |  
-                  | Add Channel
+              //tr.cursor-pointer
+              //   td
+              //   td
+              //    i.fa.fa-plus
+              //    |  
+              //    | Add Channel
 
               tr.cursor-pointer.info(ng-click='selected_channel = true')
                 td
@@ -105,12 +97,12 @@ block view-content
                   |  
                   | Channel I
 
-              tr.cursor-pointer(ng-click='selected_channel = true')
-                td
-                td
-                  i.fa.eyedropper
-                  |  
-                  | Channel II
+              // tr.cursor-pointer(ng-click='selected_channel = true')
+              //   td
+              //   td
+              //     i.fa.eyedropper
+              //     |  
+              //     | Channel II
 
 block bottom-compact-navbar-buttons
   a.btn.btn-toolbar.btn-info(type='button', ng-click='selected_channel = false')

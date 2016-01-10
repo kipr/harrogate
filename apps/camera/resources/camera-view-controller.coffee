@@ -39,16 +39,34 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider) ->
   $scope.show_visual = true
   $scope.selected_channel = false
 
-  canvas = document.getElementById('color-picker')
-  ctx = canvas.getContext('2d')
+  # TODO: Add here retrieval of real channel
+  $scope.channel = 
+    hue:
+      from: 40
+      to: 80
+    saturation:
+      from: 30
+      to:70
+    value:
+      from: 80
+      to: 120
 
-  $scope.rect = 
+  canvas = document.getElementById('color-picker')
+  canvas_container = canvas.parentElement
+
+  ctx = canvas.getContext '2d'
+  ctx.canvas.width  = canvas_container.offsetWidth
+  ctx.canvas.height = canvas_container.offsetHeight
+
+  color_picker_bounding_rect = 
     top_left:
       x: 0
       y: 0
+      color: 'white'
     bottom_right:
       x: canvas.width
       y: canvas.height
+      color: 'black'
 
   hsv2rgb = (h, s, v) ->
     h /= 60
@@ -102,6 +120,43 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider) ->
       g: rgb[1] * 255 | 0
       b: rgb[2] * 255 | 0
     }
+
+  # http://www.javascripter.net/faq/rgb2hsv.htm
+  rgb2hsv = (r, g, b) ->
+    computedH = 0
+    computedS = 0
+    computedV = 0
+    if r == null or g == null or b == null or isNaN(r) or isNaN(g) or isNaN(b)
+      alert 'Please enter numeric RGB values!'
+      return
+    if r < 0 or g < 0 or b < 0 or r > 255 or g > 255 or b > 255
+      alert 'RGB values must be in the range 0 to 255.'
+      return
+    r = r / 255
+    g = g / 255
+    b = b / 255
+    minRGB = Math.min(r, Math.min(g, b))
+    maxRGB = Math.max(r, Math.max(g, b))
+    # Black-gray-white
+    if minRGB == maxRGB
+      computedV = minRGB
+      return [
+        0
+        0
+        computedV
+      ]
+    # Colors other than black-gray-white:
+    d = if r == minRGB then g - b else if b == minRGB then r - g else b - r
+    h = if r == minRGB then 3 else if b == minRGB then 1 else 5
+    computedH = 60 * (h - (d / (maxRGB - minRGB)))
+    computedS = (maxRGB - minRGB) / maxRGB
+    computedV = maxRGB
+    [
+      Math.round computedH
+      Math.round computedS*100
+      Math.round computedV*100
+    ]
+
 
 
   # http://jsfiddle.net/AbdiasSoftware/wYBEU/
@@ -182,62 +237,71 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider) ->
     ctx.putImageData bmp, 0, 0
 
     # draw the bounding box
-    ctx.strokeStyle = '#FF0000'
-    ctx.strokeRect $scope.rect.top_left.x, $scope.rect.top_left.y,
-                   $scope.rect.bottom_right.x, $scope.rect.bottom_right.y
+    bb_width = color_picker_bounding_rect.bottom_right.x - color_picker_bounding_rect.top_left.x
+    bb_height = color_picker_bounding_rect.bottom_right.y - color_picker_bounding_rect.top_left.y
 
-    console.log $scope.rect.top_left.x, $scope.rect.top_left.y,
-                $scope.rect.bottom_right.x, $scope.rect.bottom_right.y
+    ctx.strokeStyle = 'black'
+    ctx.strokeRect color_picker_bounding_rect.top_left.x, color_picker_bounding_rect.top_left.y, bb_width, bb_height
+
+    # draw the handles
+    ctx.beginPath()
+    ctx.arc color_picker_bounding_rect.top_left.x, color_picker_bounding_rect.top_left.y, 15, 0, 2*Math.PI, false
+    ctx.lineWidth = 2
+    ctx.strokeStyle = 'black'
+    ctx.stroke()
+    ctx.fillStyle =  color_picker_bounding_rect.top_left.color
+    ctx.fill()
+
+    ctx.beginPath()
+    ctx.arc color_picker_bounding_rect.bottom_right.x, color_picker_bounding_rect.bottom_right.y, 15, 0, 2*Math.PI, false
+    ctx.lineWidth = 2
+    ctx.strokeStyle = 'black'
+    ctx.stroke()
+    ctx.fillStyle =  color_picker_bounding_rect.bottom_right.color
+    ctx.fill()
 
     return
 
-  get_position = (el) ->
-    xp = 0
-    yp = 0
-    while el
-      xp += el.offsetLeft - (el.scrollLeft) + el.clientLeft
-      xp += el.offsetTop - (el.scrollTop) + el.clientTop
-      el = el.offsetParent
-    {
-      x: xp
-      y: yp
-    }
 
-  # http://stackoverflow.com/questions/2368784/draw-on-html5-canvas-using-a-mouse
-  findxy = (res, e) ->
-    if res == 'down'
+  # set the position
+  canvas.onmousedown = (e) ->
+    [x, y] =
+    if e.offsetX?
+      [e.offsetX, e.offsetY]
+    else
+      [e.layerX - e.currentTarget.offsetLeft, e.layerY - e.currentTarget.offsetTop]
 
-      c_pos = get_position canvas
-      console.log e.pageX, e.pageY
-      console.log c_pos.x, c_pos.y
+    # calculate the distance to the current handle points
+    bottom_right_distance = Math.sqrt( Math.pow(color_picker_bounding_rect.bottom_right.x - x, 2)
+                                     + Math.pow(color_picker_bounding_rect.bottom_right.x - x, 2) )
 
-      x = e.pageX - c_pos.x
-      y = e.pageY - c_pos.y
+    top_left_distance = Math.sqrt( Math.pow(color_picker_bounding_rect.top_left.x - x, 2)
+                                 + Math.pow(color_picker_bounding_rect.top_left.x - x, 2) )
 
-      if e.button == 2 # right button
-         $scope.rect.bottom_right.x = x
-         $scope.rect.bottom_right.y = y
+    # update the hsv values of this point
+    [r, g, b] = ctx.getImageData(x, y, 1, 1).data
+    [h, s, v] = rgb2hsv r, b, g
+
+    # set the closest handle to the new x,y
+    $scope.$apply ->
+      if bottom_right_distance < top_left_distance
+        color_picker_bounding_rect.bottom_right.x = x
+        color_picker_bounding_rect.bottom_right.y = y
+        color_picker_bounding_rect.bottom_right.color = 'rgb(' + r + ',' + g + ',' + b + ')'
+
+        $scope.channel.hue.to = h
+        $scope.channel.saturation.to = s
+        $scope.channel.value.to = v
+
       else
-         $scope.rect.top_left.x = x
-         $scope.rect.top_left.y = y
+        color_picker_bounding_rect.top_left.x = x
+        color_picker_bounding_rect.top_left.y = y
+        color_picker_bounding_rect.top_left.color = 'rgb(' + r + ',' + g + ',' + b + ')'
 
-      draw()
+        $scope.channel.hue.from = h
+        $scope.channel.saturation.from = s
+        $scope.channel.value.from = v
 
-  # canvas.addEventListener 'mousemove', ((e) ->
-  #   findxy 'move', e
-  #   return
-  # ), false
-  canvas.addEventListener 'mousedown', ((e) ->
-    findxy 'down', e
-    return
-  ), true
-  # canvas.addEventListener 'mouseup', ((e) ->
-  #   findxy 'up', e
-  #   return
-  # ), false
-  # canvas.addEventListener 'mouseout', ((e) ->
-  #   findxy 'out', e
-  #   return
-  # ), false
+    draw()
 
   draw()
