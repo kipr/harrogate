@@ -8,39 +8,38 @@ block view-content
           .panel-title
             | {{motor.name}} &nbsp; - &nbsp; 
             small Speed {{motor.speed}} &nbsp; Power {{motor.power}} &nbsp; Position {{motor.position}}
-        .scrollable-panel-body-container
-          .panel-body
-            .row.row-stretch
-              .col-xs-4.col-stretch
-                .btn-group-vertical(role='group')
-                  button.btn.btn-default.btn(ng-class='{"btn-default": selected_action != "speed", "btn-primary": motor.action == "speed"}' ng-click='motor.action = "speed"')
-                    small
-                      i.fa.fa-tachometer
-                      |  
-                      | Set Speed 
-                  button.btn.btn-default.btn(ng-class='{"btn-default": selected_action != "power", "btn-primary": motor.action == "power"}' ng-click='motor.action = "power"')
-                    small
-                      i.fa.fa-flash
-                      |  
-                      | Set Power 
-                  button.btn.btn-danger.btn(ng-click='clear_position(motor)')
-                    small
-                      i.fa.fa-close
-                      |  
-                      | Clear Position Counter 
-                  button.btn.btn-danger.btn(ng-click='stop_motor(motor)')
-                    small
-                      i.fa.fa-stop
-                      |  
-                      | Stop 
+        .panel-body-container-stretch.panel-body
+          .row.row-stretch
+            .col-xs-4.col-stretch
+              .btn-group-vertical(role='group')
+                button.btn.btn-default.btn(ng-class='{"btn-default": selected_action != "speed", "btn-primary": motor.action == "speed"}' ng-click='motor.action = "speed"')
+                  small
+                    i.fa.fa-tachometer
+                    |  
+                    | Set Speed 
+                button.btn.btn-default.btn(ng-class='{"btn-default": selected_action != "power", "btn-primary": motor.action == "power"}' ng-click='motor.action = "power"')
+                  small
+                    i.fa.fa-flash
+                    |  
+                    | Set Power 
+                button.btn.btn-danger.btn(ng-click='clear_position(motor)')
+                  small
+                    i.fa.fa-close
+                    |  
+                    | Clear Position Counter 
+                button.btn.btn-danger.btn(ng-click='stop_motor(motor)')
+                  small
+                    i.fa.fa-stop
+                    |  
+                    | Stop 
 
-              .col-xs-1.col-stretch
+            .col-xs-1.col-stretch
 
-              .col-xs-6.col-stretch(ng-show='motor.action == "speed"')
-                slider(ng-attr-id='{{"speed-slider-" + motor.i}}')
+            .col-xs-6.col-stretch(ng-show='motor.action == "speed"')
+              round-slider(min-value='-1000' max-value='1000' value='motor.speed' on-click='on_slider_click(motor)')
 
-              .col-xs-6.col-stretch(ng-show='motor.action == "power"')
-                slider(ng-attr-id='{{"power-slider-" + motor.i}}')
+            .col-xs-6.col-stretch(ng-show='motor.action == "power"')
+              round-slider(min-value='-100' max-value='100' value='motor.power' on-click='on_slider_click(motor)')
 
 
 block bottom-compact-navbar-buttons
