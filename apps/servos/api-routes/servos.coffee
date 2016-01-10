@@ -14,15 +14,24 @@ router.get '/', (request, response, next) ->
   
   state = rs()
   if not state
-    
     return response.end "#{JSON.stringify({})}", 'utf8'
   msg =
-    analogs: state.analog_states.value
-    digitals: state.digital_states.value
-    battery: state.battery_state
-    imu: state.imu_state
+    servos: state.servo_states
   response.end "#{JSON.stringify(msg)}", 'utf8'
   return
 
-# export the router object
+router.post '/', (request, response, next) ->
+  # We only support application/json
+  if not /application\/json/i.test request.headers['content-type']
+    next new ServerError(415, 'Only content-type application/json supported')
+    return
+
+  if daylite?
+    daylite.publish 'robot/set_servo_state', request.body
+    response.writeHead 201
+    response.end()
+  else
+    response.writeHead 503
+    response.end()
+
 module.exports = router
