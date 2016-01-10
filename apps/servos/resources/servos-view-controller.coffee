@@ -20,8 +20,6 @@ exports.controller = ($scope, $http, $interval, $timeout, $window) ->
         i: i
         position: 0
         started: false
-
-        position_slider: null
       }
 
   $scope.selected_servo = $scope.servos[0]
