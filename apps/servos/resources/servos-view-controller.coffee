@@ -6,21 +6,12 @@ exports.inject = (app) ->
     '$http'
     '$interval'
     '$timeout'
+    '$window'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, $http, $interval, $timeout) ->
-
-  set_position = (servo, event) ->
-    $scope.$apply ->
-      servo.position = event.value
-
-      # Emit event here
-
-  update_slider = (servo) ->
-    console.log servo.position_slider
-    servo.position_slider.setValue(servo.position)
+exports.controller = ($scope, $http, $interval, $timeout, $window) ->
 
   $scope.servos = 
     for i in [0...4]
@@ -38,28 +29,9 @@ exports.controller = ($scope, $http, $interval, $timeout) ->
   $scope.select_servo = (servo) ->
     $scope.selected_servo = servo
 
-
-  $timeout (->
-
-    # init the position sliders
-    for i in [0...4]
-      console.log 'position-slider-' + i
-      $scope.servos[i].position_slider = $('position-slider-' + i).roundSlider
-        sliderType: 'min-range'
-        showTooltip: true
-        radius: 75
-        width: 16
-        min: 0
-        max: 2047
-        step: 16
-        value: 0
-        handleSize: 0
-        handleShape: 'square'
-        circleShape: 'pie'
-        startAngle: 315
-
-        change: set_position.bind(undefined, $scope.servos[i])
-  ), 100
+  $scope.on_slider_click = (servo) ->
+    console.log "#{servo.name}'s value was changed to #{servo.position}"
+    # TODO: Notify wallaby here
 
 #  $interval((->
 #    $http.get('/api/servos', {}).success (data, status, headers, config) ->

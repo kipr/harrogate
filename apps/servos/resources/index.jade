@@ -8,25 +8,23 @@ block view-content
           .panel-title
             | {{servo.name}} &nbsp; - &nbsp; 
             small Position {{servo.position}}
-        .scrollable-panel-body-container
-          .panel-body
-            .row.row-stretch
-              .col-xs-4.col-stretch
-                .btn-group-vertical(role='group')
-                    button.btn.btn-danger.btn(ng-if='selected_servo.started' ng-click='selected_servo.started = false')
-                      small
-                        i.fa.fa-stop
-                        |  
-                        | Disable
-                    button.btn.btn-default.btn(ng-if='!selected_servo.started' ng-click='selected_servo.started = true')
-                      small
-                        i.fa.fa-play
-                        |  
-                        | Enable
+        .panel-body-container-stretch.panel-body
+          .row.row-stretch
+            .col-xs-4.col-stretch
+              .btn-group-vertical(role='group')
+                  button.btn.btn-danger.btn(ng-if='servo.started' ng-click='servo.started = false')
+                    small
+                      i.fa.fa-stop
+                      |  
+                      | Disable
+                  button.btn.btn-default.btn(ng-if='!servo.started' ng-click='servo.started = true')
+                    small
+                      i.fa.fa-play
+                      |  
+                      | Enable
 
-              .col-xs-1.col-stretch
-              .col-xs-6.col-stretch
-                slider(ng-attr-id='{{"position-slider-" + servo.i}}')
+            .col-xs-8.col-stretch
+              round-slider(min-value='0' max-value='1023' value='servo.position' on-click='on_slider_click(servo)')
 
 block bottom-compact-navbar-buttons
   a.btn.btn-toolbar.btn-info(type='button' ng-repeat='servo in servos' ng-click='select_servo(servo)')

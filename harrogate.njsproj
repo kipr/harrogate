@@ -50,6 +50,7 @@
     <Content Include="shared\client\scripts\download-project-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\filename-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\buttons-only-modal-factory-service.coffee" />
+    <Content Include="shared\client\scripts\round-slider-directive.coffee" />
     <Content Include="shared\client\views\download-project-modal.jade" />
     <Content Include="shared\client\views\filename-modal.jade" />
     <Content Include="shared\client\views\buttons-only-modal.jade" />

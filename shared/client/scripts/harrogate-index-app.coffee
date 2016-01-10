@@ -12,6 +12,7 @@ require('./buttons-only-modal-factory-service.coffee').inject app
 require('./download-project-modal-factory-service.coffee').inject app
 require('./filename-modal-factory-service.coffee').inject app
 require('./terminal-directive.coffee').inject app
+require('./round-slider-directive.coffee').inject app
 require('./user-manager-service.coffee').inject app
 
 # inject the apps
