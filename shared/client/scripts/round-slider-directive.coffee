@@ -41,7 +41,7 @@ exports.directive = ->
         end_angle = 2.2 * Math.PI
 
         # the current value on the circle
-        position_percentage = $scope.value / (max_value - min_value)
+        position_percentage = Math.abs($scope.value - min_value) / (max_value - min_value)
 
         max_value_angle = Math.PI - start_angle
         min_value_angle = Math.PI - end_angle
@@ -97,10 +97,12 @@ exports.directive = ->
 
           else if mouse_angle >= 0.8*Math.PI
             # x < 0, y < 0
-            new_position = max_value * (mouse_angle - 0.8*Math.PI) / (1.4*Math.PI)
+            new_position = (max_value - min_value) * (mouse_angle - 0.8*Math.PI) / (1.4*Math.PI)
+            new_position += min_value
 
           else
-            new_position = max_value * ((0.2*Math.PI + Math.PI + mouse_angle) / (1.4*Math.PI))
+            new_position = (max_value - min_value) * ((0.2*Math.PI + Math.PI + mouse_angle) / (1.4*Math.PI))
+            new_position += min_value
 
           $scope.$apply ->
             $scope.value = Math.round new_position
