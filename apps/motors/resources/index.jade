@@ -36,10 +36,10 @@ block view-content
             .col-xs-1.col-stretch
 
             .col-xs-6.col-stretch(ng-show='motor.action == "speed"')
-              round-slider(min-value='-1000' max-value='1000' value='motor.speed' on-click='on_slider_click(motor)')
+              round-slider(min-value='-1000' max-value='1000' value='motor.speed' on-click='on_power_slider_click(motor)')
 
             .col-xs-6.col-stretch(ng-show='motor.action == "power"')
-              round-slider(min-value='-100' max-value='100' value='motor.power' on-click='on_slider_click(motor)')
+              round-slider(min-value='-100' max-value='100' value='motor.power' on-click='on_speed_slider_click(motor)')
 
 
 block bottom-compact-navbar-buttons

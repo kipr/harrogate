@@ -20,6 +20,7 @@ exports.controller = ($scope, $http, $interval, $timeout) ->
   $scope.stop_motor = (motor) ->
     motor.speed = 0
     motor.power = 0
+    $http.post('/api/motors', {port: motor.i, stop: true})
 
     # Emit event here
 
@@ -43,8 +44,27 @@ exports.controller = ($scope, $http, $interval, $timeout) ->
   $scope.select_motor = (motor) ->
     $scope.selected_motor = motor
 
-  $scope.on_slider_click = (motor) ->
-    console.log "#{motor.name}'s value was changed to #{motor.speed}, #{motor.power}"
+  $scope.on_speed_slider_click = (motor) ->
+    direction = Math.sign(motor.speed)
+    direction = 2 if direction is -1
+
+    $http.post('/api/motors',
+      port: motor.i
+      mode: 1
+      direction: direction
+      power: Math.abs(motor.speed)
+    )
+
+  $scope.on_power_slider_click = (motor) ->
+    direction = Math.sign(motor.power)
+    direction = 2 if direction is -1
+
+    $http.post('/api/motors', 
+      port: motor.i
+      mode: 0
+      direction: direction
+      power: Math.abs(motor.power)
+    )
 
   direction_multipliers = [0, 1, -1, 0]
 

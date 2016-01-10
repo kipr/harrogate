@@ -36,23 +36,13 @@ exports.controller = ($scope, $http, $interval, $timeout, $window) ->
   $scope.on_slider_click = (servo) ->
     $http.post('/api/servos', {port: servo.i, position: servo.position, enabled: servo.enabled })
 
-#  $interval((->
-#    $http.get('/api/servos', {}).success (data, status, headers, config) ->
-#
-#      # TODO: Check if we got valid data
-#      # if 'motor_state' not in data
-#      #   return
-#
-#      for servo in $scope.servos
-#
-#
-#        # TODO: set servo position
-#        # m = data.motor_state[motor.i]
-#        # mul = $scope.direction_multipliers[m.direction]
-#        # motor.power = mul * m.power
-#        # motor.speed = mul * m.goal_velocity
-#        # motor.position = m.goal_position
-#
-#        update_slider(servo)
-#  ), 500)
+  $interval((->
+    $http.get('/api/servos', {}).success (data, status, headers, config) ->
 
+      if 'servos' not in data
+        return
+
+      for servo in $scope.servos
+        servo.enabled = data.servos[servo.i].enabled
+        servo.position = data.servos[servo.i].position
+  ), 500)
