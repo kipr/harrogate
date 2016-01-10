@@ -55,6 +55,34 @@ router.get '/', (request, response, next) ->
     response.writeHead 404, { 'Content-Type': 'application/json' }
     response.end "#{JSON.stringify(error: 'No camera data')}", 'utf8'
 
+# set the settings
+router.post '/settings', (request, response, next) ->
+  # We only support application/json
+  if not /application\/json/i.test request.headers['content-type']
+    next new ServerError(415, 'Only content-type application/json supported')
+    return
+
+  if request.body.settings?
+    # Is it a settings request?
+    msg = request.body.settings
+  else if request.body.camera_config?
+    # Is it a camera_config request?
+    msg = request.body.camera_config
+  else if request.body.channel_config?
+    # Is it a channel_config request?
+    msg = request.body.channel_config
+  else
+    # we got an unexpected request
+    next new ServerError(422, 'Unknown settings request')
+
+  if daylite?
+    daylite.publish 'camera/settings', {msg: msg}
+    response.writeHead 201
+    response.end()
+  else
+    response.writeHead 503
+    response.end()
+
 
 module.exports =
   event_init: (event_group_name, ns) ->

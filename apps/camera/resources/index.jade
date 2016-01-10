@@ -2,7 +2,7 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group
-    button.btn.btn-toolbar.btn-success(type='button')
+    button.btn.btn-toolbar.btn-success(type='button' ng-click='save_config()')
       i.fa.fa-floppy-o
       br
       small.small Save Configuration
@@ -81,7 +81,7 @@ block view-content
                 
               tr.cursor-pointer.info
                 th(colspan="2")
-                  | Configuration I
+                  | Configuration_1
 
               //tr.cursor-pointer
               //   td
@@ -95,7 +95,7 @@ block view-content
                 td
                   i.fa.eyedropper
                   |  
-                  | Channel I
+                  | Channel_I
 
               // tr.cursor-pointer(ng-click='selected_channel = true')
               //   td
@@ -109,7 +109,7 @@ block bottom-compact-navbar-buttons
     i.fa.fa-folder-open-o
     |  
     small.small Open
-  a.btn.btn-toolbar.btn-info(type='button')
+  a.btn.btn-toolbar.btn-info(type='button' ng-click='save_config()')
     i.fa.fa-floppy-o
     |  
     small.small Save

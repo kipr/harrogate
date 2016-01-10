@@ -39,7 +39,20 @@ exports.controller = ($scope, $http, $location, $timeout, AppCatalogProvider) ->
   $scope.show_visual = true
   $scope.selected_channel = false
 
-  # TODO: Add here retrieval of real channel
+  $scope.save_config = ->
+    channel_config =
+      channel_name: 'Channel_1'
+      th: $scope.channel.hue.to
+      ts: $scope.channel.saturation.to
+      tv: $scope.channel.value.to
+      bh: $scope.channel.hue.from
+      bs: $scope.channel.saturation.from
+      bv: $scope.channel.value.from
+
+    $http.post('/api/camera/settings',  {channel_config: channel_config})
+
+
+  # TODO: Get the current values
   $scope.channel = 
     hue:
       from: 40
