@@ -6,14 +6,33 @@ exports.name = 'UpgradeViewController'
 exports.inject = (app) ->
   app.controller exports.name, [
     '$scope'
+    '$http'
     'AppCatalogProvider'
+    'ButtonsOnlyModalFactory'
     exports.controller
   ]
   return
 
-exports.controller = ($scope, AppCatalogProvider) ->
+exports.controller = ($scope, $http, AppCatalogProvider, ButtonsOnlyModalFactory) ->
   socket = undefined
   events = undefined
+
+  $scope.upgrading = false
+  $scope.selected_script = {name: ''}
+  $scope.scripts = []
+
+  $scope.upgrade = (script) ->
+    ButtonsOnlyModalFactory.open(
+      'Upgrade OS'
+      'Are you sure you want to upgrade your OS?'
+      [ 'Yes', 'No' ])
+    .then (button) ->
+      if button is 'Yes'
+        $scope.upgrading = true
+        $http.post('/api/upgrade', {script: script})
+
+  $http.get('/api/upgrade', {}).success (data, status, headers, config) ->
+    $scope.scripts = data
 
   AppCatalogProvider.catalog.then (app_catalog) ->
     events =  app_catalog['Upgrade']?.event_groups?.upgrade_events.events
@@ -35,11 +54,5 @@ exports.controller = ($scope, AppCatalogProvider) ->
     if socket? and events?
       socket.emit events.stdin.id, text
     return
-
-  $scope.restart = ->
-    $scope.$broadcast 'upgrade-output', '\n\n\n'
-
-    if socket? and events?
-      socket.emit events.restart.id
 
   return

@@ -8,6 +8,12 @@
   "hidden": true,
   "view": true,
   "angular_ctrl": "resources/upgrade-view-controller.coffee",
+  "web_api": {
+    "upgrade": {
+      "uri": "/api/upgrade",
+      "description": "Upgrades the OS"
+    }
+  },
   "event_groups": {
     "upgrade_events": {
       "namespace": "/upgrade",
