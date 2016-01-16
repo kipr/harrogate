@@ -1,0 +1,18 @@
+extends ../../../shared/client/views/templates/app-view-layout.jade
+
+block view-content
+  .row
+    .col-xs-12
+      .panel-group
+        .panel.panel-primary
+          .panel-heading
+            .h3.panel-title 
+              Firmware Information
+            
+          .panel-body
+            .p(ng-if='about.config.botball_fw_version')
+            | Botball Robot Controller Firmware Version: {{about.config.botball_fw_version}}
+
+            .p
+            | Harrogate version: {{about.config.version.major}}.{{about.config.version.minor}}.{{about.config.version.build_number}}
+

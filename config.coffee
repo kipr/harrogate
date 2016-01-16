@@ -1,4 +1,5 @@
-﻿Os = require 'os'
+﻿Fs = require 'fs'
+Os = require 'os'
 Path = require 'path'
 
 version = require('./package.json').version.split '.'
@@ -8,6 +9,12 @@ config =
     major: version[0]
     minor: version[1]
     build_number: version[2]
+
+# Botball board firmware version
+if Os.platform() is 'linux'
+  try
+    version = Fs.readFileSync '/kipr/botball_fw_version.txt', 'utf8'
+    config.botball_fw_version = version
 
 if Os.platform() is 'win32'
   config. ext_deps =
