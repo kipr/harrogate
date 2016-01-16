@@ -38,16 +38,11 @@
     <Content Include="apps\sensors\resources\sensors-view-controller.coffee" />
     <Content Include="apps\servos\resources\servos-injector.coffee" />
     <Content Include="apps\servos\resources\servos-view-controller.coffee" />
-    <Content Include="apps\upgrade\api-routes\upgrade.coffee" />
+    <Content Include="apps\update\exec.coffee" />
+    <Content Include="apps\update\manifest.json" />
+    <Content Include="apps\update\resources\index.jade" />
+    <Content Include="apps\update\resources\upgrade-view-controller.coffee" />
     <Content Include="config.coffee" />
-    <Content Include="installer-resources\Windows\KISS IDE.url" />
-    <Content Include="installer-resources\Windows\KISS.nsi" />
-    <Content Include="installer-resources\Windows\run_harrogate.bat" />
-    <Content Include="installer-resources\Windows\start_browser.bat" />
-    <Content Include="installer-resources\Windows\vcredist_x86.exe" />
-    <Content Include="installer-resources\Windows\vcredist_x86_2010.exe" />
-    <Content Include="installer-resources\Windows\vcredist_x86_2012.exe" />
-    <Content Include="installer-resources\Windows\windows_icon.ico" />
     <Content Include="apps\upgrade\exec.coffee" />
     <Content Include="apps\upgrade\manifest.json" />
     <Content Include="apps\upgrade\resources\index.jade" />
@@ -141,6 +136,10 @@
     <Content Include="shared\scripts\settings-manager.coffee" />
     <Content Include="shared\scripts\user-manager.coffee" />
     <Content Include="shared\scripts\user.coffee" />
+    <Content Include="shared\update\exec.coffee" />
+    <Content Include="shared\update\manifest.json" />
+    <Content Include="shared\update\resources\index.jade" />
+    <Content Include="shared\update\resources\upgrade-view-controller.coffee" />
     <Content Include="users.json" />
   </ItemGroup>
   <ItemGroup>
@@ -173,11 +172,10 @@
     <Folder Include="apps\target\" />
     <Folder Include="apps\terminal\" />
     <Folder Include="apps\terminal\resources\" />
-    <Folder Include="apps\upgrade\api-routes\" />
+    <Folder Include="apps\update\" />
+    <Folder Include="apps\update\resources\" />
     <Folder Include="apps\user\rest-resources\" />
     <Folder Include="apps\user\resources\" />
-    <Folder Include="installer-resources\" />
-    <Folder Include="installer-resources\Windows\" />
     <Folder Include="apps\upgrade\" />
     <Folder Include="apps\upgrade\resources\" />
     <Folder Include="shared\client\views\" />
@@ -194,6 +192,8 @@
     <Folder Include="shared\client\css\" />
     <Folder Include="shared\client\" />
     <Folder Include="shared\client\scripts\" />
+    <Folder Include="shared\update\" />
+    <Folder Include="shared\update\resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

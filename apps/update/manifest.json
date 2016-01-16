@@ -1,0 +1,34 @@
+{
+  "name": "Update",
+  "priority": -1,
+  "fonticon": "fa-archive",
+  "exec": "exec.coffee",
+  "description": "Updates packages",
+  "category": "System Tools",
+  "hidden": true,
+  "view": true,
+  "angular_ctrl": "resources/update-view-controller.coffee",
+  "web_api": {
+    "update": {
+      "uri": "/api/update",
+      "description": "Updates packages"
+    }
+  },
+  "event_groups": {
+    "update_events": {
+      "namespace": "/update",
+      "events": {
+        "stdout": {
+          "id": "stdout",
+          "publisher": "SERVER",
+          "description": "stdout sent from the update script."
+        },
+        "stderr": {
+          "id": "stderr",
+          "publisher": "SERVER",
+          "description": "stderr sent from the update script."
+        }
+      }
+    }
+  }
+}

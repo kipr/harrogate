@@ -38,14 +38,14 @@ router.get '/', (request, response, next) ->
       socket.emit events.stderr.id, stderr
     
     if error?
-      next new ServerError(405, "Could not mount the USB drive: #{error}")
+      next new ServerError(405, "Could not list the error #{error}")
       return
 
     # list the files
     Fs.readdir '/mnt', (error, files) ->
     # Fs.readdir '/home/stefan/usb', (error, files) ->
       if error?
-        next new ServerError(405, "Could not list the files: #{error}")
+        next new ServerError(405, "Could not list the error #{error}")
         return
 
       response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
@@ -69,7 +69,6 @@ router.post '/', (request, response, next) ->
     return
 
   # run the upgrade script
-  is_upgrading = true
   script = Path.join harrogate_base_path, 'upgrade_wallaby.sh'
   process = spawn script, [request.body.script]
   
@@ -83,14 +82,13 @@ router.post '/', (request, response, next) ->
     socket.emit events.stderr.id, data.toString('utf8')
 
   process.on 'exit', (code) ->
-    is_upgrading = false
     socket.emit events.stdout.id, "Script exited with code #{code}"
 
-    response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
-    response.setHeader 'Pragma', 'no-cache'
-    response.setHeader 'Expires', '0'
-    response.writeHead 204, { 'Content-Type': 'application/json' }
-    response.end
+  response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+  response.setHeader 'Pragma', 'no-cache'
+  response.setHeader 'Expires', '0'
+  response.writeHead 204, { 'Content-Type': 'application/json' }
+  return response.end
 
 module.exports =
   init: (app) ->
