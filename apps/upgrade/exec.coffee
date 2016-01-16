@@ -13,25 +13,12 @@ else if Os.platform() is 'darwin'
   pre_upgrade_cmd = undefined
   upgrade_cmd = undefined
 else # Linux
-  Path.resolve Path.join 
-  pre_upgrade_cmd = undefined
+  
+  pre_upgrade_cmd = Path.resolve Path.join(harrogate_base_path, 
   upgrade_cmd = undefined
 
-if Os.platform() == 
-    # when 'win32'
-    # no upgrade for windows
-    # when 'darwin'
-    # no upgrade 
-      @platform = @supported_platforms.MAC
-      @os = @supported_os.OSX
-    # TODO: Add info for Link?/Link2
 
-if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
-  upgrade_cmd = 'cmd'
-else
-  upgrade_cmd = 'sh'
-
-create_upgrade_cmd = (socket) ->
+create_upgrade_cmd = (socket, upgrade_cmd) ->
   if upgrade_cmd?
     process = spawn upgrade_cmd
 

@@ -38,6 +38,7 @@
     <Content Include="apps\sensors\resources\sensors-view-controller.coffee" />
     <Content Include="apps\servos\resources\servos-injector.coffee" />
     <Content Include="apps\servos\resources\servos-view-controller.coffee" />
+    <Content Include="apps\upgrade\api-routes\upgrade.coffee" />
     <Content Include="config.coffee" />
     <Content Include="installer-resources\Windows\KISS IDE.url" />
     <Content Include="installer-resources\Windows\KISS.nsi" />
@@ -172,6 +173,7 @@
     <Folder Include="apps\target\" />
     <Folder Include="apps\terminal\" />
     <Folder Include="apps\terminal\resources\" />
+    <Folder Include="apps\upgrade\api-routes\" />
     <Folder Include="apps\user\rest-resources\" />
     <Folder Include="apps\user\resources\" />
     <Folder Include="installer-resources\" />
