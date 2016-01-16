@@ -1,0 +1,13 @@
+extends ../../../shared/client/views/templates/app-view-layout.jade
+
+block view-toolbar-left
+  .btn-group
+     button.btn.btn-default.btn-toolbar(type='button', ng-click='restart()')
+        i.fa.fa-refresh
+        br
+        small.small Restart
+
+block view-content
+  .panel.panel-default.panel-stretch
+    .scrollable-panel-body-container
+    terminal.terminal-stretch(output-event="upgrade-output")

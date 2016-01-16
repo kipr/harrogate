@@ -1,0 +1,28 @@
+{
+  "name": "Upgrade",
+  "priority": -1,
+  "fonticon": "fa-download",
+  "exec": "exec.coffee",
+  "description": "Upgrades the OS",
+  "category": "System Tools",
+  "hidden": true,
+  "view": true,
+  "angular_ctrl": "resources/upgrade-view-controller.coffee",
+  "event_groups": {
+    "upgrade_events": {
+      "namespace": "/upgrade",
+      "events": {
+        "stdout": {
+          "id": "stdout",
+          "publisher": "SERVER",
+          "description": "stdout sent from the upgrade script."
+        },
+        "stderr": {
+          "id": "stderr",
+          "publisher": "SERVER",
+          "description": "stderr sent from the upgrade script."
+        }
+      }
+    }
+  }
+}

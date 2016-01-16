@@ -2,77 +2,78 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
   .row
-    .panel-group
-      .panel.panel-primary
-        .panel-heading
-          .h3.panel-title 
-            i.fa.fa-television
-            |  
-            | Screen
+    .col-xs-12
+      .panel-group
+        //.panel.panel-primary
+        //  .panel-heading
+        //    .h3.panel-title 
+        //      i.fa.fa-television
+        //      |  
+        //      | Screen
+        //      
+        //  .panel-body
+        //    .row
+        //      .col-md-6
+        //        .btn-group-justified.settings-btn-group-justified(role='group')
+        //          a.btn.btn-default(type='button')
+        //            i.fa.fa-arrows-v
+        //            |  
+        //            | Flip Screen
+        //            
+        //      .col-md-6
+        //        .btn-group-justified.settings-btn-group-justified(role='group')
+        //          a.btn.btn-default(type='button')
+        //            i.fa.fa-arrows-alt
+        //            |  
+        //            | Calibrate Screen
+        //            
+        .panel.panel-primary
+          .panel-heading
+            .h3.panel-title 
+              i.fa.fa-cubes
+              |  
+              | Firmware
             
-        .panel-body
-          .row
-            .col-md-6
-            .btn-group-justified.settings-btn-group-justified(role='group')
-              a.btn.btn-default(type='button')
-                i.fa.fa-arrows-v
-                |  
-                | Flip Screen
+          .panel-body
+            .row
+              .col-md-6
+                .btn-group-justified.settings-btn-group-justified(role='group')
+                  a.btn.btn-default(type='button' href='/#/apps/upgrade')
+                    i.fa.fa-download
+                    |  
+                    | Upgrade OS
                   
-            .col-md-6
-            .btn-group-justified.settings-btn-group-justified(role='group')
-              a.btn.btn-default(type='button')
-                i.fa.fa-arrows-alt
-                |  
-                | Calibrate Screen
-                  
-      .panel.panel-primary
-        .panel-heading
-          .h3.panel-title 
-            i.fa.fa-cubes
-            |  
-            | Firmware
-            
-        .panel-body
-          .row
-            .col-md-6
-            .btn-group-justified.settings-btn-group-justified(role='group')
-              a.btn.btn-default(type='button')
-                i.fa.fa-download
-                |  
-                | Update Firmware
-                  
-      .panel.panel-primary
-        .panel-heading
-          .h3.panel-title 
-            i.fa.fa-plug
-            |  
-            | Network Settings
-            
-        .panel-body
-          .row
-            .col-md-6
-            .btn-group-justified.settings-btn-group-justified(role='group')
-              a.btn.btn-default(type='button' href='/#/apps/network-settings')
-                i.fa.fa-plug
-                |  
-                | Network Settings
-
-      .panel.panel-primary(ng-repeat="(group, setting) in settings")
-        .panel-heading
-          .h3.panel-title 
-            i.fa.fa-server
-            |  
-            | {{group | capitalize}}
-              
-            
-        .panel-body
-          .form-group(ng-repeat="(name, value) in setting")
-            label(ng-attr-for="{{name}}") {{name | capitalize}}
-            .input-group
-              input.form-control(type='text' readonly ng-attr-id="{{name}}" ng-attr-value="{{value}}")
-              .input-group-btn
-                button.btn.btn-default.disabled(type='button' ng-click='apply_change()')
-                  i.fa.fa-check
-                button.btn.btn-default.disabled(type='button' ng-click='reset()')
-                  i.fa.fa-times
+        //.panel.panel-primary
+        //  .panel-heading
+        //    .h3.panel-title 
+        //      i.fa.fa-plug
+        //      |  
+        //      | Network Settings
+        //    
+        //  .panel-body
+        //    .row
+        //      .col-md-6
+        //        .btn-group-justified.settings-btn-group-justified(role='group')
+        //          a.btn.btn-default(type='button' href='/#/apps/network-settings')
+        //            i.fa.fa-plug
+        //            |  
+        //            | Network Settings
+        //
+        //.panel.panel-primary(ng-repeat="(group, setting) in settings")
+        //  .panel-heading
+        //    .h3.panel-title 
+        //      i.fa.fa-server
+        //      |  
+        //      | {{group | capitalize}}
+        //        
+        //      
+        //  .panel-body
+        //    .form-group(ng-repeat="(name, value) in setting")
+        //      label(ng-attr-for="{{name}}") {{name | capitalize}}
+        //      .input-group
+        //        input.form-control(type='text' readonly ng-attr-id="{{name}}" ng-attr-value="{{value}}")
+        //        .input-group-btn
+        //          button.btn.btn-default.disabled(type='button' ng-click='apply_change()')
+        //            i.fa.fa-check
+        //          button.btn.btn-default.disabled(type='button' ng-click='reset()')
+        //            i.fa.fa-times

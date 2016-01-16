@@ -47,6 +47,10 @@
     <Content Include="installer-resources\Windows\vcredist_x86_2010.exe" />
     <Content Include="installer-resources\Windows\vcredist_x86_2012.exe" />
     <Content Include="installer-resources\Windows\windows_icon.ico" />
+    <Content Include="apps\upgrade\exec.coffee" />
+    <Content Include="apps\upgrade\manifest.json" />
+    <Content Include="apps\upgrade\resources\index.jade" />
+    <Content Include="apps\upgrade\resources\upgrade-view-controller.coffee" />
     <Content Include="shared\client\scripts\download-project-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\filename-modal-factory-service.coffee" />
     <Content Include="shared\client\scripts\buttons-only-modal-factory-service.coffee" />
@@ -172,6 +176,8 @@
     <Folder Include="apps\user\resources\" />
     <Folder Include="installer-resources\" />
     <Folder Include="installer-resources\Windows\" />
+    <Folder Include="apps\upgrade\" />
+    <Folder Include="apps\upgrade\resources\" />
     <Folder Include="shared\client\views\" />
     <Folder Include="shared\client\views\templates\" />
     <Folder Include="shared\scripts\" />

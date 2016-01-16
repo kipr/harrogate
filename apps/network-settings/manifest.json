@@ -6,7 +6,7 @@
   "description": "Modify the system's network settings.",
   "category": "Settings",
   "hidden": true,
-  "view": true,
+  "view": false,
   "angular_ctrl": "resources/network-settings-view-controller.coffee",
   "web_api": {
     "settings": {

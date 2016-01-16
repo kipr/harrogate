@@ -25,6 +25,10 @@ if not global.require_harrogate_module?
   global.require_harrogate_module = (module) ->
     require __dirname + '/' + module
 
+# Save the harrogate base path
+if not global.harrogate_base_path?
+  global.harrogate_base_path = __dirname
+
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
 SettingsManager = require_harrogate_module '/shared/scripts/settings-manager.coffee'
 ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
