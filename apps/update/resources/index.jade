@@ -2,7 +2,7 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group
-     button.btn.btn-danger.btn-toolbar(type='button' ng-class='{disabled: !selected_script.name || upgrading}' ng-click='update(selected_script.name)')
+     button.btn.btn-danger.btn-toolbar(type='button' ng-class='{disabled: !selected_script.name || updating}' ng-click='update(selected_script.name)')
         i.fa.fa-download
         br
         small.small Update {{selected_script.name}}
@@ -29,7 +29,7 @@ block view-content
           terminal.terminal-stretch(output-event="update-output")
 
 block bottom-compact-navbar-buttons
-  a.btn.btn-toolbar.btn-danger(type='button' ng-class='{disabled: !selected_script.name || upgrading}' ng-click='update(selected_script.name)')
+  a.btn.btn-toolbar.btn-danger(type='button' ng-class='{disabled: !selected_script.name || updating}' ng-click='update(selected_script.name)')
     i.fa.fa-download
     |  
     small.small Update {{selected_script.name}}

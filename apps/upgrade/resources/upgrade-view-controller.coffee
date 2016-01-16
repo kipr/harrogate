@@ -30,6 +30,8 @@ exports.controller = ($scope, $http, AppCatalogProvider, ButtonsOnlyModalFactory
       if button is 'Yes'
         $scope.upgrading = true
         $http.post('/api/upgrade', {script: script})
+        .success -> $scope.upgrading = false
+        .error -> $scope.upgrading = false
 
   $http.get('/api/upgrade', {}).success (data, status, headers, config) ->
     $scope.scripts = data
