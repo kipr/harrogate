@@ -4,8 +4,8 @@
   "exec": "exec.coffee",
   "description": "Manually manipulate motors plugged into the system",
   "category": "Sensors and Actuators",
-  "hidden": false,
-  "view": true,
+  "hidden": true,
+  "view": false,
   "angular_ctrl": "resources/motors-injector.coffee",
   "web_api": {
     "motors": {

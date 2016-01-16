@@ -4,8 +4,8 @@
   "exec": "exec.coffee",
   "description": "Display analog and digital sensors plugged into the system",
   "category": "Sensors and Actuators",
-  "hidden": false,
-  "view": true,
+  "hidden": true,
+  "view": false,
   "angular_ctrl": "resources/sensors-injector.coffee",
   "web_api": {
     "sensors": {
