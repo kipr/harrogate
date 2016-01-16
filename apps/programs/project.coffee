@@ -77,7 +77,7 @@ class Project
   ) ->
     @uri = AppManifest.web_api.projects.uri + '/' + encodeURIComponent @name
 
-    binary_path = Path.resolve @bin_directory.path, @name
+    binary_path = Path.resolve @bin_directory.path, 'botball_user_program'
     if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
       binary_path += '.exe'
 
