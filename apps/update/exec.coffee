@@ -42,17 +42,31 @@ router.get '/', (request, response, next) ->
       return
 
     # list the files
-    Fs.readdir '/mnt', (error, files) ->
-    # Fs.readdir '/home/stefan/usb', (error, files) ->
+    src_path = '/mnt'
+    # src_path = '/home/stefan/usb'
+
+    Fs.readdir src_path, (error, files) ->
       if error?
         next new ServerError(405, "Could not list the files: #{error}")
         return
+
+      scripts = []
+
+      for file in files
+        file = Path.resolve src_path, file
+        file_stats = Fs.statSync file
+        if file_stats? and file_stats.isDirectory()
+          for f in Fs.readdirSync file
+            if f.indexOf('.sh') isnt -1
+              scripts.push Path.resolve(file, f)
+        else if file.indexOf('.sh') isnt -1
+          scripts.push Path.resolve(src_path, file)
 
       response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
       response.setHeader 'Pragma', 'no-cache'
       response.setHeader 'Expires', '0'
       response.writeHead 200, { 'Content-Type': 'application/json' }
-      response.end "#{JSON.stringify(files.filter( (f) -> f.indexOf('sh') isnt -1 ))}", 'utf8'
+      response.end "#{JSON.stringify(scripts)}", 'utf8'
 
 router.post '/', (request, response, next) ->
   if is_updating
