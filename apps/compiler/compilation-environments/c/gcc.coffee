@@ -28,7 +28,7 @@ module.exports =
 
       gcc_cmd += "-L\"#{Config.ext_deps.lib_path}\"
                   -laurora -lwallaby -lm
-                  -o \"#{project_resource.bin_directory.path}/#{project_resource.name}\" "
+                  -o \"#{project_resource.binary.path}\" "
 
       exec gcc_cmd, cb
       return
