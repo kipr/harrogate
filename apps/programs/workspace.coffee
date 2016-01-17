@@ -174,7 +174,10 @@ class Workspace
 
       pack.pipe extract
 
-  create_project: (name, language) =>
+  create_project: (name, language, src_file_name) =>
+    if not src_file_name?
+      src_file_name = 'main.c'
+
     # create the project file
     content = JSON.stringify language: language
     return @ws_directory.create_file name + '.project.json', content, 'ascii'
@@ -200,7 +203,7 @@ class Workspace
                       return 0;
                   }
                   """
-        return project_resource.src_directory.create_file 'main.c', content, 'ascii'
+        return project_resource.src_directory.create_file src_file_name, content, 'ascii'
         .then => 
           return project_resource
 

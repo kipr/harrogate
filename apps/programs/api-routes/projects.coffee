@@ -90,7 +90,7 @@ router.post '/', (request, response, next) ->
     response.writeHead 422, { 'Content-Type': 'application/json' }
     return response.end "#{JSON.stringify(error: 'Parameter \'language\' missing')}", 'utf8'
 
-  request.ws_resource.create_project request.body.name, request.body.language
+  request.ws_resource.create_project request.body.name, request.body.language, request.body.src_file_name
   .then (resource) ->
     response.writeHead 201, { 'Location': "#{resource.uri}" }
     return response.end()
