@@ -13,7 +13,7 @@ config =
 # Botball board firmware version
 if Os.platform() is 'linux'
   try
-    version = Fs.readFileSync '/kipr/botball_fw_version.txt', 'utf8'
+    version = Fs.readFileSync '/usr/share/kipr/botball_fw_version.txt', 'utf8'
     config.botball_fw_version = version
 
 if Os.platform() is 'win32'
