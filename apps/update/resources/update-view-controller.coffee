@@ -23,7 +23,7 @@ exports.controller = ($scope, $http, AppCatalogProvider, ButtonsOnlyModalFactory
 
   $scope.update = (script) ->
     ButtonsOnlyModalFactory.open(
-      'Update OS'
+      'Update Packages'
       'Are you sure you want to update packages?'
       [ 'Yes', 'No' ])
     .then (button) ->
