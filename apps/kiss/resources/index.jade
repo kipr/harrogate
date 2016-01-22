@@ -242,6 +242,8 @@ block view-content
             .form-group
               label(for='projectName') Project name
               input#projectName.form-control(type='text' placeholder='Project name')
+              label(for='sourceFileName') Source file name
+              input#sourceFileName.form-control(type='text' value='main.c')
 
         .modal-footer
           button.btn.btn-default(ng-click='hide_add_project_modal()') Cancel

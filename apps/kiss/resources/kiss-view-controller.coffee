@@ -324,7 +324,7 @@ exports.controller = (
     AppCatalogProvider.catalog.then (app_catalog) ->
       projects_resource = app_catalog['Programs']?.web_api?.projects
       if projects_resource?
-        $http.post(projects_resource.uri,  {name: $("#projectName").val(), language: 'C' })
+        $http.post(projects_resource.uri,  {name: $("#projectName").val(), language: 'C', src_file_name: $("#sourceFileName").val()})
 
         .success (data, status, headers, config) ->
           $scope.reload_ws()

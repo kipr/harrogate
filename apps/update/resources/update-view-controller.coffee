@@ -17,19 +17,21 @@ exports.controller = ($scope, $http, AppCatalogProvider, ButtonsOnlyModalFactory
   socket = undefined
   events = undefined
 
-  $scope.upgrading = false
+  $scope.updating = false
   $scope.selected_script = {name: ''}
   $scope.scripts = []
 
   $scope.update = (script) ->
     ButtonsOnlyModalFactory.open(
-      'Update OS'
-      'Are you sure you want to update your OS?'
+      'Update Packages'
+      'Are you sure you want to update packages?'
       [ 'Yes', 'No' ])
     .then (button) ->
       if button is 'Yes'
-        $scope.upgrading = true
+        $scope.updating = true
         $http.post('/api/update', {script: script})
+        .success -> $scope.updating = false
+        .error -> $scope.updating = false
 
   $http.get('/api/update', {}).success (data, status, headers, config) ->
     $scope.scripts = data
