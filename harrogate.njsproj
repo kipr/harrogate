@@ -32,16 +32,10 @@
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.coffee" />
     <Content Include="apps\compiler\compilation-environments\c\_init_helper.c" />
     <Content Include="apps\home\resources\index.jade" />
-    <Content Include="apps\motors\resources\motors-injector.coffee" />
-    <Content Include="apps\motors\resources\motors-view-controller.coffee" />
-    <Content Include="apps\sensors\resources\sensors-injector.coffee" />
-    <Content Include="apps\sensors\resources\sensors-view-controller.coffee" />
-    <Content Include="apps\servos\resources\servos-injector.coffee" />
-    <Content Include="apps\servos\resources\servos-view-controller.coffee" />
     <Content Include="apps\update\exec.coffee" />
     <Content Include="apps\update\manifest.json" />
     <Content Include="apps\update\resources\index.jade" />
-    <Content Include="apps\update\resources\upgrade-view-controller.coffee" />
+    <Content Include="apps\update\resources\update-view-controller.coffee" />
     <Content Include="config.coffee" />
     <Content Include="apps\upgrade\exec.coffee" />
     <Content Include="apps\upgrade\manifest.json" />
@@ -57,12 +51,6 @@
     <Content Include="apps\kiss\resources\kiss-injector.coffee" />
     <Content Include="apps\programs\api-routes\projects.coffee" />
     <Content Include="apps\runner\resources\runner-injector.coffee" />
-    <Content Include="apps\sensors\exec.coffee" />
-    <Content Include="apps\sensors\manifest.json" />
-    <Content Include="apps\sensors\resources\index.jade" />
-    <Content Include="apps\servos\exec.coffee" />
-    <Content Include="apps\servos\manifest.json" />
-    <Content Include="apps\servos\resources\index.jade" />
     <Content Include="apps\compiler\exec.coffee" />
     <Content Include="apps\compiler\manifest.json" />
     <Content Include="apps\compiler\compilation-environments\c\vs-cl-12.bat" />
@@ -77,7 +65,6 @@
     <Content Include="apps\fs\manifest.json" />
     <Content Include="apps\fs\resources\index.jade" />
     <Content Include="apps\fs\resources\fs-view-controller.coffee" />
-    <Content Include="apps\motors\resources\index.jade" />
     <Content Include="apps\programs\project.coffee" />
     <Content Include="apps\programs\resources\programs-view-controller.coffee" />
     <Content Include="apps\programs\resources\index.jade" />
@@ -109,18 +96,12 @@
     <Content Include="package.json" />
     <Content Include="Readme.md" />
     <Content Include="apps\categories.json" />
-    <Content Include="apps\camera\manifest.json" />
-    <Content Include="apps\camera\resources\index.jade" />
-    <Content Include="apps\camera\resources\camera-view-controller.coffee" />
-    <Content Include="apps\camera\exec.coffee" />
     <Content Include="apps\home\manifest.json" />
     <Content Include="apps\home\resources\includes\program_list.jade" />
     <Content Include="apps\home\exec.coffee" />
     <Content Include="apps\kiss\manifest.json" />
     <Content Include="apps\kiss\exec.coffee" />
     <Content Include="shared\scripts\app-catalog.coffee" />
-    <Content Include="apps\motors\manifest.json" />
-    <Content Include="apps\motors\exec.coffee" />
     <Content Include="apps\programs\manifest.json" />
     <Content Include="apps\programs\exec.coffee" />
     <Content Include="apps\runner\manifest.json" />
@@ -136,24 +117,14 @@
     <Content Include="shared\scripts\settings-manager.coffee" />
     <Content Include="shared\scripts\user-manager.coffee" />
     <Content Include="shared\scripts\user.coffee" />
-    <Content Include="shared\update\exec.coffee" />
-    <Content Include="shared\update\manifest.json" />
-    <Content Include="shared\update\resources\index.jade" />
-    <Content Include="shared\update\resources\upgrade-view-controller.coffee" />
     <Content Include="users.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps" />
-    <Folder Include="apps\camera" />
     <Folder Include="apps\compiler\api-routes\" />
     <Folder Include="apps\compiler\compilation-environments\" />
     <Folder Include="apps\compiler\compilation-environments\c\" />
     <Folder Include="apps\programs\api-routes\" />
-    <Folder Include="apps\sensors\" />
-    <Folder Include="apps\sensors\resources\" />
-    <Folder Include="apps\servos\" />
-    <Folder Include="apps\servos\resources\" />
-    <Folder Include="apps\camera\resources\" />
     <Folder Include="apps\fs\api-routes\" />
     <Folder Include="apps\home" />
     <Folder Include="apps\home\resources\" />
@@ -161,7 +132,6 @@
     <Folder Include="apps\kiss\resources\" />
     <Folder Include="apps\fs\" />
     <Folder Include="apps\fs\resources\" />
-    <Folder Include="apps\motors\resources\" />
     <Folder Include="apps\compiler\" />
     <Folder Include="apps\programs\resources\" />
     <Folder Include="apps\runner\resources\" />
@@ -182,7 +152,6 @@
     <Folder Include="shared\client\views\templates\" />
     <Folder Include="shared\scripts\" />
     <Folder Include="apps\kiss" />
-    <Folder Include="apps\motors" />
     <Folder Include="shared\" />
     <Folder Include="apps\programs\" />
     <Folder Include="apps\runner" />
@@ -192,8 +161,6 @@
     <Folder Include="shared\client\css\" />
     <Folder Include="shared\client\" />
     <Folder Include="shared\client\scripts\" />
-    <Folder Include="shared\update\" />
-    <Folder Include="shared\update\resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

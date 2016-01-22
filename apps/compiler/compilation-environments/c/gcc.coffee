@@ -27,7 +27,7 @@ module.exports =
       gcc_cmd += "\"#{Path.resolve(__dirname, '_init_helper.c')}\" "
 
       gcc_cmd += "-L\"#{Config.ext_deps.lib_path}\"
-                  -laurora -lwallaby -lm
+                  -lwallaby -lm
                   -o \"#{project_resource.bin_directory.path}/#{project_resource.name}\" "
 
       exec gcc_cmd, cb

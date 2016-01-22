@@ -6,7 +6,6 @@ spawn = require('child_process').spawn
 ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
-daylite = require_harrogate_module '/shared/scripts/daylite.coffee'
 Config = require_harrogate_module 'config.coffee'
 Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
 HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.coffee'
@@ -28,32 +27,9 @@ namespace = null
 
 client = null
 
-#child_env = Object.create(process.env)
-#if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
-#  child_env.Path += Path.delimiter + "#{Config.ext_deps.bin_path}"
-#else
-#  child_env.DYLD_LIBRARY_PATH += Path.delimiter + "#{Config.ext_deps.lib_path}"
-
-latest_graphics_window_frame = null
-
-if daylite
-  daylite.subscribe '/aurora/frame', (msg) ->
-
-    repacked_msg =
-      width: msg.width
-      height: msg.height
-
-    latest_graphics_window_frame = msg.data
-
-    if not namespace? or not running_process?
-      return
-
-    namespace.emit events.frame.id, repacked_msg
 
 start_program = ->
   if running?.resource?
-    latest_graphics_window_frame = null
-
     # TODO: change me!!
     # Create data directory
     running.resource.data_directory.create()
@@ -95,18 +71,6 @@ stop_program = ->
   if running?
     running = null
 
-  for i in [0..3]
-    daylite.publish 'robot/set_motor_state',
-      port: i
-      stop: true
-  for i in [0..3]
-    daylite.publish 'robot/set_servo_state',
-      port: i
-      enabled: false
-  
-
-  return
-
 # the runner router
 router = Express.Router()
 
@@ -114,21 +78,6 @@ router = Express.Router()
 router.get '/current', (request, response, next) ->
   response.writeHead 200, { 'Content-Type': 'application/json' }
   response.end "#{JSON.stringify(running: running)}", 'utf8'
-
-# get the current graphics window
-router.get '/current/graphics', (request, response, next) ->
-  if latest_graphics_window_frame?
-    response.setHeader "Cache-Control", "no-cache, no-store, must-revalidate"
-    response.setHeader "Pragma", "no-cache"
-    response.setHeader "Expires", "0"
-    response.writeHead 200, { 'Content-Type': 'image/png' }
-    response.end latest_graphics_window_frame, 'binary'
-  else
-    response.setHeader "Cache-Control", "no-cache, no-store, must-revalidate"
-    response.setHeader "Pragma", "no-cache"
-    response.setHeader "Expires", "0"
-    response.writeHead 404, { 'Content-Type': 'application/json' }
-    response.end "#{JSON.stringify(error: 'No program is running')}", 'utf8'
 
 # get information about the currently running program
 router.post '/', (request, response, next) ->
@@ -189,14 +138,6 @@ router.delete '/current', (request, response, next) ->
   response.end "#{JSON.stringify(running: running)}", 'utf8'
 
 runner_on_connection = (socket) ->
-
-  socket.on events.gui_input.id, (data) ->
-    if client? and data.mouse?
-      client.publish '/aurora/mouse', data.mouse
-
-    if client? and data.keyboard?
-      client.publish '/aurora/key', data.keyboard
-    return
 
   socket.on events.stdin.id, (data) ->
     if running_process?

@@ -31,7 +31,6 @@ module.exports =
 
       #linker options
       gcc_cmd += "-L\"#{Config.ext_deps.lib_path}\"
-                  -laurora
                   -o \"#{project_resource.bin_directory.path}\\#{project_resource.name}.exe\" "
 
       exec gcc_cmd, cb
