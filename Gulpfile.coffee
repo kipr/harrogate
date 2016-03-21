@@ -16,14 +16,6 @@ through = require 'through'
 
 config = require './config.coffee'
 
-# Add daylite, ... to the Windows path
-if os.platform() is 'win32'
-  process.env.PATH += path_tools.delimiter + "#{config.ext_deps.bin_path}"
-else if os.platform() is 'darwin'
-  process.env.DYLD_LIBRARY_PATH += path_tools.delimiter + "#{config.ext_deps.lib_path}"
-else # Linux
-  process.env.LD_LIBRARY_PATH += path_tools.delimiter + "#{config.ext_deps.lib_path}"
-
 process.env.COMPILE = 1
 
 # avoid require '../../.. ... for shared harrogate module
@@ -98,7 +90,6 @@ gulp.task 'shared_3rd_party_libs', [
   'code-mirror'
   'code-mirror-themes'
   'angular-ui'
-  'angular-chartist'
 ], ->
 
 # bootstrap
@@ -137,30 +128,6 @@ gulp.task 'angular-ui', [
 ],  ->
   request('http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js')
   .pipe fs.createWriteStream('public/scripts/ui-bootstrap-tpls.min.js')
-
-# Angular Chartist
-gulp.task 'angular-chartist', [
-  'scripts'
-  'chartist'
-],  ->
-  request('https://raw.githubusercontent.com/paradox41/angular-chartist.js/master/dist/angular-chartist.min.js')
-  .pipe fs.createWriteStream('public/scripts/angular-chartist.min.js')
-
-# Chartist
-gulp.task 'chartist', [
-  'chartist.js'
-  'chartist.css'
-], ->
-
-gulp.task 'chartist.js', [
-  'scripts'
-],  ->
-  request('https://raw.githubusercontent.com/gionkunz/chartist-js/master/dist/chartist.min.js')
-  .pipe fs.createWriteStream('public/scripts/chartist.min.js')
-
-gulp.task 'chartist.css',  ->
-  request('https://raw.githubusercontent.com/gionkunz/chartist-js/master/dist/chartist.min.css')
-  .pipe fs.createWriteStream('public/css/chartist.min.css')
 
 # Scripts task
 gulp.task 'scripts', ->

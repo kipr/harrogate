@@ -32,10 +32,6 @@ module.exports =
       # add the init helper file
       cl_cmd += "\"#{Path.resolve(__dirname, '_init_helper.c')}\" "
 
-      #linker options
-      #aurora
-      cl_cmd += "/link #{Path.resolve install_prefix, 'lib', 'aurora.lib'}"
-
       exec 'vs-cl-12.bat ' + cl_cmd, {cwd: Path.resolve(__dirname)}, cb
 
       return

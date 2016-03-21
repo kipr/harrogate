@@ -23,16 +23,6 @@ block view-toolbar-left
         br
         small.small KISS IDE
 
-  .btn-group
-    a.btn.btn-toolbar.btn-default(type='button' ng-class='{"btn-primary": show_console}' ng-click='show_console = !show_console')
-      i.fa.fa-terminal
-      br
-      small.small Show Console
-    a.btn.btn-toolbar.btn-default(type='button' ng-class='{"btn-primary": show_graphics_window}' ng-click='show_graphics_window = !show_graphics_window')
-      i.fa.fa-picture-o 
-      br
-      small.small Show Graphics Window
-
 block view-content
   .row.row-stretch
     .col-md-3.col-stretch(ng-class='{"desktop-only": selected_project}')
@@ -51,46 +41,30 @@ block view-content
                 th
                 th {{project.name}}
 
-    .col-stretch(ng-show='show_console' ng-class='{"col-md-9": !show_graphics_window && show_console, "col-md-4": show_graphics_window && show_console, "desktop-only": !selected_project}' )
+    .col-stretch(ng-class='{"desktop-only": !selected_project}' )
       .panel.panel-primary.panel-stretch
         .panel-heading(ng-click='select_graphics_window()')
           .panel-title Console Window
-            span.btn-group-xs.pull-right
-              button.btn.btn-danger(type='button' ng-click='show_console = !show_console')
-                i.fa.fa-times
 
         .panel-body-container-stretch
-          .btn-group.btn-group-justified
-            a.btn.btn-default(type="button")
-              small.small A
-            a.btn.btn-default(type="button")
-              small.small B
-            a.btn.btn-default(type="button")
-              small.small C
+          //.btn-group.btn-group-justified
+          //  a.btn.btn-default(type="button")
+          //    small.small A
+          //  a.btn.btn-default(type="button")
+          //    small.small B
+          //  a.btn.btn-default(type="button")
+          //    small.small C
 
           .scrollable-panel-button-container
             terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input" reset-event="runner-reset-terminal")
 
-          .btn-group.btn-group-justified
-            a.btn.btn-default(type="button")
-              small.small X
-            a.btn.btn-default(type="button")
-              small.small Y
-            a.btn.btn-default(type="button")
-              small.small Z
-
-    .col-stretch(ng-show='show_graphics_window' ng-class='{"col-md-9": show_graphics_window && !show_console, "col-md-5": show_graphics_window && show_console, "desktop-only": !selected_project}' )
-      .panel.panel-primary.panel-stretch
-        .panel-heading
-          .panel-title
-            | Graphics Window
-            span.btn-group-xs.pull-right
-              a.btn.btn-default(type='button' href="/api/run/current/graphics" download)
-                i.fa.fa-floppy-o
-              button.btn.btn-default(type='button' ng-click='select_graphics_window()')
-                i.fa.fa-keyboard-o
-              button.btn.btn-danger(type='button' ng-click='show_graphics_window = !show_graphics_window')
-                i.fa.fa-times
+          //.btn-group.btn-group-justified
+          //  a.btn.btn-default(type="button")
+          //    small.small X
+          //  a.btn.btn-default(type="button")
+          //    small.small Y
+          //  a.btn.btn-default(type="button")
+          //    small.small Z
 
         .scrollable-panel-body-container
           img#graphics_window.panel-body(ng-src="{{img_src}}"
@@ -115,15 +89,6 @@ block bottom-compact-navbar-buttons
     i.fa.fa-stop
     |  
     small.small Stop
-    
-  a.btn.btn-toolbar.btn-info(type='button' ng-show='selected_project && !show_console' ng-click='show_graphics_window = false; show_console = true')
-    i.fa.fa-terminal
-    |  
-    small.small Console
-  a.btn.btn-toolbar.btn-info(type='button' ng-show='selected_project && show_console' ng-click='show_graphics_window = true; show_console = false')
-    i.fa.fa-terminal
-    |  
-    small.small Graphics
 
   a.btn.btn-toolbar.btn-info(type='button' ng-if='!selected_project' href='/#/apps/kiss')
     i.fa.fa-file-code-o

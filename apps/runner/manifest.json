@@ -42,16 +42,6 @@
           "id": "stderr",
           "publisher": "SERVER",
           "description": "stderr sent from the program."
-        },
-        "frame": {
-          "id": "frame",
-          "publisher": "SERVER",
-          "description": "Aurora frame."
-        },
-        "gui_input": {
-          "id": "gui_input",
-           "pbulisher": "CLIENT",
-           "description": "Send mouse and keyboard input to the server"
         }
       }
     }
