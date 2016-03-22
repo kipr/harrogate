@@ -1,6 +1,7 @@
 ﻿Express = require 'express'
 Fs = require 'fs'
 Tar = require 'tar-stream'
+Zip = require 'zip-stream'
 Q = require 'q'
 Url = require 'url'
 Zlib = require 'zlib'
@@ -140,6 +141,17 @@ router.get '/:project', (request, response, next) ->
           response.writeHead 200, { 'Content-Type', 'application/octet-stream' }
           pack.pipe Zlib.createGzip()
           .pipe response
+          pack.finalize()
+          return
+
+      # reply .zip
+      else if response_mode? and response_mode is 'zip'
+        pack = new Zip()
+        project_resource.pack(pack)
+        .then (p) ->
+          response.setHeader 'Content-disposition', 'attachment; filename=' + project_resource.name + '.zip'
+          response.writeHead 200, { 'Content-Type', 'application/octet-stream' }
+          pack.pipe response
           pack.finalize()
           return
 

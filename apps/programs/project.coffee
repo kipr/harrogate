@@ -55,8 +55,12 @@ pack_helper = (pack, folder_resource, prefix) ->
         promises.push Q.Promise( (resolve, reject, notify) ->
           name = "#{prefix}/#{child.name}"
           Fs.readFile child.path, (error, content) ->
-            pack.entry { name: name }, content
-            resolve child
+            if pack.options and pack.options.zlib and pack.options.zlib.level?
+              pack.entry name, { name: name }, content
+              resolve child
+            else
+              pack.entry { name: name }, content
+              resolve child
         )
       return Q.all promises
 
