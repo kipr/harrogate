@@ -242,6 +242,10 @@ block view-content
             .form-group
               label(for='projectName') Project name
               input#projectName.form-control(type='text' placeholder='Project name')
+              label(for='programmingLanguage') Programming Language
+              select#programmingLanguage.form-control(placeholder='Programming Language', ng-model="defaultProgrammingLanguage", ng-change="change_filename()")
+                option(value='C') C
+                option(value='Python') Python
               label(for='sourceFileName') Source file name
               input#sourceFileName.form-control(type='text' value='main.c')
 

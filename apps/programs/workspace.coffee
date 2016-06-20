@@ -194,7 +194,20 @@ class Workspace
     .then (project_resource) =>
       return project_resource.src_directory.create()
       .then =>
-        content = """
+        if (language == 'Python')
+          content = """
+                  #!/usr/bin/python
+
+                  import wallaby
+
+                  def main()
+                    print "Hello World"
+
+                  if __name__=="__main__"
+                    main()
+                  """
+        else
+          content = """
                   #include <kipr/botball.h>
                           
                   int main()
