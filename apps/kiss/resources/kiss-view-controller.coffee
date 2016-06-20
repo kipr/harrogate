@@ -334,6 +334,8 @@ exports.controller = (
 
     return
 
+  $scope.defaultProgrammingLanguage = 'C';
+
   $scope.change_filename = () ->
 
     if ($("#programmingLanguage").val() == "Python")
