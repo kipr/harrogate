@@ -37,8 +37,12 @@ start_program = ->
       
       namespace.emit events.starting.id, running.resource.name
 
+      env = Object.create(process.env);
+      env.PYTHONPATH = "/usr/lib"
+
       running_process = spawn running.resource.binary.path, [], {
         cwd: Path.resolve running.resource.data_directory.path
+        env: env
       }
 
       running_process.on 'error', (data) ->
