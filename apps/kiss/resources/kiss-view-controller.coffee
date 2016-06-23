@@ -270,11 +270,17 @@ exports.controller = (
               $scope.select_project $scope.selected_project
 
   $scope.show_add_source_file_modal = ->
+
+    language_array = [ '.c' ]
+
+    if $scope.project_resource.parameters.language == 'Python'
+      language_array = [ '.py' ]
+
     FilenameModalFactory.open(
       'Create New Source File'
       'Choose a filename:'
       'Filename'
-      [ '.c' ]
+      language_array
       'Create')
       .then (data) ->
         if $scope.ws? and $scope.project_resource?
@@ -324,13 +330,24 @@ exports.controller = (
     AppCatalogProvider.catalog.then (app_catalog) ->
       projects_resource = app_catalog['Programs']?.web_api?.projects
       if projects_resource?
-        $http.post(projects_resource.uri,  {name: $("#projectName").val(), language: 'C', src_file_name: $("#sourceFileName").val()})
+        $http.post(projects_resource.uri,  {name: $("#projectName").val(), language: $("#programmingLanguage").val(), src_file_name: $("#sourceFileName").val()})
 
         .success (data, status, headers, config) ->
           $scope.reload_ws()
           return
 
       return
+
+    return
+
+  $scope.defaultProgrammingLanguage = 'C';
+
+  $scope.change_filename = () ->
+
+    if ($("#programmingLanguage").val() == "Python")
+      $("#sourceFileName").val("main.py")
+    else
+      $("#sourceFileName").val("main.c")
 
     return
 
