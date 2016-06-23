@@ -270,11 +270,17 @@ exports.controller = (
               $scope.select_project $scope.selected_project
 
   $scope.show_add_source_file_modal = ->
+
+    language_array = [ '.c' ]
+
+    if $scope.project_resource.parameters.language == 'Python'
+      language_array = [ '.py' ]
+
     FilenameModalFactory.open(
       'Create New Source File'
       'Choose a filename:'
       'Filename'
-      [ '.c', '.py' ]
+      language_array
       'Create')
       .then (data) ->
         if $scope.ws? and $scope.project_resource?
