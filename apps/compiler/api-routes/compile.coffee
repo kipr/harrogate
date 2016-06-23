@@ -71,14 +71,26 @@ router.post '/', (request, response, next) ->
 
   .then ->
 
-    compilation_environment.compile project_resource, (error, stdout, stderr) ->
-      result = {stdout: stdout, stderr: stderr, error: error}
-      response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
-      response.setHeader 'Pragma', 'no-cache'
-      response.setHeader 'Expires', '0'
-      response.writeHead 200, { 'Content-Type': 'application/json' }
-      response.end "#{JSON.stringify(result: result)}", 'utf8'
-      return
+    project_resource.get_representation(false)
+      .then (project_details) ->
+        language = project_details.parameters.language
+
+        if (language.toLowerCase() == 'c')
+          if TargetApp.platform is TargetApp.supported_platforms.WINDOWS_PC
+            compilation_environment = require '../compilation-environments/c/mingw.coffee'
+          else
+            compilation_environment = require '../compilation-environments/c/gcc.coffee'
+        else if (language.toLowerCase() == 'python')
+          compilation_environment = require '../compilation-environments/python/python.coffee'
+
+        compilation_environment.compile project_resource, (error, stdout, stderr) ->
+          result = {stdout: stdout, stderr: stderr, error: error}
+          response.setHeader 'Cache-Control', 'no-cache, no-store, must-revalidate'
+          response.setHeader 'Pragma', 'no-cache'
+          response.setHeader 'Expires', '0'
+          response.writeHead 200, { 'Content-Type': 'application/json' }
+          response.end "#{JSON.stringify(result: result)}", 'utf8'
+          return
 
   .catch (error) ->
     next error
