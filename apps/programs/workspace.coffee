@@ -197,14 +197,15 @@ class Workspace
         if (language == 'Python')
           content = """
                   #!/usr/bin/python
-
-                  import wallaby
+                  import os, sys
+                  from wallaby import *
 
                   def main():
-                    print "Hello World"
+                      print "Hello World"
 
                   if __name__=="__main__":
-                    main()
+                      sys.stdout = os.fdopen(sys.stdout.fileno(),'w',0)
+                      main()
                   """
         else
           content = """
