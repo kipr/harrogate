@@ -2,7 +2,7 @@
   "name": "Compiler",
   "hidden": true,
   "fonticon": "fa-link",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Compiles a user program",
   "category": "Development Tools",
   "hidden": true,

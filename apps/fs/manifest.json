@@ -1,7 +1,7 @@
 {
   "name": "Host Filesystem",
   "priority": 10,
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "fonticon": "fa-hdd-o",
   "description": "Host filesystem manager",
   "category": "System Tools",
