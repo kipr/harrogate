@@ -2,7 +2,7 @@ var AppCatalog, Directory, Express, HostFileSystem, ServerError, TargetApp, Work
 
 Express = require('express');
 
-ServerError = require_harrogate_module('/shared/scripts/server-error.coffee');
+ServerError = require_harrogate_module('/shared/scripts/server-error.js');
 
 AppCatalog = require_harrogate_module('/shared/scripts/app-catalog.js');
 
