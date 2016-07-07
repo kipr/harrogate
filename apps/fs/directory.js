@@ -9,11 +9,11 @@ Rmdir = require('rimraf');
 
 Q = require('q');
 
-AppCatalog = require_harrogate_module('/shared/scripts/app-catalog.coffee');
+AppCatalog = require_harrogate_module('/shared/scripts/app-catalog.js');
 
-HostFileSystem = require('./host-fs.coffee');
+HostFileSystem = require('./host-fs.js');
 
-ServerError = require_harrogate_module('/shared/scripts/server-error.coffee');
+ServerError = require_harrogate_module('/shared/scripts/server-error.js');
 
 TargetApp = AppCatalog.catalog['Target information'].get_instance();
 

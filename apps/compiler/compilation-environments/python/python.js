@@ -4,7 +4,7 @@ exec = require('child_process').exec;
 
 Path = require('path');
 
-Config = require_harrogate_module('config.coffee');
+Config = require_harrogate_module('config.js');
 
 module.exports = {
   compile: function(project_resource, cb) {

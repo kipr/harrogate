@@ -3,14 +3,14 @@ Express = require 'express'
 Path = require 'path'
 spawn = require('child_process').spawn
 
-ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.js'
 
-AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
-Config = require_harrogate_module 'config.coffee'
-Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
-HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.js'
+Config = require_harrogate_module 'config.js'
+Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.js'
+HostFileSystem = require AppCatalog.catalog['Host Filesystem'].path + '/host-fs.js'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
-Workspace = require AppCatalog.catalog['Programs'].path +  '/workspace.coffee'
+Workspace = require AppCatalog.catalog['Programs'].path +  '/workspace.js'
 
 events = AppCatalog.catalog['Runner'].event_groups.runner_events.events
 

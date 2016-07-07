@@ -1,14 +1,14 @@
 Express = require 'express'
 Url = require 'url'
 
-AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
-ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.js'
+ServerError = require_harrogate_module '/shared/scripts/server-error.js'
 UserManager = require_harrogate_module '/shared/scripts/user-manager.coffee'
 UserResource = require './rest-resources/user-resource.coffee'
 
 AppManifest = require './manifest.json'
 
-Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
+Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.js'
 
 # the fs router
 router = Express.Router()

@@ -1,4 +1,4 @@
-app_catalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+app_catalog = require_harrogate_module '/shared/scripts/app-catalog.js'
 
 cats = require '../categories.json'
 

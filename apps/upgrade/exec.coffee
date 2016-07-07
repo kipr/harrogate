@@ -5,8 +5,8 @@ Path = require 'path'
 exec = require('child_process').exec
 spawn = require('child_process').spawn
 
-AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
-ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.js'
+ServerError = require_harrogate_module '/shared/scripts/server-error.js'
 events = AppCatalog.catalog['Upgrade'].event_groups.upgrade_events.events
 
 # upgrade can only run once

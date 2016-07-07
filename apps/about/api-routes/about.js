@@ -5,7 +5,7 @@ Express = require('express');
 // the fs router
 router = Express.Router();
 
-Config = require_harrogate_module('config.coffee');
+Config = require_harrogate_module('config.js');
 
 // '/' is relative to <manifest>.web_api.settings.uri
 router.get('/', function(request, response, next) {

@@ -14,7 +14,7 @@ request = require 'request'
 transform = require 'vinyl-transform'
 through = require 'through'
 
-config = require './config.coffee'
+config = require './config.js'
 
 process.env.COMPILE = 1
 
@@ -25,7 +25,7 @@ if not global.require_harrogate_module?
 
 # Create the app instances
 app_instances = {}
-app_catalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+app_catalog = require_harrogate_module '/shared/scripts/app-catalog.js'
 for app_name, app of app_catalog.catalog
   app_instances[path_tools.basename(app['path'])] = app.get_instance()
 

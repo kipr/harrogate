@@ -1,10 +1,10 @@
 ﻿assert = require 'assert'
 Q = require 'q'
 
-AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.js'
 User = require_harrogate_module '/shared/scripts/user.coffee'
 
-Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee'
+Directory = require AppCatalog.catalog['Host Filesystem'].path + '/directory.js'
 
 AppManifest = require '../manifest.json'
 

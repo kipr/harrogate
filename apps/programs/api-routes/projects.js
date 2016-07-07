@@ -12,17 +12,17 @@ Url = require('url');
 
 Zlib = require('zlib');
 
-AppCatalog = require_harrogate_module('/shared/scripts/app-catalog.coffee');
+AppCatalog = require_harrogate_module('/shared/scripts/app-catalog.js');
 
-Project = require('../project.coffee');
+Project = require('../project.js');
 
-ServerError = require_harrogate_module('/shared/scripts/server-error.coffee');
+ServerError = require_harrogate_module('/shared/scripts/server-error.js');
 
-Workspace = require('../workspace.coffee');
+Workspace = require('../workspace.js');
 
-Directory = require(AppCatalog.catalog['Host Filesystem'].path + '/directory.coffee');
+Directory = require(AppCatalog.catalog['Host Filesystem'].path + '/directory.js');
 
-HostFileSystem = require(AppCatalog.catalog['Host Filesystem'].path + '/host-fs.coffee');
+HostFileSystem = require(AppCatalog.catalog['Host Filesystem'].path + '/host-fs.js');
 
 // the fs router
 router = Express.Router();

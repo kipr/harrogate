@@ -10,7 +10,7 @@ Passport = require 'passport'
 Path = require 'path'
 Session = require 'express-session'
 
-Config = require './config.coffee'
+Config = require './config.js'
 
 # Add daylite, ... to the Windows path
 if Os.platform() is 'win32'
@@ -29,9 +29,9 @@ if not global.require_harrogate_module?
 if not global.harrogate_base_path?
   global.harrogate_base_path = __dirname
 
-AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.coffee'
+AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.js'
 SettingsManager = require_harrogate_module '/shared/scripts/settings-manager.coffee'
-ServerError = require_harrogate_module '/shared/scripts/server-error.coffee'
+ServerError = require_harrogate_module '/shared/scripts/server-error.js'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 User = require_harrogate_module '/shared/scripts/user.coffee'
 UserManager = require_harrogate_module '/shared/scripts/user-manager.coffee'

@@ -27,7 +27,7 @@ These libraries are required to compile a robot program with harrogate.
 
 
 Note: harrogate assumes that those dependencies were installed into `<harrogate-dir>\..\prefix\usr\`.
-Modify `<harrogate-dir>\config.coffee` if you installed them into a different location.
+Modify `<harrogate-dir>\config.js` if you installed them into a different location.
 
 Launching gulp (development)
 ============================

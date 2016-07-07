@@ -47,7 +47,7 @@ File = (function() {
 
         // if our is_valid works, parent_path should be always defined and points to a directory
         // we have to require Directory here to avoid circular dependency issues
-        Directory = require('./directory.coffee');
+        Directory = require('./directory.js');
         return Directory.create_from_path(Path.dirname(_this.path));
       };
     })(this));
