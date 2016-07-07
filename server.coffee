@@ -30,7 +30,7 @@ if not global.harrogate_base_path?
   global.harrogate_base_path = __dirname
 
 AppCatalog = require_harrogate_module '/shared/scripts/app-catalog.js'
-SettingsManager = require_harrogate_module '/shared/scripts/settings-manager.coffee'
+SettingsManager = require_harrogate_module '/shared/scripts/settings-manager.js'
 ServerError = require_harrogate_module '/shared/scripts/server-error.js'
 TargetApp = AppCatalog.catalog['Target information'].get_instance()
 User = require_harrogate_module '/shared/scripts/user.coffee'

@@ -2,7 +2,7 @@
   "name": "Settings",
   "priority": -1,
   "fonticon": "fa-wrench",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Modify the system's settings, such as network, time, and more.",
   "category": "Settings",
   "hidden": false,
