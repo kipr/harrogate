@@ -2,7 +2,7 @@
   "name": "Network-Settings",
   "priority": -1,
   "fonticon": "fa-wifi",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Modify the system's network settings.",
   "category": "Settings",
   "hidden": true,
