@@ -2,7 +2,7 @@
   "name": "Runner",
   "hidden": false,
   "fonticon": "fa-rocket",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Runs a user program",
   "category": "Programs",
   "hidden": false,
