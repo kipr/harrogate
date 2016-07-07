@@ -2,7 +2,7 @@
   "name": "About",
   "priority": -1,
   "fonticon": "fa-question-circle",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Display the About page",
   "category": "Settings",
   "hidden": false,
