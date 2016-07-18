@@ -2,12 +2,12 @@
   "name": "Update",
   "priority": -1,
   "fonticon": "fa-archive",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Updates packages",
   "category": "System Tools",
   "hidden": true,
   "view": true,
-  "angular_ctrl": "resources/update-view-controller.coffee",
+  "angular_ctrl": "resources/update-view-controller.js",
   "web_api": {
     "update": {
       "uri": "/api/update",
