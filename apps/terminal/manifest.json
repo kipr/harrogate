@@ -7,7 +7,7 @@
   "category": "System Tools",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/terminal-view-controller.coffee",
+  "angular_ctrl": "resources/terminal-view-controller.js",
   "event_groups": {
     "terminal_events": {
       "namespace": "/terminal",
