@@ -2,7 +2,7 @@
   "name": "Terminal",
   "priority": -1,
   "fonticon": "fa-terminal",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Opens a terminal to the target",
   "category": "System Tools",
   "hidden": false,
