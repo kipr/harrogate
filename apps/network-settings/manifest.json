@@ -7,7 +7,7 @@
   "category": "Settings",
   "hidden": true,
   "view": false,
-  "angular_ctrl": "resources/network-settings-view-controller.coffee",
+  "angular_ctrl": "resources/network-settings-view-controller.js",
   "web_api": {
     "settings": {
       "uri": "/api/network-settings",

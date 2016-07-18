@@ -7,7 +7,7 @@
   "category": "System Tools",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/harrogate-fs-injector.coffee",
+  "angular_ctrl": "resources/harrogate-fs-injector.js",
   "web_api": {
     "fs": {
       "uri": "/api/fs",
