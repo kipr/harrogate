@@ -7,5 +7,5 @@
   "category": "Development Tools",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/kiss-injector.coffee"
+  "angular_ctrl": "resources/kiss-injector.js"
 }

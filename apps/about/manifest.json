@@ -7,7 +7,7 @@
   "category": "Settings",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/about-view-controller.coffee",
+  "angular_ctrl": "resources/about-view-controller.js",
   "web_api": {
     "about": {
       "uri": "/api/about",

@@ -7,7 +7,7 @@
   "category": "Programs",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/runner-injector.coffee",
+  "angular_ctrl": "resources/runner-injector.js",
   "web_api": {
     "run": {
       "uri": "/api/run",

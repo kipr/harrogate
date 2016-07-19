@@ -6,7 +6,7 @@
   "category": "Settings",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/users-view-controller.coffee",
+  "angular_ctrl": "resources/users-view-controller.js",
   "web_api": {
     "users": {
       "uri": "/api/users",

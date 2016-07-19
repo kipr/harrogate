@@ -6,7 +6,7 @@
   "category": "Programs",
   "hidden": true,
   "view": false,
-  "angular_ctrl": "resources/programs-view-controller.coffee",
+  "angular_ctrl": "resources/programs-view-controller.js",
   "web_api": {
     "projects": {
       "uri": "/api/projects",
