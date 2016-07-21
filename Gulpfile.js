@@ -1,8 +1,6 @@
-var app, app_catalog, app_instances, app_name, browserify, coffee, config, data, fs, gulp, gulp_filter, gutil, jade, nodemon, os, path_tools, ref, rename, request, through, transform;
+var app, app_catalog, app_instances, app_name, browserify, config, data, fs, gulp, gulp_filter, gutil, jade, nodemon, os, path_tools, ref, rename, request, through, transform;
 
 browserify = require('browserify');
-
-coffee = require('coffee-script');
 
 data = require('gulp-data');
 
@@ -30,7 +28,7 @@ transform = require('vinyl-transform');
 
 through = require('through');
 
-config = require('./config.coffee');
+config = require('./config.js');
 
 process.env.COMPILE = 1;
 
@@ -42,7 +40,7 @@ if (global.require_harrogate_module == null) {
 
 app_instances = {};
 
-app_catalog = require_harrogate_module('/shared/scripts/app-catalog.coffee');
+app_catalog = require_harrogate_module('/shared/scripts/app-catalog.js');
 
 ref = app_catalog.catalog;
 for (app_name in ref) {
@@ -124,7 +122,6 @@ gulp.task('scripts', function() {
       data[file] += buf;
     };
     end = function() {
-      this.queue(coffee.compile(data[file]));
       this.queue(null);
     };
     return through(write, end);
@@ -138,7 +135,7 @@ gulp.task('scripts', function() {
       });
     }
   }
-  return gulp.src('shared/client/scripts/harrogate-index-app.coffee').pipe(transform(function(filename) {
+  return gulp.src('shared/client/scripts/harrogate-index-app.js').pipe(transform(function(filename) {
     b.add(filename);
     return b.bundle();
   })).pipe(rename(function(path) {
@@ -168,8 +165,8 @@ gulp.task('app_views', function() {
 gulp.task('watch', function() {
   gulp.watch('shared/client/views/**/*.jade', ['shared_views']);
   gulp.watch('shared/client/css/*.css', ['shared_styles']);
-  gulp.watch('shared/client/scripts/*.coffee', ['scripts']);
+  gulp.watch('shared/client/scripts/*.js', ['scripts']);
   gulp.watch('shared/client/views/templates/**/*.jade', ['app_views']);
   gulp.watch('apps/**/resources/**/*.jade', ['app_views']);
-  return gulp.watch('apps/**/resources/*.coffee', ['scripts']);
+  return gulp.watch('apps/**/resources/*.js', ['scripts']);
 });
