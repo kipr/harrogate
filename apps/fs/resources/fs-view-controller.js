@@ -58,4 +58,3 @@ exports.controller = function($scope, $http, AppCatalogProvider, UserManagerServ
     open_dir($scope.current.links.self.href);
   };
 };
-RunLink

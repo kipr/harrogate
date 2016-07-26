@@ -1,7 +1,7 @@
 exports.inject = function(app) {
   // inject kiss angular modules
-  require('./kiss-view-controller.coffee').inject(app);
+  require('./kiss-view-controller.js').inject(app);
 };
 
 // view controller
-exports.controller = require('./kiss-view-controller.coffee').controller;
+exports.controller = require('./kiss-view-controller.js').controller;
