@@ -110,6 +110,8 @@ gulp.task('angular-ui', ['scripts'], function() {
   return request('http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js').pipe(fs.createWriteStream('public/scripts/ui-bootstrap-tpls.min.js'));
 });
 
+
+
 gulp.task('scripts', function() {
   var b, ref1;
   b = browserify({
@@ -122,6 +124,7 @@ gulp.task('scripts', function() {
       data[file] += buf;
     };
     end = function() {
+      this.queue(data[file]);
       this.queue(null);
     };
     return through(write, end);
@@ -142,6 +145,7 @@ gulp.task('scripts', function() {
     path.extname = '.js';
   })).pipe(gulp.dest('public/scripts/'));
 });
+
 
 gulp.task('apps', ['app_views'], function() {});
 
