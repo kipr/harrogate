@@ -81,9 +81,20 @@ pack_helper = function(pack, folder_resource, prefix) {
           var name;
           name = prefix + "/" + child.name;
           return Fs.readFile(child.path, function(error, content) {
-            pack.entry({
-              name: name
-            }, content);
+            console.log("pack entry name: " + name + " content: " + content);
+
+            if (pack.options && pack.options.zlib && (pack.options.zlib.level != null)) {
+              pack.entry(name, {
+                name: name
+              }, content);
+              resolve(child);
+            } else {
+              pack.entry({
+                name: name
+                }, content);
+                resolve(child);
+            }
+
             return resolve(child);
           });
         }));
