@@ -81,7 +81,6 @@ pack_helper = function(pack, folder_resource, prefix) {
           var name;
           name = prefix + "/" + child.name;
           return Fs.readFile(child.path, function(error, content) {
-            console.log("pack entry name: " + name + " content: " + content);
 
             if (pack.options && pack.options.zlib && (pack.options.zlib.level != null)) {
               pack.entry(content, {
