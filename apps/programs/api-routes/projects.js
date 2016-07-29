@@ -6,6 +6,8 @@ Fs = require('fs');
 
 Tar = require('tar-stream');
 
+Zip = require('zip-stream');
+
 Q = require('q');
 
 Url = require('url');
@@ -197,6 +199,18 @@ router.get('/:project', function(request, response, next) {
             'application/octet-stream': 'application/octet-stream'
           });
           pack.pipe(Zlib.createGzip()).pipe(response);
+          pack.finalize();
+        });
+      } else if ((response_mode != null) && response_mode === 'zip') {
+        // reply .zip
+        pack = new Zip();
+        return project_resource.pack(pack).then(function(p) {
+          response.setHeader('Content-disposition', 'attachment; filename=' + project_resource.name + '.zip');
+          response.writeHead(200, {
+            'Content-Type': 'Content-Type',
+            'application/octet-stream': 'application/octet-stream'
+          });
+          pack.pipe(response);
           pack.finalize();
         });
       } else {
