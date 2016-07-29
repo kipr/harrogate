@@ -84,15 +84,13 @@ pack_helper = function(pack, folder_resource, prefix) {
             console.log("pack entry name: " + name + " content: " + content);
 
             if (pack.options && pack.options.zlib && (pack.options.zlib.level != null)) {
-              pack.entry(name, {
+              pack.entry(content, {
                 name: name
-              }, content);
-              resolve(child);
+              });
             } else {
               pack.entry({
                 name: name
-                }, content);
-                resolve(child);
+              }, content);
             }
 
             return resolve(child);
