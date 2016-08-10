@@ -2,12 +2,12 @@
   "name": "Shutdown",
   "priority": -1,
   "fonticon": "fa-power-off",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Shuts down the System",
   "category": "System Tools",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/shutdown-view-controller.coffee",
+  "angular_ctrl": "resources/shutdown-view-controller.js",
   "web_api": {
     "shutdown": {
       "uri": "/api/shutdown",

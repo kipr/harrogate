@@ -1,12 +1,12 @@
 {
   "name": "User Preferences",
   "fonticon": "fa-user",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Set owner information, enable accessibility tools, and more.",
   "category": "Settings",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/users-view-controller.coffee",
+  "angular_ctrl": "resources/users-view-controller.js",
   "web_api": {
     "users": {
       "uri": "/api/users",

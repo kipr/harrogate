@@ -2,12 +2,12 @@
   "name": "Runner",
   "hidden": false,
   "fonticon": "fa-rocket",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Runs a user program",
   "category": "Programs",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/runner-injector.coffee",
+  "angular_ctrl": "resources/runner-injector.js",
   "web_api": {
     "run": {
       "uri": "/api/run",

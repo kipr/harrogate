@@ -2,7 +2,7 @@
   "name": "Target information",
   "hidden": true,
   "view": false,
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Contains information about the target",
   "category": "System Tools"
 }
