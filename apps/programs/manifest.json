@@ -1,12 +1,12 @@
 {
   "name": "Programs",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "fonticon": "fa-th",
   "description": "Run, modify, and manage programs on the device.",
   "category": "Programs",
   "hidden": true,
   "view": false,
-  "angular_ctrl": "resources/programs-view-controller.coffee",
+  "angular_ctrl": "resources/programs-view-controller.js",
   "web_api": {
     "projects": {
       "uri": "/api/projects",

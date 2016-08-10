@@ -1,11 +1,11 @@
 {
   "name": "KISS IDE",
   "priority": 1,
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "fonticon": "fa-file-code-o",
   "description": "Edit and compile programs for the device",
   "category": "Development Tools",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/kiss-injector.coffee"
+  "angular_ctrl": "resources/kiss-injector.js"
 }

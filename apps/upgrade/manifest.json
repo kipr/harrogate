@@ -2,12 +2,12 @@
   "name": "Upgrade",
   "priority": -1,
   "fonticon": "fa-download",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Upgrades the OS",
   "category": "System Tools",
   "hidden": true,
   "view": true,
-  "angular_ctrl": "resources/upgrade-view-controller.coffee",
+  "angular_ctrl": "resources/upgrade-view-controller.js",
   "web_api": {
     "upgrade": {
       "uri": "/api/upgrade",

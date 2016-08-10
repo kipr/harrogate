@@ -2,12 +2,12 @@
   "name": "About",
   "priority": -1,
   "fonticon": "fa-question-circle",
-  "exec": "exec.coffee",
+  "exec": "exec.js",
   "description": "Display the About page",
   "category": "Settings",
   "hidden": false,
   "view": true,
-  "angular_ctrl": "resources/about-view-controller.coffee",
+  "angular_ctrl": "resources/about-view-controller.js",
   "web_api": {
     "about": {
       "uri": "/api/about",
