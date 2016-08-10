@@ -181,11 +181,9 @@ router.get('/:project', function(request, response, next) {
         // reply .tar
         pack = Tar.pack();
         return project_resource.pack(pack).then(function(p) {
+          response.setHeader("Content-Type", "application/zip");
           response.setHeader('Content-disposition', 'attachment; filename=' + project_resource.name + '.tar');
-          response.writeHead(200, {
-            'Content-Type': 'Content-Type',
-            'application/octet-stream': 'application/octet-stream'
-          });
+          response.writeHead(200);
           pack.pipe(response);
           pack.finalize();
         });
@@ -193,11 +191,9 @@ router.get('/:project', function(request, response, next) {
         // reply .tar.gz
         pack = Tar.pack();
         return project_resource.pack(pack).then(function(p) {
+          response.setHeader("Content-Type", "application/zip");
           response.setHeader('Content-disposition', 'attachment; filename=' + project_resource.name + '.tar.gz');
-          response.writeHead(200, {
-            'Content-Type': 'Content-Type',
-            'application/octet-stream': 'application/octet-stream'
-          });
+          response.writeHead(200);
           pack.pipe(Zlib.createGzip()).pipe(response);
           pack.finalize();
         });
@@ -205,11 +201,9 @@ router.get('/:project', function(request, response, next) {
         // reply .zip
         pack = new Zip();
         return project_resource.pack(pack).then(function(p) {
+          response.setHeader("Content-Type", "application/zip");
           response.setHeader('Content-disposition', 'attachment; filename=' + project_resource.name + '.zip');
-          response.writeHead(200, {
-            'Content-Type': 'Content-Type',
-            'application/octet-stream': 'application/octet-stream'
-          });
+          response.writeHead(200);
           pack.pipe(response);
           pack.finalize();
         });
