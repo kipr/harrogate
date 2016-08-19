@@ -1,18 +1,14 @@
-var AppCatalog, Directory, Express, Fs, HostFileSystem, Project, Q, ServerError, Tar, Url, Workspace, Zlib, router;
+var AppCatalog, Archiver, Directory, Express, Fs, HostFileSystem, Project, Q, ServerError, Url, Workspace, router;
+
+Archiver = require('archiver');
 
 Express = require('express');
 
 Fs = require('fs');
 
-Tar = require('tar-stream');
-
-Zip = require('zip-stream');
-
 Q = require('q');
 
 Url = require('url');
-
-Zlib = require('zlib');
 
 AppCatalog = require_harrogate_module('/shared/scripts/app-catalog.js');
 
@@ -179,7 +175,7 @@ router.get('/:project', function(request, response, next) {
 
       if ((response_mode != null) && response_mode === 'packed') {
         // reply .tar
-        pack = Tar.pack();
+        pack = new Archiver('tar');
         return project_resource.pack(pack).then(function(p) {
           response.setHeader("Content-Type", "application/zip");
           response.setHeader('Content-disposition', 'attachment; filename=' + project_resource.name + '.tar');
@@ -187,19 +183,26 @@ router.get('/:project', function(request, response, next) {
           pack.pipe(response);
           pack.finalize();
         });
+
       } else if ((response_mode != null) && response_mode === 'compressed') {
         // reply .tar.gz
-        pack = Tar.pack();
+        pack = new Archiver('tar', {
+          gzip: true,
+          gzipOptions: {
+            level: 1
+          }
+        });
         return project_resource.pack(pack).then(function(p) {
           response.setHeader("Content-Type", "application/zip");
           response.setHeader('Content-disposition', 'attachment; filename=' + project_resource.name + '.tar.gz');
           response.writeHead(200);
-          pack.pipe(Zlib.createGzip()).pipe(response);
+          pack.pipe(response);
           pack.finalize();
         });
+
       } else if ((response_mode != null) && response_mode === 'zip') {
         // reply .zip
-        pack = new Zip();
+        pack = new Archiver('zip');
         return project_resource.pack(pack).then(function(p) {
           response.setHeader("Content-Type", "application/zip");
           response.setHeader('Content-disposition', 'attachment; filename=' + project_resource.name + '.zip');
