@@ -80,20 +80,8 @@ pack_helper = function(pack, folder_resource, prefix) {
         promises.push(Q.Promise(function(resolve, reject, notify) {
           var name;
           name = prefix + "/" + child.name;
-          return Fs.readFile(child.path, function(error, content) {
-
-            if (pack.options && pack.options.zlib && (pack.options.zlib.level != null)) {
-              pack.entry(content, {
-                name: name
-              });
-            } else {
-              pack.entry({
-                name: name
-              }, content);
-            }
-
-            return resolve(child);
-          });
+          pack.file(child.path, {name: name});
+          return resolve(child);
         }));
       }
       return Q.all(promises);
