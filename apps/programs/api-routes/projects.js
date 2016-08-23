@@ -126,7 +126,7 @@ router.put('/users/:user', function(request, response, next) {
   else
   {
     representation = {
-      error: `User "${user}" already exists`
+      error: 'User "' + user + '" already exists'
     };
   }
   
@@ -163,7 +163,7 @@ router.delete('/users/:user', function(request, response, next) {
   else
   {
     representation = {
-      error: `User "${user}" doesn't exists`
+      error: 'User "' + user + '" doesn\'t exist'
     };
   }
   

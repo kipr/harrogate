@@ -261,28 +261,24 @@ Workspace = (function() {
     var programContent;
     if (language === 'Python')
     {
-      programContent =  `#!/usr/bin/python
-import os, sys
-from wallaby import *
-
-def main():
-    print "Hello World"
-
-if __name__== "__main__":
-    sys.stdout = os.fdopen(sys.stdout.fileno(),'w',0)
-    main();
-`
+      programContent =  '#!/usr/bin/python\n' 
+        + 'import os, sys\n'
+        + 'from wallaby import *\n'
+        + '\n'
+        + 'def main():\n'
+        + '    print "Hello World"\n'
+        + 'if __name__== "__main__":\n'
+        + '    sys.stdout = os.fdopen(sys.stdout.fileno(),"w",0)\n'
+        + '    main();\n'; 
     }
     else
     {
-      programContent = `#include <kipr/botball.h>
-
-int main()
-{
-    printf("Hello World\\n");
-    return 0;
-}
-`
+      programContent = '#include <kipr/botball.h>\n'
+        + 'int main()\n'
+        + '{\n'
+        + '    printf("Hello World\\n");\n'
+        + '    return 0;\n'
+        + '}\n';
     }
 
     return this.ws_directory.create_subdirectory(user, false).then((function (_root) {
