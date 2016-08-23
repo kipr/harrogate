@@ -19,26 +19,23 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
     var projects_resource, ref, ref1;
     projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
     if (projects_resource != null) {
-      return $http.get(projects_resource.uri).success(function(data, status, headers, config) {
-        var project, selected;
+      return $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
         $scope.ws = data;
         if ($location.search().project != null) {
-          selected = (function() {
-            var i, len, ref2, results;
-            ref2 = $scope.ws.projects;
-            results = [];
-            for (i = 0, len = ref2.length; i < len; i++) {
-              project = ref2[i];
-              if (project.name === $location.search().project) {
-                results.push(project);
-              }
+          var selected = (function() {
+            var ref2 = $scope.ws.projects;
+            var results = [];
+            for (var i = 0, len = ref2.length; i < len; i++) {
+              var project = ref2[i];
+              if (project.name === $location.search().project) results.push(project);
             }
             return results;
           })();
-          if (selected[0]) {
-            return $scope.select_project(selected[0]);
-          }
+          if (selected[0]) return $scope.select_project(selected[0]);
         }
+        $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
+          $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+        });
       });
     }
   });
@@ -50,6 +47,12 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
       return $scope.selected_project = project;
     }
   };
+  
+  $scope.users = [
+    {id: 0, name: 'Default User'}
+  ];
+  $scope.active_user = $scope.users[0];
+
   AppCatalogProvider.catalog.then(function(app_catalog) {
     var events_namespace, ref, ref1, ref2, ref3;
     events = (ref = app_catalog['Runner']) != null ? (ref1 = ref.event_groups) != null ? ref1.runner_events.events : void 0 : void 0;

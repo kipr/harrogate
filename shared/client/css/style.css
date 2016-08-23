@@ -409,3 +409,22 @@
 {
   stroke-width: 2px;
 }
+
+#user-select-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#user-select-title {
+    flex-grow: 3;
+}
+
+#user-select-container > i {
+  margin-left: 0.5em;
+}
+
+
+#user-select {
+  flex-grow: 1;
+}

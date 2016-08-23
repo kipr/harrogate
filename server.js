@@ -55,12 +55,8 @@ User = require_harrogate_module('/shared/scripts/user.js');
 UserManager = require_harrogate_module('/shared/scripts/user-manager.js');
 
 init_workspace = function(workspace_path) {
-  Mkdirp.sync(workspace_path);
-  Mkdirp.sync(Path.join(workspace_path, 'bin'));
-  Mkdirp.sync(Path.join(workspace_path, 'data'));
-  Mkdirp.sync(Path.join(workspace_path, 'include'));
-  Mkdirp.sync(Path.join(workspace_path, 'lib'));
-  return Mkdirp.sync(Path.join(workspace_path, 'src'));
+  
+  return Mkdirp.sync(workspace_path);
 };
 
 harrogate_app = Express();

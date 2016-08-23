@@ -158,8 +158,11 @@ block view-content
           .panel-title
             | Project Explorer
             span.btn-group-xs.pull-right
-              button.btn.btn-default(type='button' ng-click='reload_project()')
-                i.fa.fa-refresh
+              i.fa.fa-refresh.cursor-pointer(ng-click='reload_project()')
+            div#user-select-container(style='margin-top: 1em;')
+              select#user-select(name='User' ng-model='active_user' ng-options='user.name for user in users track by user.id')
+              i.fa.fa-plus.cursor-pointer(ng-click='add_user()')
+              i.fa.fa-minus.cursor-pointer(ng-click='remove_user(active_user)')
 
         .scrollable-panel-body-container
           table.panel-body.table.tree-table
@@ -252,6 +255,23 @@ block view-content
         .modal-footer
           button.btn.btn-default(ng-click='hide_add_project_modal()') Cancel
           button.btn.btn-primary(ng-click='add_project()') Create
+
+  #new-user.modal.fade(role='dialog')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button' ng-click='hide_new_user_modal()') &times;
+          h4.modal-title Create New User
+
+        .modal-body
+          .form
+            .form-group
+              label(for='userName') User Name
+              input#userName.form-control(type='text' placeholder='User Name')
+
+        .modal-footer
+          button.btn.btn-default(ng-click='hide_new_user_modal()') Cancel
+          button.btn.btn-primary(ng-click='new_user()') Create
 
 block bottom-compact-navbar-buttons
   a.btn.btn-toolbar.btn-info(type='button', ng-click='close_project()')

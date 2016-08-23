@@ -44,7 +44,11 @@ block view-content
     .col-stretch(ng-class='{"desktop-only": !selected_project}' )
       .panel.panel-primary.panel-stretch
         .panel-heading(ng-click='select_graphics_window()')
-          .panel-title Console Window
+          .panel-title
+            div#user-select-container
+              div#user-select-title Console Window
+              select#user-select(name='User' ng-model='active_user' ng-options='user.name for user in users track by user.id')
+
 
         .panel-body-container-stretch
           //.btn-group.btn-group-justified
