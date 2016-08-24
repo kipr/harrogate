@@ -299,7 +299,6 @@ Directory = (function() {
   Directory.prototype.create_subdirectory = function(name, error_on_exists) {
     var child_path;
     if(typeof error_on_exists === 'undefined') error_on_exists = true;
-    console.log('error_on_exists', error_on_exists);
     
     // Handle 'This PC'
     if (TargetApp.platform === TargetApp.supported_platforms.WINDOWS_PC && this.path === '') {
