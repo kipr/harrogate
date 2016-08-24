@@ -87,8 +87,10 @@ Workspace = (function() {
 
   Workspace.prototype.remove_user = function(user) {
     if(user === 'Default User') return;
-    this.users = this.users.filter(function(u) { return u !== users; });
+    this.users = this.users.filter(function(u) { return u !== user; });
+    var dir = Directory.create_from_path(Path.join(this.ws_directory.path, user));
     this.sync_users();
+    return dir.remove();
   }
 
   Workspace.prototype.get_projects = function(user) {

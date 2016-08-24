@@ -136,6 +136,7 @@ router.put('/users/:user', function(request, response, next) {
   response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   response.setHeader('Pragma', 'no-cache');
   response.setHeader('Expires', '0');
+
   if(!representation)
   {
     response.writeHead(204);
@@ -180,7 +181,7 @@ router.delete('/users/:user', function(request, response, next) {
   }
 
   response.writeHead(400, { 'Content-Type': 'application/javascript' });
-  if (callback != null)
+  if(callback != null)
   {
     return response.end(callback + "(" + (JSON.stringify(representation)) + ")", 'utf8');
   }
@@ -336,6 +337,13 @@ router.get('/:user/:project', function(request, response, next) {
       return next(e);
     }
   }).done();
+});
+
+router.delete('/users/:user', function(request, response, next) {
+  var username = request.params.user;
+  request.ws_resource.users.some(function(u) { return u === username; })
+  request.ws_resource.remove_user(username);
+  return response.status(204).end();
 });
 
 router["delete"]('/:user/:project', function(request, response, next) {

@@ -162,7 +162,7 @@ block view-content
             div#user-select-container(style='margin-top: 1em;')
               select#user-select(name='User' ng-model='active_user' ng-options='user.name for user in users track by user.id')
               i.fa.fa-plus.cursor-pointer(ng-click='add_user()')
-              i.fa.fa-minus.cursor-pointer(ng-click='remove_user(active_user)')
+              i.fa.fa-minus.cursor-pointer(ng-click='remove_active_user()')
 
         .scrollable-panel-body-container
           table.panel-body.table.tree-table
