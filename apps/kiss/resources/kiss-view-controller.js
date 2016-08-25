@@ -265,16 +265,11 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   $scope.show_add_include_file_modal = function() {
     return FilenameModalFactory.open('Create New Include File', 'Choose a filename:', 'Filename', ['.h'], 'Create').then(function(data) {
       if (($scope.ws != null) && ($scope.project_resource != null)) {
-        return $http.post($scope.ws.links.include_directory.href, {
-          name: $scope.project_resource.name,
-          type: 'directory'
-        })["finally"](function() {
-          return $http.post($scope.project_resource.links.include_directory.href, {
-            name: data.filename + data.extension,
-            type: 'file'
-          }).success(function(data, status, headers, config) {
-            return $scope.select_project($scope.selected_project);
-          });
+        return $http.post($scope.project_resource.links.include_directory.href, {
+          name: data.filename + data.extension,
+          type: 'file'
+        }).success(function(data, status, headers, config) {
+          return $scope.select_project($scope.selected_project);
         });
       }
     });
@@ -287,16 +282,11 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     }
     return FilenameModalFactory.open('Create New Source File', 'Choose a filename:', 'Filename', language_array, 'Create').then(function(data) {
       if (($scope.ws != null) && ($scope.project_resource != null)) {
-        return $http.post($scope.ws.links.src_directory.href, {
-          name: $scope.project_resource.name,
-          type: 'directory'
-        })["finally"](function() {
-          return $http.post($scope.project_resource.links.src_directory.href, {
-            name: data.filename + data.extension,
-            type: 'file'
-          }).success(function(data, status, headers, config) {
-            return $scope.select_project($scope.selected_project);
-          });
+        return $http.post($scope.project_resource.links.src_directory.href, {
+          name: data.filename + data.extension,
+          type: 'file'
+        }).success(function(data, status, headers, config) {
+          return $scope.select_project($scope.selected_project);
         });
       }
     });
@@ -304,16 +294,11 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   $scope.show_add_data_file_modal = function() {
     return FilenameModalFactory.open('Create User Data File', 'Choose a filename:', 'Filename', null, 'Create').then(function(data) {
       if (($scope.ws != null) && ($scope.project_resource != null)) {
-        return $http.post($scope.ws.links.data_directory.href, {
-          name: $scope.project_resource.name,
-          type: 'directory'
-        })["finally"](function() {
-          return $http.post($scope.project_resource.links.data_directory.href, {
-            name: data.filename,
-            type: 'file'
-          }).success(function(data, status, headers, config) {
-            return $scope.select_project($scope.selected_project);
-          });
+        return $http.post($scope.project_resource.links.data_directory.href, {
+          name: data.filename,
+          type: 'file'
+        }).success(function(data, status, headers, config) {
+          return $scope.select_project($scope.selected_project);
         });
       }
     });

@@ -142,7 +142,7 @@ Workspace = (function() {
     return this.get_projects(user).then(function(project_resources) {
       // get the representation of all project resources
       return Q.allSettled(project_resources.map(function(project_resource) {
-        return project_resource.get_representation(false);
+        return project_resource.get_representation(true);
       }));
     }).then(function(project_representation_promises) {
       // add the projects (just the valid ones)
@@ -295,9 +295,13 @@ Workspace = (function() {
               Directory.create_from_path(Path.join(project_dir.path, 'lib')));
           });
         }).then(function(project_resource) {
-          return project_resource.src_directory.create().then(function() {
-            return project_resource.src_directory.create_file(src_file_name, programContent, 'ascii').then(function() {
-              return project_resource;
+          return project_resource.include_directory.create().then(function() {
+            return project_resource.data_directory.create().then(function() {
+              return project_resource.src_directory.create().then(function() {
+                return project_resource.src_directory.create_file(src_file_name, programContent, 'ascii').then(function() {
+                  return project_resource;
+                });
+              });
             });
           });
         });

@@ -300,7 +300,7 @@ router.get('/:user/:project', function(request, response, next) {
         });
       } else {
         //# reply JSON
-        return project_resource.get_representation().then(function(representation) {
+        return project_resource.get_representation(true).then(function(representation) {
           var callback;
           callback = Url.parse(request.url, true).query['callback'];
 

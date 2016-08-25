@@ -118,27 +118,9 @@ Project = (function() {
   };
 
   Project.prototype.remove = function() {
-    return delete_directory_helper(this.include_directory).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.src_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.data_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.bin_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.lib_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return _this.project_file.remove();
-      };
-    })(this));
+    return this.project_file.get_parent().then(function (parent) {
+      return delete_directory_helper(parent);
+    });
   };
 
   Project.prototype.pack = function(pack) {
@@ -158,6 +140,8 @@ Project = (function() {
       name: this.name,
       links: {}
     };
+    if(!verbose)
+      console.log('verbose?', verbose);
     if (verbose) {
       _.merge(representation, {
         links: {
