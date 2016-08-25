@@ -23,6 +23,7 @@ UserManager = (function() {
   function UserManager() {
     this.add_user = bind(this.add_user, this);
     this.update_user = bind(this.update_user, this);
+    this.list_users = bind(this.list_users, this);
     var error;
     this.users_file_paht = Path.join(harrogate_app_data_path, 'users.json');
     console.log('User settings file path: ' + this.users_file_paht);

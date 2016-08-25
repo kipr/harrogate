@@ -38,13 +38,14 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     }
   });
   $scope.reload_ws = function() {
-    AppCatalogProvider.catalog.then(function(app_catalog) {
+    return AppCatalogProvider.catalog.then(function(app_catalog) {
       var projects_resource, ref, ref1;
       projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
       if (projects_resource != null) {
-        $http.get(projects_resource.uri).success(function(data, status, headers, config) {
+        $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
           var project, selected;
           $scope.ws = data;
+          $scope.ws.projects = ($scope.ws.projects || []).filter(function(p) { return p.parameters.user === $scope.active_user.name; }); 
           if ($location.search().project != null) {
             selected = (function() {
               var i, len, ref2, results;
@@ -63,7 +64,11 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
             } else {
               $location.search('project', null);
             }
+            
           }
+        });
+        $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
+          $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
         });
       }
     });
@@ -260,16 +265,11 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   $scope.show_add_include_file_modal = function() {
     return FilenameModalFactory.open('Create New Include File', 'Choose a filename:', 'Filename', ['.h'], 'Create').then(function(data) {
       if (($scope.ws != null) && ($scope.project_resource != null)) {
-        return $http.post($scope.ws.links.include_directory.href, {
-          name: $scope.project_resource.name,
-          type: 'directory'
-        })["finally"](function() {
-          return $http.post($scope.project_resource.links.include_directory.href, {
-            name: data.filename + data.extension,
-            type: 'file'
-          }).success(function(data, status, headers, config) {
-            return $scope.select_project($scope.selected_project);
-          });
+        return $http.post($scope.project_resource.links.include_directory.href, {
+          name: data.filename + data.extension,
+          type: 'file'
+        }).success(function(data, status, headers, config) {
+          return $scope.select_project($scope.selected_project);
         });
       }
     });
@@ -282,16 +282,11 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     }
     return FilenameModalFactory.open('Create New Source File', 'Choose a filename:', 'Filename', language_array, 'Create').then(function(data) {
       if (($scope.ws != null) && ($scope.project_resource != null)) {
-        return $http.post($scope.ws.links.src_directory.href, {
-          name: $scope.project_resource.name,
-          type: 'directory'
-        })["finally"](function() {
-          return $http.post($scope.project_resource.links.src_directory.href, {
-            name: data.filename + data.extension,
-            type: 'file'
-          }).success(function(data, status, headers, config) {
-            return $scope.select_project($scope.selected_project);
-          });
+        return $http.post($scope.project_resource.links.src_directory.href, {
+          name: data.filename + data.extension,
+          type: 'file'
+        }).success(function(data, status, headers, config) {
+          return $scope.select_project($scope.selected_project);
         });
       }
     });
@@ -299,16 +294,11 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   $scope.show_add_data_file_modal = function() {
     return FilenameModalFactory.open('Create User Data File', 'Choose a filename:', 'Filename', null, 'Create').then(function(data) {
       if (($scope.ws != null) && ($scope.project_resource != null)) {
-        return $http.post($scope.ws.links.data_directory.href, {
-          name: $scope.project_resource.name,
-          type: 'directory'
-        })["finally"](function() {
-          return $http.post($scope.project_resource.links.data_directory.href, {
-            name: data.filename,
-            type: 'file'
-          }).success(function(data, status, headers, config) {
-            return $scope.select_project($scope.selected_project);
-          });
+        return $http.post($scope.project_resource.links.data_directory.href, {
+          name: data.filename,
+          type: 'file'
+        }).success(function(data, status, headers, config) {
+          return $scope.select_project($scope.selected_project);
         });
       }
     });
@@ -333,6 +323,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
       if (projects_resource != null) {
         $http.post(projects_resource.uri, {
           name: $("#projectName").val(),
+          user: $scope.active_user.name,
           language: $("#programmingLanguage").val(),
           src_file_name: $("#sourceFileName").val()
         }).success(function(data, status, headers, config) {
@@ -354,10 +345,66 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     editor.execCommand('indentAuto');
     editor.setCursor(editor.lineCount(), 0);
   };
+
+  $scope.users = [
+    {id: 0, name: 'Default User'}
+  ];
+  $scope.active_user = $scope.users[0];
+
+  $scope.show_new_user_modal = function() {
+    $('#new-user').modal('show');
+  };
+  $scope.hide_new_user_modal = function() {
+    return $('#new-user').modal('hide');
+  };
+
+  $scope.add_user = function() {
+    $scope.show_new_user_modal();
+  };
+
+  $scope.new_user = function() {
+    $('#new-user').modal('hide');
+
+    var username = $("#userName").val();
+    AppCatalogProvider.catalog.then(function(app_catalog) {
+      var projects_resource, ref, ref1;
+      projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
+      if (!projects_resource) return;
+      $http.put(projects_resource.uri + '/users/' + username).success(function(data, status) {
+        if(status !== 204) throw new Error('Failed to create new user');
+        $scope.reload_ws().then(function () {
+          $scope.active_user = $scope.users.filter(function(user) {
+            return user.name === username;
+          })[0] || $scope.active_user;
+        });
+      });
+    });
+  };
+
+  $scope.remove_active_user = function() {
+    var username = $scope.active_user.name;
+    AppCatalogProvider.catalog.then(function(app_catalog) {
+      var projects_resource, ref, ref1;
+      projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
+      if (!projects_resource) return;
+      $http.delete(projects_resource.uri + '/users/' + username).success(function(data, status) {
+        if(status !== 204) throw new Error('Failed to create new user');
+        $scope.reload_ws().then(function () {
+          $scope.active_user = $scope.users[0];
+        });
+      });
+    });
+  }
+
+  $scope.$watch('active_user', function(newValue, oldValue) {
+    $scope.reload_ws();
+  });
+
   compile = function(project_name) {
     $scope.is_compiling = true;
     return $http.post('/api/compile', {
-      name: project_name
+      name: project_name,
+      user: $scope.active_user.name
     }).success(function(data, status, headers, config) {
       var ref;
       $scope.is_compiling = false;
