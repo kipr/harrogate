@@ -424,6 +424,9 @@
   margin-left: 0.5em;
 }
 
+.disabled {
+  color: #aaa;
+}
 
 #user-select {
   flex-grow: 1;
