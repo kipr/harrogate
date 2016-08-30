@@ -3,7 +3,7 @@
   h4.modal-title {{title}}
 
 .modal-body
-  p {{content}}
+  p Create a New File:
   .form-horizontal
     .form-group
       .col-xs-8
@@ -11,7 +11,16 @@
       .col-xs-4(ng-if='extensions')
         select.form-control(ng-model='data.extension')
           option(ng-repeat='extension in extensions' ng-attr-value='{{extension}}') {{extension}}
+  .or-container
+    hr
+    .or OR
+    hr
+  p Upload an Existing File:
+  .form-horizontal
+    #file-upload.form-group
+      .col-xs-12
+        input.form-control(type='file' fileread='data.upload' accept='{{extensions.join()}}')
 
 .modal-footer
-  button.btn.btn-primary(type='button' ng-click='click()' ng-class='{disabled: !data.filename}') {{button_caption}}
+  button.btn.btn-primary(type='button' ng-click='click()' ng-class='{disabled: (!data.filename && !data.upload) || (data.filename && data.upload)}') {{button_caption}}
   button.btn.btn-default(type='button' ng-click='dismiss()') Cancel

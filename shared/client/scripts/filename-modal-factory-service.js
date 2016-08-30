@@ -5,7 +5,7 @@ exports.name = 'FilenameModalFactory';
 exports.service = function($modal) {
   var service;
   service = {
-    open: function(title, content, placeholder, extensions, button_caption) {
+    open: function(title, placeholder, extensions, button_caption) {
       var modalInstance;
       modalInstance = $modal.open({
         templateUrl: 'filename-modal.html',
@@ -13,9 +13,6 @@ exports.service = function($modal) {
         resolve: {
           title: function() {
             return title;
-          },
-          content: function() {
-            return content;
           },
           placeholder: function() {
             return placeholder;
@@ -34,21 +31,23 @@ exports.service = function($modal) {
   return service;
 };
 
-controller = function($scope, $modalInstance, title, content, placeholder, extensions, button_caption) {
+controller = function($scope, $modalInstance, title, placeholder, extensions, button_caption) {
   $scope.data = {
     filename: null,
     extension: null
   };
   $scope.title = title;
-  $scope.content = content;
   $scope.placeholder = placeholder;
   $scope.button_caption = button_caption;
-  $scope.extensions = extensions;
+  $scope.extensions = extensions; 
+
   if ($scope.extensions != null) {
     $scope.data.extension = $scope.extensions[0];
   }
   $scope.click = function() {
-    if (($scope.data.filename != null) && $scope.data.filename !== '') {
+    var new_valid = $scope.data.filename != null && $scope.data.filename !== '';
+    var upload_valid = $scope.data.upload != null && $scope.data.upload.name !== '';
+    if (new_valid || upload_valid) {
       $modalInstance.close($scope.data);
     }
   };
@@ -58,6 +57,6 @@ controller = function($scope, $modalInstance, title, content, placeholder, exten
 };
 
 exports.inject = function(app) {
-  app.controller('FilenameModalController', ['$scope', '$modalInstance', 'title', 'content', 'placeholder', 'extensions', 'button_caption', controller]);
+  app.controller('FilenameModalController', ['$scope', '$modalInstance', 'title', 'placeholder', 'extensions', 'button_caption', controller]);
   app.service(exports.name, ['$modal', exports.service]);
 };
