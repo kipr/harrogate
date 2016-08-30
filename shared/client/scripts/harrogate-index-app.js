@@ -19,6 +19,8 @@ require('./terminal-directive.js').inject(app);
 
 require('./round-slider-directive.js').inject(app);
 
+require('./fileread-directive.js').inject(app);
+
 require('./user-manager-service.js').inject(app);
 
 // inject the apps
