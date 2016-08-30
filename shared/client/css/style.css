@@ -431,3 +431,28 @@
 #user-select {
   flex-grow: 1;
 }
+
+.or-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.or-container > hr {
+  height: 1px;
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.or {
+  font-style: italic;
+  text-transform: lowercase;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#file-upload {
+  margin-top: 15px;
+}
