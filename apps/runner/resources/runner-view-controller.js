@@ -15,30 +15,9 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
   $scope.ProgramService = ProgramService;
   socket = void 0;
   events = void 0;
-  AppCatalogProvider.catalog.then(function(app_catalog) {
-    var projects_resource, ref, ref1;
-    projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
-    if (projects_resource != null) {
-      return $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
-        $scope.ws = data;
-        if ($location.search().project != null) {
-          var selected = (function() {
-            var ref2 = $scope.ws.projects;
-            var results = [];
-            for (var i = 0, len = ref2.length; i < len; i++) {
-              var project = ref2[i];
-              if (project.name === $location.search().project) results.push(project);
-            }
-            return results;
-          })();
-          if (selected[0]) return $scope.select_project(selected[0]);
-        }
-        $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
-          $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
-        });
-      });
-    }
-  });
+  
+  
+
   $scope.select_project = function(project) {
     // toggle selection
     if ($scope.selected_project === project) {
@@ -52,6 +31,39 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
     {id: 0, name: 'Default User'}
   ];
   $scope.active_user = $scope.users[0];
+
+  $scope.$watch('active_user', function(newValue, oldValue) {
+    $scope.update_projects();
+  });
+
+  $scope.update_projects = function() {
+    var projects_resource, ref, ref1;
+    AppCatalogProvider.catalog.then(function(app_catalog) {
+      projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
+      if (projects_resource != null) {
+        return $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
+          $scope.ws = data;
+          if ($location.search().project != null) {
+            var selected = (function() {
+              var ref2 = $scope.ws.projects;
+              var results = [];
+              for (var i = 0, len = ref2.length; i < len; i++) {
+                var project = ref2[i];
+                if (project.name === $location.search().project) results.push(project);
+              }
+              return results;
+            })();
+            if (selected[0]) return $scope.select_project(selected[0]);
+          }
+          $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
+            $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+          });
+        });
+      }
+    })
+  }
+
+  $scope.update_projects();
 
   AppCatalogProvider.catalog.then(function(app_catalog) {
     var events_namespace, ref, ref1, ref2, ref3;
@@ -73,7 +85,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
     if ($scope.selected_project != null) {
       $scope.img_src = null;
       $scope.$broadcast("runner-reset-terminal");
-      return ProgramService.run($scope.selected_project.name);
+      return ProgramService.run($scope.selected_project.name, $scope.active_user.name);
     }
   };
   return $scope.stop = function() {
