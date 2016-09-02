@@ -321,7 +321,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     $('#new-project').modal('show');
   };
   $scope.hide_add_project_modal = function() {
-    return $('#new-project').modal('hide');
+    $('#new-project').modal('hide');
   };
   $scope.add_project = function() {
     $('#new-project').modal('hide');
@@ -363,7 +363,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     $('#new-user').modal('show');
   };
   $scope.hide_new_user_modal = function() {
-    return $('#new-user').modal('hide');
+    $('#new-user').modal('hide');
   };
 
   $scope.add_user = function() {
