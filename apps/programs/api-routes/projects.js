@@ -63,27 +63,41 @@ router.use('/', function(request, response, next) {
   }).done();
 });
 
-router.get('/', function(request, response, next) {
-  request.ws_resource.get_representation().then(function(representation) {
-    var callback;
-    callback = Url.parse(request.url, true).query['callback'];
+router.get('/users', function(request, response, next) {
+  var representation = request.ws_resource.users;
+  var callback = Url.parse(request.url, true).query['callback'];
+
+  // should we return JSON or JSONP (callback defined)?
+  response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  response.setHeader('Pragma', 'no-cache');
+  response.setHeader('Expires', '0');
+  response.writeHead(200, {
+    'Content-Type': 'application/json'
+  });
+
+  if (callback != null) {
+    return response.end(callback + "(" + (JSON.stringify(representation)) + ")", 'utf8');
+  } else {
+    return response.end('' + JSON.stringify(representation));
+  }
+});
+
+router.get('/:user', function(request, response, next) {
+
+  request.ws_resource.get_representation(request.params.user).then(function(representation) {
+    var callback = Url.parse(request.url, true).query['callback'];
+
+    response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    response.setHeader('Pragma', 'no-cache');
+    response.setHeader('Expires', '0');
+    response.writeHead(200, {
+      'Content-Type': 'application/javascript'
+    });
 
     // should we return JSON or JSONP (callback defined)?
     if (callback != null) {
-      response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      response.setHeader('Pragma', 'no-cache');
-      response.setHeader('Expires', '0');
-      response.writeHead(200, {
-        'Content-Type': 'application/javascript'
-      });
       return response.end(callback + "(" + (JSON.stringify(representation)) + ")", 'utf8');
     } else {
-      response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      response.setHeader('Pragma', 'no-cache');
-      response.setHeader('Expires', '0');
-      response.writeHead(200, {
-        'Content-Type': 'application/json'
-      });
       return response.end("" + (JSON.stringify(representation)), 'utf8');
     }
   })["catch"](function(e) {
@@ -99,6 +113,84 @@ router.get('/', function(request, response, next) {
     }
   }).done();
 });
+
+
+
+router.put('/users/:user', function(request, response, next) {
+  const user = request.params.user;
+  var representation = undefined;
+  if(!request.ws_resource.users.some(function(u) { return u === user; }))
+  {
+    request.ws_resource.add_user(user);
+  }
+  else
+  {
+    representation = {
+      error: 'User "' + user + '" already exists'
+    };
+  }
+  
+  var callback = Url.parse(request.url, true).query['callback'];
+
+  // should we return JSON or JSONP (callback defined)?
+  response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  response.setHeader('Pragma', 'no-cache');
+  response.setHeader('Expires', '0');
+
+  if(!representation)
+  {
+    response.writeHead(204);
+    return response.end();
+  }
+
+  response.writeHead(400, { 'Content-Type': 'application/javascript' });
+  if (callback != null)
+  {
+    return response.end(callback + "(" + (JSON.stringify(representation)) + ")", 'utf8');
+  }
+  else
+  {
+    return response.end("" + (JSON.stringify(representation)), 'utf8');
+  }
+});
+
+router.delete('/users/:user', function(request, response, next) {
+  const user = request.params.user;
+  var representation = undefined;
+  if(request.ws_resource.users.some(function(u) { return u === user; }))
+  {
+    request.ws_resource.remove_user(user);
+  }
+  else
+  {
+    representation = {
+      error: 'User "' + user + '" doesn\'t exist'
+    };
+  }
+  
+  var callback = Url.parse(request.url, true).query['callback'];
+
+  // should we return JSON or JSONP (callback defined)?
+  response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  response.setHeader('Pragma', 'no-cache');
+  response.setHeader('Expires', '0');
+  if(!representation)
+  {
+    response.writeHead(204);
+    return response.end();
+  }
+
+  response.writeHead(400, { 'Content-Type': 'application/javascript' });
+  if(callback != null)
+  {
+    return response.end(callback + "(" + (JSON.stringify(representation)) + ")", 'utf8');
+  }
+  else
+  {
+    return response.end("" + (JSON.stringify(representation)), 'utf8');
+  }
+});
+
 
 router.post('/', function(request, response, next) {
 
@@ -131,7 +223,7 @@ router.post('/', function(request, response, next) {
       error: 'Parameter \'language\' missing'
     })), 'utf8');
   }
-  request.ws_resource.create_project(request.body.name, request.body.language, request.body.src_file_name).then(function(resource) {
+  request.ws_resource.create_project(request.body.user, request.body.name, request.body.language, request.body.src_file_name).then(function(resource) {
     response.writeHead(201, {
       'Location': "" + resource.uri
     });
@@ -150,19 +242,15 @@ router.post('/', function(request, response, next) {
   }).done();
 });
 
-router.get('/:project', function(request, response, next) {
-  request.ws_resource.get_projects().then(function(project_resources) {
-    var pack, project_resource, response_mode;
-
+router.get('/:user/:project', function(request, response, next) {
+  request.ws_resource.get_projects(request.params.user).then(function(project_resources) {
     // search for project.name is request.params.project
-    project_resource = ((function() {
-      var i, len, results;
-      results = [];
-      for (i = 0, len = project_resources.length; i < len; i++) {
+    var project_resource = ((function() {
+      var results = [];
+      for (var i = 0, len = project_resources.length; i < len; i++) {
         project_resource = project_resources[i];
-        if (project_resource.name === request.params.project) {
-          results.push(project_resource);
-        }
+        if (project_resource.name !== request.params.project) continue;
+        results.push(project_resource);
       }
       return results;
     })())[0];
@@ -171,7 +259,7 @@ router.get('/:project', function(request, response, next) {
       throw new ServerError(404, 'Project ' + request.params.project + ' does not exists');
     } else {
       // which mode is requested
-      response_mode = Url.parse(request.url, true).query['mode'];
+      var response_mode = Url.parse(request.url, true).query['mode'];
 
       if ((response_mode != null) && response_mode === 'packed') {
         // reply .tar
@@ -186,7 +274,7 @@ router.get('/:project', function(request, response, next) {
 
       } else if ((response_mode != null) && response_mode === 'compressed') {
         // reply .tar.gz
-        pack = new Archiver('tar', {
+        var pack = new Archiver('tar', {
           gzip: true,
           gzipOptions: {
             level: 1
@@ -212,7 +300,7 @@ router.get('/:project', function(request, response, next) {
         });
       } else {
         //# reply JSON
-        return project_resource.get_representation().then(function(representation) {
+        return project_resource.get_representation(true).then(function(representation) {
           var callback;
           callback = Url.parse(request.url, true).query['callback'];
 
@@ -251,8 +339,15 @@ router.get('/:project', function(request, response, next) {
   }).done();
 });
 
-router["delete"]('/:project', function(request, response, next) {
-  request.ws_resource.get_projects().then(function(project_resources) {
+router.delete('/users/:user', function(request, response, next) {
+  var username = request.params.user;
+  request.ws_resource.users.some(function(u) { return u === username; })
+  request.ws_resource.remove_user(username);
+  return response.status(204).end();
+});
+
+router["delete"]('/:user/:project', function(request, response, next) {
+  request.ws_resource.get_projects(request.params.user).then(function(project_resources) {
     var project_resource;
 
     // search for project.name is request.params.project

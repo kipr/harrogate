@@ -105,7 +105,7 @@ Project = (function() {
     this.pack = bind(this.pack, this);
     this.remove = bind(this.remove, this);
     this.is_valid = bind(this.is_valid, this);
-    this.uri = AppManifest.web_api.projects.uri + '/' + encodeURIComponent(this.name);
+    
     binary_path = Path.resolve(this.bin_directory.path, 'botball_user_program');
     if (TargetApp.platform === TargetApp.supported_platforms.WINDOWS_PC) {
       binary_path += '.exe';
@@ -118,31 +118,17 @@ Project = (function() {
   };
 
   Project.prototype.remove = function() {
-    return delete_directory_helper(this.include_directory).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.src_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.data_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.bin_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return delete_directory_helper(_this.lib_directory);
-      };
-    })(this)).then((function(_this) {
-      return function() {
-        return _this.project_file.remove();
-      };
-    })(this));
+    return this.project_file.get_parent().then(function (parent) {
+      return delete_directory_helper(parent);
+    });
   };
 
   Project.prototype.pack = function(pack) {
-    return Q.all([pack_helper(pack, this.include_directory, this.name + "/include"), pack_helper(pack, this.src_directory, this.name + "/src"), pack_helper(pack, this.data_directory, this.name + "/data")]);
+    return Q.all([
+      pack_helper(pack, this.include_directory, this.name + "/include"),
+      pack_helper(pack, this.src_directory, this.name + "/src"),
+      pack_helper(pack, this.data_directory, this.name + "/data")
+    ]);
   };
 
   Project.prototype.get_representation = function(verbose) {
@@ -152,12 +138,10 @@ Project = (function() {
     }
     representation = {
       name: this.name,
-      links: {
-        self: {
-          href: this.uri
-        }
-      }
+      links: {}
     };
+    if(!verbose)
+      console.log('verbose?', verbose);
     if (verbose) {
       _.merge(representation, {
         links: {
@@ -185,23 +169,40 @@ Project = (function() {
         }
       });
     }
+
     return Q.nfcall(Fs.readFile, this.project_file.path).then((function(_this) {
       // >>> Async part. Return a promise and continue
       // get the .project.json file content
       return function(content) {
         var project_parameters;
         project_parameters = JSON.parse(content);
+
+        representation.links.self = {
+          href: AppManifest.web_api.projects.uri
+            + '/' + encodeURIComponent(project_parameters.user)
+            + '/' + encodeURIComponent(_this.name)
+        };
+        
+
         if (!verbose) {
-          // just add the project language and return
+          // just add the project language and owner and return
           representation.parameters = {
-            language: project_parameters.language
+            language: project_parameters.language,
+            user: project_parameters.user
           };
           return representation;
         } else {
           // add the all parameters
           representation.parameters = project_parameters;
+          
           // add all the project files
-          return Q.all([get_file_representations(_this.include_directory), get_file_representations(_this.src_directory), get_file_representations(_this.data_directory), get_file_representations(_this.bin_directory), get_file_representations(_this.lib_directory)]).then(function(values) {
+          return Q.all([
+            get_file_representations(_this.include_directory),
+            get_file_representations(_this.src_directory),
+            get_file_representations(_this.data_directory),
+            get_file_representations(_this.bin_directory),
+            get_file_representations(_this.lib_directory)
+          ]).then(function(values) {
             if (values[0] != null) {
               representation.include_files = values[0];
             }

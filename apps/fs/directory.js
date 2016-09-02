@@ -296,8 +296,10 @@ Directory = (function() {
     })(this));
   };
 
-  Directory.prototype.create_subdirectory = function(name) {
+  Directory.prototype.create_subdirectory = function(name, error_on_exists) {
     var child_path;
+    if(typeof error_on_exists === 'undefined') error_on_exists = true;
+    
     // Handle 'This PC'
     if (TargetApp.platform === TargetApp.supported_platforms.WINDOWS_PC && this.path === '') {
       throw new ServerError(403, 'Cannot create a file or directory in \'This PC\'');
@@ -305,36 +307,31 @@ Directory = (function() {
 
     // compose the child path
     child_path = Path.join(this.path, name);
+    var path = this.path;
 
     // >>> Async part. Return a promise and continue
     // check if the resource is valid
-    return this.is_valid().then((function(_this) {
-      return function(valid) {
-        // throw an error if it's not valid
-        if (!valid) {
-          throw new ServerError(400, _this.path + ' is not a directory');
-        }
-        // get the stats (we can as 'this pc' is already handled)
-        return Q.nfcall(FS.stat, child_path);
-      };
-    })(this)).then(((function(_this) {
-      return function(stats) {
-        // file does exist --> error
-        throw new ServerError(409, name + ' already exists');
-      };
-    })(this)), (function(_this) {
-      return function(err) {
-        if (err.code !== 'ENOENT') {
-          // error is not ENOENT --> something happended --> error
-          throw new ServerError(500, 'Unable to open ' + child_path);
-        }
-        // create the directory
-        return Q.nfcall(FS.mkdir, child_path).then(function() {
-          // directory created, return resource
-          return Directory.create_from_path(child_path);
-        });
-      };
-    })(this));
+    return this.is_valid().then(function(valid) {
+      // throw an error if it's not valid
+      if (!valid) {
+        throw new ServerError(400, path + ' is not a directory');
+      }
+      // get the stats (we can as 'this pc' is already handled)
+      return Q.nfcall(FS.stat, child_path);
+    }).then(function(stats) {
+      if(error_on_exists) throw new ServerError(409, name + ' already exists');
+      return Directory.create_from_path(child_path);
+    }, function(err) {
+      if (err.code !== 'ENOENT') {
+        // error is not ENOENT --> something happended --> error
+        throw new ServerError(500, 'Unable to open ' + child_path + ' ('  + err + ')');
+      }
+      
+      // create the directory
+      return Q.nfcall(FS.mkdir, child_path).then(function() {
+        return Directory.create_from_path(child_path);
+      });
+    });
   };
 
   Directory.prototype.remove = function() {

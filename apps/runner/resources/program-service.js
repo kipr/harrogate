@@ -17,10 +17,11 @@ exports.service = function($http, $q, $timeout, AppCatalogProvider) {
       return;
     }
 
-    ProgramService.prototype.run = function(project_name) {
+    ProgramService.prototype.run = function(project_name, user) {
       return $q(function(resolve, reject) {
         $http.post(runner_api_uri, {
-          name: project_name
+          name: project_name,
+          user: user
         }).success(function() {
           resolve();
         }).error(function() {

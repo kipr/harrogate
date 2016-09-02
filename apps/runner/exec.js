@@ -109,10 +109,21 @@ router.post('/', function(request, response, next) {
     response.writeHead(422, {
       'Content-Type': 'application/json'
     });
-    response.end("" + (JSON.stringify({
+    return response.end("" + (JSON.stringify({
       error: 'Parameter \'name\' missing'
     })), 'utf8');
   }
+
+  if (request.body.user == null) {
+    response.writeHead(422, {
+      'Content-Type': 'application/json'
+    });
+    return response.end("" + (JSON.stringify({
+      error: 'Parameter \'user\' missing'
+    })), 'utf8');
+  }
+
+
   ws_resource = null;
 
   // Create the ws resource
@@ -129,7 +140,7 @@ router.post('/', function(request, response, next) {
       throw new ServerError(400, ws_resource.ws_directory.path + ' is not a valid workspace');
     }
     // and attach it to the request object
-    return ws_resource.get_projects();
+    return ws_resource.get_projects(request.body.user);
   }).then(function(project_resources) {
     var project_resource;
     // search for project.name is request.params.project
