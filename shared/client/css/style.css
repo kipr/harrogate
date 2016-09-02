@@ -414,7 +414,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: black;
 }
 
 #user-select-title {
@@ -423,7 +422,6 @@
 
 #user-select-container > i {
   margin-left: 0.5em;
-  color: black;
 }
 
 .disabled {
@@ -432,6 +430,7 @@
 
 #user-select {
   flex-grow: 1;
+  color: black;
 }
 
 .or-container {
