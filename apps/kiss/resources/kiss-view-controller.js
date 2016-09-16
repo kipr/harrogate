@@ -23,7 +23,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   editor = code_mirror.fromTextArea(document.getElementById('editor'), {
     mode: 'text/x-csrc',
     lineNumbers: true,
-    theme: 'eclipse',
+    theme: 'kiss',
     viewportMargin: Infinity
   });
   editor.on('change', function(e, obj) {
