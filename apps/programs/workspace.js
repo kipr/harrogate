@@ -276,6 +276,7 @@ Workspace = (function() {
     else
     {
       programContent = '#include <kipr/botball.h>\n'
+        + '\n'
         + 'int main()\n'
         + '{\n'
         + '    printf("Hello World\\n");\n'
