@@ -318,6 +318,8 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     return $scope.display_file_menu = true;
   };
   $scope.show_add_project_modal = function() {
+    $scope.change_filename();
+    $('#projectName').val(undefined);
     $('#new-project').modal('show');
   };
   $scope.hide_add_project_modal = function() {
