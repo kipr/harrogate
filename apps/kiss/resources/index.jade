@@ -44,16 +44,6 @@ block view-toolbar-left
       i.fa.fa-link
       br
       small.small Compile {{selected_project.name}}
-    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}' ng-class='{disabled: is_compiling}')
-      i.fa.fa-rocket
-      br
-      small.small Goto Runner
-
-  .btn-group(ng-if='!selected_project')
-    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner' ng-class'{disabled: is_compiling}')
-      i.fa.fa-rocket
-      br
-      small.small Goto Runner
 
 block view-content
   .row.row-stretch
@@ -283,11 +273,3 @@ block bottom-compact-navbar-buttons
     i.fa.fa-link
     |  
     small.small Compile
-  a.btn.btn-toolbar.btn-info(ng-if='selected_project' type='button' href='/#/apps/runner?project={{selected_project.name|escape}}')
-    i.fa.fa-rocket
-    |  
-    small.small Goto Runner
-  a.btn.btn-toolbar.btn-info(ng-if='!selected_project' type='button' href='/#/apps/runner')
-    i.fa.fa-rocket
-    |  
-    small.small Goto Runner
