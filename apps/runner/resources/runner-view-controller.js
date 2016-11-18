@@ -15,8 +15,8 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
   $scope.ProgramService = ProgramService;
   socket = void 0;
   events = void 0;
-  
-  
+
+
 
   $scope.select_project = function(project) {
     // toggle selection
@@ -26,7 +26,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
       return $scope.selected_project = project;
     }
   };
-  
+
   $scope.users = [
     {id: 0, name: 'Default User'}
   ];
@@ -35,6 +35,34 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
   $scope.$watch('active_user', function(newValue, oldValue) {
     $scope.update_projects();
   });
+
+
+  sort_users = function(users) {
+    users.sort(
+      function(a, b) {
+        var nameA = a.name.toUpperCase();
+        var nameB = b.name.toUpperCase();
+
+        if (nameA === "DEFAULT USER"){
+          return -1;
+        }
+
+        if (nameB === "DEFAULT USER"){
+          return 1;
+        }
+
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        return 0;
+      });
+
+    return users;
+  }
 
   $scope.update_projects = function() {
     var projects_resource, ref, ref1;
@@ -57,6 +85,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
           }
           $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
             $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+            $scope.users = sort_users($scope.users);
           });
         });
       }
