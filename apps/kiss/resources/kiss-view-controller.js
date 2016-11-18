@@ -335,6 +335,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
           language: $("#programmingLanguage").val(),
           src_file_name: $("#sourceFileName").val()
         }).success(function(data, status, headers, config) {
+          $location.search('project', $("#projectName").val());
           $scope.reload_ws();
         });
       }
