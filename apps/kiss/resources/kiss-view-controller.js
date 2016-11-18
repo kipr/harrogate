@@ -380,14 +380,21 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
       if (!projects_resource) return;
       $http.put(projects_resource.uri + '/users/' + username).success(function(data, status) {
         if(status !== 204) throw new Error('Failed to create new user');
-        $scope.reload_ws().then(function () {
-          $scope.active_user = $scope.users.filter(function(user) {
-            return user.name === username;
-          })[0] || $scope.active_user;
-        });
+
+          // reload users
+          $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
+            $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+            $scope.active_user = $scope.users.filter(function(user) {
+              return user.name === username;
+
+            })[0] || $scope.active_user;
+          });
       });
     });
-  };
+
+    $scope.reload_ws();
+  }
+
 
   $scope.remove_active_user = function() {
     var username = $scope.active_user.name;
