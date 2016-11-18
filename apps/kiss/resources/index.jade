@@ -44,7 +44,7 @@ block view-toolbar-left
       i.fa.fa-link
       br
       small.small Compile {{selected_project.name}}
-    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}' ng-class='{disabled: is_compiling}')
+    a.btn.btn-toolbar.btn-default(type='button' href='/#/apps/runner?project={{selected_project.name|escape}}&user={{active_user.name|escape}}' ng-class='{disabled: is_compiling}')
       i.fa.fa-rocket
       br
       small.small Goto Runner

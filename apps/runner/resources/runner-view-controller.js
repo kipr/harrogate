@@ -15,8 +15,6 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
   $scope.ProgramService = ProgramService;
   socket = void 0;
   events = void 0;
-  
-  
 
   $scope.select_project = function(project) {
     // toggle selection
@@ -26,11 +24,42 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
       return $scope.selected_project = project;
     }
   };
-  
+
+
   $scope.users = [
     {id: 0, name: 'Default User'}
   ];
+
   $scope.active_user = $scope.users[0];
+
+  $scope.update_users = function() {
+    var projects_resource, ref, ref1;
+    AppCatalogProvider.catalog.then(function(app_catalog) {
+      projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
+      if (projects_resource != null) {
+        $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
+          $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+
+          if ($location.search().user != null) {
+            (function() {
+              var ref2 = $scope.users;
+              for (var i = 0, len = ref2.length; i < len; i++) {
+                var user = ref2[i];
+                if (user.name === $location.search().user){
+                  $scope.active_user = user;
+                  break;
+                }
+              }
+            })();
+          }
+        });
+      }
+    })
+  };
+
+
+  $scope.update_users();
+
 
   $scope.$watch('active_user', function(newValue, oldValue) {
     $scope.update_projects();
@@ -44,6 +73,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
         return $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
           $scope.ws = data;
           if ($location.search().project != null) {
+
             var selected = (function() {
               var ref2 = $scope.ws.projects;
               var results = [];
