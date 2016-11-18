@@ -64,7 +64,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
             } else {
               $location.search('project', null);
             }
-            
+
           }
         });
         $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
@@ -405,6 +405,8 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   }
 
   $scope.$watch('active_user', function(newValue, oldValue) {
+    $scope.close_project();
+    $scope.close_file();
     $scope.reload_ws();
   });
 
