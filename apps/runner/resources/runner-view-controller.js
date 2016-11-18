@@ -15,8 +15,8 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
   $scope.ProgramService = ProgramService;
   socket = void 0;
   events = void 0;
-  
-  
+
+
 
   $scope.select_project = function(project) {
     // toggle selection
@@ -26,7 +26,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
       return $scope.selected_project = project;
     }
   };
-  
+
   $scope.users = [
     {id: 0, name: 'Default User'}
   ];
@@ -43,6 +43,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
       if (projects_resource != null) {
         return $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
           $scope.ws = data;
+          $scope.ws.projects = ($scope.ws.projects || []).sort();
           if ($location.search().project != null) {
             var selected = (function() {
               var ref2 = $scope.ws.projects;
