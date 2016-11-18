@@ -263,15 +263,17 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     return DownloadProjectModalFactory.open(project);
   };
   $scope.show_add_include_file_modal = function() {
-    return FilenameModalFactory.open('Create New Include File', 'Filename', ['.h'], 'Create').then(function(data) {
+    return FilenameModalFactory.open('Create New Include File', 'Filename', ['.h'], 'Create').then(function(mData) {
       if ($scope.ws == null || $scope.project_resource == null) return;
 
-      return $http.post($scope.project_resource.links.include_directory.href, {
-        name: data.filename ? (data.filename + data.extension) : data.upload.name,
+      var file = {
+        name: mData.filename ? (mData.filename + mData.extension) : mData.upload.name,
         type: 'file',
-        content: data.upload ? window.btoa(data.upload.content) : ''
-      }).success(function(data, status, headers, config) {
-        
+        content: mData.upload ? window.btoa(mData.upload.content) : ''
+      };
+
+      return $http.post($scope.project_resource.links.include_directory.href, file).success(function(data, status, headers, config) {
+        $scope.select_file(file, "include");
         return $scope.select_project($scope.selected_project);
       });
     });
@@ -282,30 +284,34 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     if ($scope.project_resource.parameters.language === 'Python') {
       language_array = ['.py'];
     }
-    return FilenameModalFactory.open('Create New Source File', 'Filename', language_array, 'Create').then(function(data) {
+    return FilenameModalFactory.open('Create New Source File', 'Filename', language_array, 'Create').then(function(mData) {
       if ($scope.ws == null || $scope.project_resource == null) return;
 
-      return $http.post($scope.project_resource.links.src_directory.href, {
-        name: data.filename ? (data.filename + data.extension) : data.upload.name,
+      var file = {
+        name: mData.filename ? (mData.filename + mData.extension) : mData.upload.name,
         type: 'file',
-        content: data.upload ? window.btoa(data.upload.content) : ''
-      }).success(function(data, status, headers, config) {
-        console.log(data);
+        content: mData.upload ? window.btoa(mData.upload.content) : ''
+      };
+
+      return $http.post($scope.project_resource.links.src_directory.href, file).success(function(data, status, headers, config) {
+        $scope.select_file(file, "src");
         return $scope.select_project($scope.selected_project);
       });
-
     });
   };
 
   $scope.show_add_data_file_modal = function() {
-    return FilenameModalFactory.open('Create User Data File', 'Filename', null, 'Create').then(function(data) {
+    return FilenameModalFactory.open('Create User Data File', 'Filename', null, 'Create').then(function(mData) {
       if ($scope.ws == null || $scope.project_resource == null) return;
 
-      return $http.post($scope.project_resource.links.data_directory.href, {
-        name: data.filename || data.upload.name,
+      var file = {
+        name: mData.filename ? (mData.filename) : mData.upload.name,
         type: 'file',
-        content: data.upload ? window.btoa(data.upload.content) : ''
-      }).success(function(data, status, headers, config) {
+        content: mData.upload ? window.btoa(mData.upload.content) : ''
+      };
+
+      return $http.post($scope.project_resource.links.data_directory.href, file).success(function(data, status, headers, config) {
+        $scope.select_file(file, "data");
         return $scope.select_project($scope.selected_project);
       });
     });
