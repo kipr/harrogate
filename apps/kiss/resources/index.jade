@@ -186,6 +186,8 @@ block view-content
                 td
                 td
                 td
+                  i.fa.fa-minus(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}'  ng-click='delete_file(selected_file)')
+                  | &nbsp;&nbsp;
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
@@ -204,6 +206,8 @@ block view-content
                 td
                 td
                 td
+                  i.fa.fa-minus(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}'  ng-click='delete_file(selected_file)')
+                  | &nbsp;&nbsp;
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
@@ -222,6 +226,8 @@ block view-content
                 td
                 td
                 td
+                  i.fa.fa-minus(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}'  ng-click='delete_file(selected_file)')
+                  | &nbsp;&nbsp;
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
