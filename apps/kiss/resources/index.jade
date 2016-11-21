@@ -130,6 +130,8 @@ block view-content
               .panel-title
                 | File: {{displayed_file ? displayed_file.name : 'Unnamed File'}}
                 span.btn-group-xs.pull-right
+                  button.btn.btn-default(type='button' ng-click='delete_file(displayed_file)')
+                    i.fa.fa-trash-o
                   button.btn.btn-default(type='button' ng-click='reload_file(displayed_file)')
                     i.fa.fa-refresh
                   button.btn.btn-danger(type='button' ng-click='close_file()')
@@ -186,8 +188,6 @@ block view-content
                 td
                 td
                 td
-                  i.fa.fa-minus(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}'  ng-click='delete_file(selected_file)')
-                  | &nbsp;&nbsp;
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
@@ -206,8 +206,6 @@ block view-content
                 td
                 td
                 td
-                  i.fa.fa-minus(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}'  ng-click='delete_file(selected_file)')
-                  | &nbsp;&nbsp;
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
@@ -226,8 +224,6 @@ block view-content
                 td
                 td
                 td
-                  i.fa.fa-minus(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}'  ng-click='delete_file(selected_file)')
-                  | &nbsp;&nbsp;
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
