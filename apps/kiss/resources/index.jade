@@ -120,6 +120,8 @@ block view-content
               .panel-title
                 | File: {{displayed_file ? displayed_file.name : 'Unnamed File'}}
                 span.btn-group-xs.pull-right
+                  button.btn.btn-default(type='button' ng-click='delete_file(displayed_file)')
+                    i.fa.fa-trash-o
                   button.btn.btn-default(type='button' ng-click='reload_file(displayed_file)')
                     i.fa.fa-refresh
                   button.btn.btn-danger(type='button' ng-click='close_file()')

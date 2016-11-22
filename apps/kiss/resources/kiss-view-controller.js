@@ -214,7 +214,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     return $location.search('cat', null);
   };
   $scope.delete_file = function(file) {
-    return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file?', ['Yes', 'No']).then(function(button) {
+    return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file (' + file.name + ') ?', ['Yes', 'No']).then(function(button) {
       if (button === 'Yes') {
         $http["delete"](file.links.self.href);
         $scope.close_file();
