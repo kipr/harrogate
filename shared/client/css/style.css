@@ -130,7 +130,7 @@
 {
     .panel-stretch > .scrollable-panel-body-container
     {
-        max-height: calc(100% - 43.333px);
+        max-height: calc(100% - 80px);
         overflow: auto;
     }
 
