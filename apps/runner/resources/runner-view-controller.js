@@ -71,6 +71,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
       if (projects_resource != null) {
         return $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
           $scope.ws = data;
+          $scope.ws.projects = ($scope.ws.projects || []).sort();
           if ($location.search().project != null) {
             var selected = (function() {
               var ref2 = $scope.ws.projects;

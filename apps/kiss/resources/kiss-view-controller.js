@@ -73,7 +73,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
         $http.get(projects_resource.uri + '/' + $scope.active_user.name).success(function(data, status, headers, config) {
           var project, selected;
           $scope.ws = data;
-          $scope.ws.projects = ($scope.ws.projects || []).filter(function(p) { return p.parameters.user === $scope.active_user.name; }); 
+          $scope.ws.projects = ($scope.ws.projects || []).filter(function(p) { return p.parameters.user === $scope.active_user.name; }).sort();
           if ($location.search().project != null) {
             selected = (function() {
               var i, len, ref2, results;
