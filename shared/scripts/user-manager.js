@@ -25,10 +25,10 @@ UserManager = (function() {
     this.update_user = bind(this.update_user, this);
     this.list_users = bind(this.list_users, this);
     var error;
-    this.users_file_paht = Path.join(harrogate_app_data_path, 'users.json');
-    console.log('User settings file path: ' + this.users_file_paht);
+    this.users_file_path = Path.join(harrogate_app_data_path, 'users.json');
+    console.log('User settings file path: ' + this.users_file_path);
     try {
-      this.users = require(this.users_file_paht);
+      this.users = require(this.users_file_path);
     } catch (error) {
       this.users = {};
     }
@@ -37,14 +37,14 @@ UserManager = (function() {
   UserManager.prototype.update_user = function(login, data) {
     assert(this.users[login] != null);
     this.users[login] = _.merge(this.users[login], data);
-    Fs.writeFile(this.users_file_paht, JSON.stringify(this.users, null, 2), 'utf8');
+    Fs.writeFile(this.users_file_path, JSON.stringify(this.users, null, 2), 'utf8');
   };
 
   UserManager.prototype.add_user = function(user) {
     assert(user instanceof User);
     assert(user.login != null);
     this.users[user.login] = user;
-    Fs.writeFile(this.users_file_paht, JSON.stringify(this.users, null, 2), 'utf8');
+    Fs.writeFile(this.users_file_path, JSON.stringify(this.users, null, 2), 'utf8');
   };
 
   return UserManager;

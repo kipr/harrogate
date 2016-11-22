@@ -96,8 +96,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
           }
         });
         $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
-          $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
-
+          $scope.users = Object.keys(data).map(function(user, i) { return {id: i, name: user, data: data[user]}; });
           $scope.users = sort_users($scope.users);
         });
       }
@@ -214,12 +213,33 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     return $location.search('cat', null);
   };
   $scope.delete_file = function(file) {
+    const project_resource = $scope.project_resource;
+    const total_files = project_resource.include_files.length + project_resource.source_files.length + project_resource.data_files.length;
+    if(total_files === 1)
+    {
+      return ButtonsOnlyModalFactory.open('Delete Project', 'This is the last file in the project. Do you want to delete the project?', ['Yes', 'No']).then(function(button) {
+        if (button !== 'Yes')
+        {
+          return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file (' + file.name + ') ?', ['Yes', 'No']).then(function(button) {
+            if (button !== 'Yes') return;
+            $http["delete"](file.links.self.href);
+            $scope.close_file();
+            $scope.select_project($scope.selected_project);
+          });
+        }
+        const project = $scope.selected_project;
+        $scope.close_project();
+        return $http["delete"](project.links.self.href).success(function(data, status, headers, config) {
+          return $scope.reload_ws();
+        });
+      });
+    }
+
     return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file (' + file.name + ') ?', ['Yes', 'No']).then(function(button) {
-      if (button === 'Yes') {
-        $http["delete"](file.links.self.href);
-        $scope.close_file();
-        $scope.select_project($scope.selected_project);
-      }
+      if (button !== 'Yes') return;
+      $http["delete"](file.links.self.href);
+      $scope.close_file();
+      $scope.select_project($scope.selected_project);
     });
   };
   save_file = function() {
@@ -422,10 +442,9 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
 
           // reload users
           $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
-            $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+            $scope.users = Object.keys(data).map(function(user, i) { return {id: i, name: user, data: data[user]}; });
             $scope.active_user = $scope.users.filter(function(user) {
               return user.name === username;
-
             })[0] || $scope.active_user;
           });
       });

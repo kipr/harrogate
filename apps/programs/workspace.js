@@ -36,9 +36,22 @@ Workspace = (function() {
     this.uri = AppManifest.web_api.projects.uri;
 
     this.users = ['Default User'];
+    var users_path = Path.join(this.ws_directory.path, 'users.json');
+
     try {
-      this.users = JSON.parse(Fs.readFileSync(Path.join(this.ws_directory.path, 'users.json'), 'utf8'));
+      this.users = JSON.parse(Fs.readFileSync(users_path, 'utf8'));
     } catch(e) {}
+
+    if(this.users.constructor === Array)
+    {
+      var new_users = {};
+      this.users.forEach(function(user) {
+        new_users[user] = {
+          mode: "simple"
+        };
+      });
+      this.users = new_users;
+    }
   }
 
   Workspace.prototype.is_valid = function() {
@@ -80,14 +93,18 @@ Workspace = (function() {
   }
 
   Workspace.prototype.add_user = function(user) {
-    if(this.users.some(function(u) { return u === user; })) return;
-    this.users.push(user);
+    if(user in this.users) return;
+    this.users[user] = {
+      mode: "simple"
+    };
     this.sync_users();
   }
 
   Workspace.prototype.remove_user = function(user) {
     if(user === 'Default User') return;
-    this.users = this.users.filter(function(u) { return u !== user; });
+    if(!(user in this.users)) return;
+    delete this.users[user];
+    
     var dir = Directory.create_from_path(Path.join(this.ws_directory.path, user));
     this.sync_users();
     return dir.remove();
