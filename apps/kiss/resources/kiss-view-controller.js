@@ -37,6 +37,34 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
       obj.cancel();
     }
   });
+
+  sort_users = function(users) {
+    users.sort( 
+      function(a, b) {
+        var nameA = a.name.toUpperCase();
+        var nameB = b.name.toUpperCase();
+
+        if (nameA === "DEFAULT USER"){
+          return -1;
+        }
+
+        if (nameB === "DEFAULT USER"){
+          return 1;
+        }
+
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        return 0;
+      });
+
+    return users;
+  }
+
   $scope.reload_ws = function() {
     return AppCatalogProvider.catalog.then(function(app_catalog) {
       var projects_resource, ref, ref1;
@@ -69,6 +97,8 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
         });
         $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
           $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+
+          $scope.users = sort_users($scope.users);
         });
       }
     });
