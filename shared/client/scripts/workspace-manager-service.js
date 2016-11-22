@@ -1,7 +1,5 @@
 exports.name = 'WorkspaceManagerService';
 
-console.log("WORKSPACE!!!!!!!")
-
 exports.inject = function(app) {
   app.service(exports.name, ['$http', '$q', '$location', 'authRequiredInterceptor', 'ButtonsOnlyModalFactory', exports.service]);
   return exports.service;
