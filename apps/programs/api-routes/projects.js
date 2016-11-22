@@ -82,6 +82,16 @@ router.get('/users', function(request, response, next) {
   }
 });
 
+router.put('/users/:user', function(request, response, next) {
+  const user = request.params.user;
+
+  // FIXME: TODO: Validate body
+  request.ws_resource.update_user(user, request.body);
+
+  response.writeHead(204);
+  response.end();
+});
+
 router.get('/:user', function(request, response, next) {
 
   request.ws_resource.get_representation(request.params.user).then(function(representation) {

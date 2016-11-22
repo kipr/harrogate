@@ -23,6 +23,8 @@ require('./fileread-directive.js').inject(app);
 
 require('./user-manager-service.js').inject(app);
 
+require('./workspace-manager-service.js').inject(app);
+
 // inject the apps
 for (app_name in app_catalog) {
   app_obj = app_catalog[app_name];

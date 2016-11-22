@@ -51,6 +51,23 @@ block view-content
                     i.fa.fa-archive
                     |  
                     | Update Packages
+        
+        .panel.panel-primary
+          .panel-heading
+            .h3.panel-title 
+              i.fa.fa-cubes
+              |  
+              | Workspace
+          .panel-body
+            .form-group
+              label Path
+              .input-group
+                input.form-control(type='text' ng-attr-id="path" ng-model="workspace_path")
+                .input-group-btn
+                  button.btn.btn-default(type='button' ng-click='apply_change()')
+                    i.fa.fa-check
+                  button.btn.btn-default(type='button' ng-click='reset()')
+                    i.fa.fa-times
                   
         //.panel.panel-primary
         //  .panel-heading

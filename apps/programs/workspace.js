@@ -47,7 +47,7 @@ Workspace = (function() {
       var new_users = {};
       this.users.forEach(function(user) {
         new_users[user] = {
-          mode: "simple"
+          mode: "Simple"
         };
       });
       this.users = new_users;
@@ -92,10 +92,16 @@ Workspace = (function() {
     Fs.writeFileSync(file, JSON.stringify(this.users));
   }
 
+  Workspace.prototype.update_user = function(user, data) {
+    if(!(user in this.users)) return;
+    this.users[user] = data;
+    this.sync_users();
+  }
+
   Workspace.prototype.add_user = function(user) {
     if(user in this.users) return;
     this.users[user] = {
-      mode: "simple"
+      mode: "Simple"
     };
     this.sync_users();
   }
