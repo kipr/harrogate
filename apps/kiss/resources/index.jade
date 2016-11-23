@@ -82,10 +82,10 @@ block view-content
               h4(ng-if='project_resource.source_files') Source Files
               ul(ng-if='project_resource.source_files')
                 li(ng-repeat = 'file in project_resource.source_files') {{file.path}}
-              h4(ng-if='project_resource.include_files') Include Files
+              h4(ng-if='project_resource.include_files && active_user.data.mode !== "Simple"') Include Files
               ul(ng-if='project_resource.include_files')
                 li(ng-repeat = 'file in project_resource.include_files') {{file.path}}
-              h4(ng-if='project_resource.data_files') Data Files
+              h4(ng-if='project_resource.data_files  && active_user.data.mode !== "Simple"') Data Files
               ul(ng-if='project_resource.data_files')
                 li(ng-repeat = 'file in project_resource.data_files') {{file.path}}
 
@@ -170,18 +170,18 @@ block view-content
                 th(colspan="3")
                   | {{project.name}}
 
-              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project' ng-class='{active: selected_file, info: !selected_file}')
+              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}')
                 th
                 th(colspan="2")
                   | Include Files
-              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project' ng-repeat = 'file in project_resource.include_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "include")')
+              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project && active_user.data.mode !== "Simple"' ng-repeat = 'file in project_resource.include_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "include")')
                 td
                 td
                 td
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
-              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_include_file_modal()')
+              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_include_file_modal()')
                  td
                  td
                  td
@@ -199,25 +199,25 @@ block view-content
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
-              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_source_file_modal()')
+              tr.cursor-pointer(ng-if='selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_source_file_modal()')
                  td
                  td
                  td
                   i.fa.fa-plus
                   |  
                   | Add File
-              tr.cursor-pointer(ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}')
+              tr.cursor-pointer(ng-if='selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}')
                 th
                 th(colspan="2")
                   | User Data Files
-              tr.cursor-pointer(ng-if='selected_project === project' ng-repeat = 'file in project_resource.data_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "data")')
+              tr.cursor-pointer(ng-if='selected_project === project && active_user.data.mode !== "Simple"' ng-repeat = 'file in project_resource.data_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "data")')
                 td
                 td
                 td
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
-              tr.cursor-pointer(ng-repeat-end ng-if='selected_project === project' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_data_file_modal()')
+              tr.cursor-pointer(ng-repeat-end ng-if='selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_data_file_modal()')
                  td
                  td
                  td

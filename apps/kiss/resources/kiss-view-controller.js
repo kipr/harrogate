@@ -96,8 +96,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
           }
         });
         $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
-          $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
-
+          $scope.users = Object.keys(data).map(function(user, i) { return {id: i, name: user, data: data[user]}; });
           $scope.users = sort_users($scope.users);
         });
       }
@@ -214,12 +213,37 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     return $location.search('cat', null);
   };
   $scope.delete_file = function(file) {
+    const project_resource = $scope.project_resource;
+    const total_files = project_resource.include_files.length + project_resource.source_files.length + project_resource.data_files.length;
+    if(total_files === 1)
+    {
+      return ButtonsOnlyModalFactory.open('Delete Project', 'This is the last file in the project. Do you want to delete the project?', ['Yes', 'No']).then(function(button) {
+        if (button !== 'Yes')
+        {
+          // We have to delete project if it is the last file in simple mode
+          // because simple mode doesn't allow another means to upload
+          if ($scope.active_user.data.mode === "Simple") return;
+
+          return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file (' + file.name + ') ?', ['Yes', 'No']).then(function(button) {
+            if (button !== 'Yes') return;
+            $http["delete"](file.links.self.href);
+            $scope.close_file();
+            $scope.select_project($scope.selected_project);
+          });
+        }
+        const project = $scope.selected_project;
+        $scope.close_project();
+        return $http["delete"](project.links.self.href).success(function(data, status, headers, config) {
+          return $scope.reload_ws();
+        });
+      });
+    }
+
     return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file (' + file.name + ') ?', ['Yes', 'No']).then(function(button) {
-      if (button === 'Yes') {
-        $http["delete"](file.links.self.href);
-        $scope.close_file();
-        $scope.select_project($scope.selected_project);
-      }
+      if (button !== 'Yes') return;
+      $http["delete"](file.links.self.href);
+      $scope.close_file();
+      $scope.select_project($scope.selected_project);
     });
   };
   save_file = function() {
@@ -422,10 +446,9 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
 
           // reload users
           $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
-            $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+            $scope.users = Object.keys(data).map(function(user, i) { return {id: i, name: user, data: data[user]}; });
             $scope.active_user = $scope.users.filter(function(user) {
               return user.name === username;
-
             })[0] || $scope.active_user;
           });
       });
@@ -437,17 +460,22 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
 
   $scope.remove_active_user = function() {
     var username = $scope.active_user.name;
-    AppCatalogProvider.catalog.then(function(app_catalog) {
-      var projects_resource, ref, ref1;
-      projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
-      if (!projects_resource) return;
-      $http.delete(projects_resource.uri + '/users/' + username).success(function(data, status) {
-        if(status !== 204) throw new Error('Failed to create new user');
-        $scope.reload_ws().then(function () {
-          $scope.active_user = $scope.users[0];
+    return ButtonsOnlyModalFactory.open('Remove User', 'Are you sure you want to permanently remove ' + username + ' and all of their projects?', ['Yes', 'No']).then(function(button) {
+      if (button !== 'Yes') return;
+
+      AppCatalogProvider.catalog.then(function(app_catalog) {
+        var projects_resource, ref, ref1;
+        projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
+        if (!projects_resource) return;
+        $http.delete(projects_resource.uri + '/users/' + username).success(function(data, status) {
+          if(status !== 204) throw new Error('Failed to create new user');
+          $scope.reload_ws().then(function () {
+            $scope.active_user = $scope.users[0];
+          });
         });
       });
     });
+    
   }
 
   $scope.$watch('active_user', function(newValue, oldValue) {

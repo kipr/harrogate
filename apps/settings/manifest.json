@@ -12,6 +12,10 @@
     "settings": {
       "uri": "/api/settings",
       "description": "Provides access to the settings"
+    },
+    "workspace": {
+      "uri": "/api/workspace",
+      "description": "Provides access to the workspace settings"
     }
   }
 }

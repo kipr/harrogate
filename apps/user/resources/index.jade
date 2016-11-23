@@ -1,43 +1,21 @@
 extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-content
-  //.row(ng-show="current_user")
-    //-.col-md-4
-      .row.desktop-only
-        .col-xs-3
-        .col-xs-2
-            i.fa.fa-5x.fa-user
-        .col-xs-5
-            h1 {{current_user.login}}
-      .row.desktop-only
-        .col-xs-5
-        .col-xs-5
-          button.btn.btn-default.bnt-lg(type='button' ng-click='logout()')
-            i.fa.fa-sign-out
-            |  
-            | Logout {{current_user.login}}
- 
-    //-.col-md-8
+  .form-group
+    label User
+    select.form-control(ng-options = 'user as user.name for user in users' ng-model="active_user" ng-change="active_user_changed()")
 
-  .row
+  .row(ng-if="active_user")
     .panel-group
       .panel.panel-primary
         .panel-heading
           .h3.panel-title 
             i.fa.fa-file-text-o
             |  
-            | Workspace
+            | Interface Mode
 
         .panel-body
-          .form-group
-            label Path
-            .input-group
-              input.form-control(type='text' ng-attr-id="path" ng-model="current_user.preferences.workspace.path")
-              .input-group-btn
-                button.btn.btn-default(type='button' ng-click='apply_change()')
-                  i.fa.fa-check
-                button.btn.btn-default(type='button' ng-click='reset()')
-                  i.fa.fa-times
+          select.form-control(ng-options = 'mode for mode in modes' ng-model="active_user.data.mode" ng-change="mode_changed()")
 
   //.row(ng-show="!current_user")
     .col-xs-1.col-md-3
