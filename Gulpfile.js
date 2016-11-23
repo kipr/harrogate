@@ -62,7 +62,7 @@ gulp.task('dev', ['compile', 'watch'], function() {
 
 gulp.task('compile', ['shared', 'apps'], function() {});
 
-gulp.task('shared', ['shared_views', 'shared_styles', 'shared_resources', 'scripts', 'shared_3rd_party_libs'], function() {});
+gulp.task('shared', ['shared_views', 'shared_styles', 'shared_resources', 'scripts', 'shared_3rd_party_libs', 'doc'], function() {});
 
 gulp.task('shared_views', function() {
   return gulp.src('shared/client/views/*.jade').pipe(jade()).pipe(gulp.dest('public/'));
@@ -88,6 +88,10 @@ gulp.task('bootstrap', function() {
       path.dirname = 'scripts';
     }
   })).pipe(gulp.dest('public/'));
+});
+
+gulp.task('doc', function() {
+  return gulp.src('shared/client/doc/**/*').pipe(gulp.dest('public/doc/'));
 });
 
 gulp.task('jquery', function() {
