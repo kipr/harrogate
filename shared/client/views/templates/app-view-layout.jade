@@ -58,16 +58,9 @@ nav.navbar.navbar-default.navbar-fixed-bottom.desktop-only#status-bar(ng-control
         |  
         a(href='http://www.kipr.org/') KISS Insitute for Practical Robotics
 
-//    p.navbar-text.navbar-right
-//        i.fa.fa-signal
-//        |  20 %
-//        |  
-//        | &nbsp;&nbsp;
-//        i.fa.fa-battery-full
-//        |  
-//        | 100 %
-//        |  
-//        | &nbsp;&nbsp;
+    p.navbar-text.navbar-right
+      i.fa(ng-class='{"fa-link": connected, "fa-chain-broken": !connected}')
+        
 
 //  form.navbar-form.navbar-left
 //    .form-group.btn-group-xs

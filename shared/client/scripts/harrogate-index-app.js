@@ -73,10 +73,15 @@ app.service('authRequiredInterceptor', [
 ]);
 
 app.controller('statusBarCtrl', [
-  '$scope', 'UserManagerService', function($scope, UserManagerService) {
-    return UserManagerService.get_current_user().then(function(current_user) {
-      $scope.current_user = current_user;
-    });
+  '$scope', '$http', 'UserManagerService', function($scope, $http, UserManagerService) {
+    $scope.connected = true;
+    const handle = window.setInterval(function() {
+      $http.get('/').then(function() {
+        $scope.connected = true;
+      }, function() {
+        $scope.connected = false;
+      });
+    }, 10000);
   }
 ]);
 
