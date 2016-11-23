@@ -82,7 +82,7 @@ router.get('/users', function(request, response, next) {
   }
 });
 
-router.put('/users/:user', function(request, response, next) {
+router.patch('/users/:user', function(request, response, next) {
   const user = request.params.user;
 
   // FIXME: TODO: Validate body
@@ -129,7 +129,8 @@ router.get('/:user', function(request, response, next) {
 router.put('/users/:user', function(request, response, next) {
   const user = request.params.user;
   var representation = undefined;
-  if(!request.ws_resource.users.some(function(u) { return u === user; }))
+  console.log(request.ws_resource.users);
+  if(!(user in request.ws_resource.users))
   {
     request.ws_resource.add_user(user);
   }
@@ -167,7 +168,7 @@ router.put('/users/:user', function(request, response, next) {
 router.delete('/users/:user', function(request, response, next) {
   const user = request.params.user;
   var representation = undefined;
-  if(request.ws_resource.users.some(function(u) { return u === user; }))
+  if(user in request.ws_resource.users)
   {
     request.ws_resource.remove_user(user);
   }
@@ -350,9 +351,12 @@ router.get('/:user/:project', function(request, response, next) {
 });
 
 router.delete('/users/:user', function(request, response, next) {
-  var username = request.params.user;
-  request.ws_resource.users.some(function(u) { return u === username; })
-  request.ws_resource.remove_user(username);
+  var user = request.params.user;
+  if(!(user in request.ws_resource.users))
+  {
+    return response.status(404).end();
+  }
+  request.ws_resource.remove_user(user);
   return response.status(204).end();
 });
 

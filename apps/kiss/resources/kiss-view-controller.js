@@ -221,8 +221,8 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
         if (button !== 'Yes')
         {
           // We have to delete project if it is the last file in simple mode
-          // because simple mode doesn't allow another means to upload files
-          if ( $scope.active_user.data.mode === "Simple") return;
+          // because simple mode doesn't allow another means to upload
+          if ($scope.active_user.data.mode === "Simple") return;
 
           return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file (' + file.name + ') ?', ['Yes', 'No']).then(function(button) {
             if (button !== 'Yes') return;
@@ -460,17 +460,22 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
 
   $scope.remove_active_user = function() {
     var username = $scope.active_user.name;
-    AppCatalogProvider.catalog.then(function(app_catalog) {
-      var projects_resource, ref, ref1;
-      projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
-      if (!projects_resource) return;
-      $http.delete(projects_resource.uri + '/users/' + username).success(function(data, status) {
-        if(status !== 204) throw new Error('Failed to create new user');
-        $scope.reload_ws().then(function () {
-          $scope.active_user = $scope.users[0];
+    return ButtonsOnlyModalFactory.open('Remove User', 'Are you sure you want to permanently remove ' + username + ' and all of their projects?', ['Yes', 'No']).then(function(button) {
+      if (button !== 'Yes') return;
+
+      AppCatalogProvider.catalog.then(function(app_catalog) {
+        var projects_resource, ref, ref1;
+        projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
+        if (!projects_resource) return;
+        $http.delete(projects_resource.uri + '/users/' + username).success(function(data, status) {
+          if(status !== 204) throw new Error('Failed to create new user');
+          $scope.reload_ws().then(function () {
+            $scope.active_user = $scope.users[0];
+          });
         });
       });
     });
+    
   }
 
   $scope.$watch('active_user', function(newValue, oldValue) {

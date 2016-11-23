@@ -104,6 +104,7 @@ Workspace = (function() {
       mode: "Simple"
     };
     this.sync_users();
+    console.log("ADD USER!!!!!!!!!!!!");
   }
 
   Workspace.prototype.remove_user = function(user) {

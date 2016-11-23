@@ -23,7 +23,7 @@ exports.service = function($http, $q, $location, authRequiredInterceptor, Button
 
     WorkspaceManagerService.prototype.change_workspace_path = function(path) {
       return $q(function(resolve, reject) {
-        return $http.put(workspace_api_uri, {
+        return $http.patch(workspace_api_uri, {
           path: path
         }).success(function() {
           return resolve();
