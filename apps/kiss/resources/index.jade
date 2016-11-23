@@ -82,10 +82,10 @@ block view-content
               h4(ng-if='project_resource.source_files') Source Files
               ul(ng-if='project_resource.source_files')
                 li(ng-repeat = 'file in project_resource.source_files') {{file.path}}
-              h4(ng-if='project_resource.include_files') Include Files
+              h4(ng-if='project_resource.include_files && active_user.data.mode !== "Simple"') Include Files
               ul(ng-if='project_resource.include_files')
                 li(ng-repeat = 'file in project_resource.include_files') {{file.path}}
-              h4(ng-if='project_resource.data_files') Data Files
+              h4(ng-if='project_resource.data_files  && active_user.data.mode !== "Simple"') Data Files
               ul(ng-if='project_resource.data_files')
                 li(ng-repeat = 'file in project_resource.data_files') {{file.path}}
 
