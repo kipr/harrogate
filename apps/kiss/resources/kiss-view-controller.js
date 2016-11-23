@@ -220,6 +220,10 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
       return ButtonsOnlyModalFactory.open('Delete Project', 'This is the last file in the project. Do you want to delete the project?', ['Yes', 'No']).then(function(button) {
         if (button !== 'Yes')
         {
+          // We have to delete project if it is the last file in simple mode
+          // because simple mode doesn't allow another means to upload files
+          if ( $scope.active_user.data.mode === "Simple") return;
+
           return ButtonsOnlyModalFactory.open('Delete File', 'Are you sure you want to permanently delete this file (' + file.name + ') ?', ['Yes', 'No']).then(function(button) {
             if (button !== 'Yes') return;
             $http["delete"](file.links.self.href);
