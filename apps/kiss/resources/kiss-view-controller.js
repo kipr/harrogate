@@ -4,16 +4,19 @@ require('codemirror/mode/clike/clike');
 
 code_mirror = require('codemirror/lib/codemirror');
 
+Io = require('socket.io-client');
+
 exports.name = 'KissViewController';
 
 exports.inject = function(app) {
-  app.controller(exports.name, ['$scope', '$rootScope', '$location', '$http', '$timeout', 'AppCatalogProvider', 'ButtonsOnlyModalFactory', 'DownloadProjectModalFactory', 'FilenameModalFactory', exports.controller]);
+  app.controller(exports.name, ['$scope', '$rootScope', '$location', '$http', '$timeout', 'AppCatalogProvider', 'ProgramService', 'ButtonsOnlyModalFactory', 'DownloadProjectModalFactory', 'FilenameModalFactory', exports.controller]);
 };
 
-exports.controller = function($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ButtonsOnlyModalFactory, DownloadProjectModalFactory, FilenameModalFactory) {
+exports.controller = function($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ProgramService, ButtonsOnlyModalFactory, DownloadProjectModalFactory, FilenameModalFactory) {
   var compile, editor, onRouteChangeOff, on_window_beforeunload, save_file, saving;
   $scope.is_compiling = false;
   $scope.documentChanged = false;
+  $scope.ProgramService = ProgramService;
   $scope.$on('$routeUpdate', function(next, current) {
     var ref, ref1;
     if ((((ref = $scope.displayed_file) != null ? ref.name : void 0) !== $location.search().file) || (((ref1 = $scope.selected_project) != null ? ref1.name : void 0) !== $location.search().project)) {
@@ -485,6 +488,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   });
 
   compile = function(project_name) {
+    $scope.stop();
     $scope.is_compiling = true;
     return $http.post('/api/compile', {
       name: project_name,
@@ -508,7 +512,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
       }
     });
   };
-  return $scope.compile = function() {
+  $scope.compile = function() {
     $scope.compiler_output = null;
     if ($scope.selected_project != null) {
       if ($scope.displayed_file != null) {
@@ -520,5 +524,42 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
         return compile($scope.selected_project.name);
       }
     }
+  };
+
+  AppCatalogProvider.catalog.then(function(app_catalog) {
+    var events_namespace, ref, ref1, ref2, ref3;
+    events = (ref = app_catalog['Runner']) != null ? (ref1 = ref.event_groups) != null ? ref1.runner_events.events : void 0 : void 0;
+    events_namespace = (ref2 = app_catalog['Runner']) != null ? (ref3 = ref2.event_groups) != null ? ref3.runner_events.namespace : void 0 : void 0;
+    if (events != null) {
+      socket = Io(':8888' + events_namespace);
+      return socket.on(events.stdout.id, function(msg) {
+        return $scope.$broadcast('runner-program-output', msg);
+      });
+    }
+  });
+  $scope.$on('runner-program-input', function(event, text) {
+    if ((socket != null) && (events != null)) {
+      return socket.emit(events.stdin.id, text);
+    }
+  });
+  $scope.run = function() {
+    if ($scope.selected_project != null) {
+      $scope.img_src = null;
+      $scope.$broadcast("runner-reset-terminal");
+      $scope.runner = true;
+      $scope.compiler_output = '';
+      return ProgramService.run($scope.selected_project.name, $scope.active_user.name);
+    }
+  };
+  $scope.toggle_run = function() {
+    if(ProgramService.running) return $scope.stop();
+    return $scope.run();
+  }
+  $scope.hide_runner = function() {
+    $scope.runner = false;
+  }
+  return $scope.stop = function() {
+    if(!ProgramService.running) return;
+    return ProgramService.stop();
   };
 };

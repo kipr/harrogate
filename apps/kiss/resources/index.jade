@@ -44,11 +44,16 @@ block view-toolbar-left
       i.fa.fa-link
       br
       small.small Compile {{selected_project.name}}
+  .btn-group(ng-if='selected_project')
+    button.btn.btn-default.btn-toolbar(type='button' ng-click='toggle_run()')
+      i.fa(ng-class='{"fa-play": !ProgramService.running, "fa-stop": ProgramService.running}')
+      br
+      small.small {{!ProgramService.running ? 'Run' : 'Stop'}}
 
 block view-content
   .row.row-stretch
     .col-md-9.col-stretch(ng-class='{"desktop-only": !selected_project}')
-      .row(ng-class="{'row-stretch-60' : compiler_output, 'row-stretch' : !compiler_output}")
+      .row(ng-class="{'row-stretch-60' : !!compiler_output || runner, 'row-stretch' : !compiler_output && !runner}")
         .col-xs-12.col-stretch
 
           //- Project menu
@@ -143,6 +148,18 @@ block view-content
             .scrollable-panel-body-container
               pre.panel-body
                 code {{compiler_output}}
+
+      .row.row-stretch-40(ng-show='runner')
+        .col-xs-12.col-stretch
+          .panel.panel-stretch.panel-primary
+            .panel-heading
+              .panel-title
+                | Runner
+                span.btn-group-xs.pull-right(ng-if="!ProgramService.running")
+                  button.btn.btn-danger(type='button' ng-click='hide_runner()')
+                    i.fa.fa-times
+            .scrollable-panel-body-container
+              terminal.terminal-stretch(output-event="runner-program-output" input-event="runner-program-input" reset-event="runner-reset-terminal")
 
     .col-md-3.col-stretch(ng-class='{"desktop-only": selected_project}')
       .panel.panel-primary.panel-stretch
@@ -275,3 +292,7 @@ block bottom-compact-navbar-buttons
     i.fa.fa-link
     |  
     small.small Compile
+  a.btn.btn-toolbar.btn-info(type='button', ng-class="{'disabled' : !selected_project}", ng-click='toggle_run()')
+    i.fa(ng-class='{"fa-play": !ProgramService.running, "fa-stop": ProgramService.running}')
+    |  
+    small.small {{!ProgramService.running ? 'Run' : 'Stop'}}

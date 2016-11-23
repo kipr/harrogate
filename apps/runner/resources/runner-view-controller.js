@@ -85,7 +85,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
             if (selected[0]) return $scope.select_project(selected[0]);
           }
           $http.get(projects_resource.uri + '/users').success(function(data, status, headers, config) {
-            $scope.users = data.map(function(user, i) { return {id: i, name: user}; });
+            $scope.users = Object.keys(data).map(function(user, i) { return {id: i, name: user}; });
             $scope.users = sort_users($scope.users);
           });
         });
