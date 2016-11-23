@@ -72,10 +72,13 @@ app.service('authRequiredInterceptor', [
   }
 ]);
 
+var handle = -1;
+
 app.controller('statusBarCtrl', [
   '$scope', '$http', 'UserManagerService', function($scope, $http, UserManagerService) {
     $scope.connected = true;
-    const handle = window.setInterval(function() {
+    if(handle >= 0) window.clearInterval(handle);
+    handle = window.setInterval(function() {
       $http.get('/').then(function() {
         $scope.connected = true;
       }, function() {
