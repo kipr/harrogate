@@ -42,7 +42,7 @@ exports.controller = function($scope, $http, AppCatalogProvider, ButtonsOnlyModa
   $scope.modes = ['Simple', 'Advanced'];
 
   $scope.mode_changed = function() {
-    $http.put($scope.users_uri + '/' + $scope.active_user.name, $scope.active_user.data).then(function() {
+    $http.patch($scope.users_uri + '/' + $scope.active_user.name, $scope.active_user.data).then(function() {
     }, function(data, status) {
       console.log("ERROR!! ", data, status);
     })
