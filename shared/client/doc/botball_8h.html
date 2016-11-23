@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>libwallaby: Main Page</title>
+<title>libwallaby: include/wallaby/botball.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -72,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('index.html','');});
+$(document).ready(function(){initNavTree('botball_8h.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -90,29 +90,75 @@ $(document).ready(function(){initNavTree('index.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">libwallaby Documentation</div>  </div>
+<div class="title">botball.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<ul><li><a href="index.html"><span>Main&#160;Page</span></a>
-</li><li><a href="pages.html"><span>Related&#160;Pages</span></a>
-</li><li><a href="modules.html"><span>Modules</span></a>
-</li><li><a href="annotated.html"><span>Classes</span></a>
-<ul><li><a href="annotated.html"><span>Class&#160;List</span></a>
-</li><li><a href="classes.html"><span>Class&#160;Index</span></a>
-</li><li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a>
-</li><li><a href="functions.html"><span>Class&#160;Members</span></a>
-</li></ul>
-</li><li><a href="files.html"><span>Files</span></a>
-<ul><li><a href="files.html"><span>File&#160;List</span></a>
-</li><li><a href="globals.html"><span>File&#160;Members</span></a>
-</li></ul>
-</li></ul>
+<div class="textblock"><code>#include &quot;<a class="el" href="export_8h_source.html">export.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="vtable_8h_source.html">vtable.h</a>&quot;</code><br />
+</div>
+<p><a href="botball_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae558f9e5e2bcaa84384565dadd03f89c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vtable_8h.html#a8956b9119e3f283cb31cf6e029da3277">VF</a> <a class="el" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="botball_8h.html#ae558f9e5e2bcaa84384565dadd03f89c">shut_down_in</a> (double s)</td></tr>
+<tr class="separator:ae558f9e5e2bcaa84384565dadd03f89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accee163b76004358fc63decc3b1579fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vtable_8h.html#a8956b9119e3f283cb31cf6e029da3277">VF</a> <a class="el" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="botball_8h.html#accee163b76004358fc63decc3b1579fe">wait_for_light</a> (int light_port_)</td></tr>
+<tr class="separator:accee163b76004358fc63decc3b1579fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ae558f9e5e2bcaa84384565dadd03f89c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vtable_8h.html#a8956b9119e3f283cb31cf6e029da3277">VF</a> <a class="el" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> void shut_down_in </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Register an event to stop the user program after s seconds </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">s</td><td>The number of seconds to wait before the end of program </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="accee163b76004358fc63decc3b1579fe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vtable_8h.html#a8956b9119e3f283cb31cf6e029da3277">VF</a> <a class="el" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> void wait_for_light </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>light_port_</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initiate a calibration and wait for light sequence which is a normal early step in Botball programs </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">light_port_</td><td>The analog port and light sensor to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_7a9bb5fcfb57a809ac25df340b11204e.html">wallaby</a></li><li class="navelem"><a class="el" href="botball_8h.html">botball.h</a></li>
     <li class="footer">Generated on Wed Nov 23 2016 16:25:07 for libwallaby by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
