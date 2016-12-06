@@ -16,6 +16,7 @@ var camera_8h =
     [ "camera_load_config", "group__camera.html#gabd45ab115bc4808ea0513ca75ac72aef", null ],
     [ "camera_open", "group__camera.html#ga1c32ffd92d48cc98480da84c688c987f", null ],
     [ "camera_open_at_res", "group__camera.html#gafb7ed0f55c5257e9fded0dece53f8b62", null ],
+    [ "camera_open_black", "group__camera.html#ga0568cee486212677871a7d954196dce4", null ],
     [ "camera_open_device", "group__camera.html#gaec5f7305bfbdbe796439e53463b1166d", null ],
     [ "camera_open_device_model_at_res", "group__camera.html#ga70db0f5c287aa021dc9613d6009d2ef6", null ],
     [ "camera_update", "group__camera.html#ga42967a7de5877369f1d21b681955c4c4", null ],
