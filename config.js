@@ -12,7 +12,7 @@ config = {
   version: {
     major: version[0],
     minor: version[1],
-    build_number: version[2]
+    build_number: version[3]
   }
 };
 

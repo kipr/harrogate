@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">libwallaby
-   &#160;<span id="projectnumber">1</span>
+   &#160;<span id="projectnumber">v23</span>
    </div>
    <div id="projectbrief">The wallaby standard library</div>
   </td>
@@ -101,6 +101,8 @@ $(document).ready(function(){initNavTree('group__camera.html','');});
 Functions</h2></td></tr>
 <tr class="memitem:ga1c32ffd92d48cc98480da84c688c987f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__camera.html#ga1c32ffd92d48cc98480da84c688c987f">camera_open</a> ()</td></tr>
 <tr class="separator:ga1c32ffd92d48cc98480da84c688c987f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0568cee486212677871a7d954196dce4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__camera.html#ga0568cee486212677871a7d954196dce4">camera_open_black</a> ()</td></tr>
+<tr class="separator:ga0568cee486212677871a7d954196dce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafb7ed0f55c5257e9fded0dece53f8b62"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__camera.html#gafb7ed0f55c5257e9fded0dece53f8b62">camera_open_at_res</a> (enum <a class="el" href="camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3">Resolution</a> res)</td></tr>
 <tr class="separator:gafb7ed0f55c5257e9fded0dece53f8b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaec5f7305bfbdbe796439e53463b1166d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__camera.html#gaec5f7305bfbdbe796439e53463b1166d">camera_open_device</a> (int number, enum <a class="el" href="camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3">Resolution</a> res)</td></tr>
@@ -243,6 +245,27 @@ Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Only LOW_RES is currently supported. The function will fail for other resolutions. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__camera.html#ga1c32ffd92d48cc98480da84c688c987f">camera_open</a> </dd>
+<dd>
+<a class="el" href="group__camera.html#gaec5f7305bfbdbe796439e53463b1166d">camera_open_device</a> </dd>
+<dd>
+<a class="el" href="group__camera.html#gad0fcacf32d4c1d166bde9532560316a3">camera_close</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga0568cee486212677871a7d954196dce4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int camera_open_black </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Opens the default system camera for use at LOW_RES (160x120). This will improve frame rates for the black Logitech camera </p><dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__camera.html#gafb7ed0f55c5257e9fded0dece53f8b62">camera_open_at_res</a> </dd>
 <dd>
 <a class="el" href="group__camera.html#gaec5f7305bfbdbe796439e53463b1166d">camera_open_device</a> </dd>
 <dd>
@@ -769,7 +792,7 @@ This string pointer will be invalid after a call to <a class="el" href="group__c
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Nov 23 2016 16:25:07 for libwallaby by
+    <li class="footer">Generated on Tue Dec 6 2016 12:00:33 for libwallaby by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

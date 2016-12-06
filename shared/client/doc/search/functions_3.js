@@ -7,6 +7,7 @@ var searchData=
   ['camera_5fload_5fconfig',['camera_load_config',['../group__camera.html#gabd45ab115bc4808ea0513ca75ac72aef',1,'camera.h']]],
   ['camera_5fopen',['camera_open',['../group__camera.html#ga1c32ffd92d48cc98480da84c688c987f',1,'camera.h']]],
   ['camera_5fopen_5fat_5fres',['camera_open_at_res',['../group__camera.html#gafb7ed0f55c5257e9fded0dece53f8b62',1,'camera.h']]],
+  ['camera_5fopen_5fblack',['camera_open_black',['../group__camera.html#ga0568cee486212677871a7d954196dce4',1,'camera.h']]],
   ['camera_5fopen_5fdevice',['camera_open_device',['../group__camera.html#gaec5f7305bfbdbe796439e53463b1166d',1,'camera.h']]],
   ['camera_5fopen_5fdevice_5fmodel_5fat_5fres',['camera_open_device_model_at_res',['../group__camera.html#ga70db0f5c287aa021dc9613d6009d2ef6',1,'camera.h']]],
   ['camera_5fupdate',['camera_update',['../group__camera.html#ga42967a7de5877369f1d21b681955c4c4',1,'camera.h']]],
