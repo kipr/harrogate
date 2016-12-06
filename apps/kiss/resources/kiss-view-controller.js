@@ -26,6 +26,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   editor = code_mirror.fromTextArea(document.getElementById('editor'), {
     mode: 'text/x-csrc',
     lineNumbers: true,
+    indentUnit: 4,
     theme: 'kiss',
     viewportMargin: Infinity
   });
