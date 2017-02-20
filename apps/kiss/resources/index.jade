@@ -40,7 +40,7 @@ block view-toolbar-left
       small.small Indent
 
   .btn-group(ng-if='selected_project')
-    button.btn.btn-toolbar.btn-default(type='button' ng-click='compile()' ng-class='{disabled: is_compiling, "btn-danger": is_compiling}')
+    button.btn.btn-toolbar.btn-default(type='button' ng-click='compile()' ng-class='{disabled: is_compiling || ProgramService.running, "btn-danger": is_compiling}')
       i.fa.fa-link
       br
       small.small Compile {{selected_project.name}}
