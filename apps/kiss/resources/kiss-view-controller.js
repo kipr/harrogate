@@ -544,12 +544,14 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     }
   });
   $scope.run = function() {
-    if ($scope.selected_project != null) {
-      $scope.img_src = null;
-      $scope.$broadcast("runner-reset-terminal");
-      $scope.runner = true;
-      $scope.compiler_output = '';
-      return ProgramService.run($scope.selected_project.name, $scope.active_user.name);
+  if ($scope.selected_project != null) {
+    if($scope.is_compiling != true) {
+        $scope.img_src = null;
+        $scope.$broadcast("runner-reset-terminal");
+        $scope.runner = true;
+        $scope.compiler_output = '';
+        return ProgramService.run($scope.selected_project.name, $scope.active_user.name);
+      }
     }
   };
   $scope.toggle_run = function() {
