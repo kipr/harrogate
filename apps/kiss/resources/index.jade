@@ -46,7 +46,7 @@ block view-toolbar-left
       small.small Compile {{selected_project.name}}
   .btn-group(ng-if='selected_project')
     button.btn.btn-default.btn-toolbar(type='button' ng-click='toggle_run()')
-      i.fa(ng-class='{"fa-play": !ProgramService.running, "fa-stop": ProgramService.running}')
+      i.fa(ng-class='{disabled: is_compiling, "fa-play": !ProgramService.running, "fa-stop": ProgramService.running}')
       br
       small.small {{!ProgramService.running ? 'Run' : 'Stop'}}
 
