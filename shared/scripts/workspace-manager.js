@@ -1,6 +1,6 @@
 var Fs, Path, User, UserManager, _, assert, harrogate_app_data_path, sys_app_data_path,
-  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
+  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 assert = require('assert');
 
 Fs = require('fs');
@@ -36,7 +36,7 @@ WorkspaceManager = (function() {
       if (TargetApp.platform === TargetApp.supported_platforms.WINDOWS_PC) {
         this.workspace_path = Path.join(process.env['USERPROFILE'], 'Documents', 'KISS');
       } else {
-        this.workspace_path = Path.join(process.env['HOME'], 'Documents', 'KISS');
+        this.workspace_path = Path.join(process.env['HOME'] || '/home/root', 'Documents', 'KISS');
       }
       
       this.update_workspace_path(this.workspace_path);
