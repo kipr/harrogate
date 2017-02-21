@@ -2,7 +2,7 @@ var searchData=
 [
   ['tcp',['tcp',['../class_socket.html#ac126b4d2350aba6c62fb58794fc8efe3',1,'Socket']]],
   ['text',['text',['../class_abstract_text_button.html#ab33eed4d7845dd5f1e39f950c1ec9146',1,'AbstractTextButton::text()'],['../class_id_button.html#a6579f858f35b53dba3228087cfd73a8f',1,'IdButton::text()']]],
-  ['thread',['Thread',['../class_thread.html',1,'Thread'],['../structthread.html',1,'thread'],['../class_thread.html#a95c703fb8f2f27cb64f475a8c940864a',1,'Thread::Thread()'],['../group__thread.html',1,'(Global Namespace)']]],
+  ['thread',['thread',['../structthread.html',1,'thread'],['../class_thread.html',1,'Thread'],['../class_thread.html#a95c703fb8f2f27cb64f475a8c940864a',1,'Thread::Thread()'],['../group__thread.html',1,'(Global Namespace)']]],
   ['thread_2eh',['thread.h',['../thread_8h.html',1,'']]],
   ['thread_2ehpp',['thread.hpp',['../thread_8hpp.html',1,'']]],
   ['thread_5fcreate',['thread_create',['../group__thread.html#ga57d114dddd39f2ef776479172b9dfb63',1,'thread.h']]],

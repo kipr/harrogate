@@ -8,6 +8,7 @@ var searchData=
   ['_7ebase',['~Base',['../class_sensor_logic_1_1_base.html#a97a4c5de864b01b69c05337a6f7933fb',1,'SensorLogic::Base']]],
   ['_7echannel',['~Channel',['../class_camera_1_1_channel.html#a4643bdf7ddd453408fdd1d42c7835118',1,'Camera::Channel']]],
   ['_7echannelimpl',['~ChannelImpl',['../class_camera_1_1_channel_impl.html#ab1389e5d5ec671f53581835edde4a25f',1,'Camera::ChannelImpl']]],
+  ['_7ecompass',['~Compass',['../class_compass.html#a26c27c9b7bba5b3107f1c671bd6f31c9',1,'Compass']]],
   ['_7ecreate',['~Create',['../class_create.html#a6060fda2b105228446ddddb09f63d127',1,'Create']]],
   ['_7edevice',['~Device',['../class_camera_1_1_device.html#aa84763523fe4b069f8e4d909386bd0c5',1,'Camera::Device']]],
   ['_7eidbutton',['~IdButton',['../class_id_button.html#acdfbcbb7ce6f41bab0a2fcbc13754a59',1,'IdButton']]],

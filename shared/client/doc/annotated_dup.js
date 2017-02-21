@@ -16,6 +16,7 @@ var annotated_dup =
     [ "Analog8", "class_analog8.html", "class_analog8" ],
     [ "BackEMF", "class_back_e_m_f.html", "class_back_e_m_f" ],
     [ "Battery", "class_battery.html", "class_battery" ],
+    [ "Compass", "class_compass.html", "class_compass" ],
     [ "Config", "class_config.html", "class_config" ],
     [ "Console", "class_console.html", "class_console" ],
     [ "Create", "class_create.html", "class_create" ],
@@ -40,8 +41,8 @@ var annotated_dup =
     [ "pixel", "structpixel.html", "structpixel" ],
     [ "point2", "structpoint2.html", "structpoint2" ],
     [ "Point2", "class_point2.html", "class_point2" ],
-    [ "point3", "structpoint3.html", "structpoint3" ],
     [ "Point3", "class_point3.html", "class_point3" ],
+    [ "point3", "structpoint3.html", "structpoint3" ],
     [ "Rect", "class_rect.html", "class_rect" ],
     [ "rectangle", "structrectangle.html", "structrectangle" ],
     [ "Rgb", "struct_rgb.html", "struct_rgb" ],
@@ -49,7 +50,7 @@ var annotated_dup =
     [ "Sensor", "class_sensor.html", "class_sensor" ],
     [ "Servo", "class_servo.html", "class_servo" ],
     [ "Socket", "class_socket.html", "class_socket" ],
-    [ "Thread", "class_thread.html", "class_thread" ],
     [ "thread", "structthread.html", "structthread" ],
+    [ "Thread", "class_thread.html", "class_thread" ],
     [ "Vec3", "struct_vec3.html", "struct_vec3" ]
 ];
