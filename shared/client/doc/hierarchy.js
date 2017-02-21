@@ -13,6 +13,7 @@ var hierarchy =
     [ "Camera::Channel", "class_camera_1_1_channel.html", null ],
     [ "Camera::ChannelImpl", "class_camera_1_1_channel_impl.html", null ],
     [ "Camera::ChannelImplManager", "class_camera_1_1_channel_impl_manager.html", null ],
+    [ "Compass", "class_compass.html", null ],
     [ "Config", "class_config.html", null ],
     [ "Camera::ConfigPath", "class_camera_1_1_config_path.html", null ],
     [ "Console", "class_console.html", null ],
@@ -33,8 +34,8 @@ var hierarchy =
     [ "point2", "structpoint2.html", null ],
     [ "Point2< T >", "class_point2.html", null ],
     [ "Point2< unsigned >", "class_point2.html", null ],
-    [ "point3", "structpoint3.html", null ],
     [ "Point3< T >", "class_point3.html", null ],
+    [ "point3", "structpoint3.html", null ],
     [ "Rect< T >", "class_rect.html", null ],
     [ "Rect< unsigned >", "class_rect.html", null ],
     [ "rectangle", "structrectangle.html", null ],
@@ -74,7 +75,7 @@ var hierarchy =
     ] ],
     [ "Servo", "class_servo.html", null ],
     [ "Socket", "class_socket.html", null ],
-    [ "Thread", "class_thread.html", null ],
     [ "thread", "structthread.html", null ],
+    [ "Thread", "class_thread.html", null ],
     [ "Vec3< T >", "struct_vec3.html", null ]
 ];

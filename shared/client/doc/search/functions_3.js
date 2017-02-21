@@ -2,7 +2,8 @@ var searchData=
 [
   ['c_5fbutton',['c_button',['../group__button.html#gab39631d7431b4bf38c8037dc741b171a',1,'button.h']]],
   ['c_5fbutton_5fclicked',['c_button_clicked',['../group__button.html#ga5d9b1aeebef7e414072dd9d7c1197520',1,'button.h']]],
-  ['calibrate',['calibrate',['../class_acceleration.html#a6e4dbb9d4a6047469441bd4c46e11a73',1,'Acceleration::calibrate()'],['../class_gyro.html#a1511a244a256fc6daef2d8e4639afe57',1,'Gyro::calibrate()'],['../class_magneto.html#aad6df575e83244f06ff0c44a7090dcb5',1,'Magneto::calibrate()']]],
+  ['calibrate',['calibrate',['../class_acceleration.html#a6e4dbb9d4a6047469441bd4c46e11a73',1,'Acceleration::calibrate()'],['../class_compass.html#aeefa60b2cfa4206fb89d50605410d1d0',1,'Compass::calibrate()'],['../class_gyro.html#a1511a244a256fc6daef2d8e4639afe57',1,'Gyro::calibrate()'],['../class_magneto.html#aad6df575e83244f06ff0c44a7090dcb5',1,'Magneto::calibrate()']]],
+  ['calibrate_5fcompass',['calibrate_compass',['../group__compass.html#ga967556bd100e24df918e7adb912bd26a',1,'compass.h']]],
   ['camera_5fclose',['camera_close',['../group__camera.html#gad0fcacf32d4c1d166bde9532560316a3',1,'camera.h']]],
   ['camera_5fload_5fconfig',['camera_load_config',['../group__camera.html#gabd45ab115bc4808ea0513ca75ac72aef',1,'camera.h']]],
   ['camera_5fopen',['camera_open',['../group__camera.html#ga1c32ffd92d48cc98480da84c688c987f',1,'camera.h']]],
@@ -35,6 +36,7 @@ var searchData=
   ['close',['close',['../class_camera_1_1_device.html#a59747ebb798f720f1f175356e14646b8',1,'Camera::Device::close()'],['../class_socket.html#a0c9750548d7cfc58390c35a513bc3a12',1,'Socket::close()']]],
   ['cmpc',['cmpc',['../group__motor.html#ga3f000f325222eb01b69844290a654795',1,'motors.h']]],
   ['column',['column',['../class_point2.html#a847cdf60948df4e4a875fc2fc40a067f',1,'Point2']]],
+  ['compass',['Compass',['../class_compass.html#a68bd2a073cc0d461b2b46529aae04765',1,'Compass']]],
   ['confidence',['confidence',['../class_camera_1_1_object.html#a9eef5a99a8ab77fc4d4baaa31b1ac21b',1,'Camera::Object']]],
   ['config',['config',['../class_camera_1_1_device.html#af034054abfa6ffa68262d5518072c098',1,'Camera::Device::config()'],['../class_config.html#abd0c571c116924871e30444b192b792a',1,'Config::Config()'],['../class_config.html#a3a6e661cd012aadb98b9f9cee541434f',1,'Config::Config(const std::map&lt; std::string, std::string &gt; &amp;config)']]],
   ['connect',['connect',['../class_create.html#a774ede2979a67d4a9ee813f8f7cff225',1,'Create::connect()'],['../class_create.html#a516b5b39ecddb18c280017d3e8b887fb',1,'Create::connect(const BaudRate baudRate)'],['../class_socket.html#a9067acf8b3e2b5191fe191e3f376b319',1,'Socket::connect()']]],

@@ -28,6 +28,10 @@ var dir_7a9bb5fcfb57a809ac25df340b11204e =
       [ "Rgb", "struct_rgb.html", "struct_rgb" ],
       [ "Hsv", "struct_hsv.html", "struct_hsv" ]
     ] ],
+    [ "compass.h", "compass_8h.html", "compass_8h" ],
+    [ "compass.hpp", "compass_8hpp.html", [
+      [ "Compass", "class_compass.html", "class_compass" ]
+    ] ],
     [ "compat.hpp", "compat_8hpp.html", "compat_8hpp" ],
     [ "config.hpp", "config_8hpp.html", [
       [ "Config", "class_config.html", "class_config" ]

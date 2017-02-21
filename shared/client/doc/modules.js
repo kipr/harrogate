@@ -5,6 +5,7 @@ var modules =
     [ "Battery", "group__battery.html", "group__battery" ],
     [ "Buttons", "group__button.html", "group__button" ],
     [ "Camera", "group__camera.html", "group__camera" ],
+    [ "Compass", "group__compass.html", "group__compass" ],
     [ "Console", "group__console.html", "group__console" ],
     [ "iRobot (R) Create (TM)", "group__create.html", "group__create" ],
     [ "Digitals", "group__digital.html", "group__digital" ],
