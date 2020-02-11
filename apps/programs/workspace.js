@@ -289,13 +289,12 @@ Workspace = (function() {
     {
       programContent =  '#!/usr/bin/python\n' 
         + 'import os, sys\n'
-        + 'import ctypes\n'
-        + 'KIPR=ctypes.CDLL("/usr/lib/libkipr.so")\n'
+        + 'import kipr as k\n'
         + '\n'
         + 'def main():\n'
         + '    print "Hello World"\n'
-        + '    #KIPR.motor(1,50)\n'
-        + '    #KIPR.msleep(2000)\n'
+	      + '    k.motor(1, 50)\n'
+      	+ '    k.msleep(5000)\n'
         + '\n'
         + 'if __name__== "__main__":\n'
         + '    sys.stdout = os.fdopen(sys.stdout.fileno(),"w",0)\n'
@@ -303,7 +302,7 @@ Workspace = (function() {
     }
     else
     {
-      programContent = '#include <kipr/botball.h>\n'
+      programContent = '#include <kipr/wombat.h>\n'
         + '\n'
         + 'int main()\n'
         + '{\n'

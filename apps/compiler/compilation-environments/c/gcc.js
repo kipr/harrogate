@@ -23,7 +23,7 @@ module.exports = {
         }
       }
       gcc_cmd += "\"" + (Path.resolve(__dirname, '_init_helper.c')) + "\" ";
-      gcc_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lwallaby -lm -o \"" + project_resource.binary.path + "\" ";
+      gcc_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lwallaby -lm -o \"" + project_resource.binary.path + "\" -lz -lpthread ";
       exec(gcc_cmd, cb);
     })["catch"](function(e) {
       cb(e);

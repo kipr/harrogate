@@ -113,6 +113,7 @@ exports.controller = function($scope, $http, $location, AppCatalogProvider, Prog
   });
   $scope.run = function() {
     if ($scope.selected_project != null) {
+      $scope.is_compiling = false;
       $scope.img_src = null;
       $scope.$broadcast("runner-reset-terminal");
       return ProgramService.run($scope.selected_project.name, $scope.active_user.name);

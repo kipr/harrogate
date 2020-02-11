@@ -489,7 +489,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   });
 
   compile = function(project_name) {
-    $scope.stop();
+    //$scope.stop();
     $scope.is_compiling = true;
     return $http.post('/api/compile', {
       name: project_name,
@@ -562,6 +562,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     $scope.runner = false;
   }
   return $scope.stop = function() {
+    $scope.is_compiling = false;
     if(!ProgramService.running) return;
     return ProgramService.stop();
   };

@@ -29,7 +29,7 @@ module.exports = {
       gcc_cmd += "\"" + (Path.resolve(__dirname, '_init_helper.c')) + "\" ";
 
       // linker options
-      gcc_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -o \"" + project_resource.binary.path + ".exe\" ";
+      gcc_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -o \"" + project_resource.binary.path + ".exe\" -lpthread ";
       exec(gcc_cmd, cb);
     })["catch"](function(e) {
       cb(e);
