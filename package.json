@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "angular": "1.5.8",
+    "angular": "1.7.9",
     "angular-route": "1.5.8",
     "archiver": "1.1.0",
     "body-parser": "1.15.2",
