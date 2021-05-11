@@ -18,12 +18,12 @@ SettingsManager = (function() {
 
   SettingsManager.prototype.update = function(value) {
     this.settings = _.merge(this.settings, value);
-    Fs.writeFile(this.settings_file_paht, JSON.stringify(this.settings, null, 2), 'utf8');
+    Fs.writeFile(this.settings_file_paht, JSON.stringify(this.settings, null, 2), 'utf8', (err) => {if (err) throw err;});
   };
 
   SettingsManager.prototype.set = function(value) {
     this.settings = value;
-    Fs.writeFile(this.settings_file_paht, JSON.stringify(this.settings, null, 2), 'utf8');
+    Fs.writeFile(this.settings_file_paht, JSON.stringify(this.settings, null, 2), 'utf8', (err) => {if (err) throw err;});
   };
 
   SettingsManager.prototype.reset_to_platform_default = function() {
