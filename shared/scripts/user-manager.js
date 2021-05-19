@@ -37,14 +37,14 @@ UserManager = (function() {
   UserManager.prototype.update_user = function(login, data) {
     assert(this.users[login] != null);
     this.users[login] = _.merge(this.users[login], data);
-    Fs.writeFile(this.users_file_path, JSON.stringify(this.users, null, 2), 'utf8');
+    Fs.writeFile(this.users_file_path, JSON.stringify(this.users, null, 2), 'utf8', (err) => {if (err) throw err;});
   };
 
   UserManager.prototype.add_user = function(user) {
     assert(user instanceof User);
     assert(user.login != null);
     this.users[user.login] = user;
-    Fs.writeFile(this.users_file_path, JSON.stringify(this.users, null, 2), 'utf8');
+    Fs.writeFile(this.users_file_path, JSON.stringify(this.users, null, 2), 'utf8', (err) => {if (err) throw err;});
   };
 
   return UserManager;
