@@ -293,8 +293,6 @@ Workspace = (function() {
         + '\n'
         + 'def main():\n'
         + '    print "Hello World"\n'
-	      + '    k.motor(1, 50)\n'
-      	+ '    k.msleep(5000)\n'
         + '\n'
         + 'if __name__== "__main__":\n'
         + '    sys.stdout = os.fdopen(sys.stdout.fileno(),"w",0)\n'
