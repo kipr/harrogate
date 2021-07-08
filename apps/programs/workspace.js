@@ -287,7 +287,7 @@ Workspace = (function() {
     var programContent;
     if (language === 'Python')
     {
-      programContent =  '#!/usr/bin/python\n' 
+      programContent =  '#!/usr/bin/python3\n' 
         + 'sys.path.append("/usr/lib")\n'
         + 'import os, sys\n'
         + 'import kipr as k\n'
