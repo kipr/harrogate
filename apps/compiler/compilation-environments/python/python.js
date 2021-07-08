@@ -16,7 +16,7 @@ module.exports = {
     }).then(function(src_files) {
       var chmod_cmd, cp_cmd, i, len, ln_cmd, pyc_cmd, src;
       cp_cmd = "cp ";
-      pyc_cmd = "python -m py_compile ";
+      pyc_cmd = "python3 -m py_compile ";
       for (i = 0, len = src_files.length; i < len; i++) {
         src = src_files[i];
         if (Path.basename(src.path).charAt(0) !== '.') {
