@@ -27,6 +27,8 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     mode: 'text/x-csrc',
     lineNumbers: true,
     indentUnit: 4,
+    smartIndent: false,
+    indentWithTabs: false,
     theme: 'kiss',
     viewportMargin: Infinity
   });
