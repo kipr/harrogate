@@ -6,14 +6,16 @@ Path = require('path');
 
 Config = require_harrogate_module('config.js');
 
+const fs = require("fs");
+
 module.exports = {
-  compile: function(project_resource, cb) {
-    project_resource.src_directory.is_valid().then(function(valid) {
+  compile: function (project_resource, cb) {
+    project_resource.src_directory.is_valid().then(function (valid) {
       if (!valid) {
         throw new ServerError(404, 'Project ' + project_resource.name + ' does not contain any source files');
       }
       return project_resource.src_directory.get_children();
-    }).then(function(src_files) {
+    }).then(function (src_files) {
       var gcc_cmd, i, len, src;
       gcc_cmd = "gcc -I\"" + project_resource.include_directory.path + "\" -I\"" + Config.ext_deps.include_path + "\" -Wall ";
       for (i = 0, len = src_files.length; i < len; i++) {
@@ -24,8 +26,19 @@ module.exports = {
       }
       gcc_cmd += "\"" + (Path.resolve(__dirname, '_init_helper.c')) + "\" ";
       gcc_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lwallaby -lm -o \"" + project_resource.binary.path + "\" -lz -lpthread ";
+
+      // extra support for extra compiler args
+      if (fs.existsSync(project_resource.data_directory.path + "/config.json")) {
+        options = JSON.parse(fs.readFileSync(project_resource.data_directory.path + "/config.json", { encoding: 'ascii', flag: 'r' }));
+        if ("compilerArgs" in options) {
+          options["compilerArgs"].forEach(element => {
+            gcc_cmd += element + " ";
+          });
+        }
+      }
+
       exec(gcc_cmd, cb);
-    })["catch"](function(e) {
+    })["catch"](function (e) {
       cb(e);
     }).done();
   }
