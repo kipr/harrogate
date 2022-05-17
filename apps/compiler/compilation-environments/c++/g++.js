@@ -24,22 +24,22 @@ module.exports = {
           gpp_cmd += '"' + src.path + "\" ";
         }
       }
-      gpp_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -o \"" + project_resource.binary.path + "\" ";
+      gpp_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lwallaby -lm -o \"" + project_resource.binary.path + "\" -lz -lpthread ";
 
       // extra support for extra compiler args
       if (fs.existsSync(project_resource.data_directory.path + "/config.json")) {
-        try{
-            options = JSON.parse(fs.readFileSync(project_resource.data_directory.path + "/config.json", { encoding: 'ascii', flag: 'r' }));
+        try {
+          options = JSON.parse(fs.readFileSync(project_resource.data_directory.path + "/config.json", { encoding: 'ascii', flag: 'r' }));
 
-            if ("compilerArgs" in options) {
-                options["compilerArgs"].forEach(element => {
-                gpp_cmd += element + " ";
-                });
-            }
+          if ("compilerArgs" in options) {
+            options["compilerArgs"].forEach(element => {
+              gpp_cmd += element + " ";
+            });
+          }
         }
-        catch (e){
-            console.log("failed because of");
-            console.log(e);
+        catch (e) {
+          console.log("failed because of");
+          console.log(e);
         }
       }
 
