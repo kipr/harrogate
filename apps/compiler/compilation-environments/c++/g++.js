@@ -16,28 +16,34 @@ module.exports = {
       }
       return project_resource.src_directory.get_children();
     }).then(function (src_files) {
-      var gcc_cmd, i, len, src;
-      gcc_cmd = "gcc -I\"" + project_resource.include_directory.path + "\" -I\"" + Config.ext_deps.include_path + "\" -Wall ";
+      var gpp_cmd, i, len, src;
+      gpp_cmd = "g++ -I\"" + project_resource.include_directory.path + "\" -I\"" + Config.ext_deps.include_path + "\" -Wall ";
       for (i = 0, len = src_files.length; i < len; i++) {
         src = src_files[i];
         if (Path.basename(src.path).charAt(0) !== '.') {
-          gcc_cmd += '"' + src.path + "\" ";
+          gpp_cmd += '"' + src.path + "\" ";
         }
       }
-      gcc_cmd += "\"" + (Path.resolve(__dirname, '_init_helper.c')) + "\" ";
-      gcc_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lwallaby -lm -o \"" + project_resource.binary.path + "\" -lz -lpthread ";
+      gpp_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lwallaby -lm -o \"" + project_resource.binary.path + "\" -lz -lpthread ";
 
       // extra support for extra compiler args
       if (fs.existsSync(project_resource.data_directory.path + "/config.json")) {
-        options = JSON.parse(fs.readFileSync(project_resource.data_directory.path + "/config.json", { encoding: 'ascii', flag: 'r' }));
-        if ("compilerArgs" in options) {
-          options["compilerArgs"].forEach(element => {
-            gcc_cmd += element + " ";
-          });
+        try {
+          options = JSON.parse(fs.readFileSync(project_resource.data_directory.path + "/config.json", { encoding: 'ascii', flag: 'r' }));
+
+          if ("compilerArgs" in options) {
+            options["compilerArgs"].forEach(element => {
+              gpp_cmd += element + " ";
+            });
+          }
+        }
+        catch (e) {
+          console.log("failed because of");
+          console.log(e);
         }
       }
 
-      exec(gcc_cmd, cb);
+      exec(gpp_cmd, cb);
     })["catch"](function (e) {
       cb(e);
     }).done();
