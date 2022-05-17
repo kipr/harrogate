@@ -30,14 +30,17 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
         // default is just c formatting
         mode += "csrc";
       }
-      else if (cur_file.includes(".cpp")) {
+      else if (cur_file.includes(".cpp") || cur_file.includes(".hpp")) {
         mode += "c++src";
       }
-      else if (cur_file.includes(".c")) {
+      else if (cur_file.includes(".c") || cur_file.includes(".h")) {
         mode += "csrc";
       }
       else if (cur_file.includes(".py")) {
         mode += "python"
+      }
+      else {
+        mode += "csrc" // by default, use c highlighting
       }
       if (editor != null) {
         editor.setOption("mode", mode);
