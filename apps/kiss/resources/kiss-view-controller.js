@@ -13,18 +13,45 @@ exports.inject = function(app) {
 };
 
 exports.controller = function($scope, $rootScope, $location, $http, $timeout, AppCatalogProvider, ProgramService, ButtonsOnlyModalFactory, DownloadProjectModalFactory, FilenameModalFactory) {
-  var compile, editor, onRouteChangeOff, on_window_beforeunload, save_file, saving;
+  var compile, editor, onRouteChangeOff, on_window_beforeunload, save_file, saving, mode;
+  mode = "text/x-csrc"
   $scope.is_compiling = false;
   $scope.documentChanged = false;
   $scope.ProgramService = ProgramService;
   $scope.$on('$routeUpdate', function(next, current) {
     var ref, ref1;
     if ((((ref = $scope.displayed_file) != null ? ref.name : void 0) !== $location.search().file) || (((ref1 = $scope.selected_project) != null ? ref1.name : void 0) !== $location.search().project)) {
-      return $scope.reload_ws();
+      $scope.reload_ws();
+      console.log("displayed file");
+      console.log($scope.displayed_file);
+      console.log("other thing");
+      console.log($location.search().file);
+      let cur_file = $location.search().file;
+      
+      mode = "text/x-";
+      if (cur_file == undefined){
+        // default is just c formatting
+        mode += "csrc";
+      }
+      else if (cur_file.includes(".cpp")){
+        mode += "c++src";
+      }
+      else if (cur_file.includes(".c")){
+        mode += "csrc";
+      }
+      else if (cur_file.includes(".py")){
+        mode += "python"
+      }
+      console.log("using mode" + mode);
+      if (editor != null){
+        editor.setOption("mode", mode);
+        console.log(editor);
+      } 
     }
   });
+  // used to be here
   editor = code_mirror.fromTextArea(document.getElementById('editor'), {
-    mode: 'text/x-csrc',
+    mode: mode,
     lineNumbers: true,
     indentUnit: 4,
     smartIndent: false,
@@ -32,6 +59,7 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     theme: 'kiss',
     viewportMargin: Infinity
   });
+
   editor.on('change', function(e, obj) {
     $timeout(function() {
       $scope.documentChanged = true;
@@ -344,6 +372,10 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
     if ($scope.project_resource.parameters.language === 'Python') {
       language_array = ['.py'];
     }
+    if ($scope.project_resource.parameters.language === 'C++') {
+      language_array = ['.cpp'];
+    }
+
     return FilenameModalFactory.open('Create New Source File', 'Filename', language_array, 'Create').then(function(mData) {
       if ($scope.ws == null || $scope.project_resource == null) return;
 
@@ -413,8 +445,12 @@ exports.controller = function($scope, $rootScope, $location, $http, $timeout, Ap
   $scope.change_filename = function() {
     if ($("#programmingLanguage").val() === "Python") {
       $("#sourceFileName").val("main.py");
-    } else {
+    } else if ($("#programmingLanguage").val() === "C") {
       $("#sourceFileName").val("main.c");
+    }
+    else {
+      // it's c++
+      $("#sourceFileName").val("main.cpp");
     }
   };
   $scope.indent = function() {
