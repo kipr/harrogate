@@ -8,6 +8,13 @@ block view-toolbar-left
       small.small Save {{displayed_file.name}}
 
   .btn-group(ng-if='displayed_file')
+    button.btn.btn-toolbar(ng-if='!display_file_menu' type='button' ng-click='toggle_theme()' ng-class="{'btn-light' : darkMode, 'btn-dark': !darkMode  }")
+      i.fa(ng-class = '{"fa-moon-o" : !darkMode, "fa-sun-o" : darkMode }')
+      br
+      small.small {{darkMode ? 'Light Mode' : 'Dark Mode'}}    
+      
+
+  .btn-group(ng-if='displayed_file')
     button.btn.btn-toolbar.btn-default(ng-if='!display_file_menu' type='button' ng-click='open_file_menu()')
       i.fa.fa-file
       br

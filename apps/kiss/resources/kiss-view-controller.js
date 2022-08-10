@@ -1,5 +1,6 @@
-var code_mirror;
 
+var code_mirror;
+var dark_mode;
 require('codemirror/mode/clike/clike');  // allows c/c++ highlighting
 require('codemirror/mode/python/python');  // allows real python highlighting
 
@@ -53,7 +54,7 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
     indentUnit: 4,
     smartIndent: false,
     indentWithTabs: false,
-    theme: 'kiss',
+    theme: 'kiss-default',
     viewportMargin: Infinity
   });
 
@@ -410,6 +411,28 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
   $scope.open_file_menu = function () {
     return $scope.display_file_menu = true;
   };
+
+ 
+  $scope.change_theme_background = function () {
+    
+
+  };
+
+  $scope.toggle_theme = function () {
+    $scope.darkMode = !($scope.darkMode); // toggle between light and dark
+    if($scope.darkMode) {
+      editor.setOption('theme', 'kiss-dark');
+      document.getElementById('view-content-container').className = "dark-theme-background";
+      
+    }
+    else {
+      editor.setOption('theme','kiss-default');
+      document.getElementById('view-content-container').className = "light-theme-background";
+    }
+    
+  };
+
+
   $scope.show_add_project_modal = function () {
     $scope.change_filename();
     $('#projectName').val(undefined);
