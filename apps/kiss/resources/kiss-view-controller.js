@@ -157,11 +157,24 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
     if ($location.search().project !== project.name) {
       $location.search('project', project.name);
     }
+
+    
+    
     return $http.get(project.links.self.href).success(function (data, status, headers, config) {
       var file, selected, selected_file, selected_file_cat;
       $scope.project_resource = data;
       selected_file = null;
       selected_file_cat = null;
+      
+      //This block changes Project Explorer table theme colors
+      var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
+      var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; //Project Explorer Table
+      var project_table_row = project_container_table.getElementsByTagName("tr"); //Table row array object
+      var table_row = Array.from(project_table_row); // table row array
+      table_row.forEach(item => table_change(item)); //each row in table
+      
+      
+      
       if ($location.search().file != null) {
         selected = [];
         if ($location.search().cat === 'include' && ($scope.project_resource.include_files != null)) {
@@ -225,12 +238,7 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
     $scope.compiler_output = '';
     $location.search('file', file.name);
     $location.search('cat', file_type);
-    if(dark_mode){
-      console.log("Accessed select_file() " + file.name);
-      Array.from(table).forEach(item => table_change(item,file));
-     
-
-    }
+    
     $http.get($scope.selected_file.links.self.href).success(function (data, status, headers, config) {
       $scope.display_file_menu = false;
       $scope.displayed_file = data;
@@ -238,6 +246,14 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
         editor.setValue(new Buffer(data.content, 'base64').toString('ascii'));
         editor.refresh();
         return $timeout(function () {
+
+          //This block changes Project Explorer table theme colors
+          var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
+          var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; //Project Explorer Table
+          var project_table_row = project_container_table.getElementsByTagName("tr"); //Table row array object
+          var table_row = Array.from(project_table_row); // table row array
+          table_row.forEach(item => table_change(item)); //each row in table
+
           return $scope.documentChanged = false;
         });
       });
@@ -420,20 +436,12 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
   $scope.open_file_menu = function () {
     return $scope.display_file_menu = true;
   };
-
-
-  var table = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4].getElementsByTagName("tbody")[0]; //Project Table 
-  
   
   table_change = function(item){ // item is 1 table row array object
-
-    var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4]; // Project Explorer
-    var project_table = project_explorer.getElementsByTagName("tbody")[0]; //Project Explorer Table
-    var i,j;
+    var i;
     var td = item.getElementsByTagName("td");
     var th = item.getElementsByTagName("th");
-    var row_list = Array.from(item); // 1 row array
-    var table_list = Array.from(project_table); // table array (full of rows)
+   
     var table_data = Array.from(td);
     var table_row_header = Array.from(th); 
   
@@ -446,7 +454,7 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
 
       for (i = 0; i < table_data.length; i++){ //changes td tag
        
-        if(item.classList.contains("info")) {
+        if(item.classList.contains("info")) { //currently selected file
           table_data[i].style.backgroundColor = '#42a5d7';
           table_data[i].style.color = '#ffffff';
         }
@@ -506,18 +514,18 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
     var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; //Project Explorer Table
     var project_table_row = project_container_table.getElementsByTagName("tr"); //Table row array object
     var table_row = Array.from(project_table_row); // table row array
-
+    var nav = document.getElementsByClassName('container-fluid')[0];
+    var container = document.getElementById('view-container');
     if($scope.darkMode) {
       editor.setOption('theme', 'kiss-dark');
       document.getElementById('view-content-container').className = "dark-theme-background";
       term.classList.add("dark-empty-editor");
-      //project_explorer.classList.add("dark-empty-editor");
-
-  
+      project_explorer.classList.add("dark-empty-editor");
+      container.classList.add("container-fluid-dark");
+      
+     nav.classList.add("container-fluid-dark");
      table_row.forEach(item => table_change(item)); //each row in table
      
-     //console.log("Row Numbers " + table_row.length); // 11 rows in table
-  
     }
     else {
       editor.setOption('theme','kiss-default');
@@ -528,8 +536,8 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
      project_explorer.classList.remove("dark-empty-editor");
      project_container_table.style.backgroundColor = '#f5f5f5';
      project_container_table.style.color = '#333333';
-
-    
+      nav.classList.remove("container-fluid-dark");
+      container.classList.remove("container-fluid-dark");
       Array.from(project_table_row).forEach(table_change,null);
     }
     

@@ -73,13 +73,13 @@
 
     background-color: #555;
     color: white;
-    content: 'Light Mode';
+   
 }
 
 .btn-light{
     background-color: white;
     color: black;
-    content: 'Dark Mode';
+   
 }
 
 .toolbar
@@ -89,10 +89,13 @@
 
 .navbar-form
 {
+    
     margin-top: 0px;
     margin-bottom: 0px;
 }
-
+.container-fluid-dark{
+    background-color: #3b3b3b;
+}
 .chartist-container
 {
     height: calc(100% - 43.333px);
@@ -361,6 +364,7 @@
 
     #top-compact-navbar
     {
+        background-color: #00CC99;
         position: fixed;
         left: 0px;
         top: 0px;
