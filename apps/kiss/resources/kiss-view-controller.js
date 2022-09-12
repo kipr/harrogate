@@ -98,6 +98,7 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
   }
 
   $scope.reload_ws = function () {
+    
     return AppCatalogProvider.catalog.then(function (app_catalog) {
       var projects_resource, ref, ref1;
       projects_resource = (ref = app_catalog['Programs']) != null ? (ref1 = ref.web_api) != null ? ref1.projects : void 0 : void 0;
@@ -217,11 +218,19 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
       }
     });
   };
+  var overall_selected_file;
   $scope.select_file = function (file, file_type) {
+    
     $scope.selected_file = file;
     $scope.compiler_output = '';
     $location.search('file', file.name);
     $location.search('cat', file_type);
+    if(dark_mode){
+      console.log("Accessed select_file() " + file.name);
+      Array.from(table).forEach(item => table_change(item,file));
+     
+
+    }
     $http.get($scope.selected_file.links.self.href).success(function (data, status, headers, config) {
       $scope.display_file_menu = false;
       $scope.displayed_file = data;
@@ -412,25 +421,121 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
     return $scope.display_file_menu = true;
   };
 
- 
-  $scope.change_theme_background = function () {
-    
 
+  var table = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4].getElementsByTagName("tbody")[0]; //Project Table 
+  
+  
+  table_change = function(item){ // item is 1 table row array object
+
+    var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4]; // Project Explorer
+    var project_table = project_explorer.getElementsByTagName("tbody")[0]; //Project Explorer Table
+    var i,j;
+    var td = item.getElementsByTagName("td");
+    var th = item.getElementsByTagName("th");
+    var row_list = Array.from(item); // 1 row array
+    var table_list = Array.from(project_table); // table array (full of rows)
+    var table_data = Array.from(td);
+    var table_row_header = Array.from(th); 
+  
+    Array.from(td).forEach(element => element.style.backgroundColor = '#05284e');
+    Array.from(td).forEach(element => element.style.color = '#ffffff');
+    Array.from(th).forEach(element => element.style.backgroundColor = '#05284e');
+    Array.from(th).forEach(element => element.style.color = '#ffffff');
+
+    if($scope.darkMode){ //if currently in dark mode --> change to dark aspects
+
+      for (i = 0; i < table_data.length; i++){ //changes td tag
+       
+        if(item.classList.contains("info")) {
+          table_data[i].style.backgroundColor = '#42a5d7';
+          table_data[i].style.color = '#ffffff';
+        }
+
+      }
+
+      for (i = 0; i < table_row_header.length; i++){ //changes th tag
+        if(item.classList.contains("info")) {
+          table_row_header[i].style.backgroundColor = '#42a5d7';
+          table_row_header[i].style.color = '#ffffff';
+        }
+        else {
+          table_row_header[i].style.backgroundColor = '#05284e';
+          table_row_header[i].style.color = '#ffffff';
+        }
+      }
+
+    }
+    
+    else { //if currently in light mode --> change to light aspects
+
+      for (i = 0; i < table_data.length; i++){ //change td tag
+        if(item.classList.contains("info")){
+
+          table_data[i].style.backgroundColor = '#d9edf7';
+          table_data[i].style.color = '#291c10';
+          
+        }
+        else {
+          table_data[i].style.backgroundColor = '#f5f5f5';
+          table_data[i].style.color = '#291c10';
+        }
+      }
+      for (i = 0; i < table_row_header.length; i++){ //change th tag
+        if(item.classList.contains("info")){
+
+          table_row_header[i].style.backgroundColor = '#d9edf7';
+          table_row_header[i].style.color = '#291c10';
+          
+        }
+        else {
+          table_row_header[i].style.backgroundColor = '#f5f5f5';
+          table_row_header[i].style.color = '#291c10';
+        }
+      }
+    }
+   
   };
 
+
   $scope.toggle_theme = function () {
-    $scope.darkMode = !($scope.darkMode); // toggle between light and dark
+    $scope.darkMode = !($scope.darkMode); // toggle between light and dark theme
+    dark_mode = $scope.darkMode;
+    
+    var term = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[2];
+    var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
+    var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; //Project Explorer Table
+    var project_table_row = project_container_table.getElementsByTagName("tr"); //Table row array object
+    var table_row = Array.from(project_table_row); // table row array
+
     if($scope.darkMode) {
       editor.setOption('theme', 'kiss-dark');
       document.getElementById('view-content-container').className = "dark-theme-background";
-      
+      term.classList.add("dark-empty-editor");
+      //project_explorer.classList.add("dark-empty-editor");
+
+  
+     table_row.forEach(item => table_change(item)); //each row in table
+     
+     //console.log("Row Numbers " + table_row.length); // 11 rows in table
+  
     }
     else {
       editor.setOption('theme','kiss-default');
       document.getElementById('view-content-container').className = "light-theme-background";
+     var term = document.getElementsByClassName('panel panel-primary panel-stretch')[2];
+     term.classList.remove("dark-empty-editor") ;
+     var project_explorer = document.getElementsByClassName('panel panel-primary panel-stretch')[4];
+     project_explorer.classList.remove("dark-empty-editor");
+     project_container_table.style.backgroundColor = '#f5f5f5';
+     project_container_table.style.color = '#333333';
+
+    
+      Array.from(project_table_row).forEach(table_change,null);
     }
     
   };
+
+  
 
 
   $scope.show_add_project_modal = function () {

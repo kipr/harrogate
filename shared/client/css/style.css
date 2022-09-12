@@ -14,11 +14,11 @@
 .cm-s-kiss-default span.cm-atom { color: purple; }
 .cm-s-kiss-default span.cm-number { color: #00CC99; }
 .cm-s-kiss-default span.cm-def { color: black; } /*Function names (main to start) */
-.cm-s-kiss-default span.cm-variable { black; }
+.cm-s-kiss-default span.cm-variable { color:black; }
 .cm-s-kiss-default span.cm-variable-2 { line-height: 1em; font-weight: bold; color: blue; }
-.cm-s-kiss-default span.cm-variable-3 { line-height: 1em; font-weight: bold; color: blue; }
-.cm-s-kiss-default span.cm-property { color: black; }
-.cm-s-kiss-default span.cm-operator { color: black; }
+.cm-s-kiss-default span.cm-variable-3 { line-height: 1em; font-weight: bold; color: blue; } /* Function declaration type*/
+.cm-s-kiss-default span.cm-property { color: rgb(255, 6, 6); }
+.cm-s-kiss-default span.cm-operator { color: rgb(0, 0, 0); }
 .cm-s-kiss-default span.cm-comment { color: green; } /* Comment lines */
 .cm-s-kiss-default span.cm-string { color: red; }
 .cm-s-kiss-default span.cm-string-2 { color: red; }
@@ -29,20 +29,37 @@
 .cm-s-kiss-default span.cm-attribute { color: #00c; }
 .cm-s-kiss-default span.cm-link { color: #219; }
 .cm-s-kiss-default span.cm-error { color: #f00; }
-.cm-s-kiss-default {background-color: rgb(222, 248, 126);}
+.cm-s-kiss-default {background-color: rgb(255, 255, 255);}
 .cm-s-kiss-default .CodeMirror-activeline-background { background: #ffe8ed; }
-.cm-s-kiss-default .CodeMirror-matchingbracket { outline:1px solid grey; color:black !important; }
+.cm-s-kiss-default .CodeMirror-matchingbracket { outline:1px solid grey; color:rgb(255, 66, 66) !important; }
 
 
 
-.cm-s-kiss-dark {background-color: #09509A;}
-
-
-
+.cm-s-kiss-dark {background-color: #05284e;}
+.cm-s-kiss-dark span.cm-meta { color: rgb(255, 146, 255); } /*Include lines */
+.cm-s-kiss-dark span.cm-variable-3 { line-height: 1em; font-weight: bold; color: rgb(139, 222, 255); } /* Function declaration type (int, double, string, etc) */
+.cm-s-kiss-dark span.cm-def { color: rgb(255, 255, 255); } /*Function names (main to start) */
+.cm-s-kiss-dark span.cm-property { color: rgb(255, 255, 255); }
+.cm-s-kiss-dark span.cm-operator { color: rgb(255, 255, 255); }
+.cm-s-kiss-dark span.cm-variable { color: white; }
+.cm-s-kiss-dark .CodeMirror-matchingbracket { outline:1px solid grey; color:rgb(255, 255, 255) !important; }
+.cm-s-kiss-dark span.cm-comment { color: rgb(106, 206, 106); } /* Comment lines */
+.cm-s-kiss-dark span.cm-keyword { line-height: 1em; font-weight: bold; color: rgb(139, 222, 255); } /* Return lines */
+.cm-s-kiss-dark span.cm-number { color: #f1ff6f; } /* Numbers */
+.cm-s-kiss-dark span.cm-string { color: rgb(255, 164, 214); }
+.cm-s-kiss-dark span.cm-string-2 { color: red; }
+.cm-s-kiss-dark span.cm-bracket { color: rgb(255, 255, 255); }
+.cm-s-kiss-dark {color: white;} /* Default text color */
+.cm-s-kiss-dark .CodeMirror-gutters {background: #05284e;}
+.cm-s-kiss-dark .CodeMirror-linenumber {color: white;}
 
 .dark-theme-background {
-    background-color: #040430;
+    background-color: #3b3b3b;
    
+}
+
+.dark-empty-editor{
+    background-color: #052141;
 }
 
 .light-theme-background {
@@ -50,6 +67,7 @@
  
 }
 
+.dark-project-explorer-container {background: #05284e;}
 
 .btn-dark{
 
@@ -123,7 +141,7 @@
 
 .panel-stretch
 {
-    background-color: rgb(248, 126, 177);
+    
     margin-bottom: -20px;
 }
 
@@ -163,7 +181,7 @@
 {
     .panel-stretch > .scrollable-panel-body-container
     {
-        background-color: #f00;
+        
         max-height: calc(100% - 80px);
         overflow: auto;
     }
