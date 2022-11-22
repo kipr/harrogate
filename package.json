@@ -24,7 +24,7 @@
     "passport-local": "1.0.0",
     "q": "1.4.1",
     "rimraf": "2.5.4",
-    "socket.io": "1.4.8",
+    "socket.io": "4.5.3",
     "socket.io-client": "1.4.8",
     "tar-stream": "1.5.2",
     "zip-stream": "0.8.0"
