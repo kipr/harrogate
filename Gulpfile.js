@@ -48,6 +48,17 @@ for (app_name in ref) {
   app_instances[path_tools.basename(app['path'])] = app.get_instance();
 }
 
+
+gulp.task('dev', gulp.series('compile','watch', function(){
+  nodemon({
+    script: 'server.js',
+    watch: 'public',
+    ext: 'html js json css'
+  }).on('restart', function() {
+    console.log('restarted!');
+  });
+}));
+
 //gulp.task('default', ['dev']);
 gulp.task('default', gulp.series('dev'));
 
@@ -61,15 +72,6 @@ gulp.task('default', gulp.series('dev'));
 //   });
 // });
 
-gulp.task('dev', gulp.series('compile','watch', function(){
-  nodemon({
-    script: 'server.js',
-    watch: 'public',
-    ext: 'html js json css'
-  }).on('restart', function() {
-    console.log('restarted!');
-  });
-}));
 
 //gulp.task('compile', ['shared', 'apps'], function() {});
 gulp.task('compile', gulp.series('shared','apps', function() {}));
