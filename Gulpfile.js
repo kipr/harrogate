@@ -61,7 +61,7 @@ gulp.task('default', gulp.series('dev'));
 //   });
 // });
 
-gulp.task('default', gulp.series('compile','watch', function(){
+gulp.task('dev', gulp.series('compile','watch', function(){
   nodemon({
     script: 'server.js',
     watch: 'public',
