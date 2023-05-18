@@ -161,7 +161,7 @@ gulp.task('jquery', gulp.series(function() {
 //     }
 //   })).pipe(gulp.dest('public/'));
 // });
-gulp.task('boostrap', gulp.series(function() {
+gulp.task('bootstrap', gulp.series(function() {
   return gulp.src('node_modules/bootstrap/dist/**/*').pipe(rename(function(path) {
     if (path.dirname === 'js') {
       path.dirname = 'scripts';
