@@ -48,9 +48,20 @@ for (app_name in ref) {
   app_instances[path_tools.basename(app['path'])] = app.get_instance();
 }
 
-gulp.task('default', ['dev']);
+//gulp.task('default', ['dev']);
+gulp.task('default', gulp.series('dev'));
 
-gulp.task('dev', ['compile', 'watch'], function() {
+// gulp.task('dev', ['compile', 'watch'], function() {
+//   nodemon({
+//     script: 'server.js',
+//     watch: 'public',
+//     ext: 'html js json css'
+//   }).on('restart', function() {
+//     console.log('restarted!');
+//   });
+// });
+
+gulp.task('default', gulp.series('compile','watch', function(){
   nodemon({
     script: 'server.js',
     watch: 'public',
@@ -58,65 +69,139 @@ gulp.task('dev', ['compile', 'watch'], function() {
   }).on('restart', function() {
     console.log('restarted!');
   });
-});
+}));
 
-gulp.task('compile', ['shared', 'apps'], function() {});
+//gulp.task('compile', ['shared', 'apps'], function() {});
+gulp.task('compile', gulp.series('shared','apps', function() {}));
 
-gulp.task('shared', ['shared_views', 'shared_styles', 'shared_resources', 'scripts', 'shared_3rd_party_libs', 'doc'], function() {});
+//gulp.task('shared', ['shared_views', 'shared_styles', 'shared_resources', 'scripts', 'shared_3rd_party_libs', 'doc'], function() {});
+gulp.task('shared', gulp.series('shared_views', 'shared_styles', 'shared_resources', 'scripts', 'shared_3rd_party_libs', 'doc', function() {}));
 
-gulp.task('shared_views', function() {
+// gulp.task('shared_views', function() {
+//   return gulp.src('shared/client/views/*.jade').pipe(jade()).pipe(gulp.dest('public/'));
+// });
+gulp.task('shared_views', gulp.series(function() {
   return gulp.src('shared/client/views/*.jade').pipe(jade()).pipe(gulp.dest('public/'));
-});
+}));
 
-gulp.task('shared_favicon', function() {
+// gulp.task('shared_favicon', function() {
+//   return gulp.src('shared/client/favicon/*').pipe(gulp.dest('public/favicon/'));
+// });
+gulp.task('shared_favicon', gulp.series(function() {
   return gulp.src('shared/client/favicon/*').pipe(gulp.dest('public/favicon/'));
-});
+}));
 
-gulp.task('shared_styles', function() {
+// gulp.task('shared_styles', function() {
+//   return gulp.src('shared/client/css/*.css').pipe(gulp.dest('public/css/'));
+// });
+gulp.task('shared_styles', gulp.series(function() {
   return gulp.src('shared/client/css/*.css').pipe(gulp.dest('public/css/'));
-});
+}));
 
-gulp.task('shared_resources', function() {
+// gulp.task('shared_resources', function() {
+//   return gulp.src('apps/categories.json').pipe(gulp.dest('public/apps/'));
+// });
+gulp.task('shared_resources', gulp.series(function() {
   return gulp.src('apps/categories.json').pipe(gulp.dest('public/apps/'));
-});
+}));
 
-gulp.task('shared_3rd_party_libs', ['bootstrap', 'jquery', 'font-awesome', 'code-mirror', 'code-mirror-themes', 'angular-ui'], function() {});
+//gulp.task('shared_3rd_party_libs', ['bootstrap', 'jquery', 'font-awesome', 'code-mirror', 'code-mirror-themes', 'angular-ui'], function() {});
+gulp.task('shared_3rd_party_libs', gulp.series('bootstrap', 'jquery', 'font-awesome', 'code-mirror', 'code-mirror-themes', 'angular-ui', function() {}));
 
-gulp.task('bootstrap', function() {
+// gulp.task('bootstrap', function() {
+//   return gulp.src('node_modules/bootstrap/dist/**/*').pipe(rename(function(path) {
+//     if (path.dirname === 'js') {
+//       path.dirname = 'scripts';
+//     }
+//   })).pipe(gulp.dest('public/'));
+// });
+gulp.task('boostrap', gulp.series(function() {
   return gulp.src('node_modules/bootstrap/dist/**/*').pipe(rename(function(path) {
     if (path.dirname === 'js') {
       path.dirname = 'scripts';
     }
   })).pipe(gulp.dest('public/'));
-});
+}));
 
-gulp.task('doc', function() {
+
+// gulp.task('doc', function() {
+//   return gulp.src('shared/client/doc/**/*').pipe(gulp.dest('public/doc/'));
+// });
+gulp.task('doc', gulp.series(function() {
   return gulp.src('shared/client/doc/**/*').pipe(gulp.dest('public/doc/'));
-});
+}));
 
-gulp.task('jquery', function() {
+// gulp.task('jquery', function() {
+//   return gulp.src('node_modules/jquery/dist/jquery.*').pipe(gulp.dest('public/scripts/'));
+// });
+gulp.task('jquery', gulp.series(function() {
   return gulp.src('node_modules/jquery/dist/jquery.*').pipe(gulp.dest('public/scripts/'));
-});
+}));
 
-gulp.task('font-awesome', function() {
+// gulp.task('font-awesome', function() {
+//   return gulp.src('node_modules/font-awesome/**/*').pipe(gulp_filter(['css/*', 'fonts/*'])).pipe(gulp.dest('public/'));
+// });
+gulp.task('font-awesome', gulp.series(function() {
   return gulp.src('node_modules/font-awesome/**/*').pipe(gulp_filter(['css/*', 'fonts/*'])).pipe(gulp.dest('public/'));
-});
+}));
 
-gulp.task('code-mirror', function() {
+// gulp.task('code-mirror', function() {
+//   return gulp.src('node_modules/codemirror/lib/codemirror.css').pipe(gulp.dest('public/css/'));
+// });
+gulp.task('code-mirror', gulp.series(function() {
   return gulp.src('node_modules/codemirror/lib/codemirror.css').pipe(gulp.dest('public/css/'));
-});
+}));
 
-gulp.task('code-mirror-themes', function() {
+// gulp.task('code-mirror-themes', function() {
+//   return gulp.src('node_modules/codemirror/theme/*.css').pipe(gulp.dest('public/css/codemirror-theme/'));
+// });
+gulp.task('code-mirror-themes', gulp.series(function() {
   return gulp.src('node_modules/codemirror/theme/*.css').pipe(gulp.dest('public/css/codemirror-theme/'));
-});
+}));
 
-gulp.task('angular-ui', ['scripts'], function() {
+// gulp.task('angular-ui', ['scripts'], function() {
+//   return request('http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js').pipe(fs.createWriteStream('public/scripts/ui-bootstrap-tpls.min.js'));
+// });
+gulp.task('angular-ui', gulp.series('scripts', function() {
   return request('http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js').pipe(fs.createWriteStream('public/scripts/ui-bootstrap-tpls.min.js'));
-});
+}));
 
 
 
-gulp.task('scripts', function() {
+// gulp.task('scripts', function() {
+//   var b, ref1;
+//   b = browserify({
+//     debug: true,
+//     bare: true
+//   }).transform(function(file) {
+//     var end, write;
+//     data[file] = '';
+//     write = function(buf) {
+//       data[file] += buf;
+//     };
+//     end = function() {
+//       this.queue(data[file]);
+//       this.queue(null);
+//     };
+//     return through(write, end);
+//   });
+//   ref1 = app_catalog.catalog;
+//   for (app_name in ref1) {
+//     app = ref1[app_name];
+//     if (app.angular_ctrl != null) {
+//       b.require(app.angular_ctrl, {
+//         expose: app.name
+//       });
+//     }
+//   }
+//   return gulp.src('shared/client/scripts/harrogate-index-app.js').pipe(transform(function(filename) {
+//     b.add(filename);
+//     return b.bundle();
+//   })).pipe(rename(function(path) {
+//     path.extname = '.js';
+//   })).pipe(gulp.dest('public/scripts/'));
+// });
+gulp.task('scripts', gulp.series(function() {
   var b, ref1;
   b = browserify({
     debug: true,
@@ -148,12 +233,30 @@ gulp.task('scripts', function() {
   })).pipe(rename(function(path) {
     path.extname = '.js';
   })).pipe(gulp.dest('public/scripts/'));
-});
+}));
 
 
-gulp.task('apps', ['app_views'], function() {});
 
-gulp.task('app_views', function() {
+//gulp.task('apps', ['app_views'], function() {});
+gulp.task('apps', gulp.series('app_views', function() {}));
+
+// gulp.task('app_views', function() {
+//   return gulp.src('apps/**/resources/*.jade').pipe(data(function(file) {
+//     var app_instance;
+//     app_name = path_tools.basename(path_tools.dirname(path_tools.dirname(file.path)));
+//     if (app_name in app_instances) {
+//       app_instance = app_instances[app_name];
+//       if (app_instance['jade_locals']) {
+//         return app_instance['jade_locals'];
+//       }
+//     }
+//     return {};
+//   })).pipe(jade().on('error', gutil.log)).pipe(rename(function(path) {
+//     path.dirname = path.dirname.replace('/resources', '');
+//     path.dirname = path.dirname.replace('\\resources', '');
+//   })).pipe(gulp.dest('public/apps/'));
+// });
+gulp.task('app_views', gulp.series(function() {
   return gulp.src('apps/**/resources/*.jade').pipe(data(function(file) {
     var app_instance;
     app_name = path_tools.basename(path_tools.dirname(path_tools.dirname(file.path)));
@@ -168,13 +271,21 @@ gulp.task('app_views', function() {
     path.dirname = path.dirname.replace('/resources', '');
     path.dirname = path.dirname.replace('\\resources', '');
   })).pipe(gulp.dest('public/apps/'));
-});
+}));
 
-gulp.task('watch', function() {
+// gulp.task('watch', function() {
+//   gulp.watch('shared/client/views/**/*.jade', ['shared_views']);
+//   gulp.watch('shared/client/css/*.css', ['shared_styles']);
+//   gulp.watch('shared/client/scripts/*.js', ['scripts']);
+//   gulp.watch('shared/client/views/templates/**/*.jade', ['app_views']);
+//   gulp.watch('apps/**/resources/**/*.jade', ['app_views']);
+//   return gulp.watch('apps/**/resources/*.js', ['scripts']);
+// });
+gulp.task('watch', gulp.series(function() {
   gulp.watch('shared/client/views/**/*.jade', ['shared_views']);
   gulp.watch('shared/client/css/*.css', ['shared_styles']);
   gulp.watch('shared/client/scripts/*.js', ['scripts']);
   gulp.watch('shared/client/views/templates/**/*.jade', ['app_views']);
   gulp.watch('apps/**/resources/**/*.jade', ['app_views']);
   return gulp.watch('apps/**/resources/*.js', ['scripts']);
-});
+}));
