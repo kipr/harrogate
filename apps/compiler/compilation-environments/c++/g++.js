@@ -24,7 +24,7 @@ module.exports = {
           gpp_cmd += '"' + src.path + "\" ";
         }
       }
-      gpp_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lwallaby -lm -o \"" + project_resource.binary.path + "\" -lz -lpthread ";
+      gpp_cmd += "-L\"" + Config.ext_deps.lib_path + "\" -lkipr -lm -o \"" + project_resource.binary.path + "\" -lz -lpthread ";
 
       // extra support for extra compiler args
       if (fs.existsSync(project_resource.data_directory.path + "/config.json")) {
