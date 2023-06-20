@@ -15,7 +15,7 @@ block view-toolbar-left
       
 
   .btn-group(ng-if='displayed_file')
-    button.btn.btn-toolbar.btn-default(ng-if='!display_file_menu' type='button' ng-click='open_file_menu()')
+    button.btn.btn-toolbar.btn-default(ng-if='!display_file_menu' type='button' ng-click='open_file_menu()' )
       i.fa.fa-file
       br
       small.small File Menu
@@ -144,7 +144,8 @@ block view-content
 
       .row.row-stretch-40(ng-show='compiler_output')
         .col-xs-12.col-stretch
-          .panel.panel-stretch(ng-class='{"panel-success": compilation_state == "Compilation succeeded", "panel-danger": compilation_state == "Compilation Failed", "panel-warning": compilation_state == "Compilation Succeeded with Warnings"}')
+          .panel.panel-stretch(ng-class='{ "panel-success":compilation_state == "Compilation succeeded",  "panel-danger": compilation_state == "Compilation Failed", "panel-warning": compilation_state == "Compilation Succeeded with Warnings", "panel-dark": darkMode}')
+            
             .panel-heading
               .panel-title
                 | {{compilation_state}}
@@ -152,8 +153,9 @@ block view-content
                   button.btn.btn-danger(type='button' ng-click='compiler_output = ""')
                     i.fa.fa-times
 
-            .scrollable-panel-body-container
+            .scrollable-panel-body-container 
               pre.panel-body
+                
                 code {{compiler_output}}
 
       .row.row-stretch-40(ng-show='runner')

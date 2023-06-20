@@ -79,7 +79,12 @@
 .btn-light{
     background-color: white;
     color: black;
-   
+}
+
+
+.btn-default-dark {
+    background-color: #2d6ca3;
+    color: white;
 }
 
 .toolbar
@@ -180,6 +185,15 @@
     padding: 0px;
 }
 
+.panel-dark{
+    background-color:#052141 ;
+}
+
+
+.panel-dark > .scrollable-panel-body-container > .panel-body {
+    background-color:#275D8D;
+    color:white;
+}
 @media (min-width: 1024px)
 {
     .panel-stretch > .scrollable-panel-body-container

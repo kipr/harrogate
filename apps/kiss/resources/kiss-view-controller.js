@@ -516,13 +516,17 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
     var table_row = Array.from(project_table_row); // table row array
     var nav = document.getElementsByClassName('container-fluid')[0];
     var container = document.getElementById('view-container');
+    var panelBody = document.getElementsByClassName('panel-body')[0];
+    var compilerPanel = document.querySelectorAll('.panel-success, .panel-danger, .panel-warning ')[0];
     if($scope.darkMode) {
       editor.setOption('theme', 'kiss-dark');
       document.getElementById('view-content-container').className = "dark-theme-background";
       term.classList.add("dark-empty-editor");
       project_explorer.classList.add("dark-empty-editor");
       container.classList.add("container-fluid-dark");
-      
+      // compilerPanel.style.backgroundColor = '#052141';
+      // panelBody.style.backgroundColor = '#42a5d7';
+      // panelBody.classList.add("container-fluid-dark");
      nav.classList.add("container-fluid-dark");
      table_row.forEach(item => table_change(item)); //each row in table
      
@@ -536,6 +540,8 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
      project_explorer.classList.remove("dark-empty-editor");
      project_container_table.style.backgroundColor = '#f5f5f5';
      project_container_table.style.color = '#333333';
+    //  compilerPanel.style.backgroundColor = '#f5f5f5';
+    //  panelBody.style.backgroundColor = '#f5f5f5';
       nav.classList.remove("container-fluid-dark");
       container.classList.remove("container-fluid-dark");
       Array.from(project_table_row).forEach(table_change,null);
