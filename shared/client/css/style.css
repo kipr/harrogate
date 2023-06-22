@@ -52,6 +52,7 @@
 .cm-s-kiss-dark {color: white;} /* Default text color */
 .cm-s-kiss-dark .CodeMirror-gutters {background: #05284e;}
 .cm-s-kiss-dark .CodeMirror-linenumber {color: white;}
+.cm-s-kiss-dark .CodeMirror-cursor {border-left-color: white;}
 
 .dark-theme-background {
     background-color: #3b3b3b;
