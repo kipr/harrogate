@@ -54,13 +54,14 @@
 .cm-s-kiss-dark .CodeMirror-linenumber {color: white;}
 .cm-s-kiss-dark .CodeMirror-cursor {border-left-color: white;}
 
+
 .dark-theme-background {
     background-color: #3b3b3b;
    
 }
 
 .dark-empty-editor{
-    background-color: #052141;
+    background-color: #0D315B;
 }
 
 .light-theme-background {
@@ -99,9 +100,48 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
-.container-fluid-dark{
-    background-color: #3b3b3b;
+.viewContainer-dark{
+    background-color: #0A2647;
 }
+
+.container-fluid-dark{
+    background-color: #144272;
+}
+
+.navbar-dark{
+    border-color: black;
+}
+
+.panelHeading-dark{
+    background-color: #205295;
+    color: white;
+    background-image: none;
+    padding: 10px 15px;
+    border-bottom: 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius:3px;
+}
+
+.panelBody-dark{
+    background-color: #1F517D;
+    color: white;
+}
+
+.panelButton-dark{
+    color: white;
+    text-shadow: 0 1px 0 #000;
+    border-color: black;
+    background-color: #708090;
+    background-image: linear-gradient(to bottom, #435964 0,#49647A 100%);
+}
+
+.panel-dark{
+    background-color:#0D315B ;
+}
+.panelButton-dark:hover{
+    background-color: #49647A;
+}
+
 .chartist-container
 {
     height: calc(100% - 43.333px);
