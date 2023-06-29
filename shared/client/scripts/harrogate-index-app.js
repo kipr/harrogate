@@ -113,13 +113,15 @@ app.controller('darkModeCtrl', [
 
 
         DarkModeToggleButton.addEventListener("click", () => {
-
+            //console.log("LocalStorage: " + localStorage.getItem('darkMode'));
             document.body.classList.toggle('dark'); // toggle the HTML body the class 'dark'
             if (document.body.classList.contains('dark')) { // when the body has the class 'dark' currently
                 localStorage.setItem('darkMode', 'enabled'); // store this data if dark mode is on
             } else {
                 localStorage.setItem('darkMode', 'disabled'); // store this data if dark mode is off
-            } toggle();
+            } 
+            console.log("LocalStorage: " + localStorage.getItem('darkMode'));
+            toggle();
 
         });
         toggle();
@@ -136,12 +138,13 @@ app.controller('darkModeCtrl', [
             var compilerPanel = document.querySelectorAll('.panel-success, .panel-danger, .panel-warning ')[0];
             var darkModeImage = DarkModeToggleButton.getElementsByTagName("i")[0];
             var darkModeText = DarkModeToggleButton.getElementsByTagName("small")[0];
+
             if (localStorage.getItem('darkMode') == 'enabled') { // dark mode settings
 
                 viewContainer.classList.add("viewContainer-dark");
                 topBannerStrip.classList.add("container-fluid-dark");
                 navbar.classList.add("navbar-dark");
-                
+
                 for (var i = 0; i < panel.length; i++) {
                     panel[i].children[0].classList.add("panelHeading-dark");
                     panel[i].children[0].classList.remove('panel-heading');
@@ -151,7 +154,7 @@ app.controller('darkModeCtrl', [
                 for (var i = 0; i < button.length; i++) {
                     button[i].classList.add('panelButton-dark');
                 }
-              
+
                 darkModeImage.classList.remove("fa-moon-o");
                 darkModeImage.classList.add("fa-sun-o");
                 darkModeText.innerHTML = "Light Mode";
@@ -168,8 +171,8 @@ app.controller('darkModeCtrl', [
                     panel[i].children[1].classList.remove("panelBody-dark");
 
                 }
-                for (var i =0; i<button.length; i++){
-                  button[i].classList.remove('panelButton-dark');
+                for (var i = 0; i < button.length; i++) {
+                    button[i].classList.remove('panelButton-dark');
                 }
                 darkModeImage.classList.remove("fa-sun-o");
                 darkModeImage.classList.add("fa-moon-o");

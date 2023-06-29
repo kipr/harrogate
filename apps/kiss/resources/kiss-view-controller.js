@@ -109,15 +109,25 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
         return users;
     }
 
+    const DarkModeToggleButton = document.getElementById('darkModeBtn');
+    DarkModeToggleButton.addEventListener("click", () => {
 
-    var project_explorer = document.getElementsByClassName('panel')[0];
-    console.log("Project_explorer: " + project_explorer.children[0].classList);
-    if (localStorage.getItem('darkMode') == 'enabled') {
-     project_explorer.classList.add("panel-dark");
-    }
-    else if(localStorage.getItem('darkMode') == 'disabled') {
-      project_explorer.classList.remove("panel-dark");
-    }
+        var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
+        console.log("Project_explorer: " + project_explorer.classList);
+        console.log("LocalStorage (editor): " + localStorage.getItem('darkMode'));
+        if (document.body.classList.contains('dark')) {
+            project_explorer.classList.add("panel-dark");
+
+        } else if (!document.body.classList.contains('dark')) {
+            project_explorer.classList.remove("panel-dark");
+        }
+
+    });
+    // toggle();
+    // function toggle() {
+
+    // }
+
 
     $scope.reload_ws = function () {
 
@@ -200,12 +210,12 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
             selected_file = null;
             selected_file_cat = null;
 
-            // This block changes Project Explorer table theme colors
-            var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
-            var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; // Project Explorer Table
-            var project_table_row = project_container_table.getElementsByTagName("tr"); // Table row array object
-            var table_row = Array.from(project_table_row); // table row array
-            table_row.forEach(item => table_change(item)); // each row in table
+            // // This block changes Project Explorer table theme colors
+            // var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
+            // var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; // Project Explorer Table
+            // var project_table_row = project_container_table.getElementsByTagName("tr"); // Table row array object
+            // var table_row = Array.from(project_table_row); // table row array
+            // table_row.forEach(item => table_change(item)); // each row in table
 
 
             if ($location.search().file != null) {
@@ -287,12 +297,13 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
             $timeout(function () {
                 editor.setValue(new Buffer(data.content, 'base64').toString('ascii'));
                 editor.refresh();
-                return $timeout(function () { // This block changes Project Explorer table theme colors
-                    var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
-                    var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; // Project Explorer Table
-                    var project_table_row = project_container_table.getElementsByTagName("tr"); // Table row array object
-                    var table_row = Array.from(project_table_row); // table row array
-                    table_row.forEach(item => table_change(item)); // each row in table
+                return $timeout(function () {
+                    // This block changes Project Explorer table theme colors
+                    // var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
+                    // var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; // Project Explorer Table
+                    // var project_table_row = project_container_table.getElementsByTagName("tr"); // Table row array object
+                    // var table_row = Array.from(project_table_row); // table row array
+                    // table_row.forEach(item => table_change(item)); // each row in table
 
                     return $scope.documentChanged = false;
                 });
@@ -494,67 +505,67 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
         return $scope.display_file_menu = true;
     };
 
-    table_change = function (item) { // item is 1 table row array object
-        var i;
-        var td = item.getElementsByTagName("td");
-        var th = item.getElementsByTagName("th");
+    // table_change = function (item) { // item is 1 table row array object
+    //     var i;
+    //     var td = item.getElementsByTagName("td");
+    //     var th = item.getElementsByTagName("th");
 
-        var table_data = Array.from(td);
-        var table_row_header = Array.from(th);
+    //     var table_data = Array.from(td);
+    //     var table_row_header = Array.from(th);
 
-        Array.from(td).forEach(element => element.style.backgroundColor = '#05284e');
-        Array.from(td).forEach(element => element.style.color = '#ffffff');
-        Array.from(th).forEach(element => element.style.backgroundColor = '#05284e');
-        Array.from(th).forEach(element => element.style.color = '#ffffff');
+    //     Array.from(td).forEach(element => element.style.backgroundColor = '#05284e');
+    //     Array.from(td).forEach(element => element.style.color = '#ffffff');
+    //     Array.from(th).forEach(element => element.style.backgroundColor = '#05284e');
+    //     Array.from(th).forEach(element => element.style.color = '#ffffff');
 
-        if ($scope.darkMode) { // if currently in dark mode --> change to dark aspects
+    //     if ($scope.darkMode) { // if currently in dark mode --> change to dark aspects
 
-            for (i = 0; i < table_data.length; i++) { // changes td tag
+    //         for (i = 0; i < table_data.length; i++) { // changes td tag
 
-                if (item.classList.contains("info")) { // currently selected file
-                    table_data[i].style.backgroundColor = '#42a5d7';
-                    table_data[i].style.color = '#ffffff';
-                }
+    //             if (item.classList.contains("info")) { // currently selected file
+    //                 table_data[i].style.backgroundColor = '#42a5d7';
+    //                 table_data[i].style.color = '#ffffff';
+    //             }
 
-            }
+    //         }
 
-            for (i = 0; i < table_row_header.length; i++) { // changes th tag
-                if (item.classList.contains("info")) {
-                    table_row_header[i].style.backgroundColor = '#42a5d7';
-                    table_row_header[i].style.color = '#ffffff';
-                } else {
-                    table_row_header[i].style.backgroundColor = '#05284e';
-                    table_row_header[i].style.color = '#ffffff';
-                }
-            }
+    //         for (i = 0; i < table_row_header.length; i++) { // changes th tag
+    //             if (item.classList.contains("info")) {
+    //                 table_row_header[i].style.backgroundColor = '#42a5d7';
+    //                 table_row_header[i].style.color = '#ffffff';
+    //             } else {
+    //                 table_row_header[i].style.backgroundColor = '#05284e';
+    //                 table_row_header[i].style.color = '#ffffff';
+    //             }
+    //         }
 
-        } else { // if currently in light mode --> change to light aspects
+    //     } else { // if currently in light mode --> change to light aspects
 
-            for (i = 0; i < table_data.length; i++) { // change td tag
-                if (item.classList.contains("info")) {
+    //         for (i = 0; i < table_data.length; i++) { // change td tag
+    //             if (item.classList.contains("info")) {
 
-                    table_data[i].style.backgroundColor = '#d9edf7';
-                    table_data[i].style.color = '#291c10';
+    //                 table_data[i].style.backgroundColor = '#d9edf7';
+    //                 table_data[i].style.color = '#291c10';
 
-                } else {
-                    table_data[i].style.backgroundColor = '#f5f5f5';
-                    table_data[i].style.color = '#291c10';
-                }
-            }
-            for (i = 0; i < table_row_header.length; i++) { // change th tag
-                if (item.classList.contains("info")) {
+    //             } else {
+    //                 table_data[i].style.backgroundColor = '#f5f5f5';
+    //                 table_data[i].style.color = '#291c10';
+    //             }
+    //         }
+    //         for (i = 0; i < table_row_header.length; i++) { // change th tag
+    //             if (item.classList.contains("info")) {
 
-                    table_row_header[i].style.backgroundColor = '#d9edf7';
-                    table_row_header[i].style.color = '#291c10';
+    //                 table_row_header[i].style.backgroundColor = '#d9edf7';
+    //                 table_row_header[i].style.color = '#291c10';
 
-                } else {
-                    table_row_header[i].style.backgroundColor = '#f5f5f5';
-                    table_row_header[i].style.color = '#291c10';
-                }
-            }
-        }
+    //             } else {
+    //                 table_row_header[i].style.backgroundColor = '#f5f5f5';
+    //                 table_row_header[i].style.color = '#291c10';
+    //             }
+    //         }
+    //     }
 
-    };
+    // };
 
 
     // $scope.toggle_theme = function () {
