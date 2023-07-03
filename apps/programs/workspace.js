@@ -288,17 +288,15 @@ Workspace = (function() {
     if (language === 'Python')
     {
       programContent =  '#!/usr/bin/python3\n' 
-        + 
+        +
         + 'import os, sys\n'
         + 'sys.path.append("/usr/lib")\n'
-        + 'import kipr as k\n'
+        + 'import _kipr as k\n'
         + '\n'
         + 'def main():\n'
         + '    print ("Hello World")\n'
         + '\n'
-        + 'if __name__== "__main__":\n'
-        + '    sys.stdout = os.fdopen(sys.stdout.fileno(),"w",0)\n'
-        + '    main();\n'; 
+        + 'main()\n'; 
     }
     else
     {
