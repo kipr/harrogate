@@ -53,6 +53,7 @@
 .cm-s-kiss-dark .CodeMirror-gutters {background: #05284e;}
 .cm-s-kiss-dark .CodeMirror-linenumber {color: white;}
 .cm-s-kiss-dark .CodeMirror-cursor {border-left-color: white;}
+.cm-s-kiss-dark .cm-builtin {color: #ff9d00;}
 
 
 .dark-theme-background {
@@ -111,6 +112,51 @@
 .navbar-dark{
     border-color: black;
 }
+
+.explorerDark{
+    background-color: #42a5d7;
+    color: #ffffff;
+
+}
+
+.runnerDark{
+    background-color: #1f517d;
+    color: white;
+}
+
+.panelDark-Success{
+    color: white;
+    background-image: none;
+    padding: 10px 15px;
+    border-bottom: 1px;
+    border-color: #0D315B;
+    border-top-left-radius: 3px;
+    border-top-right-radius:3px;
+    background-image: linear-gradient(to bottom, #189733 0,#0d3712 100%);
+}
+
+.panelDark-Failed{
+    color: white;
+    background-image: none;
+    padding: 10px 15px;
+    border-bottom: 1px;
+    border-color: #0D315B;
+    border-top-left-radius: 3px;
+    border-top-right-radius:3px;
+    background-image: linear-gradient(to bottom, #b70000 0,#450303 100%);
+}
+
+.panelDark-Warning{
+    color: white;
+    background-image: none;
+    padding: 10px 15px;
+    border-bottom: 1px;
+    border-color: #0D315B;
+    border-top-left-radius: 3px;
+    border-top-right-radius:3px;
+    background-image: linear-gradient(to bottom,#ffe975 0,#635829 100%);
+}
+
 
 .panelHeading-dark{
     background-color: #205295;
@@ -235,6 +281,7 @@
     background-color:#275D8D;
     color:white;
 }
+
 @media (min-width: 1024px)
 {
     .panel-stretch > .scrollable-panel-body-container

@@ -144,10 +144,10 @@ block view-content
 
       .row.row-stretch-40(ng-show='compiler_output')
         .col-xs-12.col-stretch
-          .panel.panel-stretch(ng-class='{ "panel-success":compilation_state == "Compilation succeeded",  "panel-danger": compilation_state == "Compilation Failed", "panel-warning": compilation_state == "Compilation Succeeded with Warnings", "panel-dark": darkMode}')
+          .panel.panel-stretch(ng-class='{ "panel-success":compilation_state =="Compilation succeeded", "panel-danger": compilation_state == "Compilation Failed", "panel-warning": compilation_state == "Compilation Succeeded with Warnings"}')
             
-            .panel-heading
-              .panel-title
+            .compiler.panel-heading
+              .compiler.panel-title
                 | {{compilation_state}}
                 span.btn-group-xs.pull-right
                   button.btn.btn-danger(type='button' ng-click='compiler_output = ""')

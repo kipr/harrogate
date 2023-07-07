@@ -112,21 +112,30 @@ app.controller('darkModeCtrl', [
         }
 
 
-        DarkModeToggleButton.addEventListener("click", () => {
-            //console.log("LocalStorage: " + localStorage.getItem('darkMode'));
+        DarkModeToggleButton.addEventListener("click", () => { // console.log("LocalStorage: " + localStorage.getItem('darkMode'));
             document.body.classList.toggle('dark'); // toggle the HTML body the class 'dark'
             if (document.body.classList.contains('dark')) { // when the body has the class 'dark' currently
                 localStorage.setItem('darkMode', 'enabled'); // store this data if dark mode is on
             } else {
                 localStorage.setItem('darkMode', 'disabled'); // store this data if dark mode is off
-            } 
+            }
             console.log("LocalStorage: " + localStorage.getItem('darkMode'));
             toggle();
 
+
         });
         toggle();
+        //
         function toggle() {
             var viewContainer = document.getElementById('view-container');
+
+            // // This block changes Project Explorer table theme colors
+            // var project_explorer = document.querySelectorAll('.panel.panel-primary.panel-stretch:not(panel-heading)')[4];
+            // var project_container_table = project_explorer.getElementsByTagName("tbody")[0]; // Project Explorer Table
+            // var project_table_row = project_container_table.getElementsByTagName("tr"); // Table row array object
+            // var table_row = Array.from(project_table_row); // table row array
+            // table_row.forEach(item => table_change(item)); // each row in table
+
 
             var navbar = viewContainer.getElementsByClassName('navbar')[0];
             var topBannerStrip = viewContainer.getElementsByClassName('container-fluid')[0];
@@ -135,10 +144,12 @@ app.controller('darkModeCtrl', [
             var panel = document.getElementsByClassName('panel');
             var panelStretch = document.getElementsByClassName('panel-stretch');
             var button = document.getElementsByClassName('btn');
-            var compilerPanel = document.querySelectorAll('.panel-success, .panel-danger, .panel-warning ')[0];
+            var compilerPanel = document.querySelectorAll('.compiler');
             var darkModeImage = DarkModeToggleButton.getElementsByTagName("i")[0];
             var darkModeText = DarkModeToggleButton.getElementsByTagName("small")[0];
-
+            var codeMirror = viewContentContainer.querySelectorAll('.CodeMirror')[0];
+            var codeMirrorSizer = viewContentContainer.querySelectorAll('.CodeMirror-lines')[0];
+            var consoleWindow = document.querySelectorAll('.cm-s-material-palenight')[0];
             if (localStorage.getItem('darkMode') == 'enabled') { // dark mode settings
 
                 viewContainer.classList.add("viewContainer-dark");
@@ -154,10 +165,26 @@ app.controller('darkModeCtrl', [
                 for (var i = 0; i < button.length; i++) {
                     button[i].classList.add('panelButton-dark');
                 }
+                for (var i = 0; i < panelStretch.length; i++) {
+                    panelStretch[i].classList.add('panel-dark');
+                }
 
                 darkModeImage.classList.remove("fa-moon-o");
                 darkModeImage.classList.add("fa-sun-o");
                 darkModeText.innerHTML = "Light Mode";
+                if (codeMirror) {
+                    codeMirror.classList.remove('cm-s-kiss-default');
+                    codeMirror.classList.add('cm-s-kiss-dark');
+                    codeMirrorSizer.classList.add('navbar-dark');
+                }
+                if (consoleWindow) {
+                    if (localStorage.getItem('darkMode') == 'enabled') {
+                        consoleWindow.classList.add('cm-s-kiss-dark');
+                    } else {
+                        consoleWindow.classList.remove('cm-s-kiss-dark');
+                    }
+                }
+
 
             } else { // light mode settings
 
@@ -174,12 +201,20 @@ app.controller('darkModeCtrl', [
                 for (var i = 0; i < button.length; i++) {
                     button[i].classList.remove('panelButton-dark');
                 }
+                for (var i = 0; i < panelStretch.length; i++) {
+                    panelStretch[i].classList.remove('panel-dark');
+                }
                 darkModeImage.classList.remove("fa-sun-o");
                 darkModeImage.classList.add("fa-moon-o");
                 darkModeText.innerHTML = "Dark Mode";
+                if (codeMirror) {
+                    // codeMirror.classList.remove('cm-s-kiss-dark');
+                    // codeMirror.classList.add('cm-s-kiss-default');
+                }
+
+
             }
         }
-
 
     }
 
