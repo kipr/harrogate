@@ -88,7 +88,7 @@ exports.controller = function ($scope, $rootScope, $location, $http, $timeout, A
         mode: mode,
         lineNumbers: true,
         indentUnit: 4,
-        smartIndent: false,
+        smartIndent: true,
         indentWithTabs: false,
         theme: 'kiss-default',
         viewportMargin: Infinity
