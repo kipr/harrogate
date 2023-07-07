@@ -24,18 +24,7 @@ exports.controller = function ($scope, $http, $location, AppCatalogProvider, Pro
     $scope.ProgramService = ProgramService;
     socket = void 0;
     events = void 0;
-    var terminal = document.getElementsByTagName('terminal')[0];
 
-    console.log(terminal.children);
-    console.log(terminal.children[1]);
-    var consoleWindow = terminal.getElementsByClassName('cm-s-material-palenight');
-    console.log(consoleWindow.children);
-    if (localStorage.getItem('darkMode') == 'enabled') {
-     // consoleWindow[0].classList.remove('cm-s-material-palenight');
-    } else {
-      //consoleWindow.classList.add('cm-s-kiss-dark');
-    }
-  
     const DarkModeToggleButton = document.getElementById('darkModeBtn');
 
     DarkModeToggleButton.addEventListener("click", () => { 
@@ -52,7 +41,6 @@ exports.controller = function ($scope, $http, $location, AppCatalogProvider, Pro
             } else {
                 localStorage.setItem('darkMode', 'disabled'); // store this data if dark mode is off
             }
-        //$scope.reload_ws();
     });
 
     $scope.select_project = function (project) { // toggle selection
@@ -70,6 +58,12 @@ exports.controller = function ($scope, $http, $location, AppCatalogProvider, Pro
     $scope.active_user = $scope.users[0];
 
     $scope.$watch('active_user', function (newValue, oldValue) {
+        var consoleWind = document.querySelectorAll('.cm-s-material-palenight')[0];
+        if (localStorage.getItem('darkMode') == 'enabled') {
+          consoleWind.classList.add('cm-s-kiss-dark');
+        } else {
+          consoleWind.classList.remove('cm-s-kiss-dark');
+        }
         $scope.update_projects();
     });
 

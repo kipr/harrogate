@@ -181,6 +181,21 @@
     background-image: linear-gradient(to bottom, #435964 0,#49647A 100%);
 }
 
+.editorSave-Dark{
+    color: white;
+    text-shadow: 0 1px 0 #000;
+    border-color: black;
+    background-color: #708090;
+    background-image: linear-gradient(to bottom, #45bd27 0,#536753 100%);
+}
+
+.editorSaveChanged-Dark{
+    color: white;
+    text-shadow: 0 1px 0 #000;
+    border-color: black;
+    background-color: #708090;
+    background-image: linear-gradient(to bottom, #ef5a5a 0,#8b4747 100%);
+}
 .panel-dark{
     background-color:#0D315B ;
 }

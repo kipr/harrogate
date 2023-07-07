@@ -2,18 +2,12 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group(ng-if='displayed_file && !display_file_menu')
-    button.btn.btn-toolbar(type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged, 'disabled': is_compiling}" ng-click='save()')
+    save.button.btn.btn-toolbar(id = "saveButton" type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged, 'disabled': is_compiling}" ng-click='save()')
       i.fa.fa-floppy-o
       br
       small.small Save {{displayed_file.name}}
-
-  //- .btn-group(ng-if='displayed_file')
-  //-   button.btn.btn-toolbar(ng-if='!display_file_menu' type='button' ng-click='toggle_theme()' ng-class="{'btn-light' : darkMode, 'btn-dark': !darkMode  }")
-  //-     i.fa(ng-class = '{"fa-moon-o" : !darkMode, "fa-sun-o" : darkMode }')
-  //-     br
-  //-     small.small {{darkMode ? 'Light Mode' : 'Dark Mode'}}    
-      
-
+   
+  
   .btn-group(ng-if='displayed_file')
     button.btn.btn-toolbar.btn-default(ng-if='!display_file_menu' type='button' ng-click='open_file_menu()' )
       i.fa.fa-file
