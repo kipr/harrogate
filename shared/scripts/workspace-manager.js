@@ -14,7 +14,7 @@ const TargetApp = AppCatalog.catalog['Target information'].get_instance();
 
 User = require('./user.js');
 
-sys_app_data_path = process.env.APPDATA || (process.platform === 'darwin' ? Path.join(process.env.HOME, 'Library/Preferences') : '/var/local');
+sys_app_data_path = (process.platform === 'darwin' ? Path.join(process.env.HOME, 'Library/Preferences') : '/var/local') || process.env.APPDATA;
 
 harrogate_app_data_path = Path.join(sys_app_data_path, 'KIPR Software Suite');
 
