@@ -14,13 +14,18 @@ const TargetApp = AppCatalog.catalog['Target information'].get_instance();
 
 User = require('./user.js');
 
-sys_app_data_path = process.env.APPDATA || (process.platform === 'darwin' ? Path.join(process.env.HOME, 'Library/Preferences') : '/var/local');
+sys_app_data_path = (process.platform === 'darwin' ? Path.join(process.env.HOME, 'Library/Preferences') : '/var/local') || process.env.APPDATA;
 
 harrogate_app_data_path = Path.join(sys_app_data_path, 'KIPR Software Suite');
 
-try {
-  Fs.mkdirSync(harrogate_app_data_path);
-} catch (undefined) {}
+// TODO: Make this automatically create the directory if it doesn't exist
+// Issue: Permission denied on Wombat when accessing /var/local
+// try {
+//   console.log('harrogate_app_data_path: ' + harrogate_app_data_path);
+//   Fs.mkdirSync(harrogate_app_data_path);
+// } catch (undefined) {
+//   console.log('could not create harrogate app data path');
+// }
 
 WorkspaceManager = (function() {
   function WorkspaceManager() {
