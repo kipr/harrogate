@@ -55,7 +55,34 @@
 .cm-s-kiss-dark .CodeMirror-cursor {border-left-color: white;}
 .cm-s-kiss-dark .cm-builtin {color: #ff9d00;}
 
+.homeTitle{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    color:white;
+}
 
+.startColumn{
+    display:flexbox;
+    flex-direction: column;
+    color:white;
+}
+
+.startColumn > .startOptionColumn {
+    display:flexbox;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 10px;
+    color:white;
+}
+
+.startColumn > .startOptionColumn > .startOptionRows{
+    display:flexbox;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 10px;
+    color:white;
+}
 .dark-theme-background {
     background-color: #3b3b3b;
    
