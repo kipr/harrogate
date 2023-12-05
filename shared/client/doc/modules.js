@@ -9,7 +9,6 @@ var modules =
     [ "Console", "group__console.html", "group__console" ],
     [ "iRobot (R) Create (TM)", "group__create.html", "group__create" ],
     [ "Digitals", "group__digital.html", "group__digital" ],
-    [ "General", "group__general.html", "group__general" ],
     [ "Graphics", "group__graphics.html", "group__graphics" ],
     [ "Gyrometer", "group__gyro.html", "group__gyro" ],
     [ "Magnetometer", "group__magneto.html", "group__magneto" ],

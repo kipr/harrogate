@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rgb',['RGB',['../graphics_8h.html#afb0564821f132bfe74508af8349a0faaa30447e9f6efa4afdd251f9afc1d5fb44',1,'graphics.h']]],
-  ['right',['Right',['../namespace_button_1_1_type.html#a53d13b3f26501127fef45668d0a2bc69aa029a876db5b47ed510b3af497f28048',1,'Button::Type']]]
+  ['med_5fres_1918',['MED_RES',['../camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3a31c6c4c7336d70b5b00cf635080641e7',1,'camera.h']]]
 ];

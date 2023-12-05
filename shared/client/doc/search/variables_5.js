@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['g',['g',['../structpixel.html#a6f4b39b225373a1404c8424c176f4006',1,'pixel::g()'],['../struct_rgb.html#a27a8958ecb91f5f98ee520129a396ce3',1,'Rgb::g()']]]
+  ['file_1716',['file',['../structkipr_1_1log_1_1Location.html#ae38b3f501c4a6057675590920634fe31',1,'kipr::log::Location']]],
+  ['flush_1717',['flush',['../namespacekipr_1_1log.html#a41f43a60fb94700f7372818de9255aa4',1,'kipr::log']]]
 ];

@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['pixel',['pixel',['../structpixel.html',1,'']]],
-  ['point2',['point2',['../structpoint2.html',1,'point2'],['../class_point2.html',1,'Point2&lt; T &gt;']]],
-  ['point2_3c_20unsigned_20_3e',['Point2&lt; unsigned &gt;',['../class_point2.html',1,'']]],
-  ['point3',['Point3',['../class_point3.html',1,'Point3&lt; T &gt;'],['../structpoint3.html',1,'point3']]]
+  ['not_1029',['Not',['../classkipr_1_1sensor_1_1logic_1_1Not.html',1,'kipr::sensor::logic']]]
 ];

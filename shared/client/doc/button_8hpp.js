@@ -1,16 +1,16 @@
 var button_8hpp =
 [
-    [ "AbstractButton", "class_abstract_button.html", "class_abstract_button" ],
-    [ "AbstractTextButton", "class_abstract_text_button.html", "class_abstract_text_button" ],
-    [ "IdButton", "class_id_button.html", "class_id_button" ],
-    [ "ExtraButtons", "class_extra_buttons.html", "class_extra_buttons" ],
-    [ "A", "button_8hpp.html#a5e7f41a5b600006aa2e5e0d656b41baa", null ],
-    [ "all", "button_8hpp.html#ad2d2da5e2b8e867dc06cab8ffa78ba73", null ],
-    [ "B", "button_8hpp.html#aef3b1b348ac209097267cb616a457117", null ],
-    [ "C", "button_8hpp.html#a6d6c83ec218164dce7961fd232aaa3f3", null ],
-    [ "Left", "button_8hpp.html#ae005768feddb60e92c843e9514b0a1c6", null ],
-    [ "Right", "button_8hpp.html#a9fe7f595b92ec54dc9cc73dc1e486d7b", null ],
-    [ "X", "button_8hpp.html#add8f3a8f381b1af07ac91b134b9994ef", null ],
-    [ "Y", "button_8hpp.html#a80b484d3457599b205656e6c57040c60", null ],
-    [ "Z", "button_8hpp.html#a1da5de854f4c69282b1b6893ae816bb6", null ]
+    [ "AbstractButton", "classkipr_1_1button_1_1AbstractButton.html", "classkipr_1_1button_1_1AbstractButton" ],
+    [ "AbstractTextButton", "classkipr_1_1button_1_1AbstractTextButton.html", "classkipr_1_1button_1_1AbstractTextButton" ],
+    [ "IdButton", "classkipr_1_1button_1_1IdButton.html", "classkipr_1_1button_1_1IdButton" ],
+    [ "ExtraButtons", "classkipr_1_1button_1_1ExtraButtons.html", null ],
+    [ "A", "button_8hpp.html#a42912de13a5cae830054fd2ac432fb18", null ],
+    [ "all", "button_8hpp.html#a3df9bc9522dfe24fb9ed619dc9d1ba14", null ],
+    [ "B", "button_8hpp.html#a55aa9b0d1e50f8d3a6ba87e943778db4", null ],
+    [ "C", "button_8hpp.html#a441c5591667c7a6d019cc327d6c412ad", null ],
+    [ "Left", "button_8hpp.html#a778e4733b946a80ef7c13a157558e22a", null ],
+    [ "Right", "button_8hpp.html#acfb2407b30b6a223b2f926ec60723bda", null ],
+    [ "X", "button_8hpp.html#a0d1572153bed9694d9b91eafc5dd92e5", null ],
+    [ "Y", "button_8hpp.html#a88643d1b09d22c8c87a72085e0bfd116", null ],
+    [ "Z", "button_8hpp.html#a7ae075e0746698b77c0f848a7030e52e", null ]
 ];

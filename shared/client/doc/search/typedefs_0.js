@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['channelptrvector',['ChannelPtrVector',['../namespace_camera.html#a230e7c517145ce678b824e3b57eab401',1,'Camera']]]
+  ['constptr_1768',['ConstPtr',['../classkipr_1_1log_1_1Log.html#a898c5e0a782262b7b84a0365736f7533',1,'kipr::log::Log']]]
 ];

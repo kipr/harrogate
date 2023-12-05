@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['fd',['fd',['../class_socket.html#acd1cbff4fc47e3aba869b4197729ebbb',1,'Socket::fd()'],['../group__motor.html#ga55a302772158e1f15f1c90992f535272',1,'fd():&#160;motors.h']]],
-  ['findobjects',['findObjects',['../class_camera_1_1_channel_impl.html#a9aec7b401fc2ad6324570a84bec5c21c',1,'Camera::ChannelImpl']]],
-  ['flush',['flush',['../class_create.html#a274a1f17eedf7f2c7d83225f8b5100e0',1,'Create']]],
-  ['forward',['forward',['../class_motor.html#ae804085b9a09f64031558711bfd700ac',1,'Motor']]],
-  ['freeze',['freeze',['../class_motor.html#a28a3af6d7d140e135469989d23e91ac9',1,'Motor::freeze()'],['../group__motor.html#ga50d36bdfccc143992c8ab51689536ecc',1,'freeze():&#160;motors.h']]],
-  ['freeze_5fhalt',['freeze_halt',['../general_8h.html#ae386a2b5c14b4291274d1224dbe43bb6',1,'general.h']]],
-  ['fullmode',['FullMode',['../class_create.html#aeeee5123c8b51972e7c7002e64d2248fac6acb1884841c0a3ac5dd3696199c6c5',1,'Create']]]
+  ['fatal_242',['fatal',['../classkipr_1_1log_1_1Log.html#ace1798e31bb7d7b03b70014b35084673',1,'kipr::log::Log::fatal(const std::string &amp;message, const Location &amp;location)'],['../classkipr_1_1log_1_1Log.html#a3d7abab9d33d976d07eb2675cd027516',1,'kipr::log::Log::fatal(const std::string &amp;message)'],['../classkipr_1_1log_1_1Log.html#a02272838b5187ef57702b7a4dac07824',1,'kipr::log::Log::fatal()']]],
+  ['fatal_243',['Fatal',['../namespacekipr_1_1log.html#ac448d0ee86b50f80a44a11636d65fe34a882384ec38ce8d9582b57e70861730e4',1,'kipr::log']]],
+  ['fd_244',['fd',['../classSocket.html#af8da516631e03da69eb9cb5dfac46383',1,'Socket::fd()'],['../group__motor.html#ga55a302772158e1f15f1c90992f535272',1,'fd():&#160;motor.h']]],
+  ['file_245',['file',['../structkipr_1_1log_1_1Location.html#ae38b3f501c4a6057675590920634fe31',1,'kipr::log::Location']]],
+  ['flush_246',['flush',['../classkipr_1_1create_1_1Create.html#a535ceb95d037ccee233aaf119172f660',1,'kipr::create::Create::flush()'],['../namespacekipr_1_1log.html#a41f43a60fb94700f7372818de9255aa4',1,'kipr::log::flush()']]],
+  ['flush_247',['Flush',['../structkipr_1_1log_1_1Flush.html',1,'kipr::log']]],
+  ['forward_248',['forward',['../classkipr_1_1motor_1_1Motor.html#ab7643ecdc777b105f46208a2f5a838d3',1,'kipr::motor::Motor']]],
+  ['freeze_249',['freeze',['../classkipr_1_1motor_1_1Motor.html#a32a7e6f957875a1f8509c4155a4c79cd',1,'kipr::motor::Motor::freeze()'],['../group__motor.html#ga50d36bdfccc143992c8ab51689536ecc',1,'freeze(int motor):&#160;motor.h']]],
+  ['fuchsia_250',['FUCHSIA',['../colors_8h.html#a025a1624e6a431140f6176b3c410f189',1,'colors.h']]],
+  ['fullmode_251',['FullMode',['../classkipr_1_1create_1_1Create.html#aa705f92c64f024ca75a4e7be32ff5aa5a2e6ccf4636d4ae3dd6e210c6f179aaf9',1,'kipr::create::Create']]]
 ];

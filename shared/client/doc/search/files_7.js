@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['magneto_2eh',['magneto.h',['../magneto_8h.html',1,'']]],
-  ['magneto_2ehpp',['magneto.hpp',['../magneto_8hpp.html',1,'']]],
-  ['motors_2eh',['motors.h',['../motors_8h.html',1,'']]],
-  ['motors_2ehpp',['motors.hpp',['../motors_8hpp.html',1,'']]]
+  ['log_2ehpp_1113',['log.hpp',['../log_8hpp.html',1,'']]],
+  ['logic_2ehpp_1114',['logic.hpp',['../logic_8hpp.html',1,'']]]
 ];

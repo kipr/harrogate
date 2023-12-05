@@ -1,18 +1,10 @@
 var searchData=
 [
-  ['left_5fbutton',['left_button',['../group__button.html#ga34eaae0b8960db57c37e35eecc891b6c',1,'button.h']]],
-  ['lightbumpcenterleft',['lightBumpCenterLeft',['../class_create.html#a91b78b65ec27c1f72d47260410e08fc4',1,'Create']]],
-  ['lightbumpcenterleftsignal',['lightBumpCenterLeftSignal',['../class_create.html#a373ce4251ad64ef61557ebba96e4e53b',1,'Create']]],
-  ['lightbumpcenterright',['lightBumpCenterRight',['../class_create.html#ac08b8bc833cfe0e00c72cc3324250723',1,'Create']]],
-  ['lightbumpcenterrightsignal',['lightBumpCenterRightSignal',['../class_create.html#a4831102bffa1ebae4c247f1a9d94fc98',1,'Create']]],
-  ['lightbumpfrontleft',['lightBumpFrontLeft',['../class_create.html#ae61844804332b0a4d0eabee384170296',1,'Create']]],
-  ['lightbumpfrontleftsignal',['lightBumpFrontLeftSignal',['../class_create.html#a4c9e744634608a6c9d10525c8fbbc148',1,'Create']]],
-  ['lightbumpfrontright',['lightBumpFrontRight',['../class_create.html#a8a500e6437bd07162f904e9957f2592e',1,'Create']]],
-  ['lightbumpfrontrightsignal',['lightBumpFrontRightSignal',['../class_create.html#ab93d47b726686df0b6750eea2fdb183a',1,'Create']]],
-  ['lightbumpleft',['lightBumpLeft',['../class_create.html#aaddb2ab474d8c217ad6eb14db82dca16',1,'Create']]],
-  ['lightbumpleftsignal',['lightBumpLeftSignal',['../class_create.html#a3fab83cd36f5488dd659314ce47fb03f',1,'Create']]],
-  ['lightbumpright',['lightBumpRight',['../class_create.html#a37a004bbba86cea40cc9d5981cde09a4',1,'Create']]],
-  ['lightbumprightsignal',['lightBumpRightSignal',['../class_create.html#ac99a278b5bf244f8057373620184157c',1,'Create']]],
-  ['load',['load',['../class_config.html#af781f098acf63a3ada27b1d7af8f43fd',1,'Config']]],
-  ['lock',['lock',['../class_mutex.html#ad91be808bf0a60a16f10b897ec246d3a',1,'Mutex']]]
+  ['kipr_5fbuild_5fdatetime_1435',['kipr_build_datetime',['../core_8h.html#a3b11d13df2fb38ee31746362e189a287',1,'core.h']]],
+  ['kipr_5fgit_5fbranch_1436',['kipr_git_branch',['../core_8h.html#ac1b158abd8977a7a47c57341884da0e1',1,'core.h']]],
+  ['kipr_5fgit_5fcommit_5fhash_1437',['kipr_git_commit_hash',['../core_8h.html#a078b4d94ae27925754c8e2dbfdddf7a2',1,'core.h']]],
+  ['kipr_5fversion_1438',['kipr_version',['../core_8h.html#a68e2b885bfc29b9d15eb7434e313217d',1,'core.h']]],
+  ['kipr_5fversion_5fmajor_1439',['kipr_version_major',['../core_8h.html#ac8383a59b1dae0edcfadc8d0c6a7f5b8',1,'core.h']]],
+  ['kipr_5fversion_5fminor_1440',['kipr_version_minor',['../core_8h.html#a9477fdfa9af0446ef6a75afa16784063',1,'core.h']]],
+  ['kipr_5fversion_5fpatch_1441',['kipr_version_patch',['../core_8h.html#a88391ac44169cedf09a70854c1dc6f2d',1,'core.h']]]
 ];

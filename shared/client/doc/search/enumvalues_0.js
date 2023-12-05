@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['a',['A',['../namespace_button_1_1_type.html#a53d13b3f26501127fef45668d0a2bc69ac2db47d151ed7ced4109ab4314622f41',1,'Button::Type']]]
+  ['a_1792',['A',['../namespacekipr_1_1button.html#a46c17cd2d42572a5b00eebc23dc79507a7fc56270e7a70fa81a5935b72eacbe29',1,'kipr::button']]]
 ];

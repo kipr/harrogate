@@ -1,0 +1,12 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classkipr_1_1sensor_1_1Sensor.html" title=" " alt="" coords="5,85,156,127"/>
+<area shape="rect" id="node2" href="$classkipr_1_1button_1_1AbstractButton.html" title=" " alt="" coords="204,13,407,39"/>
+<area shape="rect" id="node5" href="$classkipr_1_1digital_1_1Digital.html" title=" " alt="" coords="232,63,379,90"/>
+<area shape="rect" id="node6" href="$classkipr_1_1sensor_1_1logic_1_1Base.html" title=" " alt="" coords="237,115,374,156"/>
+<area shape="rect" id="node10" href="$classkipr_1_1sensor_1_1logic_1_1Not.html" title=" " alt="" coords="221,181,389,207"/>
+<area shape="rect" id="node3" href="$classkipr_1_1button_1_1AbstractTextButton.html" title=" " alt="" coords="455,5,641,47"/>
+<area shape="rect" id="node4" href="$classkipr_1_1button_1_1IdButton.html" title=" " alt="" coords="689,13,849,39"/>
+<area shape="rect" id="node7" href="$classkipr_1_1sensor_1_1logic_1_1And.html" title=" " alt="" coords="463,71,633,98"/>
+<area shape="rect" id="node8" href="$classkipr_1_1sensor_1_1logic_1_1Or.html" title=" " alt="" coords="468,122,628,149"/>
+<area shape="rect" id="node9" href="$classkipr_1_1sensor_1_1logic_1_1Xor.html" title=" " alt="" coords="465,173,631,199"/>
+</map>

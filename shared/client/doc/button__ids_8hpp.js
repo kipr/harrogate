@@ -1,13 +1,14 @@
 var button__ids_8hpp =
 [
-    [ "Id", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69", [
-      [ "A", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69ac2db47d151ed7ced4109ab4314622f41", null ],
-      [ "B", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69a53241bd774d7e061e162bcc6730a6882", null ],
-      [ "C", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69a106d7e210722f7a37a1219e01a302ec1", null ],
-      [ "X", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69adbee8157489434cb2a60bc70417ec0c6", null ],
-      [ "Y", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69aa53ba9c7784aa738022495a8e23b514e", null ],
-      [ "Z", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69a7cf96be0b844682e1c874c2ef7380439", null ],
-      [ "Left", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69a2c0a1488aa8e881cbbd9a05fd528c4ba", null ],
-      [ "Right", "button__ids_8hpp.html#a53d13b3f26501127fef45668d0a2bc69aa029a876db5b47ed510b3af497f28048", null ]
+    [ "Id", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507", [
+      [ "A", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a7fc56270e7a70fa81a5935b72eacbe29", null ],
+      [ "B", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a9d5ed678fe57bcca610140957afab571", null ],
+      [ "C", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a0d61f8370cad1d412f80b84d143e1257", null ],
+      [ "X", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a02129bb861061d1a052c592e2dc6b383", null ],
+      [ "Y", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a57cec4137b614c87cb4e24a3d003a3e0", null ],
+      [ "Z", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a21c2e59531c8710156d34a3c30ac81d5", null ],
+      [ "Left", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a945d5e233cf7d6240f6b783b36a374ff", null ],
+      [ "Right", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507a92b09c7c48c520c3c55e497875da437c", null ],
+      [ "Physical", "button__ids_8hpp.html#a46c17cd2d42572a5b00eebc23dc79507ace898d62ed9ca7653a01fe0c781e97e9", null ]
     ] ]
 ];

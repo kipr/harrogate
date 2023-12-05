@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['z',['Z',['../namespace_button_1_1_type.html#a53d13b3f26501127fef45668d0a2bc69a7cf96be0b844682e1c874c2ef7380439',1,'Button::Type']]]
+  ['safemode_1926',['SafeMode',['../classkipr_1_1create_1_1Create.html#aa705f92c64f024ca75a4e7be32ff5aa5ab6df5b1b041ef2284c0a034103fd5f06',1,'kipr::create::Create']]]
 ];

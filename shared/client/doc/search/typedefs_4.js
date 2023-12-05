@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['rectangle',['rectangle',['../geom_8h.html#a0126ba4701d038e4801fb29fcf8bea37',1,'geom.h']]]
+  ['rectangle_1777',['rectangle',['../geometry_8h.html#ac05b76cb45185785dc024912b32b7b05',1,'geometry.h']]],
+  ['rectd_1778',['Rectd',['../namespacekipr_1_1geometry.html#a03b09b8bf18b50e8789ddff275bfc944',1,'kipr::geometry']]],
+  ['rectf_1779',['Rectf',['../namespacekipr_1_1geometry.html#a38c4dfe559219ca39db5b5d7f453b06e',1,'kipr::geometry']]]
 ];

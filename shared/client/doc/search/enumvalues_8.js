@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['native_5fres',['NATIVE_RES',['../camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3a2bd5d757a7a7770b41543ff935608470',1,'camera.h']]]
+  ['info_1806',['Info',['../namespacekipr_1_1log.html#ac448d0ee86b50f80a44a11636d65fe34a4059b0251f66a18cb56f544728796875',1,'kipr::log']]]
 ];

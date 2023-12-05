@@ -1,15 +1,17 @@
 var camera_8h =
 [
     [ "pixel", "structpixel.html", "structpixel" ],
-    [ "pixel", "camera_8h.html#a43f8e17bb61f4261f8e163deea9e59f9", null ],
+    [ "pixel", "camera_8h.html#adbb58f7670e1dd0e03e1529819c3688a", null ],
     [ "Model", "camera_8h.html#a051e4d035e053a4636efc58c1bde9b3e", [
       [ "WHITE_2016", "camera_8h.html#a051e4d035e053a4636efc58c1bde9b3eade38c5b2c8031780d3866d4d8caf33eb", null ],
-      [ "BLACK_2017", "camera_8h.html#a051e4d035e053a4636efc58c1bde9b3ea38f2beaf8e06a06776412da04c79bfb9", null ]
+      [ "BLACK_2017", "camera_8h.html#a051e4d035e053a4636efc58c1bde9b3ea38f2beaf8e06a06776412da04c79bfb9", null ],
+      [ "TELLO", "camera_8h.html#a051e4d035e053a4636efc58c1bde9b3ea0bf0382452fe60dcf55f993f0f08a7da", null ]
     ] ],
     [ "Resolution", "camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3", [
       [ "LOW_RES", "camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3a1ef19067eb67501e71e653c55bf478a8", null ],
       [ "MED_RES", "camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3a31c6c4c7336d70b5b00cf635080641e7", null ],
       [ "HIGH_RES", "camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3ab9d3cdf4dc2819081ce68db47475e9ad", null ],
+      [ "TELLO_RES", "camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3ab4ffdc86d6e1e8edb0934c53596176cc", null ],
       [ "NATIVE_RES", "camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3a2bd5d757a7a7770b41543ff935608470", null ]
     ] ],
     [ "camera_close", "group__camera.html#gad0fcacf32d4c1d166bde9532560316a3", null ],
@@ -50,7 +52,5 @@ var camera_8h =
     [ "get_object_count", "group__camera.html#ga19c05235f84400070c5fcca43e0de185", null ],
     [ "get_object_data", "group__camera.html#ga9f60a583ef5459d8a210cb9d005bf39d", null ],
     [ "get_object_data_length", "group__camera.html#ga8fb6db2b521064ed7e96482766a52646", null ],
-    [ "set_camera_config_base_path", "group__camera.html#ga1cc33d1bd2df4720e8ddcf10c3f2cb38", null ],
-    [ "set_camera_height", "group__camera.html#ga4af1da440b20682bce0affdf5f5e7728", null ],
-    [ "set_camera_width", "group__camera.html#ga7d33b21ee765a36b597e923850796d26", null ]
+    [ "set_camera_config_base_path", "group__camera.html#ga1cc33d1bd2df4720e8ddcf10c3f2cb38", null ]
 ];

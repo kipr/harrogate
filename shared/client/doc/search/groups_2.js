@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['camera',['Camera',['../group__camera.html',1,'']]],
-  ['compass',['Compass',['../group__compass.html',1,'']]],
-  ['console',['Console',['../group__console.html',1,'']]]
+  ['camera_2023',['Camera',['../group__camera.html',1,'']]],
+  ['compass_2024',['Compass',['../group__compass.html',1,'']]],
+  ['console_2025',['Console',['../group__console.html',1,'']]]
 ];

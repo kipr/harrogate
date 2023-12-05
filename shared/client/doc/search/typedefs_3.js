@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['pixel',['pixel',['../camera_8h.html#a43f8e17bb61f4261f8e163deea9e59f9',1,'camera.h']]],
-  ['point2',['point2',['../geom_8h.html#a19cb2146d8936c5e776f14450676e49c',1,'geom.h']]],
-  ['point3',['point3',['../geom_8h.html#a8ad25d4f2d11e77bf499a8c2f45edc3d',1,'geom.h']]]
+  ['pixel_1771',['pixel',['../camera_8h.html#adbb58f7670e1dd0e03e1529819c3688a',1,'camera.h']]],
+  ['point2_1772',['point2',['../geometry_8h.html#a740b92e74889e69dc6fba3672ef007bf',1,'geometry.h']]],
+  ['point2d_1773',['Point2d',['../namespacekipr_1_1geometry.html#add89420fb5918154cc86018b9aea3751',1,'kipr::geometry']]],
+  ['point2f_1774',['Point2f',['../namespacekipr_1_1geometry.html#a17dd40014875d824d8a1d6b7915769e7',1,'kipr::geometry']]],
+  ['point3_1775',['point3',['../geometry_8h.html#a2ce9ea0acb67122e9f6884b020263e9f',1,'geometry.h']]],
+  ['ptr_1776',['Ptr',['../classkipr_1_1log_1_1Log.html#a26063a0c80e68110ae767810db625937',1,'kipr::log::Log']]]
 ];

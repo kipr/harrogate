@@ -1,15 +1,13 @@
 var thread_8h =
 [
-    [ "mutex", "structmutex.html", "structmutex" ],
-    [ "thread", "structthread.html", "structthread" ],
-    [ "thread_function", "thread_8h.html#a8e3564199059191e2e89c86bd95dfaed", null ],
-    [ "mutex_create", "group__thread.html#gaea5bc9305d33037d0a01eba196419372", null ],
-    [ "mutex_destroy", "group__thread.html#ga9a0a3bafbaca9f1de11e64a6cbf17666", null ],
-    [ "mutex_lock", "group__thread.html#ga71c64fc4a1f98e6cfe8bebd212fb42a9", null ],
-    [ "mutex_trylock", "group__thread.html#gafb1b0162590387dbb388f84f0af4772c", null ],
-    [ "mutex_unlock", "group__thread.html#ga4a75acf8b8f46c02c355ea42c7526a8a", null ],
-    [ "thread_create", "group__thread.html#ga57d114dddd39f2ef776479172b9dfb63", null ],
-    [ "thread_destroy", "group__thread.html#ga66c491a2489292871fbaa62c1834f22e", null ],
-    [ "thread_start", "group__thread.html#ga6952e1150a7ced20a192ddbf327346d2", null ],
-    [ "thread_wait", "group__thread.html#ga9e2fb40465fc3d2581e56ab2aebb4a76", null ]
+    [ "thread_function", "group__thread.html#ga8e3564199059191e2e89c86bd95dfaed", null ],
+    [ "mutex_create", "group__thread.html#gac9c53fb550d97d6d0ee04f13957f18d0", null ],
+    [ "mutex_destroy", "group__thread.html#ga62eb2dbc14e329e96bbf5691ec1dfee3", null ],
+    [ "mutex_lock", "group__thread.html#gaa08ae0459f0e31b7c611ca81e285c273", null ],
+    [ "mutex_trylock", "group__thread.html#ga2c3ccecaebe15c1f43def485da2c399d", null ],
+    [ "mutex_unlock", "group__thread.html#gaed6032809721c21f7aae938ee5cc2dff", null ],
+    [ "thread_create", "group__thread.html#gad2588e21e1b9643b6310da12d251d86a", null ],
+    [ "thread_destroy", "group__thread.html#gaaa9816237851d3dbae5e975be5701131", null ],
+    [ "thread_start", "group__thread.html#gab1cab7238611cc0e8ecb6cedd8f3b4de", null ],
+    [ "thread_wait", "group__thread.html#gaae2fdbe256ab077842db9d1693ff2d01", null ]
 ];

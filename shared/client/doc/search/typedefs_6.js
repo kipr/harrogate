@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['thread_5ffunction',['thread_function',['../thread_8h.html#a8e3564199059191e2e89c86bd95dfaed',1,'thread.h']]],
-  ['ticks_5ft',['ticks_t',['../class_servo.html#a5c29b5dbeeb014967bc2fbe9d3a09b11',1,'Servo']]]
+  ['thread_5ffunction_1781',['thread_function',['../group__thread.html#ga8e3564199059191e2e89c86bd95dfaed',1,'thread.h']]],
+  ['ticks_5ft_1782',['ticks_t',['../classkipr_1_1servo_1_1Servo.html#a20d37c49ff42aeb80568bf0f49183c6e',1,'kipr::servo::Servo']]]
 ];

@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['rect',['Rect',['../class_rect.html',1,'']]],
-  ['rect_3c_20unsigned_20_3e',['Rect&lt; unsigned &gt;',['../class_rect.html',1,'']]],
-  ['rectangle',['rectangle',['../structrectangle.html',1,'']]],
-  ['rgb',['Rgb',['../struct_rgb.html',1,'']]],
-  ['robot',['Robot',['../class_robot.html',1,'']]]
+  ['object_1030',['Object',['../classkipr_1_1camera_1_1Object.html',1,'kipr::camera']]],
+  ['or_1031',['Or',['../classkipr_1_1sensor_1_1logic_1_1Or.html',1,'kipr::sensor::logic']]]
 ];

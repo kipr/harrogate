@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['magnetometer',['Magnetometer',['../group__magneto.html',1,'']]],
-  ['motors',['Motors',['../group__motor.html',1,'']]]
+  ['magnetometer_2030',['Magnetometer',['../group__magneto.html',1,'']]],
+  ['motors_2031',['Motors',['../group__motor.html',1,'']]]
 ];

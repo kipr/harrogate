@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['white_5f2016',['WHITE_2016',['../camera_8h.html#a051e4d035e053a4636efc58c1bde9b3eade38c5b2c8031780d3866d4d8caf33eb',1,'camera.h']]]
+  ['offmode_1920',['OffMode',['../classkipr_1_1create_1_1Create.html#aa705f92c64f024ca75a4e7be32ff5aa5a9a8ef8921c0eb914995f1697c981c867',1,'kipr::create::Create']]]
 ];

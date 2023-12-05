@@ -1,0 +1,11 @@
+<map id="/home/erin/Desktop/qt6Upgrade/libwallaby/module/sensor/public/kipr/sensor/sensor.hpp" name="/home/erin/Desktop/qt6Upgrade/libwallaby/module/sensor/public/kipr/sensor/sensor.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="599,5,773,76"/>
+<area shape="rect" id="node2" href="$accel_8hpp.html" title=" " alt="" coords="5,124,191,195"/>
+<area shape="rect" id="node3" href="$analog_8hpp.html" title=" " alt="" coords="215,124,389,195"/>
+<area shape="rect" id="node4" href="$button_8hpp.html" title=" " alt="" coords="414,124,587,195"/>
+<area shape="rect" id="node5" href="$create_8hpp.html" title=" " alt="" coords="475,243,649,313"/>
+<area shape="rect" id="node6" href="$digital_8hpp.html" title=" " alt="" coords="662,124,835,195"/>
+<area shape="rect" id="node7" href="$gyro_8hpp.html" title=" " alt="" coords="860,124,1040,195"/>
+<area shape="rect" id="node8" href="$magneto_8hpp.html" title=" " alt="" coords="1065,124,1267,195"/>
+<area shape="rect" id="node9" href="$logic_8hpp.html" title=" " alt="" coords="1291,124,1465,195"/>
+</map>

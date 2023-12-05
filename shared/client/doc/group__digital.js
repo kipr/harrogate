@@ -1,5 +1,6 @@
 var group__digital =
 [
+    [ "", "group__digital.html", "group__digital_dup" ],
     [ "digital", "group__digital.html#ga3eb7db79d996b92f7063b65dc34b3484", null ],
     [ "get_digital_output", "group__digital.html#ga865e9d1807739ddc9585c5665de1281c", null ],
     [ "get_digital_pullup", "group__digital.html#ga2d37bb1981515925418bd5a624eb1aa6", null ],
