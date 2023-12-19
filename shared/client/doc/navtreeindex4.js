@@ -21,7 +21,6 @@ var NAVTREEINDEX4 =
 "group__battery.html#gafed7c1f128056008a75719ff634a1af4":[3,2,4],
 "group__battery.html#gafed7c1f128056008a75719ff634a1af4":[6,0,0,3,0,0,0,0,3],
 "group__button.html":[3,3],
-"group__button.html":[3,3,0],
 "group__button.html#ga0ba2508dd7683d9bf0848f7491a374b8":[3,3,11],
 "group__button.html#ga0ba2508dd7683d9bf0848f7491a374b8":[6,0,0,5,0,0,0,0,10],
 "group__button.html#ga0f39976525759a3a341a1d8ec0f22ec6":[3,3,24],

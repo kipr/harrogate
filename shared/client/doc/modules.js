@@ -8,6 +8,7 @@ var modules =
     [ "Compass", "group__compass.html", "group__compass" ],
     [ "Console", "group__console.html", "group__console" ],
     [ "iRobot (R) Create (TM)", "group__create.html", "group__create" ],
+    [ "iRobot (R) Create 3 (TM)", "group__create3.html", "group__create3" ],
     [ "Digitals", "group__digital.html", "group__digital" ],
     [ "Graphics", "group__graphics.html", "group__graphics" ],
     [ "Gyrometer", "group__gyro.html", "group__gyro" ],
