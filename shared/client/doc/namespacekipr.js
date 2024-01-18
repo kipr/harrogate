@@ -9,6 +9,7 @@ var namespacekipr =
     [ "config", "namespacekipr_1_1config.html", "namespacekipr_1_1config" ],
     [ "console", "namespacekipr_1_1console.html", "namespacekipr_1_1console" ],
     [ "create", "namespacekipr_1_1create.html", "namespacekipr_1_1create" ],
+    [ "create3", "namespacekipr_1_1create3.html", "namespacekipr_1_1create3" ],
     [ "digital", "namespacekipr_1_1digital.html", "namespacekipr_1_1digital" ],
     [ "geometry", "namespacekipr_1_1geometry.html", "namespacekipr_1_1geometry" ],
     [ "gyro", "namespacekipr_1_1gyro.html", "namespacekipr_1_1gyro" ],
