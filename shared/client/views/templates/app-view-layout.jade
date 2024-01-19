@@ -1,4 +1,7 @@
-﻿// Navbar
+﻿
+
+
+// Navbar
 nav.navbar.navbar-default.desktop-only
   .container-fluid
     form.navbar-form.navbar-left
@@ -18,6 +21,11 @@ nav.navbar.navbar-default.desktop-only
           block view-toolbar-right
 
           .btn-group
+            button.btn.btn-toolbar.btn-primary(id ='darkModeBtn' ng-controller='darkModeCtrl' type='button'  ng-class="{'btn-light' : darkMode, 'btn-dark': !darkMode  }")
+              i.fa.fa-sun-o
+              br
+              small.small 
+              
             a.btn.btn-toolbar.btn-primary(type="button" href='/#/apps/about')
               i.fa.fa-exclamation-circle
               br

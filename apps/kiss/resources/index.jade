@@ -2,13 +2,14 @@ extends ../../../shared/client/views/templates/app-view-layout.jade
 
 block view-toolbar-left
   .btn-group(ng-if='displayed_file && !display_file_menu')
-    button.btn.btn-toolbar(type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged, 'disabled': is_compiling}" ng-click='save()')
+    save.button.btn.btn-toolbar(id = "saveButton" type='button' ng-class="{'btn-success' : !documentChanged, 'btn-danger' : documentChanged, 'disabled': is_compiling}" ng-click='save()')
       i.fa.fa-floppy-o
       br
       small.small Save {{displayed_file.name}}
-
+   
+  
   .btn-group(ng-if='displayed_file')
-    button.btn.btn-toolbar.btn-default(ng-if='!display_file_menu' type='button' ng-click='open_file_menu()')
+    button.btn.btn-toolbar.btn-default(ng-if='!display_file_menu' type='button' ng-click='open_file_menu()' )
       i.fa.fa-file
       br
       small.small File Menu
@@ -137,16 +138,18 @@ block view-content
 
       .row.row-stretch-40(ng-show='compiler_output')
         .col-xs-12.col-stretch
-          .panel.panel-stretch(ng-class='{"panel-success": compilation_state == "Compilation succeeded", "panel-danger": compilation_state == "Compilation Failed", "panel-warning": compilation_state == "Compilation Succeeded with Warnings"}')
-            .panel-heading
-              .panel-title
+          .panel.panel-stretch(ng-class='{ "panel-success":compilation_state =="Compilation succeeded", "panel-danger": compilation_state == "Compilation Failed", "panel-warning": compilation_state == "Compilation Succeeded with Warnings"}')
+            
+            .compiler.panel-heading
+              .compiler.panel-title
                 | {{compilation_state}}
                 span.btn-group-xs.pull-right
                   button.btn.btn-danger(type='button' ng-click='compiler_output = ""')
                     i.fa.fa-times
 
-            .scrollable-panel-body-container
+            .scrollable-panel-body-container 
               pre.panel-body
+                
                 code {{compiler_output}}
 
       .row.row-stretch-40(ng-show='runner')
@@ -187,18 +190,18 @@ block view-content
                 th(colspan="3")
                   | {{project.name}}
 
-              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}')
+              tr.cursor-pointer(ng-if='(selected_project.parameters.language === "C" || selected_project.parameters.language === "C++") && selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}')
                 th
                 th(colspan="2")
                   | Include Files
-              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project && active_user.data.mode !== "Simple"' ng-repeat = 'file in project_resource.include_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "include")')
+              tr.cursor-pointer(ng-if='(selected_project.parameters.language === "C" || selected_project.parameters.language === "C++") && selected_project === project && active_user.data.mode !== "Simple"' ng-repeat = 'file in project_resource.include_files' ng-class='{active: selected_file && selected_file != file, info: !selected_file || selected_file === file}' ng-click='select_file(file, "include")')
                 td
                 td
                 td
                   i.fa.fa-file-o
                   |  
                   | {{file.name}}
-              tr.cursor-pointer(ng-if='selected_project.parameters.language === "C" && selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_include_file_modal()')
+              tr.cursor-pointer(ng-if='(selected_project.parameters.language === "C" || selected_project.parameters.language === "C++") && selected_project === project && active_user.data.mode !== "Simple"' ng-class='{active: selected_file, info: !selected_file}' ng-click='show_add_include_file_modal()')
                  td
                  td
                  td
@@ -259,6 +262,7 @@ block view-content
               select#programmingLanguage.form-control(placeholder='Programming Language', ng-model="defaultProgrammingLanguage", ng-change="change_filename()")
                 option(value='C') C
                 option(value='Python') Python
+                option(value="C++") C++
               label(for='sourceFileName') Source file name
               input#sourceFileName.form-control(type='text' value='main.c' disabled='disabled')
 

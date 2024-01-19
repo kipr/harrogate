@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['high_5fres',['HIGH_RES',['../camera_8h.html#a3c1fc1369ee351f25804c8cde5e85ac3ab9d3cdf4dc2819081ce68db47475e9ad',1,'camera.h']]]
+  ['error_1801',['Error',['../namespacekipr_1_1log.html#ac448d0ee86b50f80a44a11636d65fe34a902b0d55fddef6f8d651fe1035b7d4bd',1,'kipr::log']]]
 ];

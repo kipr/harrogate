@@ -1,5 +1,6 @@
 var group__camera =
 [
+    [ "", "group__camera.html", "group__camera_dup" ],
     [ "camera_close", "group__camera.html#gad0fcacf32d4c1d166bde9532560316a3", null ],
     [ "camera_load_config", "group__camera.html#gabd45ab115bc4808ea0513ca75ac72aef", null ],
     [ "camera_open", "group__camera.html#ga1c32ffd92d48cc98480da84c688c987f", null ],
@@ -22,7 +23,5 @@ var group__camera =
     [ "get_object_count", "group__camera.html#ga19c05235f84400070c5fcca43e0de185", null ],
     [ "get_object_data", "group__camera.html#ga9f60a583ef5459d8a210cb9d005bf39d", null ],
     [ "get_object_data_length", "group__camera.html#ga8fb6db2b521064ed7e96482766a52646", null ],
-    [ "set_camera_config_base_path", "group__camera.html#ga1cc33d1bd2df4720e8ddcf10c3f2cb38", null ],
-    [ "set_camera_height", "group__camera.html#ga4af1da440b20682bce0affdf5f5e7728", null ],
-    [ "set_camera_width", "group__camera.html#ga7d33b21ee765a36b597e923850796d26", null ]
+    [ "set_camera_config_base_path", "group__camera.html#ga1cc33d1bd2df4720e8ddcf10c3f2cb38", null ]
 ];

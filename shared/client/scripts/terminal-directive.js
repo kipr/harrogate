@@ -32,7 +32,7 @@ exports.directive = function() {
       editor = code_mirror.fromTextArea($element.children()[0], {
         mode: 'text/plain',
         lineNumbers: false,
-        theme: 'eclipse',
+        theme: 'material-palenight',
         viewportMargin: Infinity,
         extraKeys: {
           Enter: on_enter

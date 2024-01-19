@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['h',['h',['../struct_hsv.html#aff34d0070e8941ade8da7229d210fe2d',1,'Hsv']]],
-  ['height',['height',['../structrectangle.html#af460193d9a375b8e2813bf1fe6216cce',1,'rectangle']]]
+  ['g_1718',['g',['../structpixel.html#a6f4b39b225373a1404c8424c176f4006',1,'pixel::g()'],['../structRgb.html#a27a8958ecb91f5f98ee520129a396ce3',1,'Rgb::g()']]]
 ];

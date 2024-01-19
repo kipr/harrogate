@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['y',['y',['../class_acceleration.html#a355ced109c51dd583df43c143ba8a273',1,'Acceleration::y()'],['../class_point2.html#a4d4859e867145650f750599520adc1e8',1,'Point2::y()'],['../class_point3.html#aaee4e19ba1a7ce01854bbf7f431d3c03',1,'Point3::y()'],['../class_rect.html#af231d3e16099ffbfe66eca99612b2a52',1,'Rect::y()'],['../class_gyro.html#a82781fcd01e9be0b2bcb6ae29d21140e',1,'Gyro::y()'],['../class_magneto.html#a88bf053fdfaf8aebf4c520b8142c2ffa',1,'Magneto::y()']]],
-  ['y_5fbutton',['y_button',['../group__button.html#ga6bd72b4acad143902eb35d50a7686b58',1,'button.h']]],
-  ['y_5fbutton_5fclicked',['y_button_clicked',['../group__button.html#ga583c9e4603220a934d47667dca1decc3',1,'button.h']]],
-  ['yield',['yield',['../namespacecompat.html#ad3308802a5b0951142e29de85abce3e3',1,'compat']]]
+  ['x_1661',['x',['../classkipr_1_1accel_1_1Acceleration.html#ae6e0db9ea15b22b5ebd3114370ece2d9',1,'kipr::accel::Acceleration::x()'],['../classkipr_1_1geometry_1_1Point2.html#a26fb7f0535a9158827556b476cf5f042',1,'kipr::geometry::Point2::x()'],['../classkipr_1_1geometry_1_1Point3.html#a8b92dee923884bc58b46ac4d8309cc5c',1,'kipr::geometry::Point3::x()'],['../classkipr_1_1geometry_1_1Rect.html#aa08ac3fc95ef7b959209e0be9fc30aa2',1,'kipr::geometry::Rect::x()'],['../classkipr_1_1gyro_1_1Gyro.html#a321bf74624402d79afb0e22dd017b281',1,'kipr::gyro::Gyro::x()'],['../classkipr_1_1magneto_1_1Magneto.html#adc89c12b6712215cfc1c5621929b2248',1,'kipr::magneto::Magneto::x()']]],
+  ['x_5fbutton_1662',['x_button',['../group__button.html#ga650c53fd8eca117e7bbece899d3efc5d',1,'button.h']]],
+  ['x_5fbutton_5fclicked_1663',['x_button_clicked',['../group__button.html#ga0f39976525759a3a341a1d8ec0f22ec6',1,'button.h']]],
+  ['xor_1664',['Xor',['../classkipr_1_1sensor_1_1logic_1_1Xor.html#a49fc851965400fc31174d3f0153334ed',1,'kipr::sensor::logic::Xor']]]
 ];

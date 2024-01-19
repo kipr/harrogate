@@ -1,7 +1,6 @@
 var group__console =
 [
-    [ "Console", "class_console.html", [
-      [ "clear", "class_console.html#a37a8561cc9b3ae7367290fe1667ba0db", null ]
-    ] ],
-    [ "console_clear", "group__console.html#ga00450156795a2e67a33731ead413a981", null ]
+    [ "Console", "classkipr_1_1console_1_1Console.html", null ],
+    [ "", "group__console.html", null ],
+    [ "console_clear", "group__console.html#ga490370bb141fb9d46cafb20abdf77e65", null ]
 ];

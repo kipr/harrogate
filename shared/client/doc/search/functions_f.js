@@ -1,17 +1,12 @@
 var searchData=
 [
-  ['path',['path',['../class_camera_1_1_config_path.html#acd75cb5135463402a52e79354ed8f2fd',1,'Camera::ConfigPath']]],
-  ['pidgains',['pidGains',['../class_motor.html#a4b9aa114213018be186f6adad185ef3e',1,'Motor']]],
-  ['playbutton',['playButton',['../class_create.html#a6dba78e613ccc7728972a4fcd8c1cd7f',1,'Create']]],
-  ['point2',['Point2',['../class_point2.html#a39957faf4f3de74f3f9f06097a15cd81',1,'Point2']]],
-  ['point3',['Point3',['../class_point3.html#aa63ecf6839f3c695e5e414972eddd930',1,'Point3']]],
-  ['port',['port',['../class_analog.html#ac0e9d2025040abc35b17fd4a35431dca',1,'Analog::port()'],['../class_motor.html#af772f9e1265a13d983294886259e3603',1,'Motor::port()'],['../class_back_e_m_f.html#a01436d8265ea5c68cfd0166bf252e32f',1,'BackEMF::port()'],['../class_address.html#a5d0aa91c99440e84cd8b799e2fe9e01b',1,'Address::port()']]],
-  ['position',['position',['../class_servo.html#a83fc00c0a361b818fe17bd4c9e0e137d',1,'Servo']]],
-  ['power_5flevel',['power_level',['../group__battery.html#gae1ca31cc83102eaaeaf1afa62a15abb6',1,'battery.h']]],
-  ['power_5flevel_5flife',['power_level_life',['../group__battery.html#ga2998e0fd731d4c46608ffbea835e6f03',1,'battery.h']]],
-  ['power_5flevel_5flipo',['power_level_lipo',['../group__battery.html#gafed7c1f128056008a75719ff634a1af4',1,'battery.h']]],
-  ['power_5flevel_5fnimh',['power_level_nimh',['../group__battery.html#ga4240f318b6aaab523f4947ad1314ef15',1,'battery.h']]],
-  ['powerlevel',['powerLevel',['../class_battery.html#afead1880eafc4022fc57528a056d258b',1,'Battery']]],
-  ['publish',['publish',['../group__general.html#ga2955f8e823ea99f92d32a86f21a5dab2',1,'general.h']]],
-  ['pullup',['pullup',['../class_analog.html#a53005cfde3d21ec52859df1a12d385b3',1,'Analog::pullup()'],['../class_digital.html#a0873ea36b90cc0106234b467676af862',1,'Digital::pullup()']]]
+  ['object_1487',['Object',['../classkipr_1_1camera_1_1Object.html#ac80228216d038226094d49629faacfe6',1,'kipr::camera::Object::Object(const geometry::Point2&lt; unsigned &gt; &amp;centroid, const geometry::Rect&lt; unsigned &gt; &amp;boundingBox, const double confidence, const char *data=0, const size_t &amp;dataLength=0)'],['../classkipr_1_1camera_1_1Object.html#a54dc475d74a503042bb3b68aeda8560a',1,'kipr::camera::Object::Object(const Object &amp;rhs)']]],
+  ['objects_1488',['objects',['../classkipr_1_1camera_1_1Channel.html#ae063189132bf9c29e0e43e2e57e0a0cc',1,'kipr::camera::Channel']]],
+  ['off_1489',['off',['../classkipr_1_1motor_1_1Motor.html#afa7c31efb374ac08b3dd7097ae82e2be',1,'kipr::motor::Motor::off()'],['../group__motor.html#gab32a8ae225a031b09e355e0813bec06f',1,'off():&#160;motor.h']]],
+  ['open_1490',['open',['../classkipr_1_1camera_1_1Device.html#a118c537d828e0d098ab829c6041f5db7',1,'kipr::camera::Device::open()'],['../classSocket.html#ac29147e85ea697c250cdb9f6bfdd72cb',1,'Socket::open()']]],
+  ['operator_28_29_1491',['operator()',['../structstd_1_1hash_3_01kipr_1_1log_1_1Level_01_4.html#a24cea8098fefc9aafed9b933ee20bf1f',1,'std::hash&lt; kipr::log::Level &gt;']]],
+  ['operator_3c_3c_1492',['operator&lt;&lt;',['../classkipr_1_1log_1_1LogStream.html#aae2707d3f30e9a633b922e8f00116767',1,'kipr::log::LogStream::operator&lt;&lt;(const Flush &amp;_)'],['../classkipr_1_1log_1_1LogStream.html#a38c19acd716ac3de3d4d0865e018393e',1,'kipr::log::LogStream::operator&lt;&lt;(const T &amp;t)']]],
+  ['operator_3d_1493',['operator=',['../classkipr_1_1camera_1_1Image.html#a409957a1ef82879d478efbce560b05ca',1,'kipr::camera::Image::operator=()'],['../classkipr_1_1create_1_1CreateScript.html#ad76bddbdfbd1180309f02aa22a64eee7',1,'kipr::create::CreateScript::operator=()']]],
+  ['or_1494',['Or',['../classkipr_1_1sensor_1_1logic_1_1Or.html#a94eb56dbc145c66018f96eed9fa59d42',1,'kipr::sensor::logic::Or']]],
+  ['owns_1495',['owns',['../classkipr_1_1sensor_1_1logic_1_1Base.html#a37b8870bb7d84ed44788ba297826ad0e',1,'kipr::sensor::logic::Base::owns()'],['../classkipr_1_1sensor_1_1logic_1_1Not.html#a6d615e40a0e05d001a0fb5faa2663c62',1,'kipr::sensor::logic::Not::owns()']]]
 ];

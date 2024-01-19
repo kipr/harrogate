@@ -1,15 +1,17 @@
 var searchData=
 [
-  ['enable',['enable',['../class_servo.html#a080d081d3ae1f8a86b6efde7e3ab7f68',1,'Servo']]],
-  ['enable_5fservo',['enable_servo',['../group__servo.html#ga74414a627ba987f929cb23de9173b056',1,'servo.h']]],
-  ['enable_5fservos',['enable_servos',['../group__servo.html#gad82d46ae912a2a0de1f942ce7e10bfbf',1,'servo.h']]],
-  ['encoding',['Encoding',['../graphics_8h.html#afb0564821f132bfe74508af8349a0faa',1,'Encoding():&#160;graphics.h'],['../graphics_8h.html#abcf932930895f894b04f1d4925c99cdb',1,'Encoding():&#160;graphics.h']]],
-  ['endatomicoperation',['endAtomicOperation',['../class_create.html#a4b2782d523d42945918a6b6eea9039a7',1,'Create']]],
-  ['endgroup',['endGroup',['../class_config.html#a50e29487f260cb5136d06b36311c3837',1,'Config']]],
-  ['export_2eh',['export.h',['../export_8h.html',1,'']]],
-  ['export_5fsym',['EXPORT_SYM',['../export_8h.html#ad78259114e2822d9b93f376572655819',1,'export.h']]],
-  ['extension',['extension',['../class_camera_1_1_config_path.html#aeb7b0f84167948f3cf41629cf2a5ff24',1,'Camera::ConfigPath']]],
-  ['extra_5fbuttons_5fhide',['extra_buttons_hide',['../group__button.html#gaefa6dc45e14284cb813eddd89e2f759b',1,'button.h']]],
-  ['extra_5fbuttons_5fshow',['extra_buttons_show',['../group__button.html#gaf817d3b9e670746da2d171bd0065f2a6',1,'button.h']]],
-  ['extrabuttons',['ExtraButtons',['../class_extra_buttons.html',1,'']]]
+  ['enable_228',['enable',['../classkipr_1_1servo_1_1Servo.html#ad40dd3da49dd1b8a492163f5c1215d10',1,'kipr::servo::Servo']]],
+  ['enable_5fservo_229',['enable_servo',['../group__servo.html#ga74414a627ba987f929cb23de9173b056',1,'servo.h']]],
+  ['enable_5fservos_230',['enable_servos',['../group__servo.html#gad82d46ae912a2a0de1f942ce7e10bfbf',1,'servo.h']]],
+  ['encoding_231',['Encoding',['../group__graphics.html#gafb0564821f132bfe74508af8349a0faa',1,'Encoding():&#160;graphics.h'],['../group__graphics.html#ga08cafb219a227e701219541255fb77b4',1,'Encoding():&#160;graphics.h']]],
+  ['endatomicoperation_232',['endAtomicOperation',['../classkipr_1_1create_1_1Create.html#a56897361b8a54a61c58d5522c4737d20',1,'kipr::create::Create']]],
+  ['endgroup_233',['endGroup',['../classkipr_1_1config_1_1Config.html#abf86d0aef4e7f522f6113271ab54d4d9',1,'kipr::config::Config']]],
+  ['error_234',['error',['../classkipr_1_1log_1_1Log.html#a641ec24b2a797c77930b50bb00655112',1,'kipr::log::Log::error(const std::string &amp;message, const Location &amp;location)'],['../classkipr_1_1log_1_1Log.html#a86937dd91fc86be7c3ed488d90197fb4',1,'kipr::log::Log::error(const std::string &amp;message)'],['../classkipr_1_1log_1_1Log.html#a3afb6a573fa31c479faffd39826e49aa',1,'kipr::log::Log::error()']]],
+  ['error_235',['Error',['../namespacekipr_1_1log.html#ac448d0ee86b50f80a44a11636d65fe34a902b0d55fddef6f8d651fe1035b7d4bd',1,'kipr::log']]],
+  ['export_2eh_236',['export.h',['../export_8h.html',1,'']]],
+  ['export_5fsym_237',['EXPORT_SYM',['../export_8h.html#ad78259114e2822d9b93f376572655819',1,'export.h']]],
+  ['extension_238',['extension',['../classkipr_1_1camera_1_1ConfigPath.html#ab630fa33460dae3dcd3af057052919e1',1,'kipr::camera::ConfigPath']]],
+  ['extra_5fbuttons_5fhide_239',['extra_buttons_hide',['../group__button.html#gaefa6dc45e14284cb813eddd89e2f759b',1,'button.h']]],
+  ['extra_5fbuttons_5fshow_240',['extra_buttons_show',['../group__button.html#gaf817d3b9e670746da2d171bd0065f2a6',1,'button.h']]],
+  ['extrabuttons_241',['ExtraButtons',['../classkipr_1_1button_1_1ExtraButtons.html',1,'kipr::button']]]
 ];

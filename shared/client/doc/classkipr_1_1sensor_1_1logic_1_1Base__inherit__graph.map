@@ -1,0 +1,7 @@
+<map id="kipr::sensor::logic::Base" name="kipr::sensor::logic::Base">
+<area shape="rect" id="node1" title=" " alt="" coords="211,95,349,136"/>
+<area shape="rect" id="node3" href="$classkipr_1_1sensor_1_1logic_1_1And.html" title=" " alt="" coords="5,184,176,211"/>
+<area shape="rect" id="node4" href="$classkipr_1_1sensor_1_1logic_1_1Or.html" title=" " alt="" coords="200,184,360,211"/>
+<area shape="rect" id="node5" href="$classkipr_1_1sensor_1_1logic_1_1Xor.html" title=" " alt="" coords="385,184,551,211"/>
+<area shape="rect" id="node2" href="$classkipr_1_1sensor_1_1Sensor.html" title=" " alt="" coords="205,5,355,47"/>
+</map>

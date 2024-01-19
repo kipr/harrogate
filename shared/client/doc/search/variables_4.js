@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['data',['data',['../structmutex.html#a4a80e8b6f332480afe9e5cd36cddd1a8',1,'mutex::data()'],['../structthread.html#a950fee393b7c274d80cb5dcd97ed90f1',1,'thread::data()']]],
-  ['distance',['distance',['../struct_create_state.html#a0154ed42d271cca3c9a095bf3468686c',1,'CreateState::distance()'],['../struct_create_packets_1_1__2.html#afb30de28ec41190d0cb278640d4782ab',1,'CreatePackets::_2::distance()']]]
+  ['data_1714',['data',['../structmutex.html#a4a80e8b6f332480afe9e5cd36cddd1a8',1,'mutex::data()'],['../structthread.html#a950fee393b7c274d80cb5dcd97ed90f1',1,'thread::data()']]],
+  ['distance_1715',['distance',['../structkipr_1_1create_1_1CreateState.html#abf7892ddcaebc78a04e40590c008b97a',1,'kipr::create::CreateState::distance()'],['../structkipr_1_1create_1_1CreatePackets_1_1__2.html#af58f25943c9c27fdee9165ee086fa381',1,'kipr::create::CreatePackets::_2::distance()']]]
 ];

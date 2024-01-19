@@ -81,6 +81,10 @@ router.post('/', function(request, response, next) {
       } else if (language.toLowerCase() === 'python') {
         compilation_environment = require('../compilation-environments/python/python.js');
       }
+      else if (language.toLowerCase() === 'c++') {
+        compilation_environment = require('../compilation-environments/c++/g++.js');
+      }
+      
       return compilation_environment.compile(project_resource, function(error, stdout, stderr) {
         var result;
         result = {

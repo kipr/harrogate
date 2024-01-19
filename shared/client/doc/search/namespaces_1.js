@@ -1,8 +1,25 @@
 var searchData=
 [
-  ['camera',['Camera',['../namespace_camera.html',1,'']]],
-  ['compat',['compat',['../namespacecompat.html',1,'']]],
-  ['createpackets',['CreatePackets',['../namespace_create_packets.html',1,'']]],
-  ['createsensors',['CreateSensors',['../namespace_create_sensors.html',1,'']]],
-  ['cv',['cv',['../namespacecv.html',1,'']]]
+  ['accel_1052',['accel',['../namespacekipr_1_1accel.html',1,'kipr']]],
+  ['analog_1053',['analog',['../namespacekipr_1_1analog.html',1,'kipr']]],
+  ['battery_1054',['battery',['../namespacekipr_1_1battery.html',1,'kipr']]],
+  ['button_1055',['button',['../namespacekipr_1_1button.html',1,'kipr']]],
+  ['camera_1056',['camera',['../namespacekipr_1_1camera.html',1,'kipr']]],
+  ['compass_1057',['compass',['../namespacekipr_1_1compass.html',1,'kipr']]],
+  ['config_1058',['config',['../namespacekipr_1_1config.html',1,'kipr']]],
+  ['console_1059',['console',['../namespacekipr_1_1console.html',1,'kipr']]],
+  ['create_1060',['create',['../namespacekipr_1_1create.html',1,'kipr']]],
+  ['createpackets_1061',['CreatePackets',['../namespacekipr_1_1create_1_1CreatePackets.html',1,'kipr::create']]],
+  ['digital_1062',['digital',['../namespacekipr_1_1digital.html',1,'kipr']]],
+  ['geometry_1063',['geometry',['../namespacekipr_1_1geometry.html',1,'kipr']]],
+  ['gyro_1064',['gyro',['../namespacekipr_1_1gyro.html',1,'kipr']]],
+  ['kipr_1065',['kipr',['../namespacekipr.html',1,'']]],
+  ['log_1066',['log',['../namespacekipr_1_1log.html',1,'kipr']]],
+  ['logic_1067',['logic',['../namespacekipr_1_1sensor_1_1logic.html',1,'kipr::sensor']]],
+  ['magneto_1068',['magneto',['../namespacekipr_1_1magneto.html',1,'kipr']]],
+  ['motor_1069',['motor',['../namespacekipr_1_1motor.html',1,'kipr']]],
+  ['sensor_1070',['sensor',['../namespacekipr_1_1sensor.html',1,'kipr']]],
+  ['sensors_1071',['sensors',['../namespacekipr_1_1create_1_1sensors.html',1,'kipr::create']]],
+  ['servo_1072',['servo',['../namespacekipr_1_1servo.html',1,'kipr']]],
+  ['thread_1073',['thread',['../namespacekipr_1_1thread.html',1,'kipr']]]
 ];

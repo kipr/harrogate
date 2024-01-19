@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['objectvector',['ObjectVector',['../namespace_camera.html#aa768478d06bbe12ca879897f30632b36',1,'Camera']]]
+  ['objectvector_1770',['ObjectVector',['../namespacekipr_1_1camera.html#ab5b03a717a191c7377854e2518658748',1,'kipr::camera']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['digitals',['Digitals',['../group__digital.html',1,'']]]
+  ['digitals_2026',['Digitals',['../group__digital.html',1,'']]]
 ];

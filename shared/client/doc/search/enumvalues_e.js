@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x',['X',['../namespace_button_1_1_type.html#a53d13b3f26501127fef45668d0a2bc69adbee8157489434cb2a60bc70417ec0c6',1,'Button::Type']]]
+  ['passivemode_1921',['PassiveMode',['../classkipr_1_1create_1_1Create.html#aa705f92c64f024ca75a4e7be32ff5aa5ac37b1b453585b163235b882484432eb9',1,'kipr::create::Create']]],
+  ['physical_1922',['Physical',['../namespacekipr_1_1button.html#a46c17cd2d42572a5b00eebc23dc79507ace898d62ed9ca7653a01fe0c781e97e9',1,'kipr::button']]]
 ];

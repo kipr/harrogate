@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['fd',['fd',['../class_socket.html#acd1cbff4fc47e3aba869b4197729ebbb',1,'Socket::fd()'],['../group__motor.html#ga55a302772158e1f15f1c90992f535272',1,'fd():&#160;motors.h']]],
-  ['findobjects',['findObjects',['../class_camera_1_1_channel_impl.html#a9aec7b401fc2ad6324570a84bec5c21c',1,'Camera::ChannelImpl']]],
-  ['flush',['flush',['../class_create.html#a274a1f17eedf7f2c7d83225f8b5100e0',1,'Create']]],
-  ['forward',['forward',['../class_motor.html#ae804085b9a09f64031558711bfd700ac',1,'Motor']]],
-  ['freeze',['freeze',['../class_motor.html#a28a3af6d7d140e135469989d23e91ac9',1,'Motor::freeze()'],['../group__motor.html#ga50d36bdfccc143992c8ab51689536ecc',1,'freeze():&#160;motors.h']]],
-  ['freeze_5fhalt',['freeze_halt',['../general_8h.html#ae386a2b5c14b4291274d1224dbe43bb6',1,'general.h']]]
+  ['fatal_1281',['fatal',['../classkipr_1_1log_1_1Log.html#ace1798e31bb7d7b03b70014b35084673',1,'kipr::log::Log::fatal(const std::string &amp;message, const Location &amp;location)'],['../classkipr_1_1log_1_1Log.html#a3d7abab9d33d976d07eb2675cd027516',1,'kipr::log::Log::fatal(const std::string &amp;message)'],['../classkipr_1_1log_1_1Log.html#a02272838b5187ef57702b7a4dac07824',1,'kipr::log::Log::fatal()']]],
+  ['fd_1282',['fd',['../classSocket.html#af8da516631e03da69eb9cb5dfac46383',1,'Socket::fd()'],['../group__motor.html#ga55a302772158e1f15f1c90992f535272',1,'fd():&#160;motor.h']]],
+  ['flush_1283',['flush',['../classkipr_1_1create_1_1Create.html#a535ceb95d037ccee233aaf119172f660',1,'kipr::create::Create']]],
+  ['forward_1284',['forward',['../classkipr_1_1motor_1_1Motor.html#ab7643ecdc777b105f46208a2f5a838d3',1,'kipr::motor::Motor']]],
+  ['freeze_1285',['freeze',['../classkipr_1_1motor_1_1Motor.html#a32a7e6f957875a1f8509c4155a4c79cd',1,'kipr::motor::Motor::freeze()'],['../group__motor.html#ga50d36bdfccc143992c8ab51689536ecc',1,'freeze():&#160;motor.h']]]
 ];

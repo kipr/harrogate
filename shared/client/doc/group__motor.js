@@ -2,6 +2,7 @@ var group__motor =
 [
     [ "alloff", "group__motor.html#gad6cb702751d048f67025d99608424796", null ],
     [ "ao", "group__motor.html#gae640dbf28bc931da0ff9d2369066c641", null ],
+    [ "baasbennaguui", "group__motor.html#gabe90111c4e73d8fc98c752bb13391cb8", null ],
     [ "bk", "group__motor.html#ga3f5edef0489aca523a64a40e8fe16320", null ],
     [ "block_motor_done", "group__motor.html#ga51c44577ae12ad636e27a94899f73a11", null ],
     [ "bmd", "group__motor.html#gab9c5212ebf04366ae991deb14b570c58", null ],

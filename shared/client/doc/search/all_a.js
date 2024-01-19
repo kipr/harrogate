@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['join',['join',['../class_thread.html#a4d9d788e98388a3217831a9046709deb',1,'Thread']]]
+  ['join_429',['join',['../classkipr_1_1thread_1_1Thread.html#ae4ef45e7d79a7e01c2507a345d234e60',1,'kipr::thread::Thread']]]
 ];

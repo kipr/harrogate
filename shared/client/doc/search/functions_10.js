@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['rawimage',['rawImage',['../class_camera_1_1_device.html#ac80c88707f80112834b1cf58a27ebf11',1,'Camera::Device']]],
-  ['rawpoweradc',['rawPowerADC',['../class_battery.html#a61ec9b29dc6d7ae6e1166f77ccccb200',1,'Battery']]],
-  ['read',['read',['../class_create.html#a177838426044d3c0100318ada011522f',1,'Create::read()'],['../class_create.html#ab89b4e07f162f3103a33800269c74cc8',1,'Create::read(unsigned char *data, const size_t &amp;len)'],['../class_ir.html#a6b1cb5bcee8cd99c5fa73034c76f8c18',1,'Ir::read()']]],
-  ['rect',['Rect',['../class_rect.html#af3ea475d7450e39eaeb2237de3b1c0b2',1,'Rect']]],
-  ['recv',['recv',['../class_socket.html#a0a0ee366bc625b8f0d435cf68d083157',1,'Socket']]],
-  ['recvfrom',['recvfrom',['../class_socket.html#a1f9437723ddf95179268958407383f1c',1,'Socket']]],
-  ['refreshrate',['refreshRate',['../class_create.html#a6aba67344d17731690a7b20205590246',1,'Create']]],
-  ['register_5fvalue',['register_value',['../debug_8h.html#a741ac2c9bcc99558c55e0ad27577c50b',1,'debug.h']]],
-  ['remove',['remove',['../class_create_script.html#a053dc84182f532b3516ec01a3ee5d18b',1,'CreateScript']]],
-  ['resettext',['resetText',['../class_abstract_text_button.html#aa76b8ad84d4a4f3d9ca0daa11975b875',1,'AbstractTextButton::resetText()'],['../class_id_button.html#aafb9032f4f241438ac3755674dc3f0d1',1,'IdButton::resetText()']]],
-  ['resolutiontoheight',['resolutionToHeight',['../class_camera_1_1_device.html#a7d80abf74f1ee2a6ab5590941e27bc2a',1,'Camera::Device']]],
-  ['resolutiontowidth',['resolutionToWidth',['../class_camera_1_1_device.html#af7ec7e7d39417667657a2af257195f1f',1,'Camera::Device']]],
-  ['right_5fbutton',['right_button',['../group__button.html#ga22b4859d4454499466dea2293d109d6d',1,'button.h']]],
-  ['row',['row',['../class_point2.html#a22eab082a8720e35f491d48e024c40e9',1,'Point2']]],
-  ['run',['run',['../class_thread.html#aae90dfabab3e1776cf01a26e7ee3a620',1,'Thread']]]
+  ['path_1496',['path',['../classkipr_1_1camera_1_1ConfigPath.html#a5bcf31e42f12636cd468e7c6ab97e8d6',1,'kipr::camera::ConfigPath']]],
+  ['pidgains_1497',['pidGains',['../classkipr_1_1motor_1_1Motor.html#a411b3fbb39e0a7e25e355e213616211e',1,'kipr::motor::Motor']]],
+  ['playbutton_1498',['playButton',['../classkipr_1_1create_1_1Create.html#a6b5c75b31115c4e24bb36b42edf5c41d',1,'kipr::create::Create']]],
+  ['playsong_1499',['playSong',['../group__create.html#gae92e9562ccbf510058d365de97c2254d',1,'kipr::create::Create']]],
+  ['point2_1500',['Point2',['../classkipr_1_1geometry_1_1Point2.html#a2298f26854e113f4d27fcb58e75be94f',1,'kipr::geometry::Point2']]],
+  ['point3_1501',['Point3',['../classkipr_1_1geometry_1_1Point3.html#ac626d35e7c80f773cb8151fc69441ff4',1,'kipr::geometry::Point3']]],
+  ['port_1502',['port',['../classAddress.html#afcba3f4a73addfc2262b549ae62e7c8f',1,'Address::port()'],['../classkipr_1_1motor_1_1BackEMF.html#aaaaab063495c6d24dc984eca92dc83c4',1,'kipr::motor::BackEMF::port()'],['../classkipr_1_1motor_1_1Motor.html#a162aa66d2994a6e83e96b794d2e8b623',1,'kipr::motor::Motor::port()'],['../classkipr_1_1analog_1_1Analog.html#ab9b0dfe22f15f4ac1f4379de6d835b25',1,'kipr::analog::Analog::port()']]],
+  ['position_1503',['position',['../classkipr_1_1servo_1_1Servo.html#a201e623e418e7a5222b42c17711e755f',1,'kipr::servo::Servo']]],
+  ['power_5flevel_1504',['power_level',['../group__battery.html#gae1ca31cc83102eaaeaf1afa62a15abb6',1,'battery.h']]],
+  ['power_5flevel_5flife_1505',['power_level_life',['../group__battery.html#ga2998e0fd731d4c46608ffbea835e6f03',1,'battery.h']]],
+  ['power_5flevel_5flipo_1506',['power_level_lipo',['../group__battery.html#gafed7c1f128056008a75719ff634a1af4',1,'battery.h']]],
+  ['power_5flevel_5fnimh_1507',['power_level_nimh',['../group__battery.html#ga4240f318b6aaab523f4947ad1314ef15',1,'battery.h']]],
+  ['powerlevel_1508',['powerLevel',['../classkipr_1_1battery_1_1Battery.html#a53aceba0d53c91e872ec17ffbf7a1aa5',1,'kipr::battery::Battery']]],
+  ['pullup_1509',['pullup',['../classkipr_1_1analog_1_1Analog.html#ab3badada2f9999109d61265e4ee9df82',1,'kipr::analog::Analog::pullup()'],['../classkipr_1_1digital_1_1Digital.html#aa52921b84deb2ecd6344bf0b6d224c80',1,'kipr::digital::Digital::pullup()']]],
+  ['push_5fbutton_1510',['push_button',['../button_8h.html#acb91c985be490a34faa6f213d063eec0',1,'button.h']]]
 ];

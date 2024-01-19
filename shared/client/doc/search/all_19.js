@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['z',['z',['../structpoint3.html#a0380e24b79b7c2576ea6dc79d5e2812b',1,'point3::z()'],['../struct_vec3.html#a0f694311f956380952aee054cbabb8b6',1,'Vec3::z()'],['../class_acceleration.html#a73a471130d01b00d01499c43da23f355',1,'Acceleration::z()'],['../class_point3.html#a25e0df5bf35f6ba859efbdf8e5235974',1,'Point3::z()'],['../class_gyro.html#a1f378098d327f14742448e92dc976312',1,'Gyro::z()'],['../class_magneto.html#a0d3eabc6dacbb144ee23a642f8de3073',1,'Magneto::z()'],['../namespace_button.html#a1da5de854f4c69282b1b6893ae816bb6',1,'Button::Z()'],['../namespace_button_1_1_type.html#a53d13b3f26501127fef45668d0a2bc69a7cf96be0b844682e1c874c2ef7380439',1,'Button::Type::Z()']]],
-  ['z_5fbutton',['z_button',['../group__button.html#gaec792dc42538e698fccd11cab61d0dcf',1,'button.h']]],
-  ['z_5fbutton_5fclicked',['z_button_clicked',['../group__button.html#ga5fd7315c64006429bab9dd9e67cc61a3',1,'button.h']]]
+  ['z_957',['z',['../structpoint3.html#a0380e24b79b7c2576ea6dc79d5e2812b',1,'point3::z()'],['../classkipr_1_1accel_1_1Acceleration.html#a7ec550b429376d236673e2ad469ff671',1,'kipr::accel::Acceleration::z()'],['../classkipr_1_1geometry_1_1Point3.html#a9a98f600787d84663ece798fcd54c920',1,'kipr::geometry::Point3::z()'],['../classkipr_1_1gyro_1_1Gyro.html#aef5cc12f902a47244680a5f218b40015',1,'kipr::gyro::Gyro::z()'],['../classkipr_1_1magneto_1_1Magneto.html#a98ec956609879074892c378d4e7fec48',1,'kipr::magneto::Magneto::z()']]],
+  ['z_958',['Z',['../namespacekipr_1_1button.html#a7ae075e0746698b77c0f848a7030e52e',1,'kipr::button::Z()'],['../namespacekipr_1_1button.html#a46c17cd2d42572a5b00eebc23dc79507a21c2e59531c8710156d34a3c30ac81d5',1,'kipr::button::Z()']]],
+  ['z_5fbutton_959',['z_button',['../group__button.html#gaec792dc42538e698fccd11cab61d0dcf',1,'button.h']]],
+  ['z_5fbutton_5fclicked_960',['z_button_clicked',['../group__button.html#ga5fd7315c64006429bab9dd9e67cc61a3',1,'button.h']]]
 ];

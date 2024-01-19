@@ -12,6 +12,7 @@ var button_8h =
     [ "extra_buttons_show", "group__button.html#gaf817d3b9e670746da2d171bd0065f2a6", null ],
     [ "get_extra_buttons_visible", "group__button.html#ga0ba2508dd7683d9bf0848f7491a374b8", null ],
     [ "left_button", "group__button.html#ga34eaae0b8960db57c37e35eecc891b6c", null ],
+    [ "push_button", "button_8h.html#acb91c985be490a34faa6f213d063eec0", null ],
     [ "right_button", "group__button.html#ga22b4859d4454499466dea2293d109d6d", null ],
     [ "set_a_button_text", "group__button.html#gad816f48e95049f42e7ddfe83bebcf67a", null ],
     [ "set_b_button_text", "group__button.html#ga9c70bfdf09245ab36547bdbc2cc31a7c", null ],

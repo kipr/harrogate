@@ -1,0 +1,11 @@
+<map id="~/libwallaby/module/camera/public" name="~/libwallaby/module/camera/public">
+<area shape="rect" id="node2" href="dir_3927bfc893ee15296ea1d90fc789eb5c.html" title="kipr" alt="" coords="101,63,173,111"/>
+<area shape="rect" id="node3" href="dir_1bcefdeb28ddd377002c287402658c5c.html" title="config" alt="" coords="5,159,77,207"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000028_000038.html" title="2" alt="" coords="79,145,88,159"/>
+<area shape="rect" id="node4" href="dir_45dcb3eba9df13cb6293f5b679bcad22.html" title="color" alt="" coords="101,159,173,207"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000028_000030.html" title="1" alt="" coords="141,133,150,148"/>
+<area shape="rect" id="node5" href="dir_f3ded07c4f2eecbfea4389ad19cf4641.html" title="geometry" alt="" coords="197,159,283,207"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000028_000062.html" title="3" alt="" coords="202,133,211,147"/>
+<area shape="rect" id="clust2" href="dir_cb6f3768d1e1645769e412c7ec581d80.html" alt="" coords="91,52,280,121"/>
+<area shape="rect" id="clust1" href="dir_d0e263540bf49060ac0686e43cc0432f.html" title="camera" alt="" coords="80,16,291,132"/>
+</map>

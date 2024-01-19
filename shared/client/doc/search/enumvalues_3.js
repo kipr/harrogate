@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fullmode',['FullMode',['../class_create.html#aeeee5123c8b51972e7c7002e64d2248fac6acb1884841c0a3ac5dd3696199c6c5',1,'Create']]]
+  ['debug_1800',['Debug',['../namespacekipr_1_1log.html#ac448d0ee86b50f80a44a11636d65fe34aa603905470e2a5b8c13e96b579ef0dba',1,'kipr::log']]]
 ];

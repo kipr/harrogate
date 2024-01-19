@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['z',['z',['../structpoint3.html#a0380e24b79b7c2576ea6dc79d5e2812b',1,'point3::z()'],['../struct_vec3.html#a0f694311f956380952aee054cbabb8b6',1,'Vec3::z()'],['../namespace_button.html#a1da5de854f4c69282b1b6893ae816bb6',1,'Button::Z()']]]
+  ['y_1764',['y',['../structpoint2.html#a4caabf9c28bb6b0283b028ddad9c8a62',1,'point2::y()'],['../structpoint3.html#a87df35474bb5e0d5ba2d68c522842d0a',1,'point3::y()']]],
+  ['y_1765',['Y',['../namespacekipr_1_1button.html#a88643d1b09d22c8c87a72085e0bfd116',1,'kipr::button']]]
 ];

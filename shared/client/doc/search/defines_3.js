@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['export_5fsym',['EXPORT_SYM',['../export_8h.html#ad78259114e2822d9b93f376572655819',1,'export.h']]]
+  ['dkgray_1951',['DKGRAY',['../colors_8h.html#a94acd99b9c9aa3d0bc02834f543437b9',1,'colors.h']]]
 ];
