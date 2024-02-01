@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>libkipr: ~/create3/client/include/kipr/create3/client/Vector3.hpp Source File</title>
+<title>libkipr: ~/create3/client/include/kipr/create3/client/pose.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('create3_vector3_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('pose_8h_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -94,30 +94,34 @@ $(document).ready(function(){initNavTree('create3_vector3_8hpp_source.html','');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Vector3.hpp</div>  </div>
+<div class="title">pose.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="vector3_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="pose_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="vector3_8h.html">    3</a></span>&#160;<span class="preprocessor">#include <a class="code" href="vector3_8h.html">"vector3.h"</a></span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="namespacekipr.html">    5</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacekipr.html">kipr</a></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="namespacekipr_1_1create3.html">    7</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacekipr_1_1create3.html">create3</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespacekipr_1_1create3_1_1client.html">    9</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacekipr_1_1create3_1_1client.html">client</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="vector3_8h.html#adbb58f7670e1dd0e03e1529819c3688a">   11</a></span>&#160;<span class="keyword">    using </span>Vector3 = <a class="code" href="vector3_8h.html">Create3Vector3</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include "<a class="code" href="quaternion_8h.html">quaternion.h</a>"</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include "<a class="code" href="vector3_8h.html">vector3.h</a>"</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot; {</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structCreate3Pose.html#a4feece2ec58d909444613177ec67e2bc">   12</a></span>&#160;  <span class="keywordtype"><a class="code" href="vector3_8h.html">Create3Vector3</a></span> <a class="code" href="structCreate3Pose.html#a4feece2ec58d909444613177ec67e2bc">position</a>;  </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structCreate3Pose.html#ac537f5c6afbda6ef42cc428540058ecb">   13</a></span>&#160;  <span class="keywordtype"><a class="code" href="quaternion_8h.html">Create3Quaternion</a></span> <a class="code" href="structCreate3Pose.html#ac537f5c6afbda6ef42cc428540058ecb">orientation</a>;  </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="pose_8h.html#adbb58f7670e1dd0e03e1529819c3688a">   14</a></span>&#160;} <a class="code" href="pose_8h.html#adbb58f7670e1dd0e03e1529819c3688a">Create3Pose</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
 
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekipr.html">kipr</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1create3.html">create3</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1create3_1_1client.html">client</a></li><li class="navelem"><a class="el" href="structkipr_create3_client_Twist.html">Twist</a></li><li class="navelem"><a class="el" href="dir_19d9d37997aab9ae43e474024879cdf9.html">create</a></li><li class="navelem"><a class="el" href="create_8hpp.html">create.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_a7b0466279106ea0b8f86f609f621680.html">module</a></li><li class="navelem"><a class="el" href="dir_d0e263540bf49060ac0686e43cc0432f.html">camera</a></li><li class="navelem"><a class="el" href="dir_cb6f3768d1e1645769e412c7ec581d80.html">public</a></li><li class="navelem"><a class="el" href="dir_3927bfc893ee15296ea1d90fc789eb5c.html">kipr</a></li><li class="navelem"><a class="el" href="dir_56c00da25897d81c5a58dd016e94312f.html">camera</a></li><li class="navelem"><a class="el" href="camera_8h.html">camera.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

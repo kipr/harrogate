@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>libkipr: kipr::create3::client::Twist Struct Reference</title>
+<title>libkipr: kipr::create3::client::ClientImpl Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structkipr_create3_client_Twist.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structkipr_create3_client_ClientImpl.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -94,64 +94,107 @@ $(document).ready(function(){initNavTree('structkipr_create3_client_Twist.html',
 
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structkipr_create3_client_Twist-members.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="structkipr_create3_client_ClientImpl-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">kipr::create3::client::Twist Struct Reference</div>  </div>
+<div class="title">kipr::create3::client::ClientImpl Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="create3_twist_8hpp_source.html">Twist.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="create3_clientImpl_8hpp_source.html">ClientImpl.hpp</a>&gt;</code></p>
+
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a153ee6bc0e148a129ab7d0adda859b3a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_Twist.html#a153ee6bc0e148a129ab7d0adda859b3a">linear_x</a></td></tr>
-<tr class="separator:a153ee6bc0e148a129ab7d0adda859b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14175fc7bc9adacb3269fc71f8f62a3a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_Twist.html#a14175fc7bc9adacb3269fc71f8f62a3a">angular_z</a></td></tr>
-<tr class="separator:a14175fc7bc9adacb3269fc71f8f62a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff5312accc3d37fb3c142810d0c24692"><td class="memItemLeft" align="right" valign="top">std::optional&lt;kj::Promise&lt;void&gt;&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_ClientImpl.html#aff5312accc3d37fb3c142810d0c24692">last_waitable</a></td></tr>
+<tr class="separator:aff5312accc3d37fb3c142810d0c24692"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Locally stored state information </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a153ee6bc0e148a129ab7d0adda859b3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a153ee6bc0e148a129ab7d0adda859b3a">&#9670;&nbsp;</a></span>linear_x</h2>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af1c92c299b735e63171cca6574602778"><td class="memItemLeft" align="right" valign="top">virtual kj::WaitScope&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_ClientImpl.html#af1c92c299b735e63171cca6574602778">&waitScope</a> () = 0</td></tr>
+<tr class="separator:af1c92c299b735e63171cca6574602778"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:dcjpNSIZCqyksQbiR0OKtlaZfH4dA0Lt"><td class="memItemLeft" align="right" valign="top">virtual Create3::Client&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_ClientImpl.html#dcjpNSIZCqyksQbiR0OKtlaZfH4dA0Lt">&create3Client</a> () = 0</td></tr>
+<tr class="separator:dcjpNSIZCqyksQbiR0OKtlaZfH4dA0Lt"><td class="memSeparator" colspan="2">&#160;</td></tr>
+
+</table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aff5312accc3d37fb3c142810d0c24692"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5312accc3d37fb3c142810d0c24692">&#9670;&nbsp;</a></span>last_waitable</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double kipr::create3::client::Twist::linear_x</td>
+          <td class="memname">std::optional&lt;Create3::Server&gt; kipr::create3::client::ClientImpl::&&server</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a87c81424392a23ff9a9aa9f889034f8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87c81424392a23ff9a9aa9f889034f8e">&#9670;&nbsp;</a></span>angular_z</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af1c92c299b735e63171cca6574602778"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1c92c299b735e63171cca6574602778">&#9670;&nbsp;</a></span>&waitScope()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char kipr::create3::client::Twist::angular_z</td>
+          <td class="memname">virtual kj::WaitScope kipr::create3::client::ClientImpl::&waitScope </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 
+</div>
+</div>
+
+<a id="dcjpNSIZCqyksQbiR0OKtlaZfH4dA0Lt"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#dcjpNSIZCqyksQbiR0OKtlaZfH4dA0Lt">&#9670;&nbsp;</a></span>&create3Client()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Create3::Client kipr::create3::client::ClientImpl::&create3Client </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>~/create3/client/include/kipr/create3/client/<a class="el" href="create3_twist_8hpp_source.html">Twist.hpp</a></li>
+
+
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>~/create3/client/include/kipr/create3/client/<a class="el" href="clientImpl_8hpp_source.html">ClientImpl.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekipr.html">kipr</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1create3.html">create3</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1create3_1_1client.html">client</a></li><li class="navelem"><a class="el" href="structkipr_create3_client_Twist.html">Twist</a></li>
+    <li class="navelem"><a class="el" href="namespacekipr.html">kipr</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1sensor.html">sensor</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1sensor_1_1logic.html">logic</a></li><li class="navelem"><a class="el" href="structkipr_create3_client_ClientImpl.html">And</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
