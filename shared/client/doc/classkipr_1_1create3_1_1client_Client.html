@@ -100,8 +100,29 @@ $(document).ready(function(){initNavTree('classkipr_1_1create3_1_1client_Client.
 <div class="title">kipr::create3::client::Client Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+  <div class="textblock">
+    <code>#include &lt;cstdint&gt;</code><br />
+    <code>#include &lt;string_view&gt;</code><br />
+    <code>#include &lt;memory&gt;</code><br />
+    <code>#include &lt;mutex&gt;</code><br />
+    <code>#include &lt;chrono&gt;</code><br />
+    <code>#include &lt;optional&gt;</code><br />
+    <code>#include &quot;<a class="el" href="create3_audioNote_8hpp_source.html">AudioNote.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_bumpSensor_8hpp_source.html">BumpSensor.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_direction_8hpp_source.html">Direction.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_duration_8hpp_source.html">Duration.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_follow_8hpp_source.html">Follow.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_hazardDetectionVector_8hpp_source.html">HazardDetectionVector.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_irIntensityVector_8hpp_source.html">IrIntensityVector.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_ledanimationtype_8hpp_source.html">LedAnimationType.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_ledcolor_8hpp_source.html">LedColor.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_lightring_8hpp_source.html">Lightring.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_odometry_8hpp_source.html">Odometry.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_pose_8hpp_source.html">Pose.hpp</a>&quot;</code><br />
+    <code>#include &quot;<a class="el" href="create3_twist_8hpp_source.html">Twist.hpp</a>&quot;</code><br />
+    </div>
 
-<p><code>#include &lt;<a class="el" href="client_8hpp_source.html">Client.hpp</a>&gt;</code></p>
+    <p><a href="create3_client_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -320,7 +341,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void kipr::create3::client::Client::setVelocity </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classkipr_1_1sensor_1_1Sensor.html">Twist</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structkipr_create3_client_Twist.html">Twist</a>&#160;</td>
           <td class="paramname"><em>velocity</em> </td>
         </tr>
         <tr>
@@ -340,7 +361,7 @@ Public Member Functions</h2></td></tr>
     <tr>
       <td class="memname">void kipr::create3::client::Client::playAudio</td>
       <td>(</td>
-      <td class="paramtype">const <a class="el" href="classkipr_1_1sensor_1_1Sensor.html">AudioNote</a> *const&#160;</td>
+      <td class="paramtype">const <a class="el" href="structkipr_create3_client_AudioNote.html">AudioNote</a> *const&#160;</td>
       <td class="paramname"><em>notes</em>, </td>
     </tr>
     <tr>
@@ -468,13 +489,13 @@ Public Member Functions</h2></td></tr>
           <tr>
             <td class="memname">kipr::create3::client::Client::ledAnimation </td>
             <td>(</td>
-            <td class="paramtype">const <a class="el" href="classkipr_1_1sensor_1_1Sensor.html">LedAnimationType</a>&#160;</td>
+            <td class="paramtype">const <a class="el" href="structkipr_create3_client_LedAnimationType.html">LedAnimationType</a>&#160;</td>
             <td class="paramname"><em>animation_type</em>, </td>
           </tr>
           <tr>
             <td class="paramkey"></td>
             <td></td>
-            <td class="paramtype">const <a class="el" href="classkipr_1_1sensor_1_1Sensor.html">Lightring</a>&#160;</td>
+            <td class="paramtype">const <a class="el" href="structkipr_create3_client_Lightring.html">Lightring</a>&#160;</td>
             <td class="paramname"><em>lightring</em>, </td>
           </tr>
           <tr>
@@ -503,7 +524,7 @@ Public Member Functions</h2></td></tr>
           <tr>
             <td class="memname">kipr::create3::client::Client::lightring </td>
             <td>(</td>
-            <td class="paramtype">const <a class="el" href="classkipr_1_1sensor_1_1Sensor.html">Lightring</a>&#160;</td>
+            <td class="paramtype">const <a class="el" href="structkipr_create3_client_Lightring.html">Lightring</a>&#160;</td>
             <td class="paramname"><em>lightring</em></td>
           </tr>
           <tr>
@@ -553,7 +574,7 @@ Public Member Functions</h2></td></tr>
           <tr>
             <td class="memname">kipr::create3::client::Client::navigateTo</td>
             <td>(</td>
-            <td class="paramtype">const <a class="el" href="classkipr_1_1sensor_1_1Sensor.html">Pose</a>&&#160;</td>
+            <td class="paramtype">const <a class="el" href="structkipr_create3_client_Pose.html">Pose</a>&&#160;</td>
             <td class="paramname"><em>pose</em>, </td>
           </tr>
           <tr>
@@ -680,7 +701,7 @@ Public Member Functions</h2></td></tr>
           <tr>
             <td class="memname">kipr::create3::client::Client::followWall</td>
             <td>(</td>
-            <td class="paramtype">const <a class="el" href="classkipr_1_1sensor_1_1Sensor.html">Follow</a>&#160;</td>
+            <td class="paramtype">const <a class="el" href="structkipr_create3_client_Follow.html">Follow</a>&#160;</td>
             <td class="paramname"><em>follow</em>, </td>
           </tr>
           <tr>
@@ -770,14 +791,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>~/libwallaby/module/camera/public/kipr/camera/<a class="el" href="object_8hpp_source.html">object.hpp</a></li>
+<li>~/libwallaby/module/camera/public/kipr/camera/<a class="el" href="create3_client_8hpp_source.html">Client.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekipr.html">kipr</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1camera.html">camera</a></li><li class="navelem"><a class="el" href="classkipr_1_1create3_1_1client_Client.html">Object</a></li>
+    <li class="navelem"><a class="el" href="namespacekipr.html">kipr</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1create3.html">create3</a></li><li class="navelem"><a class="el" href="namespacekipr_1_1create3_1_1client.html">client</a></li><li class="navelem"><a class="el" href="classkipr_1_1create3_1_1client_Client.html">Client</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

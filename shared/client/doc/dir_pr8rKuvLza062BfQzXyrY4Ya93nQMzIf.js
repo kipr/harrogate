@@ -1,5 +1,27 @@
 var dir_pr8rKuvLza062BfQzXyrY4Ya93nQMzIf =
 [
+    ["audio_note.h", "audioNote_8h.html", "audioNote_8h" ],
+    ["AudioNote.hpp", "audioNote_8hpp.html", "audioNote_8hpp" ],
     ["client.h", "create3_8h.html", "create3_8h"],
-    [ "audio_note.h", "structCreate3AudioNote.html", "structCreate3AudioNote" ],
+    ["Client.hpp", "client_8hpp.html", "client_8hpp" ],
+    ["ClientImpl.hpp", "clientImpl_8hpp.html", "clientImpl_8hpp" ],
+    ["follow.h", "follow_8h.html", "follow_8h" ],
+    ["Follow.hpp", "follow_8hpp.html", "follow_8hpp" ],
+    ["led_animation_type.h", "led_animation_type_8h.html", "led_animation_type_8h" ],
+    ["LedAnimationType.hpp", "led_animation_type_8hpp.html", "led_animation_type_8hpp" ],
+    ["led_color.h", "led_color_8h.html", "led_color_8h" ],
+    ["LedColor.hpp", "led_color_8hpp.html", "led_color_8hpp" ],
+    ["lightring.h", "lightring_8h.html", "lightring_8h" ],
+    ["Lightring.hpp", "lightring_8hpp.html", "lightring_8hpp" ],
+    ["odometry.h", "odometry_8h.html", "odometry_8h" ],
+    ["Odometry.hpp", "odometry_8hpp.html", "odometry_8hpp" ],
+    ["pose.h", "pose_8h.html", "pose_8h" ],
+    ["Pose.hpp", "pose_8hpp.html", "pose_8hpp" ],
+    ["quaternion.h", "quaternion_8h.html", "quaternion_8h" ],
+    ["Quaternion.hpp", "quaternion_8hpp.html", "quaternion_8hpp" ],
+    ["twist.h", "twist_8h.html", "twist_8h" ],
+    ["Twist.hpp", "twist_8hpp.html", "twist_8hpp" ],
+    ["vector3.h", "vector3_8h.html", "vector3_8h" ],
+    ["Vector3.hpp", "vector3_8hpp.html", "vector3_8hpp" ],
+
 ];

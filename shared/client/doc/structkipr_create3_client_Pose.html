@@ -101,7 +101,12 @@ $(document).ready(function(){initNavTree('structkipr_create3_client_Pose.html','
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="create3_pose_8hpp_source.html">Pose.hpp</a>&gt;</code></p>
+    <p><code>#include <a class="el" href="quaternion_8h_source.html">"quaternion.h"</a></code></p>
+    <p><code>#include <a class="el" href="vector3_8h_source.html">"vector3.h"</a></code></p>
+    
+
+<p><a href="create3_pose_8hpp_source.html">Go to the source code of this file.</a></p>
+
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -110,6 +115,22 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a14175fc7bc9adacb3269fc71f8f62a3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="quaternion_8h.html">Create3Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_Pose.html#a14175fc7bc9adacb3269fc71f8f62a3a">orientation</a></td></tr>
 <tr class="separator:a14175fc7bc9adacb3269fc71f8f62a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga7abc2298660a0c95e911de24771a5623"><td class="memItemLeft" align="right" valign="top"> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_Pose.html#ga7abc2298660a0c95e911de24771a5623">create3_navigate_to_pose</a>(const <a class="el" href="structkipr_create3_client_Pose.html">Create3Pose</a>, const float max_linear_speed, const float max_angular_speed, const int achieve_goal_heading)</td></tr>
+<tr class="memdesc:ga7abc2298660a0c95e911de24771a5623"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Create3Vector3 in a (x,y,z) representation  <a href="structkipr_create3_client_Pose.html#ga7abc2298660a0c95e911de24771a5623">More...</a><br /></td></tr>
+<tr class="separator:ga7abc2298660a0c95e911de24771a5623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab8d4d522ae0855ca565f59c549e0052d"><td class="memItemLeft" align="right" valign="top"> <a class="el" href="structkipr_create3_client_Pose.html">Create3Pose</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkipr_create3_client_Pose.html#gab8d4d522ae0855ca565f59c549e0052d">create3_pose_get</a>()</td></tr>
+<tr class="memdesc:gab8d4d522ae0855ca565f59c549e0052d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Create3Quaternion in a (x,y,z,w) representation  <a href="structkipr_create3_client_Pose.html#gab8d4d522ae0855ca565f59c549e0052d">More...</a><br /></td></tr>
+<tr class="separator:gab8d4d522ae0855ca565f59c549e0052d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+        
+        
+</table>
+
+    
+
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Locally stored state information </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
@@ -125,10 +146,11 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The Create3Vector3 in a (x,y,z) representation  </p>
 </div>
 </div>
-<a id="a87c81424392a23ff9a9aa9f889034f8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87c81424392a23ff9a9aa9f889034f8e">&#9670;&nbsp;</a></span>orientation</h2>
+<a id="a14175fc7bc9adacb3269fc71f8f62a3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14175fc7bc9adacb3269fc71f8f62a3a">&#9670;&nbsp;</a></span>orientation</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -138,9 +160,98 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+    <p>The Create3Quaternion in a (x,y,z,w) representation </p>
+
+</div>
+</div>
+
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ga89a445249e6b48972a41fb9c30cdc8ac"></a>
 
 
 
+<a class="anchor" id="ga7abc2298660a0c95e911de24771a5623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7abc2298660a0c95e911de24771a5623">&#9670;&nbsp;</a></span>create3_navigate_to_pose()</h2>
+<div class="memitem">
+<div class="memproto">
+    <table class="memname">
+        <tr>
+          <td class="memname"> void create3_navigate_to_pose </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structkipr_create3_client_Pose.html">Create3Pose</a>&#160;</td>
+          <td class="paramname"><em>pose</em></td>
+        </tr>
+        <tr>
+            <td class="paramkey"></td>
+            <td></td>
+            <td class="paramtype">const float&#160;</td>
+            <td class="paramname"><em>max_linear_speed</em>&#160;</td>
+        </tr>
+        <tr>
+            <td class="paramkey"></td>
+            <td></td>
+            <td class="paramtype">const float&#160;</td>
+            <td class="paramname"><em>max_angular_speed</em>&#160;</td>
+        </tr>
+        <tr>
+            <td class="paramkey"></td>
+            <td></td>
+            <td class="paramtype">const int&#160;</td>
+            <td class="paramname"><em>achieve_goal_heading</em>&#160;</td>
+        </tr>
+    
+        <tr>
+            <td></td>
+            <td>)</td>
+            <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+    <p>Navigate the iRobot Create 3 to the given pose.</p><dl class="section user"><dt><b>The iRobot Create 3 will navigate to the given pose at the given maximum linear and angular speeds. The iRobot Create 3 will stop when it reaches the pose. The iRobot Create 3 will rotate in place to achieve the goal heading if `achieve_goal_heading` is 1.</b></dt><dd></dd></dl>
+    <dl class="params"><dt>Parameters</dt><dd>
+        <table class="params">
+          <tr><td class="paramdir">[in]</td><td class="paramname">pose</td><td>The pose to navigate to. This contains a Vector3 for position and a Quaternion for orientation.</td></tr>
+          <tr><td class="paramdir">[in]</td><td class="paramname">max_linear_speed</td><td>The maximum linear speed in meters per second. Max with no safety overrides is 0.306 m/s. Used to get to the vector position.</td></tr>
+          <tr><td class="paramdir">[in]</td><td class="paramname">max_angular_speed</td><td>The maximum angular speed in radians per second. Max with no safety overrides is 2.64 rad/s. Used to get to the quaternion orientation.</td></tr>
+          <tr><td class="paramdir">[in]</td><td class="paramname">achieve_goal_heading</td><td>1 to rotate in place to achieve the goal heading, 0 otherwise.</td></tr>
+         
+        </table>
+        </dd>
+      </dl>
+
+      <dl class="section note"><dt>Example</dt>
+        <dd><a class="el" href="structkipr_create3_client_Pose.html">Create3Pose</a> pose; </dd>
+        <dd>pose.position.x = 1.0; </dd>
+        <dd>pose.position.y = 1.0;</dd>
+        <dd>pose.position.z = 0.0; </dd>
+        <dd> </dd>
+        <dd>pose.orientation.x = 0.0; </dd>
+        <dd>pose.orientation.y = 0.0; </dd>
+        <dd>pose.orientation.z = 0.0;</dd>
+        <dd>pose.orientation.w = 1.0; </dd>
+        <dd>create3_navigate_to_pose(pose, 0.5, 1.0, 1); <em> // Navigate to the given pose at 0.5 m/s and 1 rad/s and rotate in place to achieve the goal heading.</em></dd>
+        
+    </dl>    
+</div>
+</div>
+
+<a class="anchor" id="gab8d4d522ae0855ca565f59c549e0052d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab8d4d522ae0855ca565f59c549e0052d">&#9670;&nbsp;</a></span>create3_pose_get()</h2>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> <a class="el" href="structkipr_create3_client_Pose.html">Create3Pose</a> create3_pose_get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+    <p>Get the pose of the iRobot Create 3.</p>
+    <dl class="section return"><dt>Returns</dt><dd>The pose.</dd></dl>
+
+   
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>libkipr: Create3Odometry Struct Reference</title>
+<title>libkipr: ~/create3/client/include/kipr/create3/client/odometry.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structCreate3Odometry.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('odometry_8h_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -93,76 +93,36 @@ $(document).ready(function(){initNavTree('structCreate3Odometry.html',''); initR
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structCreate3Odometry-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Create3Odometry Struct Reference</div>  </div>
+<div class="title">odometry.h</div>  </div>
 </div><!--header-->
 <div class="contents">
+<a href="odometry_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include "<a class="code" href="pose_8h.html">pose.h</a>"</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include "<a class="code" href="twist_8h.html">twist.h</a>"</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot; {</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structCreate3Odometry.html#a4feece2ec58d909444613177ec67e2bc">   12</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="structCreate3Odometry.html#a4feece2ec58d909444613177ec67e2bc">linear_x</a>;  </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structCreate3Odometry.html#ac537f5c6afbda6ef42cc428540058ecb">   13</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="structCreate3Odometry.html#ac537f5c6afbda6ef42cc428540058ecb">angular_z</a>;  </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="odometry_8h.html#adbb58f7670e1dd0e03e1529819c3688a">   14</a></span>&#160;} <a class="code" href="odometry_8h.html#adbb58f7670e1dd0e03e1529819c3688a">Create3Odometry</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
 
-<p>A Create3Odometry object.  
- <a href="structCreate3Odometry.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="geometry_8h_source.html">quaternion.h</a>&gt;</code></p>
-<p><code>#include &lt;<a class="el" href="geometry_8h_source.html">vector3.h</a>&gt;</code></p>
-
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a4feece2ec58d909444613177ec67e2bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCreate3Pose.html">Create3Pose</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCreate3Odometry.html#a4feece2ec58d909444613177ec67e2bc">pose</a></td></tr>
-<tr class="memdesc:a4feece2ec58d909444613177ec67e2bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Create3Pose value made of Create3Vector3 and Create3Quaternion<a href="structCreate3Odometry.html#a4feece2ec58d909444613177ec67e2bc">More...</a><br /></td></tr>
-<tr class="separator:a4feece2ec58d909444613177ec67e2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac537f5c6afbda6ef42cc428540058ecb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCreate3Twist.html">Create3Twist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCreate3Odometry.html#ac537f5c6afbda6ef42cc428540058ecb">velocity</a></td></tr>
-<tr class="memdesc:ac537f5c6afbda6ef42cc428540058ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Create3Twist value made of the linear_x value and angular_z value <a href="structCreate3Odometry.html#ac537f5c6afbda6ef42cc428540058ecb">More...</a><br /></td></tr>
-<tr class="separator:ac537f5c6afbda6ef42cc428540058ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A Create3Odometry object. </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="af460193d9a375b8e2813bf1fe6216cce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af460193d9a375b8e2813bf1fe6216cce">&#9670;&nbsp;</a></span>pose</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structCreate3Pose.html">Create3Pose</a> Create3Odometry::pose</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The Create3Pose value made of Create3Vector3 and Create3Quaternion</p>
-
-</div>
-</div>
-<a id="a4feece2ec58d909444613177ec67e2bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4feece2ec58d909444613177ec67e2bc">&#9670;&nbsp;</a></span>velocity</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structCreate3Twist.html">Create3Twist</a> Create3Odometry::velocity</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The Create3Twist value made of the linear_x value and angular_z value</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>~/create3/client/include/kipr/create3/client/<a class="el" href="geometry_8h_source.html">odometry.h</a></li>
-</ul>
-</div><!-- contents -->
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structCreate3Odometry.html">Create3Odometry</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="navelem"><a class="el" href="dir_scX43EKttEUjWGU9MYxu5BODr2knM3wM.html">client</a></li><li class="navelem"><a class="el" href="dir_qfxTB7fDtWlsxkxb9KTS8eFWq733knlq.html">include</a></li><li class="navelem"><a class="el" href="dir_rKR7vO8phKptzdJmKLqiTAJrwuIbFfxn.html">kipr</a></li><li class="navelem"><a class="el" href="dir_dcjpNSIZCqyksQbiR0OKtlaZfH4dA0Lt.html">create3</a></li><li class="navelem"><a class="el" href="dir_pr8rKuvLza062BfQzXyrY4Ya93nQMzIf.html">client</a></li><li class="navelem"><a class="el" href="odometry_8h.html">odometry.h</a></li><li class="navelem"><a class="el" href="odometry_8h_source.html">odometry.h source</a></li>
+     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

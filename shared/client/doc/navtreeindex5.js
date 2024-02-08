@@ -34,6 +34,7 @@ var NAVTREEINDEX5 =
 "group__create.html#gaffec88876bd690aee900ca6d43b74d31":[3,7,51],
 "group__create.html#gaffec88876bd690aee900ca6d43b74d31":[6,0,0,12,0,0,0,0,49],
 "group__create3.html":[3,8],
+"group__create3.html#ga89a445249e6b48972a41fb9c30cdc8ac":[3,8,0],
 "group__digital.html":[3,9,0],
 "group__digital.html":[3,9],
 "group__digital.html#example_digital_touch":[3,9,0,0],
