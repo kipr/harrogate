@@ -111,8 +111,10 @@ gulp.task('code-mirror-themes', function() {
 });
 
 gulp.task('angular-ui', ['scripts'], function() {
-  return request('http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js').pipe(fs.createWriteStream('public/scripts/ui-bootstrap-tpls.min.js'));
+  return gulp.src('/home/kipr/wombat-os/configFiles/ui-bootstrap-tpls.min.js').pipe(gulp.dest('public/scripts/'));
 });
+
+
 
 
 
