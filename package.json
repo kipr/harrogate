@@ -1,6 +1,6 @@
 {
   "name": "harrogate",
-  "version": "2.1.3",
+  "version": "1.0.1",
   "description": "",
   "main": "server.js",
   "dependencies": {
